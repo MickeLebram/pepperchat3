@@ -1,0 +1,10 @@
+# PepperChat Python3 Requirements
+python-dotenv
+numpy
+pyaudio
+scipy
+torch
+silero-vad
+websocket-client
+platformdirs
+pyside6

@@ -1,0 +1,1188 @@
+from .gentypes import *
+from .robot_client import send_mfc
+import json
+"""
+ALColorBlobDetection is a module which can detect blobs of a certain color.
+  The output value is written in ALMemory has a Tracker microEvent.
+ 
+"""
+def version() -> str:
+	"""
+	Returns the version of the module.
+	
+	Returns
+	----------
+	A string containing the version of the module.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 103,
+	    "returnSignature": "s",
+	    "name": "version",
+	    "parametersSignature": "()",
+	    "description": "Returns the version of the module.",
+	    "parameters": [],
+	    "returnDescription": "A string containing the version of the module."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "version", [])
+
+def ping() -> bool:
+	"""
+	Just a ping. Always returns true
+	
+	Returns
+	----------
+	returns true
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 104,
+	    "returnSignature": "b",
+	    "name": "ping",
+	    "parametersSignature": "()",
+	    "description": "Just a ping. Always returns true",
+	    "parameters": [],
+	    "returnDescription": "returns true"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "ping", [])
+
+def getMethodList() -> List[str]:
+	"""
+	Retrieves the module's method list.
+	
+	Returns
+	----------
+	An array of method names.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 105,
+	    "returnSignature": "[s]",
+	    "name": "getMethodList",
+	    "parametersSignature": "()",
+	    "description": "Retrieves the module's method list.",
+	    "parameters": [],
+	    "returnDescription": "An array of method names."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getMethodList", [])
+
+def getMethodHelp(methodName:str) -> object:
+	"""
+	Retrieves a method's description.
+	
+	Parameters
+	----------
+	methodName:str
+		The name of the method.
+	
+	Returns
+	----------
+	A structure containing the method's description.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 106,
+	    "returnSignature": "m",
+	    "name": "getMethodHelp",
+	    "parametersSignature": "(s)",
+	    "description": "Retrieves a method's description.",
+	    "parameters": [
+	        {
+	            "name": "methodName",
+	            "description": "The name of the method."
+	        }
+	    ],
+	    "returnDescription": "A structure containing the method's description."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getMethodHelp", [methodName])
+
+def getModuleHelp() -> object:
+	"""
+	Retrieves the module's description.
+	
+	Returns
+	----------
+	A structure describing the module.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 107,
+	    "returnSignature": "m",
+	    "name": "getModuleHelp",
+	    "parametersSignature": "()",
+	    "description": "Retrieves the module's description.",
+	    "parameters": [],
+	    "returnDescription": "A structure describing the module."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getModuleHelp", [])
+
+def wait_1(id:int, timeoutPeriod:int) -> bool:
+	"""
+	Note: This is one of the overloads of the original method (wait)
+	
+	Wait for the end of a long running method that was called using 'post'
+	
+	Parameters
+	----------
+	id:int
+		The ID of the method that was returned when calling the method using 'post'
+	timeoutPeriod:int
+		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
+	
+	Returns
+	----------
+	True if the timeout period terminated. False if the method returned.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 108,
+	    "returnSignature": "b",
+	    "name": "wait",
+	    "parametersSignature": "(ii)",
+	    "description": "Wait for the end of a long running method that was called using 'post'",
+	    "parameters": [
+	        {
+	            "name": "id",
+	            "description": "The ID of the method that was returned when calling the method using 'post'"
+	        },
+	        {
+	            "name": "timeoutPeriod",
+	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
+	        }
+	    ],
+	    "returnDescription": "True if the timeout period terminated. False if the method returned."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "wait", [id, timeoutPeriod])
+
+def wait_2(id:int) -> None:
+	"""
+	Note: This is one of the overloads of the original method (wait)
+	
+	Wait for the end of a long running method that was called using 'post', returns a cancelable future
+	
+	Parameters
+	----------
+	id:int
+		The ID of the method that was returned when calling the method using 'post'
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 109,
+	    "returnSignature": "v",
+	    "name": "wait",
+	    "parametersSignature": "(i)",
+	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
+	    "parameters": [
+	        {
+	            "name": "id",
+	            "description": "The ID of the method that was returned when calling the method using 'post'"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "wait", [id])
+
+def isRunning(id:int) -> bool:
+	"""
+	Returns true if the method is currently running.
+	
+	Parameters
+	----------
+	id:int
+		The ID of the method that was returned when calling the method using 'post'
+	
+	Returns
+	----------
+	True if the method is currently running
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 110,
+	    "returnSignature": "b",
+	    "name": "isRunning",
+	    "parametersSignature": "(i)",
+	    "description": "Returns true if the method is currently running.",
+	    "parameters": [
+	        {
+	            "name": "id",
+	            "description": "The ID of the method that was returned when calling the method using 'post'"
+	        }
+	    ],
+	    "returnDescription": "True if the method is currently running"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "isRunning", [id])
+
+def stop(id:int) -> None:
+	"""
+	returns true if the method is currently running
+	
+	Parameters
+	----------
+	id:int
+		the ID of the method to wait for
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 111,
+	    "returnSignature": "v",
+	    "name": "stop",
+	    "parametersSignature": "(i)",
+	    "description": "returns true if the method is currently running",
+	    "parameters": [
+	        {
+	            "name": "id",
+	            "description": "the ID of the method to wait for"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "stop", [id])
+
+def getBrokerName() -> str:
+	"""
+	Gets the name of the parent broker.
+	
+	Returns
+	----------
+	The name of the parent broker.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 112,
+	    "returnSignature": "s",
+	    "name": "getBrokerName",
+	    "parametersSignature": "()",
+	    "description": "Gets the name of the parent broker.",
+	    "parameters": [],
+	    "returnDescription": "The name of the parent broker."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getBrokerName", [])
+
+def getUsage(name:str) -> str:
+	"""
+	Gets the method usage string. This summarises how to use the method.
+	
+	Parameters
+	----------
+	name:str
+		The name of the method.
+	
+	Returns
+	----------
+	A string that summarises the usage of the method.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 113,
+	    "returnSignature": "s",
+	    "name": "getUsage",
+	    "parametersSignature": "(s)",
+	    "description": "Gets the method usage string. This summarises how to use the method.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "The name of the method."
+	        }
+	    ],
+	    "returnDescription": "A string that summarises the usage of the method."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getUsage", [name])
+
+def subscribe_1(name:str, period:int, precision:float) -> None:
+	"""
+	Note: This is one of the overloads of the original method (subscribe)
+	
+	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which subscribes.
+	period:int
+		Refresh period (in milliseconds) if relevant.
+	precision:float
+		Precision of the extractor if relevant.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 114,
+	    "returnSignature": "v",
+	    "name": "subscribe",
+	    "parametersSignature": "(sif)",
+	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which subscribes."
+	        },
+	        {
+	            "name": "period",
+	            "description": "Refresh period (in milliseconds) if relevant."
+	        },
+	        {
+	            "name": "precision",
+	            "description": "Precision of the extractor if relevant."
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "subscribe", [name, period, precision])
+
+def subscribe_2(name:str) -> None:
+	"""
+	Note: This is one of the overloads of the original method (subscribe)
+	
+	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which subscribes.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 115,
+	    "returnSignature": "v",
+	    "name": "subscribe",
+	    "parametersSignature": "(s)",
+	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which subscribes."
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "subscribe", [name])
+
+def unsubscribe(name:str) -> None:
+	"""
+	Unsubscribes from the extractor.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which had subscribed.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 116,
+	    "returnSignature": "v",
+	    "name": "unsubscribe",
+	    "parametersSignature": "(s)",
+	    "description": "Unsubscribes from the extractor.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which had subscribed."
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "unsubscribe", [name])
+
+def updatePeriod(name:str, period:int) -> None:
+	"""
+	Updates the period if relevant.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which has subscribed.
+	period:int
+		Refresh period (in milliseconds).
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 117,
+	    "returnSignature": "v",
+	    "name": "updatePeriod",
+	    "parametersSignature": "(si)",
+	    "description": "Updates the period if relevant.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which has subscribed."
+	        },
+	        {
+	            "name": "period",
+	            "description": "Refresh period (in milliseconds)."
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "updatePeriod", [name, period])
+
+def updatePrecision(name:str, precision:float) -> None:
+	"""
+	Updates the precision if relevant.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which has subscribed.
+	precision:float
+		Precision of the extractor.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 118,
+	    "returnSignature": "v",
+	    "name": "updatePrecision",
+	    "parametersSignature": "(sf)",
+	    "description": "Updates the precision if relevant.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which has subscribed."
+	        },
+	        {
+	            "name": "precision",
+	            "description": "Precision of the extractor."
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "updatePrecision", [name, precision])
+
+def getCurrentPeriod() -> int:
+	"""
+	Gets the current period.
+	
+	Returns
+	----------
+	Refresh period (in milliseconds).
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 119,
+	    "returnSignature": "i",
+	    "name": "getCurrentPeriod",
+	    "parametersSignature": "()",
+	    "description": "Gets the current period.",
+	    "parameters": [],
+	    "returnDescription": "Refresh period (in milliseconds)."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getCurrentPeriod", [])
+
+def getCurrentPrecision() -> float:
+	"""
+	Gets the current precision.
+	
+	Returns
+	----------
+	Precision of the extractor.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 120,
+	    "returnSignature": "f",
+	    "name": "getCurrentPrecision",
+	    "parametersSignature": "()",
+	    "description": "Gets the current precision.",
+	    "parameters": [],
+	    "returnDescription": "Precision of the extractor."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getCurrentPrecision", [])
+
+def getMyPeriod(name:str) -> int:
+	"""
+	Gets the period for a specific subscription.
+	
+	Parameters
+	----------
+	name:str
+		Name of the module which has subscribed.
+	
+	Returns
+	----------
+	Refresh period (in milliseconds).
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 121,
+	    "returnSignature": "i",
+	    "name": "getMyPeriod",
+	    "parametersSignature": "(s)",
+	    "description": "Gets the period for a specific subscription.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "Name of the module which has subscribed."
+	        }
+	    ],
+	    "returnDescription": "Refresh period (in milliseconds)."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getMyPeriod", [name])
+
+def getMyPrecision(name:str) -> float:
+	"""
+	Gets the precision for a specific subscription.
+	
+	Parameters
+	----------
+	name:str
+		name of the module which has subscribed
+	
+	Returns
+	----------
+	precision of the extractor
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 122,
+	    "returnSignature": "f",
+	    "name": "getMyPrecision",
+	    "parametersSignature": "(s)",
+	    "description": "Gets the precision for a specific subscription.",
+	    "parameters": [
+	        {
+	            "name": "name",
+	            "description": "name of the module which has subscribed"
+	        }
+	    ],
+	    "returnDescription": "precision of the extractor"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getMyPrecision", [name])
+
+def getSubscribersInfo() -> object:
+	"""
+	Gets the parameters given by the module.
+	
+	Returns
+	----------
+	Array of names and parameters of all subscribers.
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 123,
+	    "returnSignature": "m",
+	    "name": "getSubscribersInfo",
+	    "parametersSignature": "()",
+	    "description": "Gets the parameters given by the module.",
+	    "parameters": [],
+	    "returnDescription": "Array of names and parameters of all subscribers."
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getSubscribersInfo", [])
+
+def getOutputNames() -> List[str]:
+	"""
+	Get the list of values updated in ALMemory.
+	
+	Returns
+	----------
+	Array of values updated by this extractor in ALMemory
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 124,
+	    "returnSignature": "[s]",
+	    "name": "getOutputNames",
+	    "parametersSignature": "()",
+	    "description": "Get the list of values updated in ALMemory.",
+	    "parameters": [],
+	    "returnDescription": "Array of values updated by this extractor in ALMemory"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getOutputNames", [])
+
+def getEventList() -> List[str]:
+	"""
+	Get the list of events updated in ALMemory.
+	
+	Returns
+	----------
+	Array of events updated by this extractor in ALMemory
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 125,
+	    "returnSignature": "[s]",
+	    "name": "getEventList",
+	    "parametersSignature": "()",
+	    "description": "Get the list of events updated in ALMemory.",
+	    "parameters": [],
+	    "returnDescription": "Array of events updated by this extractor in ALMemory"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getEventList", [])
+
+def getMemoryKeyList() -> List[str]:
+	"""
+	Get the list of events updated in ALMemory.
+	
+	Returns
+	----------
+	Array of events updated by this extractor in ALMemory
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 126,
+	    "returnSignature": "[s]",
+	    "name": "getMemoryKeyList",
+	    "parametersSignature": "()",
+	    "description": "Get the list of events updated in ALMemory.",
+	    "parameters": [],
+	    "returnDescription": "Array of events updated by this extractor in ALMemory"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getMemoryKeyList", [])
+
+def setFrameRate_1(subscriberName:str, framerate:int) -> bool:
+	"""
+	Note: This is one of the overloads of the original method (setFrameRate)
+	
+	Sets the extractor framerate for a chosen subscriber
+	
+	Parameters
+	----------
+	subscriberName:str
+		Name of the subcriber
+	framerate:int
+		New framerate
+	
+	Returns
+	----------
+	True if the update succeeded, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 127,
+	    "returnSignature": "b",
+	    "name": "setFrameRate",
+	    "parametersSignature": "(si)",
+	    "description": "Sets the extractor framerate for a chosen subscriber",
+	    "parameters": [
+	        {
+	            "name": "subscriberName",
+	            "description": "Name of the subcriber"
+	        },
+	        {
+	            "name": "framerate",
+	            "description": "New framerate"
+	        }
+	    ],
+	    "returnDescription": "True if the update succeeded, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setFrameRate", [subscriberName, framerate])
+
+def setFrameRate_2(framerate:int) -> bool:
+	"""
+	Note: This is one of the overloads of the original method (setFrameRate)
+	
+	Sets the extractor framerate for all the subscribers
+	
+	Parameters
+	----------
+	framerate:int
+		New framerate
+	
+	Returns
+	----------
+	True if the update succeeded, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 128,
+	    "returnSignature": "b",
+	    "name": "setFrameRate",
+	    "parametersSignature": "(i)",
+	    "description": "Sets the extractor framerate for all the subscribers",
+	    "parameters": [
+	        {
+	            "name": "framerate",
+	            "description": "New framerate"
+	        }
+	    ],
+	    "returnDescription": "True if the update succeeded, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setFrameRate", [framerate])
+
+def setResolution(resolution:int) -> bool:
+	"""
+	Sets extractor resolution
+	
+	Parameters
+	----------
+	resolution:int
+		New resolution
+	
+	Returns
+	----------
+	True if the update succeeded, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 129,
+	    "returnSignature": "b",
+	    "name": "setResolution",
+	    "parametersSignature": "(i)",
+	    "description": "Sets extractor resolution",
+	    "parameters": [
+	        {
+	            "name": "resolution",
+	            "description": "New resolution"
+	        }
+	    ],
+	    "returnDescription": "True if the update succeeded, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setResolution", [resolution])
+
+def setActiveCamera(cameraId:int) -> bool:
+	"""
+	Sets extractor active camera
+	
+	Parameters
+	----------
+	cameraId:int
+		Id of the camera that will become the active camera
+	
+	Returns
+	----------
+	True if the update succeeded, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 130,
+	    "returnSignature": "b",
+	    "name": "setActiveCamera",
+	    "parametersSignature": "(i)",
+	    "description": "Sets extractor active camera",
+	    "parameters": [
+	        {
+	            "name": "cameraId",
+	            "description": "Id of the camera that will become the active camera"
+	        }
+	    ],
+	    "returnDescription": "True if the update succeeded, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setActiveCamera", [cameraId])
+
+def getFrameRate() -> int:
+	"""
+	Gets extractor framerate
+	
+	Returns
+	----------
+	Current value of the framerate of the extractor
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 132,
+	    "returnSignature": "i",
+	    "name": "getFrameRate",
+	    "parametersSignature": "()",
+	    "description": "Gets extractor framerate",
+	    "parameters": [],
+	    "returnDescription": "Current value of the framerate of the extractor"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getFrameRate", [])
+
+def getResolution() -> int:
+	"""
+	Gets extractor resolution
+	
+	Returns
+	----------
+	Current value of the resolution of the extractor
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 133,
+	    "returnSignature": "i",
+	    "name": "getResolution",
+	    "parametersSignature": "()",
+	    "description": "Gets extractor resolution",
+	    "parameters": [],
+	    "returnDescription": "Current value of the resolution of the extractor"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getResolution", [])
+
+def getActiveCamera() -> int:
+	"""
+	Gets extractor active camera
+	
+	Returns
+	----------
+	Id of the current active camera of the extractor
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 134,
+	    "returnSignature": "i",
+	    "name": "getActiveCamera",
+	    "parametersSignature": "()",
+	    "description": "Gets extractor active camera",
+	    "parameters": [],
+	    "returnDescription": "Id of the current active camera of the extractor"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getActiveCamera", [])
+
+def isPaused() -> bool:
+	"""
+	Gets extractor pause status
+	
+	Returns
+	----------
+	True if the extractor is paused, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 135,
+	    "returnSignature": "b",
+	    "name": "isPaused",
+	    "parametersSignature": "()",
+	    "description": "Gets extractor pause status",
+	    "parameters": [],
+	    "returnDescription": "True if the extractor is paused, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "isPaused", [])
+
+def isProcessing() -> bool:
+	"""
+	Gets extractor running status
+	
+	Returns
+	----------
+	True if the extractor is currently processing images, False if not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 136,
+	    "returnSignature": "b",
+	    "name": "isProcessing",
+	    "parametersSignature": "()",
+	    "description": "Gets extractor running status",
+	    "parameters": [],
+	    "returnDescription": "True if the extractor is currently processing images, False if not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "isProcessing", [])
+
+def pause(paused:bool) -> None:
+	"""
+	Changes the pause status of the extractor
+	
+	Parameters
+	----------
+	paused:bool
+		New pause satus
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 137,
+	    "returnSignature": "v",
+	    "name": "pause",
+	    "parametersSignature": "(b)",
+	    "description": "Changes the pause status of the extractor",
+	    "parameters": [
+	        {
+	            "name": "paused",
+	            "description": "New pause satus"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "pause", [paused])
+
+def setColor(r:int, g:int, b:int, colorThres:int) -> None:
+	"""
+	Color parameter setting
+	
+	Parameters
+	----------
+	r:int
+		The R component in RGB of the color to find
+	g:int
+		The G component in RGB of the color to find
+	b:int
+		The B component in RGB of the color to find
+	colorThres:int
+		The color threshold
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 139,
+	    "returnSignature": "v",
+	    "name": "setColor",
+	    "parametersSignature": "(iiii)",
+	    "description": "Color parameter setting",
+	    "parameters": [
+	        {
+	            "name": "r",
+	            "description": "The R component in RGB of the color to find"
+	        },
+	        {
+	            "name": "g",
+	            "description": "The G component in RGB of the color to find"
+	        },
+	        {
+	            "name": "b",
+	            "description": "The B component in RGB of the color to find"
+	        },
+	        {
+	            "name": "colorThres",
+	            "description": "The color threshold"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setColor", [r, g, b, colorThres])
+
+def setObjectProperties_1(minSize:int, span:float) -> None:
+	"""
+	Note: This is one of the overloads of the original method (setObjectProperties)
+	
+	Object parameter setting
+	
+	Parameters
+	----------
+	minSize:int
+		The minimum size of the cluster to find
+	span:float
+		The span of the object in meters
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 140,
+	    "returnSignature": "v",
+	    "name": "setObjectProperties",
+	    "parametersSignature": "(if)",
+	    "description": "Object parameter setting",
+	    "parameters": [
+	        {
+	            "name": "minSize",
+	            "description": "The minimum size of the cluster to find"
+	        },
+	        {
+	            "name": "span",
+	            "description": "The span of the object in meters"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setObjectProperties", [minSize, span])
+
+def setObjectProperties_2(minSize:int, span:float, shape:str) -> None:
+	"""
+	Note: This is one of the overloads of the original method (setObjectProperties)
+	
+	Object parameter setting
+	
+	Parameters
+	----------
+	minSize:int
+		The minimum size of the cluster to find
+	span:float
+		The span of the object in meters
+	shape:str
+		The shape of the object
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 141,
+	    "returnSignature": "v",
+	    "name": "setObjectProperties",
+	    "parametersSignature": "(ifs)",
+	    "description": "Object parameter setting",
+	    "parameters": [
+	        {
+	            "name": "minSize",
+	            "description": "The minimum size of the cluster to find"
+	        },
+	        {
+	            "name": "span",
+	            "description": "The span of the object in meters"
+	        },
+	        {
+	            "name": "shape",
+	            "description": "The shape of the object"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setObjectProperties", [minSize, span, shape])
+
+def getCircle() -> object:
+	"""
+	Send back the x,y,radius of the circle if any
+	
+	Returns
+	----------
+	The circle as x,y,radius in image relative coordinates (x,radius divided by rows and y by cols)
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 142,
+	    "returnSignature": "m",
+	    "name": "getCircle",
+	    "parametersSignature": "()",
+	    "description": "Send back the x,y,radius of the circle if any",
+	    "parameters": [],
+	    "returnDescription": "The circle as x,y,radius in image relative coordinates (x,radius divided by rows and y by cols)"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getCircle", [])
+
+def getAutoExposure() -> bool:
+	"""
+	Get the camera auto exposure mode
+	
+	Returns
+	----------
+	A flag saying the exposure is auto or not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 143,
+	    "returnSignature": "b",
+	    "name": "getAutoExposure",
+	    "parametersSignature": "()",
+	    "description": "Get the camera auto exposure mode",
+	    "parameters": [],
+	    "returnDescription": "A flag saying the exposure is auto or not"
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "getAutoExposure", [])
+
+def setAutoExposure(mode:bool) -> None:
+	"""
+	Set the camera auto exposure to on
+	
+	Parameters
+	----------
+	mode:bool
+		Whether the exposure is auto or not
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 144,
+	    "returnSignature": "v",
+	    "name": "setAutoExposure",
+	    "parametersSignature": "(b)",
+	    "description": "Set the camera auto exposure to on",
+	    "parameters": [
+	        {
+	            "name": "mode",
+	            "description": "Whether the exposure is auto or not"
+	        }
+	    ],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALColorBlobDetection", "setAutoExposure", [mode])
+
