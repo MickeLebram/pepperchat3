@@ -4,7 +4,7 @@ import threading
 import time
 from typing import Callable
 from PySide6.QtWidgets import (
-    QApplication, QGroupBox, QLayout, QWidget, QVBoxLayout,
+    QApplication, QGridLayout, QGroupBox, QLayout, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
@@ -55,11 +55,9 @@ class App(QWidget):
 
         self.setWindowTitle("Qt Controls Example")
 
-        self.name = QLineEdit()
-        self.name.setPlaceholderText("Your name")
-        layout = QVBoxLayout(self)
+        layout = QGridLayout(self)
         
-        def add_combo(layout:QLayout, name:str, options:list, selected_option, onchange:Callable):
+        def add_combo(layout:QGridLayout, name:str, options:list, selected_option, onchange:Callable):
 
             combo = QComboBox()
             combo.addItems(options)
@@ -68,10 +66,11 @@ class App(QWidget):
                 run_async_task(onchange, [options[idx]], lambda: combo.setEnabled(True))
             combo.setCurrentIndex(options.index(selected_option) if selected_option in options else 0)
             combo.currentIndexChanged.connect(chg)
-            layout.addWidget(QLabel(name))
-            layout.addWidget(combo)
+            row_idx = layout.rowCount() + 1
+            layout.addWidget(QLabel(name),row_idx, 0)
+            layout.addWidget(combo,row_idx, 1)
             return combo
-        def add_button(layout:QLayout, caption, onclick, args=None):
+        def add_button(layout:QGridLayout, caption, onclick, args=None):
             btn = QPushButton(caption)
             def click():
                 if args is not None:
@@ -82,7 +81,7 @@ class App(QWidget):
             layout.addWidget(btn)
             return btn
         
-        def add_slider(layout:QLayout, name:str, val:int, min:int, max:int, onchange:Callable[[int],None]=None):
+        def add_slider(layout:QGridLayout, name:str, val:int, min:int, max:int, onchange:Callable[[int],None]=None):
             label = QLabel()
             def update_label():
                 label.setText(f"{name}: {slider.value()}")
@@ -95,15 +94,17 @@ class App(QWidget):
                 update_label()
             update_label()
             slider.valueChanged.connect(change)
-            layout.addWidget(label)
-            layout.addWidget(slider)
+            row_idx = layout.rowCount() + 1
+            layout.addWidget(label, row_idx, 0)
+            layout.addWidget(slider, row_idx, 1)
             return slider
 
         add_button(layout, "Apa", set_prompt, "You are a friendly monkey. Speak swedish.")
         add_button(layout, "Einstein", set_prompt, "You are a mad scientist. Speak swedish.")
         self.cur_volume = api.ALAudioDevice.getOutputVolume()
         slide_volume = add_slider(layout, "Volume", self.cur_volume, 0, 100)        
-
+        self.cur_tts_speed = api.ALTextToSpeech.getParameter("speed")
+        slide_tts_speed = add_slider(layout, "Speech speed", self.cur_tts_speed, 50, 200)        
         add_combo(
             layout,
             "Autonomous Life State", 
@@ -135,12 +136,13 @@ class App(QWidget):
                 lambda args: set_posture(args[0]),
                 [posture]
             )
-        # print(api.ALMotion.s .getPostureList())
-        add_button(layout, "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
-        for side in ("Right", "Left"):
-            add_button(layout, f"Raise {side} Arm", lambda joint: api.ALMotion.setAngles_1(joint, -1.3, .25), side[0] + "ShoulderPitch")
-            add_button(layout, f"Lower {side} Arm", lambda joint: api.ALMotion.setAngles_1(joint, 1.6, .25), side[0] + "ShoulderPitch")
-        
+        group_gesture = QGroupBox("Gestures")
+        group_gesture.setLayout(QVBoxLayout())
+        layout.addWidget(group_gesture)
+        add_button(group_gesture.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
+        def add_anim_button(layout, caption, path):
+            add_button(layout, caption, lambda x: api.ALAnimationPlayer.run(x), path)
+        add_anim_button(group_gesture.layout(), "Wave", "animations/Stand/Gestures/Hey_1")
         add_button(layout, "Restart subtitles", subtitles.try_show_on_tablet)
         if 0:
             label_joint_angs = QLabel()
@@ -158,35 +160,17 @@ class App(QWidget):
             if self.cur_volume != slide_volume.value():
                 self.cur_volume = slide_volume.value()
                 api.ALAudioDevice.setOutputVolume(self.cur_volume)
+            if self.cur_tts_speed != slide_tts_speed.value():
+                self.cur_tts_speed = slide_tts_speed.value()
+                api.ALTextToSpeech.setParameter("speed", self.cur_tts_speed)
         self.sparse_updater = QTimer(self)
         self.sparse_updater.timeout.connect(sparse_update)
         self.sparse_updater.start(100)
 
-        save_button = QPushButton("Save")
-        clear_button = QPushButton("Clear")
-
-
-        save_button.clicked.connect(self.save)
-        clear_button.clicked.connect(self.clear)
-
-        layout.addWidget(self.name)
-        layout.addWidget(save_button)
-        layout.addWidget(clear_button)
 
 
 
-    def save(self):
-        pass
-        # SAVE_FILE.write_text(
-        #     f"name={self.name.text()}\n"
-        #     f"color={self.combo_autonomous_life.currentText()}\n"
-        #     f"volume={self.slider.value()}\n"
-        # )
 
-    def clear(self):
-        self.name.clear()
-
-        self.slider.setValue(50)
 
 set_prompt:Callable[[str],None] = None
 def run(set_prompt_callback):
@@ -196,7 +180,4 @@ def run(set_prompt_callback):
     window = App()
     window.show()
     sys.exit(app.exec())
-
-if __name__ == "__main__":
-    api.robot_client.init("192.168.1.12")
-    run()
+    

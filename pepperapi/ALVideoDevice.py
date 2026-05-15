@@ -5,6 +5,333 @@ import json
 ALVideoDevice, formerly called Video Input systemis architectured in order to provide every client related to vision, a direct access to raw images from video source, or an access to images transformed in the requested format.
   Extension name of the methods providing images depends on wether clients are local (dynamic library) or remote (executable).
 """
+def registerEvent(p0:int, p1:int, p2:int) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 0,
+	    "returnSignature": "L",
+	    "name": "registerEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "registerEvent", [p0, p1, p2])
+
+def unregisterEvent(p0:int, p1:int, p2:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 1,
+	    "returnSignature": "v",
+	    "name": "unregisterEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "unregisterEvent", [p0, p1, p2])
+
+def metaObject(p0:int) -> MetaObject:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 2,
+	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
+	    "name": "metaObject",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "metaObject", [p0])
+
+def terminate(p0:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 3,
+	    "returnSignature": "v",
+	    "name": "terminate",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "terminate", [p0])
+
+def property(p0:object) -> object:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 5,
+	    "returnSignature": "m",
+	    "name": "property",
+	    "parametersSignature": "(m)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "property", [p0])
+
+def setProperty(p0:object, p1:object) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	p1:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 6,
+	    "returnSignature": "v",
+	    "name": "setProperty",
+	    "parametersSignature": "(mm)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "setProperty", [p0, p1])
+
+def properties() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 7,
+	    "returnSignature": "[s]",
+	    "name": "properties",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "properties", [])
+
+def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	p3:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 8,
+	    "returnSignature": "L",
+	    "name": "registerEventWithSignature",
+	    "parametersSignature": "(IILs)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "registerEventWithSignature", [p0, p1, p2, p3])
+
+def isStatsEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 80,
+	    "returnSignature": "b",
+	    "name": "isStatsEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "isStatsEnabled", [])
+
+def enableStats(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 81,
+	    "returnSignature": "v",
+	    "name": "enableStats",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "enableStats", [p0])
+
+def stats() -> Dict[int,MethodStatistics]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 82,
+	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
+	    "name": "stats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "stats", [])
+
+def clearStats() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 83,
+	    "returnSignature": "v",
+	    "name": "clearStats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "clearStats", [])
+
+def isTraceEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 84,
+	    "returnSignature": "b",
+	    "name": "isTraceEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "isTraceEnabled", [])
+
+def enableTrace(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 85,
+	    "returnSignature": "v",
+	    "name": "enableTrace",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "enableTrace", [p0])
+
 def version() -> str:
 	"""
 	Returns the version of the module.
@@ -466,6 +793,44 @@ def unsubscribe(nameId:str) -> bool:
 	'''
 	"""
 	return send_mfc("ALVideoDevice", "unsubscribe", [nameId])
+
+def getSubscribers() -> object:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 117,
+	    "returnSignature": "m",
+	    "name": "getSubscribers",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getSubscribers", [])
+
+def getCameraIndexes() -> object:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 118,
+	    "returnSignature": "m",
+	    "name": "getCameraIndexes",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getCameraIndexes", [])
 
 def getActiveCamera_1() -> int:
 	"""
@@ -1051,6 +1416,174 @@ def setAllParametersToDefault(cameraIndex:int) -> bool:
 	"""
 	return send_mfc("ALVideoDevice", "setAllParametersToDefault", [cameraIndex])
 
+def openCamera(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 137,
+	    "returnSignature": "b",
+	    "name": "openCamera",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "openCamera", [p0])
+
+def closeCamera(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 138,
+	    "returnSignature": "b",
+	    "name": "closeCamera",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "closeCamera", [p0])
+
+def isCameraOpen(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 139,
+	    "returnSignature": "b",
+	    "name": "isCameraOpen",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "isCameraOpen", [p0])
+
+def startCamera(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 140,
+	    "returnSignature": "b",
+	    "name": "startCamera",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "startCamera", [p0])
+
+def stopCamera(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 141,
+	    "returnSignature": "b",
+	    "name": "stopCamera",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "stopCamera", [p0])
+
+def isCameraStarted(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 142,
+	    "returnSignature": "b",
+	    "name": "isCameraStarted",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "isCameraStarted", [p0])
+
+def resetCamera(p0:int) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 143,
+	    "returnSignature": "b",
+	    "name": "resetCamera",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "resetCamera", [p0])
+
 def startFrameGrabber_1(cameraIndex:int) -> bool:
 	"""
 	Note: This is one of the overloads of the original method (startFrameGrabber)
@@ -1143,6 +1676,25 @@ def isFrameGrabberOff_1(cameraIndex:int) -> bool:
 	'''
 	"""
 	return send_mfc("ALVideoDevice", "isFrameGrabberOff", [cameraIndex])
+
+def hasDepthCamera() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 147,
+	    "returnSignature": "b",
+	    "name": "hasDepthCamera",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "hasDepthCamera", [])
 
 def getFrameRate_2(name:str) -> int:
 	"""
@@ -2504,6 +3056,164 @@ def stopVideo(id:str) -> bool:
 	'''
 	"""
 	return send_mfc("ALVideoDevice", "stopVideo", [id])
+
+def getAngularPositionFromImagePosition(p0:int, p1:List[float]) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 186,
+	    "returnSignature": "[f]",
+	    "name": "getAngularPositionFromImagePosition",
+	    "parametersSignature": "(i[f])",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getAngularPositionFromImagePosition", [p0, p1])
+
+def getImagePositionFromAngularPosition(p0:int, p1:List[float]) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 187,
+	    "returnSignature": "[f]",
+	    "name": "getImagePositionFromAngularPosition",
+	    "parametersSignature": "(i[f])",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getImagePositionFromAngularPosition", [p0, p1])
+
+def getAngularSizeFromImageSize(p0:int, p1:List[float]) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 188,
+	    "returnSignature": "[f]",
+	    "name": "getAngularSizeFromImageSize",
+	    "parametersSignature": "(i[f])",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getAngularSizeFromImageSize", [p0, p1])
+
+def getImageSizeFromAngularSize(p0:int, p1:List[float]) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 189,
+	    "returnSignature": "[f]",
+	    "name": "getImageSizeFromAngularSize",
+	    "parametersSignature": "(i[f])",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getImageSizeFromAngularSize", [p0, p1])
+
+def getImageInfoFromAngularInfo(p0:int, p1:List[float]) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 190,
+	    "returnSignature": "[f]",
+	    "name": "getImageInfoFromAngularInfo",
+	    "parametersSignature": "(i[f])",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getImageInfoFromAngularInfo", [p0, p1])
+
+def getImageInfoFromAngularInfoWithResolution(p0:int, p1:List[float], p2:int) -> List[float]:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:List[float]
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 191,
+	    "returnSignature": "[f]",
+	    "name": "getImageInfoFromAngularInfoWithResolution",
+	    "parametersSignature": "(i[f]i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALVideoDevice", "getImageInfoFromAngularInfoWithResolution", [p0, p1, p2])
 
 def putImage_1(cameraIndex:int, timeStamp:object, width:int, height:int, colorSpace:int, imageBuffer:object) -> bool:
 	"""

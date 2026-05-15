@@ -4,6 +4,333 @@ import json
 """
 ALModularityis a filter management system based on a filter graph.The users of this module can add, modify, delete or use filters that are stored in a library.
 """
+def registerEvent(p0:int, p1:int, p2:int) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 0,
+	    "returnSignature": "L",
+	    "name": "registerEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "registerEvent", [p0, p1, p2])
+
+def unregisterEvent(p0:int, p1:int, p2:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 1,
+	    "returnSignature": "v",
+	    "name": "unregisterEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "unregisterEvent", [p0, p1, p2])
+
+def metaObject(p0:int) -> MetaObject:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 2,
+	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
+	    "name": "metaObject",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "metaObject", [p0])
+
+def terminate(p0:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 3,
+	    "returnSignature": "v",
+	    "name": "terminate",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "terminate", [p0])
+
+def property(p0:object) -> object:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 5,
+	    "returnSignature": "m",
+	    "name": "property",
+	    "parametersSignature": "(m)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "property", [p0])
+
+def setProperty(p0:object, p1:object) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	p1:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 6,
+	    "returnSignature": "v",
+	    "name": "setProperty",
+	    "parametersSignature": "(mm)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "setProperty", [p0, p1])
+
+def properties() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 7,
+	    "returnSignature": "[s]",
+	    "name": "properties",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "properties", [])
+
+def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	p3:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 8,
+	    "returnSignature": "L",
+	    "name": "registerEventWithSignature",
+	    "parametersSignature": "(IILs)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "registerEventWithSignature", [p0, p1, p2, p3])
+
+def isStatsEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 80,
+	    "returnSignature": "b",
+	    "name": "isStatsEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "isStatsEnabled", [])
+
+def enableStats(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 81,
+	    "returnSignature": "v",
+	    "name": "enableStats",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "enableStats", [p0])
+
+def stats() -> Dict[int,MethodStatistics]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 82,
+	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
+	    "name": "stats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "stats", [])
+
+def clearStats() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 83,
+	    "returnSignature": "v",
+	    "name": "clearStats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "clearStats", [])
+
+def isTraceEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 84,
+	    "returnSignature": "b",
+	    "name": "isTraceEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "isTraceEnabled", [])
+
+def enableTrace(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 85,
+	    "returnSignature": "v",
+	    "name": "enableTrace",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "enableTrace", [p0])
+
 def version() -> str:
 	"""
 	Returns the version of the module.
@@ -319,6 +646,25 @@ def getUsage(name:str) -> str:
 	"""
 	return send_mfc("ALModularity", "getUsage", [name])
 
+def getModularity() -> object:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 114,
+	    "returnSignature": "X",
+	    "name": "getModularity",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getModularity", [])
+
 def loadProgram(program:str) -> bool:
 	"""
 	
@@ -347,6 +693,30 @@ def loadProgram(program:str) -> bool:
 	'''
 	"""
 	return send_mfc("ALModularity", "loadProgram", [program])
+
+def loadProgramFromFile(p0:str) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 116,
+	    "returnSignature": "b",
+	    "name": "loadProgramFromFile",
+	    "parametersSignature": "(s)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "loadProgramFromFile", [p0])
 
 def getData(sink:str) -> object:
 	"""
@@ -464,6 +834,25 @@ def getImageRemote(sink:str) -> object:
 	"""
 	return send_mfc("ALModularity", "getImageRemote", [sink])
 
+def getFilters() -> object:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 121,
+	    "returnSignature": "m",
+	    "name": "getFilters",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getFilters", [])
+
 def getFilterDescription(name:str) -> str:
 	"""
 	
@@ -579,6 +968,25 @@ def deleteFilter(name:str) -> bool:
 	'''
 	"""
 	return send_mfc("ALModularity", "deleteFilter", [name])
+
+def getSources() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 126,
+	    "returnSignature": "[s]",
+	    "name": "getSources",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getSources", [])
 
 def isSourceBinded(name:str) -> bool:
 	"""
@@ -766,6 +1174,25 @@ def deleteSource(name:str) -> bool:
 	"""
 	return send_mfc("ALModularity", "deleteSource", [name])
 
+def getRobotHeightOffset() -> float:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 133,
+	    "returnSignature": "f",
+	    "name": "getRobotHeightOffset",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getRobotHeightOffset", [])
+
 def setRobotHeightOffset(heightOffset:float) -> None:
 	"""
 	
@@ -794,6 +1221,25 @@ def setRobotHeightOffset(heightOffset:float) -> None:
 	'''
 	"""
 	return send_mfc("ALModularity", "setRobotHeightOffset", [heightOffset])
+
+def getProcesses() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 135,
+	    "returnSignature": "[s]",
+	    "name": "getProcesses",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getProcesses", [])
 
 def isProcesses(name:str) -> bool:
 	"""
@@ -1277,6 +1723,82 @@ def deleteProcess(name:str) -> bool:
 	"""
 	return send_mfc("ALModularity", "deleteProcess", [name])
 
+def getScheduledJobs() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 152,
+	    "returnSignature": "[s]",
+	    "name": "getScheduledJobs",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getScheduledJobs", [])
+
+def startScheduler() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 153,
+	    "returnSignature": "b",
+	    "name": "startScheduler",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "startScheduler", [])
+
+def stopScheduler() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 154,
+	    "returnSignature": "b",
+	    "name": "stopScheduler",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "stopScheduler", [])
+
+def getInstrumentationResult() -> str:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 155,
+	    "returnSignature": "s",
+	    "name": "getInstrumentationResult",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "getInstrumentationResult", [])
+
 def getDotGraph(filter:str, level:int) -> object:
 	"""
 	
@@ -1311,6 +1833,44 @@ def getDotGraph(filter:str, level:int) -> object:
 	'''
 	"""
 	return send_mfc("ALModularity", "getDotGraph", [filter, level])
+
+def _startMotionWorker() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 157,
+	    "returnSignature": "v",
+	    "name": "_startMotionWorker",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "_startMotionWorker", [])
+
+def _stopMotionWorker() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 158,
+	    "returnSignature": "v",
+	    "name": "_stopMotionWorker",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALModularity", "_stopMotionWorker", [])
 
 def _setMotionSource(sourceName:str, data:List[float]) -> None:
 	"""

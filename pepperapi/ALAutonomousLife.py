@@ -4,6 +4,333 @@ import json
 """
 Manages the focused Activity and Autonomous Life state
 """
+def registerEvent(p0:int, p1:int, p2:int) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 0,
+	    "returnSignature": "L",
+	    "name": "registerEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "registerEvent", [p0, p1, p2])
+
+def unregisterEvent(p0:int, p1:int, p2:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 1,
+	    "returnSignature": "v",
+	    "name": "unregisterEvent",
+	    "parametersSignature": "(IIL)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "unregisterEvent", [p0, p1, p2])
+
+def metaObject(p0:int) -> MetaObject:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 2,
+	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
+	    "name": "metaObject",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "metaObject", [p0])
+
+def terminate(p0:int) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 3,
+	    "returnSignature": "v",
+	    "name": "terminate",
+	    "parametersSignature": "(I)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "terminate", [p0])
+
+def property(p0:object) -> object:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 5,
+	    "returnSignature": "m",
+	    "name": "property",
+	    "parametersSignature": "(m)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "property", [p0])
+
+def setProperty(p0:object, p1:object) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:object
+		
+	p1:object
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 6,
+	    "returnSignature": "v",
+	    "name": "setProperty",
+	    "parametersSignature": "(mm)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "setProperty", [p0, p1])
+
+def properties() -> List[str]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 7,
+	    "returnSignature": "[s]",
+	    "name": "properties",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "properties", [])
+
+def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	p1:int
+		
+	p2:int
+		
+	p3:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 8,
+	    "returnSignature": "L",
+	    "name": "registerEventWithSignature",
+	    "parametersSignature": "(IILs)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "registerEventWithSignature", [p0, p1, p2, p3])
+
+def isStatsEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 80,
+	    "returnSignature": "b",
+	    "name": "isStatsEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "isStatsEnabled", [])
+
+def enableStats(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 81,
+	    "returnSignature": "v",
+	    "name": "enableStats",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "enableStats", [p0])
+
+def stats() -> Dict[int,MethodStatistics]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 82,
+	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
+	    "name": "stats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "stats", [])
+
+def clearStats() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 83,
+	    "returnSignature": "v",
+	    "name": "clearStats",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "clearStats", [])
+
+def isTraceEnabled() -> bool:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 84,
+	    "returnSignature": "b",
+	    "name": "isTraceEnabled",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "isTraceEnabled", [])
+
+def enableTrace(p0:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 85,
+	    "returnSignature": "v",
+	    "name": "enableTrace",
+	    "parametersSignature": "(b)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "enableTrace", [p0])
+
 def version() -> str:
 	"""
 	Returns the version of the module.
@@ -809,6 +1136,182 @@ def switchFocus_3(activity_name:str, flags:int, parameters:object) -> None:
 	"""
 	return send_mfc("ALAutonomousLife", "switchFocus", [activity_name, flags, parameters])
 
+def _switchFocus_1(p0:str, p1:str) -> None:
+	"""
+	Note: This is one of the overloads of the original method (_switchFocus)
+	
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 128,
+	    "returnSignature": "v",
+	    "name": "_switchFocus",
+	    "parametersSignature": "(ss)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1])
+
+def _switchFocus_2(p0:str, p1:int, p2:str) -> None:
+	"""
+	Note: This is one of the overloads of the original method (_switchFocus)
+	
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:int
+		
+	p2:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 129,
+	    "returnSignature": "v",
+	    "name": "_switchFocus",
+	    "parametersSignature": "(sis)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1, p2])
+
+def _switchFocus_3(p0:str, p1:int, p2:object, p3:str) -> None:
+	"""
+	Note: This is one of the overloads of the original method (_switchFocus)
+	
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:int
+		
+	p2:object
+		
+	p3:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 130,
+	    "returnSignature": "v",
+	    "name": "_switchFocus",
+	    "parametersSignature": "(sims)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1, p2, p3])
+
+def stopFocus() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 131,
+	    "returnSignature": "v",
+	    "name": "stopFocus",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "stopFocus", [])
+
+def _stopFocus(p0:str) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 132,
+	    "returnSignature": "v",
+	    "name": "_stopFocus",
+	    "parametersSignature": "(s)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "_stopFocus", [p0])
+
+def stopAll() -> None:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 133,
+	    "returnSignature": "v",
+	    "name": "stopAll",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "stopAll", [])
+
+def _stopAll(p0:str) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 134,
+	    "returnSignature": "v",
+	    "name": "_stopAll",
+	    "parametersSignature": "(s)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "_stopAll", [p0])
+
 def getFocusContext(name:str) -> object:
 	"""
 	Get a value of an ALMemory key that is used in a condition, which is the value at the previous autonomous activity focus.
@@ -908,6 +1411,25 @@ def getActivityNature(activity_name:str) -> str:
 	"""
 	return send_mfc("ALAutonomousLife", "getActivityNature", [activity_name])
 
+def getActivityStatistics() -> Dict[str,Dict[str,int]]:
+	"""
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 138,
+	    "returnSignature": "{s{si}}",
+	    "name": "getActivityStatistics",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "getActivityStatistics", [])
+
 def getAutonomousActivityStatistics() -> Dict[str,Dict[str,int]]:
 	"""
 	Get launch count, last completion time, etc for activities with autonomous launch trigger conditions.
@@ -931,6 +1453,100 @@ def getAutonomousActivityStatistics() -> Dict[str,Dict[str,int]]:
 	"""
 	return send_mfc("ALAutonomousLife", "getAutonomousActivityStatistics", [])
 
+def getFocusHistory_1() -> List[Tuple[str,int]]:
+	"""
+	Note: This is one of the overloads of the original method (getFocusHistory)
+	
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 140,
+	    "returnSignature": "[(si)]",
+	    "name": "getFocusHistory",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "getFocusHistory", [])
+
+def getFocusHistory_2(p0:int) -> List[Tuple[str,int]]:
+	"""
+	Note: This is one of the overloads of the original method (getFocusHistory)
+	
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 141,
+	    "returnSignature": "[(si)]",
+	    "name": "getFocusHistory",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "getFocusHistory", [p0])
+
+def getStateHistory_1() -> List[Tuple[str,int]]:
+	"""
+	Note: This is one of the overloads of the original method (getStateHistory)
+	
+	
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 142,
+	    "returnSignature": "[(si)]",
+	    "name": "getStateHistory",
+	    "parametersSignature": "()",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "getStateHistory", [])
+
+def getStateHistory_2(p0:int) -> List[Tuple[str,int]]:
+	"""
+	Note: This is one of the overloads of the original method (getStateHistory)
+	
+	
+	
+	Parameters
+	----------
+	p0:int
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 143,
+	    "returnSignature": "[(si)]",
+	    "name": "getStateHistory",
+	    "parametersSignature": "(i)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "getStateHistory", [p0])
+
 def getLifeTime() -> int:
 	"""
 	Get the time in seconds as life sees it.  Based on gettimeofday()
@@ -953,6 +1569,32 @@ def getLifeTime() -> int:
 	'''
 	"""
 	return send_mfc("ALAutonomousLife", "getLifeTime", [])
+
+def setAutonomousAbilityEnabled(p0:str, p1:bool) -> None:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:bool
+		
+	
+	*Reference struct*
+	'''
+	{
+	    "uid": 145,
+	    "returnSignature": "v",
+	    "name": "setAutonomousAbilityEnabled",
+	    "parametersSignature": "(sb)",
+	    "description": "",
+	    "parameters": [],
+	    "returnDescription": ""
+	}
+	'''
+	"""
+	return send_mfc("ALAutonomousLife", "setAutonomousAbilityEnabled", [p0, p1])
 
 def getAutonomousAbilityEnabled(autonomousAbility:str) -> bool:
 	"""
