@@ -14,28 +14,15 @@ from platformdirs import user_data_dir
 import gui
 
 from config import config, show_config_dlg
-#ROBOT_SERVER_IP = "192.168.0.147" # Nao Mickes kontor
-#ROBOT_SERVER_IP = "192.168.1.12" # Pepper lab
-#ROBOT_SERVER_IP = "192.168.2.106" # Pepper shc
-
-
-
-"""
-GUI
-Volym
-Autonomous life på av
-Apply postures
-"""
 
 def main():
     if not config.openai_api_key or not config.robot_server_ip:
         show_config_dlg()
 
     api.robot_client.init(config.robot_server_ip)
-    api.ALAudioDevice.getOutputVolume() # Ful bootstrap
+    api.ALAudioDevice.getOutputVolume() # Ful bootstrap, kolla varför den behövs
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
-    #pts.push_text("Hej")
     mute_mic_until = 0
     def mute_mic_a_while(dur):
         nonlocal mute_mic_until
