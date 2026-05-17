@@ -1,22 +1,17 @@
-from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
 import traceback
-import platformdirs
-from PySide6.QtWidgets import (
-    QApplication, QDialog, QGridLayout, QGroupBox, QLayout, QWidget, QVBoxLayout,
-    QPushButton, QComboBox, QSlider,
-    QLineEdit, QLabel
-)
-from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal
+from PySide6.QtWidgets import QApplication, QDialog, QGridLayout,  QPushButton, QLineEdit, QLabel
 
-_appdir = Path(platformdirs.user_data_dir("PepperChat3"))
+from PySide6.QtCore import QStandardPaths
+_appdir = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation) + "/PepperChat3")
+
 _logdir = _appdir / "logs"
 for d in (_appdir, _logdir):
     d.mkdir(parents=True, exist_ok=True)
 
-_config_fname = _appdir / "config.txt"
+_config_fname = _appdir / "system.cfg"
 
 def _assign_from_file(obj:object, filename:str):
     with open(filename, "r", encoding="utf-8") as f:
@@ -33,7 +28,7 @@ def _save_to_file(obj:object, filename:str):
 class Config:
     def __init__(self):
         self.cur_prompt_file = ""
-        self.robot_server_ip = "192.168.2.106"
+        self.robot_server_ip = ""
         self.openai_api_key = ""
         self.last_browsed_anim = ""
     def save(self):
@@ -61,7 +56,6 @@ except:
 print(config.__dict__)
 
 def show_config_dlg(parent=None):
-    print("show config")
     standalone = QApplication() if not QApplication.instance() else None
     dlg = QDialog(parent=parent)
     layout = QGridLayout(dlg)
@@ -78,11 +72,14 @@ def show_config_dlg(parent=None):
 
     btn_apply = QPushButton("Apply")
     btn_cancel = QPushButton("Cancel")
+    applied = False
     def apply():
+        nonlocal applied
         config.robot_server_ip = robot_server_ip.text()
         config.openai_api_key = apikey.text()
         config.save()
         dlg.close()
+        applied = True
     btn_apply.clicked.connect(apply)
     btn_cancel.clicked.connect(dlg.close)
 
@@ -96,5 +93,4 @@ def show_config_dlg(parent=None):
         standalone.exec()
     else:
         dlg.exec()
-
-#show_config_dlg()
+    return applied

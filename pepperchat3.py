@@ -16,8 +16,9 @@ import gui
 from config import config, show_config_dlg
 
 def main():
-    if not config.openai_api_key or not config.robot_server_ip:
-        show_config_dlg()
+    while not config.openai_api_key or not config.robot_server_ip:
+        if not show_config_dlg():
+            exit()
 
     api.robot_client.init(config.robot_server_ip)
     api.ALAudioDevice.getOutputVolume() # Ful bootstrap, kolla varför den behövs
