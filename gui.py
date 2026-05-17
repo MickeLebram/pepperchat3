@@ -97,7 +97,7 @@ class App(QWidget):
             return slider
 
         def update_btn_prompt():
-            caption = config.cur_prompt_file if config.cur_prompt_file else "Load prompt"
+            caption = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else "Load prompt"
             maxlen = 40
             if len(caption) > maxlen:
                 caption = "..." + caption[-maxlen:]
