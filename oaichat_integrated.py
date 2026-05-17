@@ -1,16 +1,11 @@
 import traceback
 from typing import Callable, List, Tuple
-import dotenv
 import silerovad
 from pcm_processor import PcmProcessor
-dotenv.load_dotenv()
-import os, json, base64, threading, time
+import json, base64, threading, time
 import numpy as np
 from websocket import WebSocketApp
 
-API_KEY = os.environ.get("OPENAI_KEY", "")
-API_KEY = os.environ.get("OPENAI_API_KEY", "")
-assert API_KEY, "Set OPENAI_KEY in your environment."
 
 class Query:
     def __init__(self):
@@ -30,6 +25,7 @@ class OaiChatIntegrated:
     STATE_RECEIVING_RESPONSE = "RECEIVING_RESPONSE"
 
     def __init__(self, 
+                 api_key:str,
                  system_prompt = "", 
                  language = "sv", 
                  voice="sage", 
@@ -77,6 +73,7 @@ class OaiChatIntegrated:
         self._listening = True
         self._state = self.STATE_IDLE
         self.ws:WebSocketApp = None
+        self.api_key = api_key
         self.start()
     @property
     def state(self):
@@ -174,7 +171,7 @@ class OaiChatIntegrated:
         self.ws = WebSocketApp(
             "wss://api.openai.com/v1/realtime?model=gpt-realtime",
             header=[
-                "Authorization: Bearer " + API_KEY,
+                "Authorization: Bearer " + self.api_key,
                 "OpenAI-Beta: realtime=v1",
             ],
             on_open=on_open,

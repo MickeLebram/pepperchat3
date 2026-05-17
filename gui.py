@@ -1,10 +1,11 @@
 import math
+import os
 from pathlib import Path
 import threading
 import time
 from typing import Callable
 from PySide6.QtWidgets import (
-    QApplication, QGridLayout, QGroupBox, QLayout, QWidget, QVBoxLayout,
+    QApplication, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
@@ -12,7 +13,8 @@ from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal
 import sys
 from apidefs import api
 import subtitles
-SAVE_FILE = Path("settings.txt")
+from config import config
+from config import show_config_dlg
 
 class Task(QObject):
     done = Signal()
@@ -37,23 +39,17 @@ def run_async_task(func, args, ondone):
     task.done.connect(done)
     thread.start()
 
-joint_names = []
-def get_joint_angs():
-    if not joint_names:
-        joint_names.extend(api.ALMotion.getBodyNames("JointActuators"))
-    angs = api.ALMotion.getAngles(joint_names, False)
-    dct = {}
-    for i, joint_name in enumerate(joint_names):
-        dct[joint_name] = angs[i]
-    return dct
 
+def show_msg(owner, msg:str):
+    msgBox = QMessageBox(owner)
+    msgBox.setText(msg)
+    msgBox.exec()    
 
 class App(QWidget):
     def __init__(self):
         super().__init__()
-        print(get_joint_angs())
 
-        self.setWindowTitle("Qt Controls Example")
+        self.setWindowTitle("PepperChat3")
 
         layout = QGridLayout(self)
         
@@ -70,6 +66,7 @@ class App(QWidget):
             layout.addWidget(QLabel(name),row_idx, 0)
             layout.addWidget(combo,row_idx, 1)
             return combo
+        
         def add_button(layout:QGridLayout, caption, onclick, args=None):
             btn = QPushButton(caption)
             def click():
@@ -99,19 +96,28 @@ class App(QWidget):
             layout.addWidget(slider, row_idx, 1)
             return slider
 
-        add_button(layout, "Apa", set_prompt, "You are a friendly monkey. Speak swedish.")
-        add_button(layout, "Einstein", set_prompt, "You are a mad scientist. Speak swedish.")
+        def update_btn_prompt():
+            caption = config.cur_prompt_file if config.cur_prompt_file else "Load prompt"
+            maxlen = 40
+            if len(caption) > maxlen:
+                caption = "..." + caption[-maxlen:]
+            btn_prompt.setText(caption)
+        def browse_prompts():
+            start_path = config.cur_prompt_file if config.cur_prompt_file else str(config.appdir.absolute())
+            fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
+            if not fname:
+                return
+            config.cur_prompt_file = fname
+            config.save()
+            update_btn_prompt()
+            reload_prompt()
+        btn_prompt = add_button(layout, "Load", browse_prompts)
+        layout.addWidget(btn_prompt, 0,0,1,2)
+        update_btn_prompt()
         self.cur_volume = api.ALAudioDevice.getOutputVolume()
         slide_volume = add_slider(layout, "Volume", self.cur_volume, 0, 100)        
         self.cur_tts_speed = api.ALTextToSpeech.getParameter("speed")
         slide_tts_speed = add_slider(layout, "Speech speed", self.cur_tts_speed, 50, 200)        
-        add_combo(
-            layout,
-            "Autonomous Life State", 
-            ["solitary", "interactive", "safeguard", "disabled"],
-            api.ALAutonomousLife.getState(),
-            lambda state: api.ALAutonomousLife.setState(state)
-        )
         add_combo(
             layout,
             "Speech Language", 
@@ -119,6 +125,16 @@ class App(QWidget):
             api.ALTextToSpeech.getLanguage(),
             lambda lang: api.ALTextToSpeech.setLanguage(lang)
         )
+
+        add_combo(
+            layout,
+            "Autonomous Life State", 
+            ["solitary", "interactive", "safeguard", "disabled"],
+            api.ALAutonomousLife.getState(),
+            lambda state: api.ALAutonomousLife.setState(state)
+        )
+        add_button(layout, "System config", show_config_dlg, self)
+        add_button(layout, "Restart subtitles", subtitles.try_show_on_tablet)
         group_posture = QGroupBox("Postures")
         group_posture.setLayout(QVBoxLayout())
         layout.addWidget(group_posture)
@@ -136,25 +152,46 @@ class App(QWidget):
                 lambda args: set_posture(args[0]),
                 [posture]
             )
-        group_gesture = QGroupBox("Gestures")
-        group_gesture.setLayout(QVBoxLayout())
-        layout.addWidget(group_gesture)
-        add_button(group_gesture.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
-        def add_anim_button(layout, caption, path):
-            add_button(layout, caption, lambda x: api.ALAnimationPlayer.run(x), path)
-        add_anim_button(group_gesture.layout(), "Wave", "animations/Stand/Gestures/Hey_1")
-        add_button(layout, "Restart subtitles", subtitles.try_show_on_tablet)
-        if 0:
-            label_joint_angs = QLabel()
-            def update_joint_angs():
-                lines = [f"{j}: {ang:.2f}" for j, ang in get_joint_angs().items()]
-                label_joint_angs.setText("\n".join(lines))
-            
-            layout.addWidget(label_joint_angs)
-            update_joint_angs()
-            self.state_timer = QTimer(self)
-            self.state_timer.timeout.connect(update_joint_angs)
-            self.state_timer.start(500)
+        group_motion = QGroupBox("Motion")
+        group_motion.setLayout(QVBoxLayout())
+        layout.addWidget(group_motion)
+        add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
+        def browse_animations():
+            anim_root = os.path.abspath("animations")
+            stand_path = os.path.abspath(anim_root+"/Stand")
+            def valid(fname:str, show_reject_reason = False):
+                print("fname",fname)
+                p = Path(fname)
+                reject = ""
+                if not (p.exists() and Path(stand_path) in p.parents):
+                    reject = "Invalid path, need to be child of\n" + stand_path
+                elif "loop" in fname.lower():
+                    reject = "Looped animations are currently not allowed"
+                if reject:
+                    if show_reject_reason:
+                        show_msg(self, reject)
+                    return False
+                return True
+                
+            start_path = config.last_browsed_anim if valid(config.last_browsed_anim) else stand_path
+            fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Animations (*.anim)")[0]
+            if not fname:
+                return
+            fname = os.path.abspath(fname)
+            if valid(fname, True):
+                def run_anim(a):
+                    try:
+                        api.ALAnimationPlayer.run(a)
+                        config.last_browsed_anim = fname
+                        config.save()
+                    except Exception as e:
+                        show_msg(self,str(e))
+                anim = fname.removeprefix(os.path.dirname(anim_root)).replace("\\","/").removesuffix(".anim")[1:]
+                # run_anim(anim)
+                btn_animations.setEnabled(False)
+                run_async_task(run_anim, [anim], lambda: btn_animations.setEnabled(True))
+
+        btn_animations = add_button(group_motion.layout(), "Animations...", browse_animations)
 
         def sparse_update():
             if self.cur_volume != slide_volume.value():
@@ -167,16 +204,11 @@ class App(QWidget):
         self.sparse_updater.timeout.connect(sparse_update)
         self.sparse_updater.start(100)
 
-
-
-
-
-
-set_prompt:Callable[[str],None] = None
-def run(set_prompt_callback):
-    global set_prompt
-    set_prompt = set_prompt_callback
-    app = QApplication(sys.argv)
+reload_prompt:Callable[[],None] = None
+def run(reload_prompt_callback):
+    global reload_prompt
+    reload_prompt = reload_prompt_callback
+    app = QApplication.instance() if QApplication.instance() else QApplication()
     window = App()
     window.show()
     sys.exit(app.exec())

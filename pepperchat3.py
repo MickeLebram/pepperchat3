@@ -11,13 +11,14 @@ import utils
 from  oaichat_integrated import OaiChatIntegrated, Query
 from pathlib import Path
 from platformdirs import user_data_dir
-from config import config
-ROBOT_SERVER_IP = "192.168.0.147" # Nao Mickes kontor
-#ROBOT_SERVER_IP = "192.168.1.12" # Pepper lab
-ROBOT_SERVER_IP = "192.168.2.106" # Pepper shc
-api.robot_client.init(config.robot_server_ip)
+import gui
 
-LOGDIR = Path(user_data_dir("Pepperchat")) / "logs"
+from config import config, show_config_dlg
+#ROBOT_SERVER_IP = "192.168.0.147" # Nao Mickes kontor
+#ROBOT_SERVER_IP = "192.168.1.12" # Pepper lab
+#ROBOT_SERVER_IP = "192.168.2.106" # Pepper shc
+
+
 
 """
 GUI
@@ -27,16 +28,14 @@ Apply postures
 """
 
 def main():
-    
-    try:
-        api.ALTextToSpeech.setLanguage(os.getenv('LANGUAGE', 'Swedish'))
-    except:
-        traceback.print_exc()
+    if not config.openai_api_key or not config.robot_server_ip:
+        show_config_dlg()
 
+    api.robot_client.init(config.robot_server_ip)
+    api.ALAudioDevice.getOutputVolume() # Ful bootstrap
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
-    #pts.push_text("Det enda ja äter, är sill o puttäter. Sillsillsill och puttputtputtäter.")
-    pts.push_text("Hej")
+    #pts.push_text("Hej")
     mute_mic_until = 0
     def mute_mic_a_while(dur):
         nonlocal mute_mic_until
@@ -82,7 +81,8 @@ def main():
             api.ALLeds.earLedsSetAngle(90, .01, False)
 
     oai = OaiChatIntegrated(
-        system_prompt=os.getenv('PROMPT', ''),
+        api_key=config.openai_api_key,
+        system_prompt=config.get_prompt(),
         query_update_callback = on_query_update,
         state_callback=print,
         intermediate_response_text_callback=pts.push_text,
@@ -99,17 +99,18 @@ def main():
             time.sleep(.1)
     threading.Thread(target=muter, daemon=True).start()
     pcm_utils.listen_on_local_mic(48000,[oai.push_pcm16_frames])
-    def set_system_prompt(prompt:str):
-        oai.system_prompt = prompt
+    def reload_system_prompt():
+        oai.system_prompt = config.get_prompt()
         oai.start()
 
-    import gui
-    gui.run(set_system_prompt)
+    gui.run(reload_system_prompt)
     # try:
     #     while True:
     #         time.sleep(1)
     # except KeyboardInterrupt:
     #     pass
-    
+
+
+
 if __name__ == "__main__":
     main()

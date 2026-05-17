@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 import traceback
 import platformdirs
 from PySide6.QtWidgets import (
-    QApplication, QGridLayout, QGroupBox, QLayout, QWidget, QVBoxLayout,
+    QApplication, QDialog, QGridLayout, QGroupBox, QLayout, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
@@ -31,15 +32,23 @@ def _save_to_file(obj:object, filename:str):
 
 class Config:
     def __init__(self):
-        self.last_prompt_file = ""
+        self.cur_prompt_file = ""
         self.robot_server_ip = "192.168.2.106"
         self.openai_api_key = ""
+        self.last_browsed_anim = ""
     def save(self):
         _save_to_file(self, _config_fname)
-    
+    def get_prompt(self):
+        if os.path.exists(self.cur_prompt_file):
+            with open(self.cur_prompt_file,"r",encoding="utf8") as f:
+                return f.read()
+        return ""
     @property
     def logdir(self):
         return _logdir
+    @property
+    def appdir(self):
+        return _appdir
 
 config = Config()
 
@@ -51,9 +60,10 @@ except:
 
 print(config.__dict__)
 
-def show_dlg():
-    app = QApplication()
-    dlg = QWidget()
+def show_config_dlg(parent=None):
+    print("show config")
+    standalone = QApplication() if not QApplication.instance() else None
+    dlg = QDialog(parent=parent)
     layout = QGridLayout(dlg)
     dlg.setWindowTitle("Config")
     def add_text(caption, cur_text):
@@ -80,7 +90,11 @@ def show_dlg():
     layout.addWidget(btn_cancel)
     
 
-    dlg.show()
-    exit(app.exec())
 
-# show_dlg()
+    if standalone:
+        dlg.show()
+        standalone.exec()
+    else:
+        dlg.exec()
+
+#show_config_dlg()
