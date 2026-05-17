@@ -103,9 +103,12 @@ class App(QWidget):
                 caption = "..." + caption[-maxlen:]
             btn_prompt.setText(caption)
         def browse_prompts():
-            start_path = config.cur_prompt_file if config.cur_prompt_file else str(config.appdir.absolute())
+            start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(config.appdir.absolute())
             fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
             if not fname:
+                return
+            if os.path.samefile(fname, config.file):
+                show_msg("Never share this file")
                 return
             config.cur_prompt_file = fname
             config.save()

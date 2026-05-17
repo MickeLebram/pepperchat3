@@ -44,6 +44,9 @@ class Config:
     @property
     def appdir(self):
         return _appdir
+    @property
+    def file(self):
+        return _config_fname
 
 config = Config()
 
