@@ -5,52 +5,160 @@ import threading
 import time
 from typing import Callable
 from PySide6.QtWidgets import (
-    QApplication, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QWidget, QVBoxLayout,
+    QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QTreeView, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
-from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal
+from PySide6.QtGui import QStandardItemModel, QStandardItem
+from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal, Slot
 import sys
 from apidefs import api
 import subtitles
 from config import config
 from config import show_config_dlg
 
+
+
+_active_tasks = []
+
+
 class Task(QObject):
     done = Signal()
-    def __init__(self, func, args):
+    error = Signal(Exception)
+
+    def __init__(self, func, args=()):
         super().__init__()
         self.func = func
         self.args = args
-    def run(self):
-        self.func(*self.args)
-        self.done.emit()
 
-def run_async_task(func, args, ondone):
+    @Slot()
+    def run(self):
+        try:
+            self.func(*self.args)
+        except Exception as e:
+            self.error.emit(e)
+        finally:
+            self.done.emit()
+
+
+def run_async_task(func, args=(), ondone=None, onerror=None):
     task = Task(func, args)
     thread = QThread()
-    task.moveToThread(thread)
-    thread.started.connect(task.run)
-    def done():
-        thread.quit()
-        task.deleteLater()
-        thread.deleteLater()
-        ondone()
-    task.done.connect(done)
-    thread.start()
 
+    # keep both alive
+    _active_tasks.append((thread, task))
+
+    task.moveToThread(thread)
+
+    thread.started.connect(task.run)
+
+    def handle_done():
+        if ondone:
+            ondone()
+        thread.quit()
+
+    def handle_error(e):
+        if onerror:
+            onerror(e)
+        else:
+            print("Task error:", e)
+
+    def cleanup():
+        try:
+            _active_tasks.remove((thread, task))
+        except ValueError:
+            pass
+
+    task.done.connect(handle_done)
+    task.error.connect(handle_error)
+
+    thread.finished.connect(task.deleteLater)
+    thread.finished.connect(thread.deleteLater)
+    thread.finished.connect(cleanup)
+
+    thread.start()
 
 def show_msg(owner, msg:str):
     msgBox = QMessageBox(owner)
     msgBox.setText(msg)
     msgBox.exec()    
 
+class AnimationBrowser(QDialog):
+    def __init__(self, parent):
+        super().__init__(parent=parent)
+
+        self.setWindowTitle("Animation Browser")
+        layout = QVBoxLayout(self)
+        self.tree = QTreeView()
+        self.model = QStandardItemModel()
+        self.model.setHorizontalHeaderLabels(["Animations"])
+
+        self.tree.setModel(self.model)
+        self.tree.clicked.connect(self.on_item_clicked)
+        self.tree.doubleClicked.connect(self.on_item_doubleclicked)
+        layout.addWidget(self.tree)
+        self.btn_play = QPushButton("Play")
+        self.btn_play.clicked.connect(self.play_selected)
+        layout.addWidget(self.btn_play)
+        self.resize(600,400)
+        def populate():
+            root = self.model.invisibleRootItem()
+            nodes = {}
+            # Skip loops until we know how to terminate them without robot reboot
+            def allowed(anim_path:str):
+                name = anim_path.split("/")[-1]
+                if "loop" in name.lower():
+                    return False
+                return True
+
+            for anim_path in api.ALAnimationPlayer._getAnimations_1():
+                if allowed(anim_path):
+                    parent = root
+                    current_path = ""
+                    for part in anim_path.split("/"):
+                        current_path = f"{current_path}/{part}" if current_path else part
+
+                        if current_path not in nodes:
+                            item = QStandardItem(part)
+                            item.setEditable(False)
+                            item.setData(current_path, Qt.UserRole)
+
+                            parent.appendRow(item)
+                            nodes[current_path] = item
+
+                        parent = nodes[current_path]
+        populate()
+        self.tree.expandToDepth(1)
+    
+    def play_selected(self):
+        if not self.tree.selectedIndexes():
+            return
+        item = self.model.itemFromIndex(self.tree.selectedIndexes()[0])
+        if item.rowCount() != 0:
+            return
+        path = item.data(Qt.UserRole)
+        def doit(a):
+            try:
+                api.ALAnimationPlayer.run(a)
+                config.last_browsed_anim = path
+                config.save()
+            except Exception as e:
+                show_msg(self,str(e))
+        self.setEnabled(False)
+        run_async_task(doit, [path], lambda: self.setEnabled(True))  
+    
+    def on_item_clicked(self, index):
+        self.btn_play.setEnabled(self.model.itemFromIndex(index).rowCount() == 0)
+    
+    def on_item_doubleclicked(self, index):
+        if self.model.itemFromIndex(index).rowCount() == 0:
+            self.play_selected()
+
 class App(QWidget):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("PepperChat3")
-
         layout = QGridLayout(self)
         
         def add_combo(layout:QGridLayout, name:str, options:list, selected_option, onchange:Callable):
@@ -160,41 +268,9 @@ class App(QWidget):
         layout.addWidget(group_motion)
         add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
         def browse_animations():
-            anim_root = os.path.abspath("animations")
-            stand_path = os.path.abspath(anim_root+"/Stand")
-            def valid(fname:str, show_reject_reason = False):
-                print("fname",fname)
-                p = Path(fname)
-                reject = ""
-                if not (p.exists() and Path(stand_path) in p.parents):
-                    reject = "Invalid path, need to be child of\n" + stand_path
-                elif "loop" in fname.lower():
-                    reject = "Looped animations are currently not allowed"
-                if reject:
-                    if show_reject_reason:
-                        show_msg(self, reject)
-                    return False
-                return True
-                
-            start_path = config.last_browsed_anim if valid(config.last_browsed_anim) else stand_path
-            fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Animations (*.anim)")[0]
-            if not fname:
-                return
-            fname = os.path.abspath(fname)
-            if valid(fname, True):
-                def run_anim(a):
-                    try:
-                        api.ALAnimationPlayer.run(a)
-                        config.last_browsed_anim = fname
-                        config.save()
-                    except Exception as e:
-                        show_msg(self,str(e))
-                anim = fname.removeprefix(os.path.dirname(anim_root)).replace("\\","/").removesuffix(".anim")[1:]
-                # run_anim(anim)
-                btn_animations.setEnabled(False)
-                run_async_task(run_anim, [anim], lambda: btn_animations.setEnabled(True))
+            AnimationBrowser(self).show()
 
-        btn_animations = add_button(group_motion.layout(), "Animations...", browse_animations)
+        add_button(group_motion.layout(), "Animations...", browse_animations)
 
         def sparse_update():
             if self.cur_volume != slide_volume.value():
