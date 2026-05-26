@@ -5,7 +5,7 @@ from pcm_processor import PcmProcessor
 import json, base64, threading, time
 import numpy as np
 from websocket import WebSocketApp
-
+from syslogger import syslogger
 
 class Query:
     def __init__(self):
@@ -28,7 +28,7 @@ class OaiChatIntegrated:
                  api_key:str,
                  system_prompt = "", 
                  language = "sv", 
-                 voice="sage", 
+                 voice="", #ex. sage
                  temperature = 0.8,
                  query_update_callback: Callable[[Query], None] = None,
                  state_callback: Callable[[str], None] = None,
@@ -48,9 +48,9 @@ class OaiChatIntegrated:
             self._set_state(self.STATE_RECEIVING_RESPONSE)
             self._send_data({
                 "type": "response.create",
-                "response": {
-                    "temperature": temperature,
-                }
+                # "response": {
+                #     "temperature": temperature,
+                # }
             })
 
         self.pcm_processor = PcmProcessor(24000, 1, millis_per_chunk=100) # Realtime API expects PCM16 mono ~24 kHz
@@ -93,21 +93,36 @@ class OaiChatIntegrated:
         def on_open(ws):
             print("WebSocket connected")
             session_data = {
-                "instructions": self.system_prompt,
-                "turn_detection": {
-                    "type": "server_vad",
-                    "create_response": False # We decide ourselves when it's time for response
-                },
-                "input_audio_format": "pcm16",
-                "output_audio_format": "pcm16",
-                "input_audio_transcription": {
-                    "model": "gpt-4o-mini-transcribe",   # or gpt-4o-transcribe / whisper-1
-                    "language": self.language
-                } ,
-                "modalities": ["text", "audio"] if self.voice else ["text"],                      
+                "type": "realtime",
+                "instructions": "",
+                "output_modalities": ["text", "audio"] if self.voice else ["text"],  
+                "audio": {
+                    "input": {
+                        "format": {
+                            "type": "audio/pcm",
+                            "rate": 24000
+                        },
+                        "transcription": {
+                            "model": "gpt-4o-mini-transcribe",
+                            "language": "sv"
+                        },
+                        "turn_detection": {
+                            "type": "server_vad",
+                            "create_response": False # We decide ourselves when it's time for response
+                        }
+                    },
+                }
+
             }
             if self.voice:
-                session_data["voice"] = self.voice
+                session_data["audio"]["output"] = {
+                    "format": {
+                        "type": "audio/pcm",
+                        "rate": 24000
+                    },
+                    "voice": self.voice,
+                }
+
 
             self._send_data({
                 "type": "session.update",
@@ -132,7 +147,8 @@ class OaiChatIntegrated:
                         if error.get("code") == "response_cancel_not_active":
                             return
                     # OBS! ERROR: {'type': 'error', 'event_id': 'event_Cf56YfnjwVCABifRNL02D', 'error': {'type': 'invalid_request_error', 'code': 'session_expired', 'message': 'Your session hit the maximum duration of 60 minutes.', 'param': None, 'event_id': None}}
-                    print("ERROR:", evt)
+                    # print("ERROR:", evt)
+                    syslogger.error(f"Error event: {evt}")
                 elif t == "response.audio.delta":
                     b = base64.b64decode(evt.get("delta", ""))
                     if self.response_audio_callback:
@@ -143,7 +159,7 @@ class OaiChatIntegrated:
                 elif t == "conversation.item.input_audio_transcription.completed":
                     self._cur_query.query_text += " "
                     # print("USER:", evt.get("transcript"), evt)
-                elif t in ("response.audio_transcript.delta", "response.text.delta"):
+                elif t == "response.output_text.delta":
                     text = evt.get("delta")
                     self._cur_query.response_text += text
                     if not self._cur_query.canceled:
@@ -157,22 +173,21 @@ class OaiChatIntegrated:
                     if evt["response"]["status"] == "completed":
                         self._cur_query.done = True
                         self._cur_query.duration = time.time() - self._cur_query.start_time
-                    if self.query_response_callback:
+                    if self.query_response_callback and not self._cur_query.canceled:
                         self.query_response_callback(self._cur_query)
                     self._set_state(self.STATE_IDLE)
                 else:
                     pass
-                    #print(t, (time.time() - self._cur_query.start_time))
-                    
-            except Exception:
-                traceback.print_exc()
-                print(evt)
+                #print(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
+            except Exception as e:
+                syslogger.exception(f"Exception {e} when handling event {evt}")
+
 
         self.ws = WebSocketApp(
             "wss://api.openai.com/v1/realtime?model=gpt-realtime",
             header=[
                 "Authorization: Bearer " + self.api_key,
-                "OpenAI-Beta: realtime=v1",
+                #"OpenAI-Beta: realtime=v1",
             ],
             on_open=on_open,
             on_message=on_message,
@@ -194,6 +209,10 @@ class OaiChatIntegrated:
 
     def _send_data(self, data:dict):
         self.ws.send(json.dumps(data))
+        # if data["type"] == "input_audio_buffer.append":
+        #     data = data.copy()
+        #     data["audio"] = "..."
+        # print("SEND DATA:",json.dumps(data))
 
     def push_pcm16_frames(self, sample_rate:int, channel_cnt:int, frames:np.ndarray):
         if self._listening:

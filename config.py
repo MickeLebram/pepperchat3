@@ -1,17 +1,10 @@
 import json
 import os
 from pathlib import Path
-import traceback
 from PySide6.QtWidgets import QApplication, QDialog, QGridLayout,  QPushButton, QLineEdit, QLabel
+import dirs
 
-from PySide6.QtCore import QStandardPaths
-_appdir = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation) + "/PepperChat3")
-
-_logdir = _appdir / "logs"
-for d in (_appdir, _logdir):
-    d.mkdir(parents=True, exist_ok=True)
-
-_config_fname = _appdir / "system.cfg"
+_config_fname = dirs.APP_DIR / "system.cfg"
 
 def _assign_from_file(obj:object, filename:str):
     with open(filename, "r", encoding="utf-8") as f:
@@ -39,12 +32,6 @@ class Config:
                 return f.read()
         return ""
     @property
-    def logdir(self):
-        return _logdir
-    @property
-    def appdir(self):
-        return _appdir
-    @property
     def file(self):
         return _config_fname
 
@@ -55,8 +42,6 @@ try:
 except:
     pass
     #traceback.print_exc()
-
-print(config.__dict__)
 
 def show_config_dlg(parent=None):
     standalone = QApplication() if not QApplication.instance() else None
@@ -97,3 +82,4 @@ def show_config_dlg(parent=None):
     else:
         dlg.exec()
     return applied
+

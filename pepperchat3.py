@@ -1,6 +1,8 @@
 from apidefs import api
 import traceback
 import dotenv
+
+import dirs
 dotenv.load_dotenv()
 import threading, time, json, os
 from datetime import datetime
@@ -10,9 +12,8 @@ import subtitles
 import utils
 from  oaichat_integrated import OaiChatIntegrated, Query
 from pathlib import Path
-from platformdirs import user_data_dir
 import gui
-
+from syslogger import syslogger
 from config import config, show_config_dlg
 
 def main():
@@ -20,7 +21,7 @@ def main():
         if not show_config_dlg():
             exit()
 
-    api.robot_client.init(config.robot_server_ip)
+    api.robot_client.init(config.robot_server_ip, logger=syslogger)
     api.ALAudioDevice.getOutputVolume() # Ful bootstrap, kolla varför den behövs
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
@@ -32,16 +33,14 @@ def main():
         for sensor in data:
             bodypart, touched = sensor[:2]
             if touched and bodypart == "Head":
-                print("STFU")
+                syslogger.info("Head touched, please be quiet")
                 mute_mic_a_while(3)
                 oai.cancel_current()
                 pts.stop_talking()
     api.event.TouchChanged.subscribe(ontouch)
 
-    logdir = os.path.join(os.path.dirname(__file__), 'logs')
-    os.makedirs(logdir, exist_ok=True)
-    logfile = os.path.join(logdir, datetime.now().strftime('dialogue_%Y-%m-%d_%H%M%S.log'))
-    print('Logging to', logfile)
+    logfile = os.path.join(dirs.LOG_DIR, datetime.now().strftime("dialogue_%Y-%m-%d_%H%M%S.log"))
+    syslogger.info(f"Logging to {logfile}")
 
     def log_query(query:Query):
         entry = {
@@ -57,9 +56,9 @@ def main():
     def on_query_update(query:Query):
         #print(query)
         if query.query_text and not query.response_text:
-            print("USER:", query.query_text.strip())
+            syslogger.info(f"USER: {query.query_text.strip()}")
         if query.done:
-            print(query)
+            syslogger.info(query)
             log_query(query)
     
     def on_listening_state_change(listening):

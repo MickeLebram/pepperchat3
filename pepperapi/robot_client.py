@@ -9,8 +9,9 @@ import uuid
 import queue
 from . robot_comm_common import *
 import os
+import sys
 import __main__
-
+import logging
 def _close_sock(sock):
     try:
         sock.shutdown(socket.SHUT_RDWR)
@@ -23,16 +24,27 @@ def _close_sock(sock):
 
 _robot_server_ip = ""
 _robot_server_port = 0
-
+_logger:logging.Logger = None
 def _assert_inited():
     if not _robot_server_ip or not _robot_server_port:
         raise(Exception("robot_client.init must be called before this operation"))
 
 
-def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT):
-    global _robot_server_ip, _robot_server_port
+def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logging.Logger = None):
+    global _robot_server_ip, _robot_server_port, _logger
     _robot_server_ip = robot_server_ip
     _robot_server_port = robot_server_port
+    if logger:
+        _logger = logger
+    else:
+        _logger = logging.getLogger("clientdummylogger")
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setFormatter(logging.Formatter(
+            fmt="%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        ))
+        _logger.addHandler(console_handler)
+
 
 class _Request:
     def __init__(self):
@@ -83,7 +95,7 @@ class _MessageClient:
                 req.response = response
                 req.lock.release_lock()
             else:
-                print("Unmatched reply:", response)
+                _logger.warning(f"Unmatched reply: {response}")
 
     def close(self):
         self.running.clear()
@@ -129,22 +141,21 @@ class EventListener:
                 for cb in self.callbacks:
                     try:
                         cb(evt["data"])
-                    except:
-                        traceback.print_exc()
+                    except Exception as e:
+                        _logger.exception(e)
         def listen():
             while self.alive.is_set():
                 try:
                     send_dict(self.sock, msg_poll.__dict__)
                     evt_bytes = read_packet(self.sock)   
-                    #print("evt_bytes",evt_bytes)                    
                     if evt_bytes:
                         pending_events.put(json.loads(evt_bytes.decode("utf8")))
                 except ConnectionResetError as e:
-                    print(f"{self.event_name} connection was closed by server.")
+                    _logger.warning(f"{self.event_name} connection was closed by server.")
                     self.alive.clear()
                 except Exception as e:
                     if self.alive.is_set():
-                        traceback.print_exc()
+                        _logger.exception(e)
             _close_sock(self.sock)
         threading.Thread(target=dispatcher, daemon=True).start()
         self.listener_thread= threading.Thread(target=listen, daemon=True)

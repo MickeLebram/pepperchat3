@@ -13,6 +13,7 @@ from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal, Slot
 import sys
 from apidefs import api
+import dirs
 import subtitles
 from config import config
 from config import show_config_dlg
@@ -211,7 +212,7 @@ class App(QWidget):
                 caption = "..." + caption[-maxlen:]
             btn_prompt.setText(caption)
         def browse_prompts():
-            start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(config.appdir.absolute())
+            start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(dirs.APP_DIR.absolute())
             fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
             if not fname:
                 return
