@@ -1,8 +1,10 @@
 import json
 import os
 from pathlib import Path
-from PySide6.QtWidgets import QApplication, QDialog, QGridLayout,  QPushButton, QLineEdit, QLabel
+from typing import Callable
+from PySide6.QtWidgets import QApplication, QComboBox, QDialog, QGridLayout,  QPushButton, QLineEdit, QLabel
 import dirs
+import wifi
 
 _config_fname = dirs.APP_DIR / "system.cfg"
 
@@ -24,6 +26,9 @@ class Config:
         self.robot_server_ip = ""
         self.openai_api_key = ""
         self.last_browsed_anim = ""
+        self.wifi_ssid = ""
+        self.wifi_security = ""
+        self.wifi_pwd = ""
     def save(self):
         _save_to_file(self, _config_fname)
     def get_prompt(self):
@@ -54,10 +59,25 @@ def show_config_dlg(parent=None):
         layout.addWidget(QLabel(caption),row_idx,0)
         layout.addWidget(ret,row_idx,1)
         return ret
-
+        
+    def add_combo(name:str, options:list, selected_option, onchange:Callable[[int], None] = None):
+        combo = QComboBox()
+        combo.addItems(options)
+        combo.setCurrentIndex(options.index(selected_option) if selected_option in options else 0)
+        if onchange:
+            combo.currentIndexChanged.connect(onchange)
+        row_idx = layout.rowCount() + 1
+        layout.addWidget(QLabel(name),row_idx, 0)
+        layout.addWidget(combo,row_idx, 1)
+        return combo
     robot_server_ip = add_text("Robot Server IP", config.robot_server_ip)
     apikey = add_text("Openai API Key", config.openai_api_key)
-
+    wifis = wifi.list_wifi_networks()
+    combo_wifi_ssid = add_combo("Wifi ssid", wifis, config.wifi_ssid)
+    securities = ["wpa","wep","open"]
+    combo_wifi_security = add_combo("Wifi security", securities, config.wifi_security)
+    txt_wifi_pwd = add_text("Wifi pwd", config.wifi_pwd)
+    txt_wifi_pwd.setEchoMode(QLineEdit.Password)
     btn_apply = QPushButton("Apply")
     btn_cancel = QPushButton("Cancel")
     applied = False
@@ -65,6 +85,9 @@ def show_config_dlg(parent=None):
         nonlocal applied
         config.robot_server_ip = robot_server_ip.text()
         config.openai_api_key = apikey.text()
+        config.wifi_ssid = wifis[combo_wifi_ssid.currentIndex()]
+        config.wifi_security = securities[combo_wifi_security.currentIndex()]
+        config.wifi_pwd = txt_wifi_pwd.text()
         config.save()
         dlg.close()
         applied = True
@@ -83,3 +106,5 @@ def show_config_dlg(parent=None):
         dlg.exec()
     return applied
 
+if __name__ == "__main__":
+    show_config_dlg()

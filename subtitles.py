@@ -13,7 +13,7 @@ import http.server
 import socketserver
 from typing import Callable, List, Tuple
 import numpy as np
-
+from syslogger import syslogger
 import utils
 from apidefs import api
 
@@ -77,6 +77,9 @@ class SubtitleServer:
         self._try_show_on_tablet()
     
     def _try_show_on_tablet(self):
+        if not utils.has_tablet():
+            syslogger.error("Tablet missing")
+            return
         print("setup")
         if self.setting_up_tablet.is_set():
             print("nopes")
