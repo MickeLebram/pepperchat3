@@ -158,7 +158,7 @@ class AnimationBrowser(QDialog):
 class App(QWidget):
     def __init__(self):
         super().__init__()
-
+        robot_connected = api.robot_client.robot_connected()
         self.setWindowTitle("PepperChat3")
         layout = QGridLayout(self)
         
@@ -216,8 +216,9 @@ class App(QWidget):
             fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
             if not fname:
                 return
-            if os.path.samefile(fname, config.file):
-                show_msg("Never share this file")
+            if Path(fname) == Path(config.file):
+                print(fname, config.file)
+                show_msg(self, "Never share this file")
                 return
             config.cur_prompt_file = fname
             config.save()
@@ -226,14 +227,14 @@ class App(QWidget):
         btn_prompt = add_button(layout, "Load", browse_prompts)
         layout.addWidget(btn_prompt, 0,0,1,2)
         update_btn_prompt()
-        self.cur_volume = api.ALAudioDevice.getOutputVolume()
+        self.cur_volume = api.ALAudioDevice.getOutputVolume() if robot_connected else 0
         slide_volume = add_slider(layout, "Volume", self.cur_volume, 0, 100)        
-        self.cur_tts_speed = api.ALTextToSpeech.getParameter("speed")
+        self.cur_tts_speed = api.ALTextToSpeech.getParameter("speed") if robot_connected else 0
         slide_tts_speed = add_slider(layout, "Speech speed", self.cur_tts_speed, 50, 200)        
         add_combo(
             layout,
             "Speech Language", 
-            api.ALTextToSpeech.getAvailableLanguages(),
+            api.ALTextToSpeech.getAvailableLanguages() if robot_connected else [],
             api.ALTextToSpeech.getLanguage(),
             lambda lang: api.ALTextToSpeech.setLanguage(lang)
         )
@@ -250,28 +251,29 @@ class App(QWidget):
         group_posture = QGroupBox("Postures")
         group_posture.setLayout(QVBoxLayout())
         layout.addWidget(group_posture)
-        for posture in api.ALRobotPosture.getPostureList():
-            def set_posture(p):
-                group_posture.setEnabled(False)
-                run_async_task(
-                    api.ALRobotPosture.goToPosture,
-                    [p,1],
-                    lambda: group_posture.setEnabled(True)
+        if robot_connected:
+            for posture in api.ALRobotPosture.getPostureList():
+                def set_posture(p):
+                    group_posture.setEnabled(False)
+                    run_async_task(
+                        api.ALRobotPosture.goToPosture,
+                        [p,1],
+                        lambda: group_posture.setEnabled(True)
+                    )
+                add_button(
+                    group_posture.layout(),
+                    posture,
+                    lambda args: set_posture(args[0]),
+                    [posture]
                 )
-            add_button(
-                group_posture.layout(),
-                posture,
-                lambda args: set_posture(args[0]),
-                [posture]
-            )
-        group_motion = QGroupBox("Motion")
-        group_motion.setLayout(QVBoxLayout())
-        layout.addWidget(group_motion)
-        add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
-        def browse_animations():
-            AnimationBrowser(self).show()
+            group_motion = QGroupBox("Motion")
+            group_motion.setLayout(QVBoxLayout())
+            layout.addWidget(group_motion)
+            add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
+            def browse_animations():
+                AnimationBrowser(self).show()
 
-        add_button(group_motion.layout(), "Animations...", browse_animations)
+            add_button(group_motion.layout(), "Animations...", browse_animations)
 
         def sparse_update():
             if self.cur_volume != slide_volume.value():

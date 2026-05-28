@@ -4,17 +4,23 @@ from apidefs import api
 from syslogger import syslogger
 from config import config
 
+_has_tablet = None
 def has_tablet():
-    try:
-        api.ALTabletService._ping()
-    except api.robot_client.FunctionCallException:
-        return False
-    return True
+    global _has_tablet
+    if has_tablet is None:
+        try:
+            api.ALTabletService._ping()
+            _has_tablet = True
+        except api.robot_client.FunctionCallException:
+            _has_tablet =  False
+    return _has_tablet
+
+def tablet_connected():
+    return api.ALTabletService.getWifiStatus() == "CONNECTED"
 
 def connect_tablet():
-    def connected():
-        return api.ALTabletService.getWifiStatus() == "CONNECTED"
-    if not connected():
+    connected = tablet_connected()
+    if not connected:
 
         if config.wifi_ssid and config.wifi_pwd:
             syslogger.info(f"Configuring tablet wifi: {config.wifi_ssid}")
@@ -24,11 +30,12 @@ def connect_tablet():
                 config.wifi_pwd
             )
             t = time.time()
-            while not connected() and time.time() - t < 15:
+            while not connected and time.time() - t < 15:
+                connected = tablet_connected()
                 time.sleep(.2)
-    if connected():
+    if connected:
         syslogger.info("Tablet connected")
         return True
-    syslogger.warning("Could not connect tablet. Check environment variables TABLET_WIFI_SSID, TABLET_WIFI_PWD and TABLET_WIFI_SECURITY" )
+    syslogger.warning("Could not connect tablet. Check wifi credentials." )
     return False
 

@@ -25,10 +25,6 @@ def _close_sock(sock):
 _robot_server_ip = ""
 _robot_server_port = 0
 _logger:logging.Logger = None
-def _assert_inited():
-    if not _robot_server_ip or not _robot_server_port:
-        raise(Exception("robot_client.init must be called before this operation"))
-
 
 def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logging.Logger = None):
     global _robot_server_ip, _robot_server_port, _logger
@@ -38,12 +34,12 @@ def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logg
         _logger = logger
     else:
         _logger = logging.getLogger("clientdummylogger")
-        console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setFormatter(logging.Formatter(
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setFormatter(logging.Formatter(
             fmt="%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S"
         ))
-        _logger.addHandler(console_handler)
+        _logger.addHandler(handler)
 
 
 class _Request:
@@ -66,14 +62,19 @@ class _MessageClient:
         self.id = ""
 
     def send_msg(self, msg:MsgBase):
-        _assert_inited()
         if not self.sock:
+            if not _robot_server_ip or not _robot_server_port:
+                raise(Exception("robot_client.init must be called before this operation"))
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.sock.connect((_robot_server_ip, _robot_server_port))
-            self.id = f"{int(time.time()*1000) % 100000}[{os.path.splitext(os.path.basename(__main__.__file__))[0]}@{self.sock.getsockname()[0]}]"
-            self.running.set()
-            self.recv_thread.start()
-
+            try:
+                self.sock.connect((_robot_server_ip, _robot_server_port))
+                self.id = f"{int(time.time()*1000) % 100000}[{os.path.splitext(os.path.basename(__main__.__file__))[0]}@{self.sock.getsockname()[0]}]"
+                self.running.set()
+                self.recv_thread.start()
+            except:
+                _logger.error("Could not connect to robot server")
+        if not self.running.is_set():
+            return None
         msg.id = str(uuid.uuid4())
         msg.client_id = self.id
         req = _Request()
@@ -105,6 +106,9 @@ class _MessageClient:
 
 
 _client = _MessageClient()
+def robot_connected():
+    return _client.running.is_set()
+
 def send_mfc(module_name, func_name, func_args = []):
     msg = MsgModuleFunctionCall(
         module_name=module_name,
@@ -124,15 +128,13 @@ class EventListener:
         self.event_name = event_name
         self.callbacks = []
         self.instances_by_event_name[event_name] = self
+        self.alive = threading.Event()
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #sock.settimeout(10)
-        resp = _client.send_msg(MsgEventSubscription(event_name, True))
-        self.sock.connect((_robot_server_ip, resp["port"]))
         msg_poll = MsgEventPoll()
         msg_poll.client_id = _client.id
-        self.alive = threading.Event()
-        self.alive.set()
         pending_events = queue.Queue()
+
         def dispatcher():
             while self.alive.is_set():
                 evt = pending_events.get()
@@ -151,15 +153,20 @@ class EventListener:
                     if evt_bytes:
                         pending_events.put(json.loads(evt_bytes.decode("utf8")))
                 except ConnectionResetError as e:
-                    _logger.warning(f"{self.event_name} connection was closed by server.")
+                    _logger.error(f"{self.event_name} connection was closed by server.")
                     self.alive.clear()
                 except Exception as e:
                     if self.alive.is_set():
                         _logger.exception(e)
             _close_sock(self.sock)
-        threading.Thread(target=dispatcher, daemon=True).start()
+        
         self.listener_thread= threading.Thread(target=listen, daemon=True)
-        self.listener_thread.start()
+        if robot_connected():
+            resp = _client.send_msg(MsgEventSubscription(event_name, True))
+            self.sock.connect((_robot_server_ip, resp["port"]))
+            self.alive.set()
+            threading.Thread(target=dispatcher, daemon=True).start()
+            self.listener_thread.start()
 
     def stop(self):
         self.alive.clear()
