@@ -29,7 +29,6 @@ class OaiChatIntegrated:
                  system_prompt = "", 
                  language = "sv", 
                  voice="", #ex. sage
-                 temperature = 0.8,
                  query_update_callback: Callable[[Query], None] = None,
                  state_callback: Callable[[str], None] = None,
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
@@ -94,7 +93,7 @@ class OaiChatIntegrated:
             print("WebSocket connected")
             session_data = {
                 "type": "realtime",
-                "instructions": "",
+                "instructions": self.system_prompt,
                 "output_modalities": ["text", "audio"] if self.voice else ["text"],  
                 "audio": {
                     "input": {
