@@ -1,4 +1,3 @@
-import os
 import time
 from apidefs import api
 from syslogger import syslogger

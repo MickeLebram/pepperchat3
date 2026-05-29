@@ -1,17 +1,12 @@
 from apidefs import api
 import traceback
-import dotenv
-
 import dirs
-dotenv.load_dotenv()
 import threading, time, json, os
 from datetime import datetime
 from pepper_text_speaker import PepperTextSpeaker
 import pcm_utils
 import subtitles
-import utils
 from  oaichat_integrated import OaiChatIntegrated, Query
-from pathlib import Path
 import gui
 from syslogger import syslogger
 from config import config, show_config_dlg
@@ -70,11 +65,15 @@ def main():
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
         system_prompt=config.get_prompt(),
-        query_update_callback = on_query_update,
-        state_callback=print,
-        intermediate_response_text_callback=pts.push_text,
-        listening_state_change_callback=on_listening_state_change
+        # query_update_callback = on_query_update,
+        # state_callback=print,
+        # intermediate_response_text_callback=pts.push_text,
+        # listening_state_change_callback=on_listening_state_change
     )
+    oai.query_update_callbacks.append(on_query_update)
+    oai.state_callbacks.append(print)
+    oai.intermediate_response_text_callbacks.append(pts.push_text)
+    oai.listening_state_change_callbacks.append(on_listening_state_change)
     oai.silero.threshold = .5
     
 
@@ -86,17 +85,8 @@ def main():
             time.sleep(.1)
     threading.Thread(target=muter, daemon=True).start()
     pcm_utils.listen_on_local_mic(48000,[oai.push_pcm16_frames])
-    def reload_system_prompt():
-        oai.system_prompt = config.get_prompt()
-        oai.start()
 
-    gui.run(reload_system_prompt)
-    # try:
-    #     while True:
-    #         time.sleep(1)
-    # except KeyboardInterrupt:
-    #     pass
-
+    gui.run(oai)
 
 
 if __name__ == "__main__":

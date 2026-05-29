@@ -5,7 +5,7 @@ import threading
 import time
 from typing import Callable
 from PySide6.QtWidgets import (
-    QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QTreeView, QWidget, QVBoxLayout,
+    QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QTextEdit, QTreeView, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
@@ -17,8 +17,7 @@ import dirs
 import subtitles
 from config import config
 from config import show_config_dlg
-
-
+from oaichat_integrated import OaiChatIntegrated, Query
 
 _active_tasks = []
 
@@ -83,6 +82,23 @@ def show_msg(owner, msg:str):
     msgBox = QMessageBox(owner)
     msgBox.setText(msg)
     msgBox.exec()    
+
+
+class ChatDisplay(QTextEdit):
+    class QueryWorker(QObject):
+        signal_query = Signal(Query)
+    def __init__(self, oai:OaiChatIntegrated):
+        super().__init__()
+        self.worker = ChatDisplay.QueryWorker()
+        self.worker.moveToThread(self.thread())
+
+        def append(q:Query):
+            if q.done:
+                self.append(f"<i>{q.query_text}</i>")
+                self.append(f"{q.response_text}<br>")
+        self.worker.signal_query.connect(append)
+        oai.query_update_callbacks.append(lambda q:self.worker.signal_query.emit(q))
+
 
 class AnimationBrowser(QDialog):
     def __init__(self, parent):
@@ -155,9 +171,10 @@ class AnimationBrowser(QDialog):
         if self.model.itemFromIndex(index).rowCount() == 0:
             self.play_selected()
 
-class App(QWidget):
-    def __init__(self):
+class MainWindow(QWidget):
+    def __init__(self, oai:OaiChatIntegrated):
         super().__init__()
+        self.oai = oai
         robot_connected = api.robot_client.robot_connected()
         self.setWindowTitle("PepperChat3")
         layout = QGridLayout(self)
@@ -223,7 +240,7 @@ class App(QWidget):
             config.cur_prompt_file = fname
             config.save()
             update_btn_prompt()
-            reload_prompt()
+            oai.set_system_prompt(config.get_prompt())
         btn_prompt = add_button(layout, "Load", browse_prompts)
         layout.addWidget(btn_prompt, 0,0,1,2)
         update_btn_prompt()
@@ -275,6 +292,12 @@ class App(QWidget):
 
             add_button(group_motion.layout(), "Animations...", browse_animations)
 
+        chat_display = ChatDisplay(oai)
+        # chat_display.append('<span style="color:green">Connected</span>')
+        # chat_display.append('<span style="color:red">Connection failed</span>')
+        # chat_display.append('<b>Downloading...</b>')
+        chat_display.setMinimumWidth(500)
+        layout.addWidget(chat_display, 0, 3, 20, 1)
         def sparse_update():
             if self.cur_volume != slide_volume.value():
                 self.cur_volume = slide_volume.value()
@@ -287,11 +310,9 @@ class App(QWidget):
         self.sparse_updater.start(100)
 
 reload_prompt:Callable[[],None] = None
-def run(reload_prompt_callback):
-    global reload_prompt
-    reload_prompt = reload_prompt_callback
+def run(oai:OaiChatIntegrated):
     app = QApplication.instance() if QApplication.instance() else QApplication()
-    window = App()
+    window = MainWindow(oai)
     window.show()
     sys.exit(app.exec())
     

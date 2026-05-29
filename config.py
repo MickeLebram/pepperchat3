@@ -73,9 +73,11 @@ def show_config_dlg(parent=None):
     robot_server_ip = add_text("Robot Server IP", config.robot_server_ip)
     apikey = add_text("Openai API Key", config.openai_api_key)
     wifis = wifi.list_wifi_networks()
+    if config.wifi_ssid not in wifis:
+        wifis.insert(0, config.wifi_ssid)
     combo_wifi_ssid = add_combo("Wifi ssid", wifis, config.wifi_ssid)
-    securities = ["wpa","wep","open"]
-    combo_wifi_security = add_combo("Wifi security", securities, config.wifi_security)
+    combo_wifi_ssid.setEditable(True)
+    combo_wifi_security = add_combo("Wifi security", ["wpa","wep","open"], config.wifi_security)
     txt_wifi_pwd = add_text("Wifi pwd", config.wifi_pwd)
     txt_wifi_pwd.setEchoMode(QLineEdit.Password)
     btn_apply = QPushButton("Apply")
@@ -85,8 +87,8 @@ def show_config_dlg(parent=None):
         nonlocal applied
         config.robot_server_ip = robot_server_ip.text()
         config.openai_api_key = apikey.text()
-        config.wifi_ssid = wifis[combo_wifi_ssid.currentIndex()]
-        config.wifi_security = securities[combo_wifi_security.currentIndex()]
+        config.wifi_ssid = combo_wifi_ssid.currentText()
+        config.wifi_security = combo_wifi_security.currentText()
         config.wifi_pwd = txt_wifi_pwd.text()
         config.save()
         dlg.close()

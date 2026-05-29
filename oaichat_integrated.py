@@ -29,11 +29,11 @@ class OaiChatIntegrated:
                  system_prompt = "", 
                  language = "sv", 
                  voice="", #ex. sage
-                 query_update_callback: Callable[[Query], None] = None,
-                 state_callback: Callable[[str], None] = None,
+                #  query_update_callback: Callable[[Query], None] = None,
+                #  state_callback: Callable[[str], None] = None,
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
-                 intermediate_response_text_callback: Callable[[str], None] = None,
-                 listening_state_change_callback: Callable[[bool], None] = None,
+                #  intermediate_response_text_callback: Callable[[str], None] = None,
+                #  listening_state_change_callback: Callable[[bool], None] = None,
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             self._set_state(self.STATE_SENDING_SPEECH)
@@ -60,11 +60,11 @@ class OaiChatIntegrated:
             speech_stream_callback=on_pcm16_frames,
             speech_end_callback=on_speech_end
         )
-        self.state_callback = state_callback
-        self.query_response_callback = query_update_callback
+        self.state_callbacks:List[Callable[[str], None]] = []
+        self.query_update_callbacks:List[Callable[[Query], None]] = []
+        self.listening_state_change_callbacks:List[Callable[[bool], None]] = []
+        self.intermediate_response_text_callbacks:List[Callable[[str], None]] = []
         self.response_audio_callback = response_audio_callback
-        self.intermediate_response_text_callback = intermediate_response_text_callback
-        self.listening_state_change_callback = listening_state_change_callback
         self.language = language
         self.voice = voice
         self.system_prompt = system_prompt
@@ -84,8 +84,8 @@ class OaiChatIntegrated:
                 self.cancel_current()
                 self._cur_query = Query()
             self._state = state
-            if self.state_callback:
-                self.state_callback(state)
+            for cbk in self.state_callbacks:
+                cbk(state)
     def start(self):
         if self.ws:
             self.close()
@@ -162,22 +162,23 @@ class OaiChatIntegrated:
                     text = evt.get("delta")
                     self._cur_query.response_text += text
                     if not self._cur_query.canceled:
-                        if self.query_response_callback:
-                            self.query_response_callback(self._cur_query)
-                        if self.intermediate_response_text_callback:
-                            self.intermediate_response_text_callback(text)
+                        for cbk in  self.query_update_callbacks:
+                            cbk(self._cur_query)
+                        for cbk in self.intermediate_response_text_callbacks:
+                            cbk(text)
                 # elif delta := evt.get("delta"):
                 #     print(t,delta)
                 elif t == "response.done":
                     if evt["response"]["status"] == "completed":
                         self._cur_query.done = True
                         self._cur_query.duration = time.time() - self._cur_query.start_time
-                    if self.query_response_callback and not self._cur_query.canceled:
-                        self.query_response_callback(self._cur_query)
+                    if not self._cur_query.canceled:
+                        for cbk in self.query_update_callbacks:
+                            cbk(self._cur_query)
                     self._set_state(self.STATE_IDLE)
                 else:
                     pass
-                #print(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
+                syslogger.info(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
             except Exception as e:
                 syslogger.exception(f"Exception {e} when handling event {evt}")
 
@@ -206,6 +207,10 @@ class OaiChatIntegrated:
         except:
             traceback.print_exc()
 
+    def set_system_prompt(self, prompt:str):
+        self.system_prompt = prompt
+        self.start()
+
     def _send_data(self, data:dict):
         self.ws.send(json.dumps(data))
         # if data["type"] == "input_audio_buffer.append":
@@ -217,12 +222,12 @@ class OaiChatIntegrated:
         if self._listening:
             self.silero.push_pcm16_frames(sample_rate, channel_cnt, frames)
     
-    def set_listening(self, listening):
+    def set_listening(self, listening:bool):
         if self._listening != listening:
             print("listening:",listening)
             self._listening = listening
-            if self.listening_state_change_callback:
-                self.listening_state_change_callback(listening)
+            for cbk in self.listening_state_change_callbacks:
+                cbk(listening)
     
     def cancel_current(self):
         self._cur_query.canceled = True
