@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import threading
 import time
+import traceback
 from typing import Callable
 from PySide6.QtWidgets import (
     QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QTextEdit, QTreeView, QWidget, QVBoxLayout,
@@ -13,12 +14,12 @@ from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtCore import QObject, QThread, QTimer, Qt, Signal, Slot
 import sys
 from apidefs import api
-import dirs
+import defs
 import subtitles
 from config import config
 from config import show_config_dlg
 from oaichat_integrated import OaiChatIntegrated, Query
-
+from syslogger import syslogger
 _active_tasks = []
 
 
@@ -37,6 +38,7 @@ class Task(QObject):
             self.func(*self.args)
         except Exception as e:
             self.error.emit(e)
+            traceback.print_exc()
         finally:
             self.done.emit()
 
@@ -77,6 +79,7 @@ def run_async_task(func, args=(), ondone=None, onerror=None):
     thread.finished.connect(cleanup)
 
     thread.start()
+    return thread
 
 def show_msg(owner, msg:str):
     msgBox = QMessageBox(owner)
@@ -95,7 +98,7 @@ class ChatDisplay(QTextEdit):
         def append(q:Query):
             if q.done:
                 self.append(f"<i>{q.query_text}</i>")
-                self.append(f"{q.response_text}<br>")
+                self.append(f"{q.response_text}\n")
         self.worker.signal_query.connect(append)
         oai.query_update_callbacks.append(lambda q:self.worker.signal_query.emit(q))
 
@@ -229,7 +232,7 @@ class MainWindow(QWidget):
                 caption = "..." + caption[-maxlen:]
             btn_prompt.setText(caption)
         def browse_prompts():
-            start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(dirs.APP_DIR.absolute())
+            start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(defs.APP_DIR.absolute())
             fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
             if not fname:
                 return
@@ -309,10 +312,65 @@ class MainWindow(QWidget):
         self.sparse_updater.timeout.connect(sparse_update)
         self.sparse_updater.start(100)
 
-reload_prompt:Callable[[],None] = None
 def run(oai:OaiChatIntegrated):
     app = QApplication.instance() if QApplication.instance() else QApplication()
     window = MainWindow(oai)
     window.show()
     sys.exit(app.exec())
     
+def show_init_dialog():
+    app = QApplication.instance() if QApplication.instance() else QApplication()
+    while not config.openai_api_key or not config.robot_server_ip:
+        if not show_config_dlg():
+            exit()
+
+    dlg = QDialog()
+    layout = QGridLayout(dlg)
+    dlg.setWindowTitle(defs.APP_NAME)
+    status = QLabel()
+    layout.addWidget(status)
+    done = threading.Event()
+    def on_done():
+        try:
+            done.set()
+            dlg.deleteLater()
+        except:
+            traceback.print_exc()
+    connect_thread:QThread = None
+    def connect():
+        nonlocal connect_thread
+        status.setText(f"Trying to connect to robot on {config.robot_server_ip}...")
+        def doit():
+            api.robot_client.init(config.robot_server_ip, logger=syslogger)
+            api.ALMotion.ping()
+            if api.robot_client.robot_connected():
+                on_done()
+            else:
+                try:
+                    status.setText(f"Could not connect to robot on {config.robot_server_ip}")
+                except:
+                    pass
+        connect_thread = run_async_task(doit, ())
+    
+    btn_no_robot = QPushButton("Continue without robot")
+    btn_no_robot.clicked.connect(on_done)
+    layout.addWidget(btn_no_robot)
+    def on_cfg():
+        if show_config_dlg(dlg):
+            # api.robot_client.close()
+            connect()
+    btn_config= QPushButton("System config")
+    btn_config.clicked.connect(on_cfg)
+    layout.addWidget(btn_config)
+    connect()
+    
+
+    dlg.exec()
+    if not done.is_set():
+        try:
+            connect_thread.deleteLater()
+        except:
+            pass
+        exit()
+    
+        

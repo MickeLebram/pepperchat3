@@ -18,7 +18,12 @@ class Query:
     def __str__(self):
         return str(self.__dict__)
 
-    
+META_INSTRUCTIONS = """
+When responding to audio input, always format the response as json with the fields:
+HEARD: <your best interpretation of the user's utterance>,
+RESPONSE: <your normal response>
+""" 
+
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
     STATE_SENDING_SPEECH = "SENDING_SPEECH"
@@ -29,11 +34,7 @@ class OaiChatIntegrated:
                  system_prompt = "", 
                  language = "sv", 
                  voice="", #ex. sage
-                #  query_update_callback: Callable[[Query], None] = None,
-                #  state_callback: Callable[[str], None] = None,
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
-                #  intermediate_response_text_callback: Callable[[str], None] = None,
-                #  listening_state_change_callback: Callable[[bool], None] = None,
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             self._set_state(self.STATE_SENDING_SPEECH)

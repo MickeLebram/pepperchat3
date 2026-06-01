@@ -3,10 +3,10 @@ import os
 from pathlib import Path
 from typing import Callable
 from PySide6.QtWidgets import QApplication, QComboBox, QDialog, QGridLayout,  QPushButton, QLineEdit, QLabel
-import dirs
+import defs
 import wifi
 
-_config_fname = dirs.APP_DIR / "system.cfg"
+_config_fname = defs.APP_DIR / "system.cfg"
 
 def _assign_from_file(obj:object, filename:str):
     with open(filename, "r", encoding="utf-8") as f:

@@ -22,17 +22,13 @@ def _close_sock(sock):
     except:
         pass
 
-_robot_server_ip = ""
-_robot_server_port = 0
 _logger:logging.Logger = None
 
 def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logging.Logger = None):
-    global _robot_server_ip, _robot_server_port, _logger
-    _robot_server_ip = robot_server_ip
-    _robot_server_port = robot_server_port
+    global _logger, _client
     if logger:
         _logger = logger
-    else:
+    if not _logger:
         _logger = logging.getLogger("clientdummylogger")
         handler = logging.StreamHandler(sys.stdout)
         handler.setFormatter(logging.Formatter(
@@ -40,6 +36,9 @@ def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logg
             datefmt="%Y-%m-%d %H:%M:%S"
         ))
         _logger.addHandler(handler)
+    if _client:
+        close()
+    _client = _MessageClient(robot_server_ip, robot_server_port)
 
 
 class _Request:
@@ -53,26 +52,32 @@ class FunctionCallException(Exception):
 
   
 class _MessageClient:
-    def __init__(self):
+    def __init__(self, server_ip, server_port):
         self.sock:socket.socket = None
         self.pending_requests:dict[str,_Request] = {}
         self.sock_lock = threading.Lock()
         self.running = threading.Event()
+        self.closing = threading.Event()
         self.recv_thread = threading.Thread(target=self._recv_loop, daemon=True)
+        self.server_ip = server_ip
+        self.server_port = server_port
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.id = ""
+        try:
+            _logger.info("Connecting")
+            self.sock.connect((self.server_ip, self.server_port))
+            _logger.info("Connected")
+            self.id = f"{int(time.time()*1000) % 100000}[{os.path.splitext(os.path.basename(__main__.__file__))[0]}@{self.sock.getsockname()[0]}]"
+            self.running.set()
+            self.recv_thread.start()
+            self.send_msg(MsgSystemCommand(MsgSystemCommand.GET_MODULE_NAMES))
+        except Exception as e:
+            if not self.closing.is_set():
+                _logger.error(f"Could not connect to robot server on {server_ip}:{server_port}. {e}")
 
     def send_msg(self, msg:MsgBase):
-        if not self.sock:
-            if not _robot_server_ip or not _robot_server_port:
-                raise(Exception("robot_client.init must be called before this operation"))
-            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            try:
-                self.sock.connect((_robot_server_ip, _robot_server_port))
-                self.id = f"{int(time.time()*1000) % 100000}[{os.path.splitext(os.path.basename(__main__.__file__))[0]}@{self.sock.getsockname()[0]}]"
-                self.running.set()
-                self.recv_thread.start()
-            except:
-                _logger.error("Could not connect to robot server")
+        # if not self.server_ip or not self.server_port:
+        #     raise(Exception("robot_client.init must be called before this operation"))
         if not self.running.is_set():
             return None
         msg.id = str(uuid.uuid4())
@@ -100,16 +105,21 @@ class _MessageClient:
 
     def close(self):
         self.running.clear()
-        if self.recv_thread:
+        self.closing.set()
+        try:
             self.recv_thread.join(timeout=1)
+        except:
+            pass
         _close_sock(self.sock)
 
 
-_client = _MessageClient()
+_client:_MessageClient = None
 def robot_connected():
-    return _client.running.is_set()
+    return _client and _client.running.is_set()
 
 def send_mfc(module_name, func_name, func_args = []):
+    if not _client:
+        return None
     msg = MsgModuleFunctionCall(
         module_name=module_name,
         func_name=func_name,
@@ -119,8 +129,10 @@ def send_mfc(module_name, func_name, func_args = []):
 
 def close():
     for el in EventListener.instances_by_event_name.values():
-        el.listener_thread.join(timeout=1)
-    _client.close()
+        #el.listener_thread.join(timeout=1)
+        el.stop()
+    if _client:
+        _client.close()
 
 class EventListener:
     instances_by_event_name:Dict[str, "EventListener"] = {}
@@ -132,7 +144,7 @@ class EventListener:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #sock.settimeout(10)
         msg_poll = MsgEventPoll()
-        msg_poll.client_id = _client.id
+        msg_poll.client_id = _client.id if _client else None
         pending_events = queue.Queue()
 
         def dispatcher():
@@ -163,14 +175,15 @@ class EventListener:
         self.listener_thread= threading.Thread(target=listen, daemon=True)
         if robot_connected():
             resp = _client.send_msg(MsgEventSubscription(event_name, True))
-            self.sock.connect((_robot_server_ip, resp["port"]))
+            self.sock.connect((_client.server_ip, resp["port"]))
             self.alive.set()
             threading.Thread(target=dispatcher, daemon=True).start()
             self.listener_thread.start()
 
     def stop(self):
         self.alive.clear()
-        _client.send_msg(MsgEventSubscription(self.event_name, False))
+        if _client:
+            _client.send_msg(MsgEventSubscription(self.event_name, False))
         _close_sock(self.sock)
 
 class EventSubscription:
@@ -183,11 +196,3 @@ class EventSubscription:
         if not self._listener.callbacks:
             self._listener.stop()
 
-def subscribe_to_event(event_name, callback):
-    el = EventListener.instances_by_event_name.get(event_name, EventListener(event_name))
-    el.callbacks.append(callback)
-
-
-
-def get_module_names():
-    return _client.send_msg(MsgSystemCommand(MsgSystemCommand.GET_MODULE_NAMES))

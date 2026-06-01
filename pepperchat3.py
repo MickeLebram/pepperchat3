@@ -1,6 +1,6 @@
 from apidefs import api
 import traceback
-import dirs
+import defs
 import threading, time, json, os
 from datetime import datetime
 from pepper_text_speaker import PepperTextSpeaker
@@ -12,12 +12,9 @@ from syslogger import syslogger
 from config import config, show_config_dlg
 
 def main():
-    while not config.openai_api_key or not config.robot_server_ip:
-        if not show_config_dlg():
-            exit()
 
-    api.robot_client.init(config.robot_server_ip, logger=syslogger)
-    api.ALAudioDevice.getOutputVolume() # Ful bootstrap, kolla varför den behövs
+    gui.show_init_dialog()
+
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
     mute_mic_until = 0
@@ -34,7 +31,7 @@ def main():
                 pts.stop_talking()
     api.event.TouchChanged.subscribe(ontouch)
 
-    logfile = os.path.join(dirs.LOG_DIR, datetime.now().strftime("dialogue_%Y-%m-%d_%H%M%S.log"))
+    logfile = os.path.join(defs.LOG_DIR, datetime.now().strftime("dialogue_%Y-%m-%d_%H%M%S.log"))
     syslogger.info(f"Logging to {logfile}")
 
     def log_query(query:Query):
@@ -65,10 +62,6 @@ def main():
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
         system_prompt=config.get_prompt(),
-        # query_update_callback = on_query_update,
-        # state_callback=print,
-        # intermediate_response_text_callback=pts.push_text,
-        # listening_state_change_callback=on_listening_state_change
     )
     oai.query_update_callbacks.append(on_query_update)
     oai.state_callbacks.append(print)
