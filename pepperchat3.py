@@ -9,7 +9,7 @@ import subtitles
 from  oaichat_integrated import OaiChatIntegrated, Query
 import gui
 from syslogger import syslogger
-from config import config, show_config_dlg
+from config import config
 
 def main():
 
@@ -58,17 +58,15 @@ def main():
             api.ALLeds.earLedsSetAngle(270, .01, True)
         else:
             api.ALLeds.earLedsSetAngle(90, .01, False)
-
+    
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
         system_prompt=config.get_prompt(),
     )
     oai.query_update_callbacks.append(on_query_update)
-    oai.state_callbacks.append(print)
     oai.intermediate_response_text_callbacks.append(pts.push_text)
     oai.listening_state_change_callbacks.append(on_listening_state_change)
     oai.silero.threshold = .5
-    
 
     def muter():
         while True:
@@ -77,7 +75,7 @@ def main():
             oai.set_listening(time.time() > mute_mic_until)
             time.sleep(.1)
     threading.Thread(target=muter, daemon=True).start()
-    pcm_utils.listen_on_local_mic(48000,[oai.push_pcm16_frames])
+    pcm_utils.listen_on_local_mic(24000,[oai.push_pcm16_frames])
 
     gui.run(oai)
 

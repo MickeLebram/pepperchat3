@@ -1,5 +1,9 @@
+from datetime import datetime
+import os
 import traceback
 from typing import Callable, List, Tuple
+import wave
+import defs
 import silerovad
 from pcm_processor import PcmProcessor
 import json, base64, threading, time
@@ -15,14 +19,11 @@ class Query:
         self.done = False
         self.duration = 0
         self.canceled = False
+        self.audio_chunks = []
     def __str__(self):
         return str(self.__dict__)
 
-META_INSTRUCTIONS = """
-When responding to audio input, always format the response as json with the fields:
-HEARD: <your best interpretation of the user's utterance>,
-RESPONSE: <your normal response>
-""" 
+
 
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
@@ -37,8 +38,18 @@ class OaiChatIntegrated:
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
-            self._set_state(self.STATE_SENDING_SPEECH)
+            if self.state != self.STATE_SENDING_SPEECH:
+                #self.cancel_current()
+                self._cur_query = Query()  
+                wavname = str(input_audio_wav_dir / f"{int(self._cur_query.start_time*1000)}.wav")
+                self.input_audio_wav_file = wave.open(wavname, "wb")
+                self.input_audio_wav_file.setnchannels(self.pcm_processor.channel_cnt)
+                self.input_audio_wav_file.setframerate(self.pcm_processor.sample_rate)
+                self.input_audio_wav_file.setsampwidth(2)
+                self._set_state(self.STATE_SENDING_SPEECH)
+                syslogger.debug(f"start wav:{wavname}")
             for chunk in self.pcm_processor.get_frame_chunks(sample_rate, channel_cnt, frames):
+                self.input_audio_wav_file.writeframes(chunk.tobytes())
                 self._send_data({
                     "type": "input_audio_buffer.append",
                     "audio": base64.b64encode(bytes(chunk.tobytes())).decode("ascii"),
@@ -48,11 +59,12 @@ class OaiChatIntegrated:
             self._set_state(self.STATE_RECEIVING_RESPONSE)
             self._send_data({
                 "type": "response.create",
-                # "response": {
-                #     "temperature": temperature,
-                # }
             })
+            self.input_audio_wav_file.close()
 
+        input_audio_wav_dir = defs.WAV_DIR / datetime.now().strftime('%Y-%m-%d_%H%M%S')
+        os.makedirs(input_audio_wav_dir, exist_ok=True)
+        self.input_audio_wav_file:wave.Wave_write = None
         self.pcm_processor = PcmProcessor(24000, 1, millis_per_chunk=100) # Realtime API expects PCM16 mono ~24 kHz
         self._sending_speech = False
         self.silero = silerovad.SileroVad(
@@ -81,10 +93,8 @@ class OaiChatIntegrated:
     
     def _set_state(self, state):
         if self._state != state:
-            if state == self.STATE_SENDING_SPEECH:
-                self.cancel_current()
-                self._cur_query = Query()
             self._state = state
+            syslogger.debug(state)
             for cbk in self.state_callbacks:
                 cbk(state)
     def start(self):
@@ -179,7 +189,7 @@ class OaiChatIntegrated:
                     self._set_state(self.STATE_IDLE)
                 else:
                     pass
-                syslogger.info(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
+                syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
             except Exception as e:
                 syslogger.exception(f"Exception {e} when handling event {evt}")
 
@@ -214,10 +224,10 @@ class OaiChatIntegrated:
 
     def _send_data(self, data:dict):
         self.ws.send(json.dumps(data))
-        # if data["type"] == "input_audio_buffer.append":
-        #     data = data.copy()
-        #     data["audio"] = "..."
-        # print("SEND DATA:",json.dumps(data))
+        if data["type"] == "input_audio_buffer.append":
+            data = data.copy()
+            data["audio"] = "..."
+        syslogger.debug(f"SEND DATA:{json.dumps(data)}")
 
     def push_pcm16_frames(self, sample_rate:int, channel_cnt:int, frames:np.ndarray):
         if self._listening:
@@ -232,5 +242,6 @@ class OaiChatIntegrated:
     
     def cancel_current(self):
         self._cur_query.canceled = True
-        self._send_data({"type": "response.cancel"})
+        if self.state != self.STATE_IDLE:
+            self._send_data({"type": "response.cancel"})
 

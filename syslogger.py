@@ -4,7 +4,6 @@ import sys
 
 import defs
 
-
 def _create_syslogger():
     logger = logging.getLogger(defs.APP_NAME)
     logger.setLevel(logging.DEBUG)

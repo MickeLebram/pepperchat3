@@ -1,3 +1,4 @@
+import logging
 import math
 import os
 from pathlib import Path
@@ -6,7 +7,7 @@ import time
 import traceback
 from typing import Callable
 from PySide6.QtWidgets import (
-    QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QTextEdit, QTreeView, QWidget, QVBoxLayout,
+    QApplication, QDialog, QFileDialog, QGridLayout, QGroupBox, QLayout, QMessageBox, QPlainTextEdit, QTextEdit, QTreeView, QWidget, QVBoxLayout,
     QPushButton, QComboBox, QSlider,
     QLineEdit, QLabel
 )
@@ -102,6 +103,42 @@ class ChatDisplay(QTextEdit):
         self.worker.signal_query.connect(append)
         oai.query_update_callbacks.append(lambda q:self.worker.signal_query.emit(q))
 
+class LogEmitter(QObject):
+    log_message = Signal(str)
+
+class LogHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+        self.emitter = LogEmitter()
+
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            self.emitter.log_message.emit(msg)
+        except Exception:
+            self.handleError(record)
+
+
+class LogViewer(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Logs")
+
+        self.log_view = QPlainTextEdit()
+        self.log_view.setReadOnly(True)
+
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.log_view)
+        handler = LogHandler()
+        handler.setFormatter(logging.Formatter(
+            "%(asctime)s.%(msecs)03d "
+            "[%(filename)s:%(lineno)d] "
+            "%(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        ))
+        syslogger.addHandler(handler)
+        handler.emitter.log_message.connect(self.log_view.appendPlainText)
 
 class AnimationBrowser(QDialog):
     def __init__(self, parent):
@@ -266,7 +303,9 @@ class MainWindow(QWidget):
             api.ALAutonomousLife.getState(),
             lambda state: api.ALAutonomousLife.setState(state)
         )
+        self.logview = LogViewer()
         add_button(layout, "System config", show_config_dlg, self)
+        add_button(layout, "Log viewer", self.logview.show)
         add_button(layout, "Restart subtitles", subtitles.try_show_on_tablet)
         group_posture = QGroupBox("Postures")
         group_posture.setLayout(QVBoxLayout())

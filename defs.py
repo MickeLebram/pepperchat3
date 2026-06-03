@@ -7,4 +7,5 @@ def _add_dir(path:Path):
     return path
 APP_DIR = _add_dir(Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation)) / APP_NAME)
 LOG_DIR = _add_dir(APP_DIR / "logs")
+WAV_DIR = _add_dir(APP_DIR / "wavs")
 SYSLOG_DIR = _add_dir(APP_DIR / "syslogs")

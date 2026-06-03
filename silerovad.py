@@ -6,13 +6,8 @@ from typing import List
 import numpy as np
 import torch
 from pcm_processor import PcmProcessor
-
+from syslogger import syslogger
 class SileroVad:
-    PRINT_DEBUG = False
-    def debug_print(self, *args, **kwargs):
-        if self.PRINT_DEBUG:
-            print(f"{self.__class__.__name__}:", *args, **kwargs)
-
     def __init__(self, speech_stream_callback, threshold = 0.5, head_millis = 300, min_silence_duration_ms = 500, speech_end_callback = None):
 
         self._threshold = threshold
@@ -67,7 +62,7 @@ class SileroVad:
             speech_dict = self._vad_iterator(f32norm.squeeze(), self._pcmmgr.sample_rate)
             if speech_dict:
                 self._speech_detected = speech_dict.get("start")
-                self.debug_print("Speech detected:", speech_dict)
+                syslogger.info(f"Speech detected:{speech_dict}")
 
         if self._speech_detected:
             while self._last_pcm16_chunks:
