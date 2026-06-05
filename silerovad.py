@@ -4,16 +4,31 @@ import math
 import time
 from typing import List
 import numpy as np
-import torch
+
 from pcm_processor import PcmProcessor
 from syslogger import syslogger
+
+#Background import of torch in order to start the gui quicker
+import importlib
+from concurrent.futures import ThreadPoolExecutor
+
+_executor = ThreadPoolExecutor(max_workers=1)
+
+def import_torch():
+    return importlib.import_module("torch")
+
+_torch_future = _executor.submit(import_torch)
+
+def get_torch():
+    return _torch_future.result()
+
 class SileroVad:
     def __init__(self, speech_stream_callback, threshold = 0.5, head_millis = 300, min_silence_duration_ms = 500, speech_end_callback = None):
-
+        print(f"{self.__class__.__name__} initing")
         self._threshold = threshold
         self._min_silence_duration_ms = min_silence_duration_ms
 
-        model, utils = torch.hub.load('snakers4/silero-vad', 'silero_vad', trust_repo=True)
+        model, utils = get_torch().hub.load('snakers4/silero-vad', 'silero_vad', trust_repo=True)
         (_, _, _, VADIterator, _) = utils
         
         def create():

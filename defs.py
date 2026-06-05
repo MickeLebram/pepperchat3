@@ -5,7 +5,7 @@ APP_NAME = "PepperChat3"
 def _add_dir(path:Path):
     path.mkdir(parents=True, exist_ok=True)
     return path
-APP_DIR = _add_dir(Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation)) / APP_NAME)
+APP_DIR = _add_dir(Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppLocalDataLocation)) / APP_NAME)
 LOG_DIR = _add_dir(APP_DIR / "logs")
 WAV_DIR = _add_dir(APP_DIR / "wavs")
 SYSLOG_DIR = _add_dir(APP_DIR / "syslogs")

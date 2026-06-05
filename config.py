@@ -41,7 +41,7 @@ class Config:
         return _config_fname
 
 config = Config()
-
+print(config)
 try:
     _assign_from_file(config, _config_fname)
 except:

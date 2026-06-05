@@ -358,6 +358,7 @@ def run(oai:OaiChatIntegrated):
     sys.exit(app.exec())
     
 def show_init_dialog():
+    syslogger.debug("1")
     app = QApplication.instance() if QApplication.instance() else QApplication()
     while not config.openai_api_key or not config.robot_server_ip:
         if not show_config_dlg():
@@ -401,6 +402,8 @@ def show_init_dialog():
     btn_config= QPushButton("System config")
     btn_config.clicked.connect(on_cfg)
     layout.addWidget(btn_config)
+    syslogger.debug("2")
+
     connect()
     
 

@@ -12,7 +12,7 @@ from syslogger import syslogger
 from config import config
 
 def main():
-
+    syslogger.debug("main")
     gui.show_init_dialog()
 
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
