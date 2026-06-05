@@ -21,11 +21,8 @@ class Query:
         self.done = False
         self.duration = 0
         self.canceled = False
-        self.audio_chunks = []
     def __str__(self):
-        dct = self.__dict__.copy()
-        dct["audio_chunks"]=f"..."
-        return str(dct)
+        return str(self.__dict__)
     @property
     def query_text(self):
         ret = "trans:"
@@ -35,7 +32,8 @@ class Query:
         if self.query_interpretation:
             ret += self.query_interpretation
         return ret
-class TagFilter:
+    
+class TagBlockParser:
     def __init__(self, tag):
         self.start_tag = f"<{tag}>"
         self.end_tag = f"</{tag}>"
@@ -48,8 +46,11 @@ class TagFilter:
         self.content_done = False
 
     def feed(self, chunk: str) -> str:
-        out = ""
-
+        """
+        Returns chars outside of the block
+        Captures chars inside of the block
+        """
+        outside_chars = ""
         for ch in chunk:
             self.pending += ch
 
@@ -74,34 +75,45 @@ class TagFilter:
 
                 # Return only chars that can no longer be part of start tag
                 while self.pending and not self.start_tag.startswith(self.pending):
-                    out += self.pending[0]
+                    outside_chars += self.pending[0]
                     self.pending = self.pending[1:]
 
-        return out
+        return outside_chars
 
     def flush(self) -> str:
-        """
-        Call when done.
-        Return leftover text if outside a heard block, otherwise append it to content
-        """
-        leftover = self.pending
-        self.pending = ""
         if self.is_inside:
-            self.content += leftover
+            self.content += self.pending
             return ""
-        return leftover
+        return self.pending
         
-# f = TagFilter("heard")
-# txt = ""
-# for chunk in ["Vis", "st, <he", "ard>Ja, men", " den är där.</heard>den finns."]:
-#     visible = f.feed(chunk)
-#     if visible:
-#         print("STREAM:", visible)
-#     txt += visible
-# txt += f.flush()
-# print("HEARD:", f.content)
-# print("txt",txt)
-# exit()
+SYSTEM_PROMPT_PREFIX = """
+=== OUTPUT FORMAT ===
+
+Every response MUST begin with exactly one <heard> tag.
+
+Format:
+
+<heard>best interpretation of the user's speech</heard>
+
+followed immediately by the assistant response.
+
+Examples:
+
+<heard>What time is it?</heard>
+No idea. Look at a clock.
+
+<heard>Can you help me?</heard>
+Maybe. What's the problem?
+
+Rules:
+- Every response must contain exactly one <heard> tag.
+- The tag must be the first content emitted.
+- Never omit the tag.
+- Never emit text before the tag.
+
+=== CONVERSATION INSTRUCTIONS ===
+
+"""
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
     STATE_SENDING_SPEECH = "SENDING_SPEECH"
@@ -135,9 +147,7 @@ class OaiChatIntegrated:
 
         def on_speech_end(sample_rate:int, channel_cnt:int, pcm16_chunks:List[np.ndarray]):
             self._set_state(self.STATE_RECEIVING_RESPONSE)
-            self._send_data({
-                "type": "response.create",
-            })
+            self._send_data({"type": "input_audio_buffer.commit"})
             self.input_audio_wav_file.close()
 
         input_audio_wav_dir = defs.WAV_DIR / datetime.now().strftime('%Y-%m-%d_%H%M%S')
@@ -160,7 +170,7 @@ class OaiChatIntegrated:
         self.voice = voice
         self.system_prompt = system_prompt
         self._cur_query = Query()
-        self._heard_filter = TagFilter("heard")
+        self._heard_filter = TagBlockParser("heard")
         self._listening = True
         self._state = self.STATE_IDLE
         self.ws:WebSocketApp = None
@@ -184,7 +194,7 @@ class OaiChatIntegrated:
             print("WebSocket connected")
             session_data = {
                 "type": "realtime",
-                "instructions": self.system_prompt,
+                "instructions": SYSTEM_PROMPT_PREFIX + self.system_prompt,
                 "output_modalities": ["text", "audio"] if self.voice else ["text"],  
                 "audio": {
                     "input": {
@@ -196,10 +206,10 @@ class OaiChatIntegrated:
                             "model": "gpt-4o-mini-transcribe",
                             "language": "sv"
                         },
-                        "turn_detection": {
-                            "type": "server_vad",
-                            "create_response": False # We decide ourselves when it's time for response
-                        }
+                        # "turn_detection": {
+                        #     "type": "server_vad",
+                        #     "create_response": False # We decide ourselves when it's time for response
+                        # }
                     },
                 }
 
@@ -238,10 +248,10 @@ class OaiChatIntegrated:
                         q.duration = time.time() - self._cur_query.start_time
                         for cbk in self.query_update_callbacks:
                             cbk(self._cur_query)
+                    self._set_state(self.STATE_IDLE)
 
                 evt = json.loads(message)
                 t = evt.get("type", "")
-                #print(t)
                 if t == "error":
                     if error := evt.get("error"):
                         if error.get("code") == "response_cancel_not_active":
@@ -249,40 +259,33 @@ class OaiChatIntegrated:
                     # OBS! ERROR: {'type': 'error', 'event_id': 'event_Cf56YfnjwVCABifRNL02D', 'error': {'type': 'invalid_request_error', 'code': 'session_expired', 'message': 'Your session hit the maximum duration of 60 minutes.', 'param': None, 'event_id': None}}
                     # print("ERROR:", evt)
                     syslogger.error(f"Error event: {evt}")
+                elif t == "input_audio_buffer.committed":
+                    self._send_data({"type": "response.create"})
                 elif t == "response.audio.delta":
                     b = base64.b64decode(evt.get("delta", ""))
                     if self.response_audio_callback:
                         frames = np.frombuffer(b, dtype=np.int16)
                         self.response_audio_callback(24000, 1, frames)
-                # elif t == "conversation.item.input_audio_transcription.delta":
-                #     self._cur_query.query_text += evt.get("delta")
                 elif t == "conversation.item.input_audio_transcription.completed":
                     transcript = evt.get("transcript")
                     self._cur_query.query_transcript = transcript if transcript else "EMPTY"
                     try_set_query_done()
-                    # print("USER:", evt.get("transcript"), evt)
                 elif t == "response.output_text.delta":
                     filtered_text = self._heard_filter.feed(evt.get("delta"))
                     if self._heard_filter.content_done:
                         self._cur_query.query_interpretation = self._heard_filter.content
                     self._cur_query.response_text += filtered_text
-                    #Nåt med filtered_text funkar inte
-                    print("filtered:", filtered_text)
-                    print("resptext:", self._cur_query.response_text.strip())
                     if not self._cur_query.canceled:
                         for cbk in  self.query_update_callbacks:
                             cbk(self._cur_query)
                         if filtered_text:
                             for cbk in self.intermediate_response_text_callbacks:
                                 cbk(filtered_text)
-                # elif delta := evt.get("delta"):
-                #     print(t,delta)
                 elif t == "response.done":
                     self._heard_filter.flush()
                     self._cur_query.query_interpretation = self._heard_filter.content
                     self._cur_query.response_done = True
                     try_set_query_done()
-                    self._set_state(self.STATE_IDLE)
                 else:
                     pass
                 syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
