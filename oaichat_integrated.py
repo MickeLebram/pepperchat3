@@ -206,10 +206,8 @@ class OaiChatIntegrated:
                             "model": "gpt-4o-mini-transcribe",
                             "language": "sv"
                         },
-                        # "turn_detection": {
-                        #     "type": "server_vad",
-                        #     "create_response": False # We decide ourselves when it's time for response
-                        # }
+                        "turn_detection": None, # We decide ourselves when it's time for response
+
                     },
                 }
 
@@ -251,6 +249,8 @@ class OaiChatIntegrated:
                     self._set_state(self.STATE_IDLE)
 
                 evt = json.loads(message)
+                syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {json.dumps(evt)}")
+
                 t = evt.get("type", "")
                 if t == "error":
                     if error := evt.get("error"):
@@ -288,8 +288,7 @@ class OaiChatIntegrated:
                     try_set_query_done()
                 else:
                     pass
-                syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {evt}")
-                print("cur:",self._cur_query)
+                # print("cur:",self._cur_query)
             except Exception as e:
                 syslogger.exception(f"Exception {e} when handling event {evt}")
 
