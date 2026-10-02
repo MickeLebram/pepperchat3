@@ -33,87 +33,9 @@ class Query:
             ret += self.query_interpretation
         return ret
     
-class TagBlockParser:
-    def __init__(self, tag):
-        self.start_tag = f"<{tag}>"
-        self.end_tag = f"</{tag}>"
-        self.reset()
-
-    def reset(self):
-        self.is_inside = False
-        self.pending = ""
-        self.content = ""
-        self.content_done = False
-
-    def feed(self, chunk: str) -> str:
-        """
-        Returns chars outside of the block
-        Captures chars inside of the block
-        """
-        outside_chars = ""
-        for ch in chunk:
-            self.pending += ch
-
-            if self.is_inside:
-                if self.pending.endswith(self.end_tag):
-                    self.content += self.pending[:-len(self.end_tag)]
-                    self.pending = ""
-                    self.is_inside = False
-                    self.content_done = True
-                    continue
-
-                # Capture only chars that can no longer be part of end tag
-                while self.pending and not self.end_tag.startswith(self.pending):
-                    self.content += self.pending[0]
-                    self.pending = self.pending[1:]
-
-            else:
-                if self.pending.endswith(self.start_tag):
-                    self.pending = ""
-                    self.is_inside = True
-                    continue
-
-                # Return only chars that can no longer be part of start tag
-                while self.pending and not self.start_tag.startswith(self.pending):
-                    outside_chars += self.pending[0]
-                    self.pending = self.pending[1:]
-
-        return outside_chars
-
-    def flush(self) -> str:
-        if self.is_inside:
-            self.content += self.pending
-            return ""
-        return self.pending
         
-SYSTEM_PROMPT_PREFIX = """
-=== OUTPUT FORMAT ===
+SYSTEM_PROMPT_PREFIX = ""
 
-Every response MUST begin with exactly one <heard> tag.
-
-Format:
-
-<heard>best interpretation of the user's speech</heard>
-
-followed immediately by the assistant response.
-
-Examples:
-
-<heard>What time is it?</heard>
-No idea. Look at a clock.
-
-<heard>Can you help me?</heard>
-Maybe. What's the problem?
-
-Rules:
-- Every response must contain exactly one <heard> tag.
-- The tag must be the first content emitted.
-- Never omit the tag.
-- Never emit text before the tag.
-
-=== CONVERSATION INSTRUCTIONS ===
-
-"""
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
     STATE_SENDING_SPEECH = "SENDING_SPEECH"
@@ -130,7 +52,6 @@ class OaiChatIntegrated:
             if self.state != self.STATE_SENDING_SPEECH:
                 #self.cancel_current()
                 self._cur_query = Query()  
-                self._heard_filter.reset()
                 wavname = str(input_audio_wav_dir / f"{int(self._cur_query.start_time*1000)}.wav")
                 self.input_audio_wav_file = wave.open(wavname, "wb")
                 self.input_audio_wav_file.setnchannels(self.pcm_processor.channel_cnt)
@@ -170,7 +91,6 @@ class OaiChatIntegrated:
         self.voice = voice
         self.system_prompt = system_prompt
         self._cur_query = Query()
-        self._heard_filter = TagBlockParser("heard")
         self._listening = True
         self._state = self.STATE_IDLE
         self.ws:WebSocketApp = None
@@ -271,19 +191,16 @@ class OaiChatIntegrated:
                     self._cur_query.query_transcript = transcript if transcript else "EMPTY"
                     try_set_query_done()
                 elif t == "response.output_text.delta":
-                    filtered_text = self._heard_filter.feed(evt.get("delta"))
-                    if self._heard_filter.content_done:
-                        self._cur_query.query_interpretation = self._heard_filter.content
-                    self._cur_query.response_text += filtered_text
+                    text_delta = evt.get("delta")
+                    self._cur_query.response_text += text_delta
                     if not self._cur_query.canceled:
                         for cbk in  self.query_update_callbacks:
                             cbk(self._cur_query)
-                        if filtered_text:
+                        if text_delta:
                             for cbk in self.intermediate_response_text_callbacks:
-                                cbk(filtered_text)
+                                cbk(text_delta)
                 elif t == "response.done":
-                    self._heard_filter.flush()
-                    self._cur_query.query_interpretation = self._heard_filter.content
+                    self._cur_query.query_interpretation = "xxxx"
                     self._cur_query.response_done = True
                     try_set_query_done()
                 else:
