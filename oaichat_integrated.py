@@ -17,7 +17,6 @@ class Query:
         self.response_text = ""
         self.response_done = False
         self.query_transcript:str = None
-        self.query_interpretation:str = None
         self.done = False
         self.duration = 0
         self.canceled = False
@@ -25,16 +24,29 @@ class Query:
         return str(self.__dict__)
     @property
     def query_text(self):
-        ret = "trans:"
-        if self.query_transcript:
-            ret += self.query_transcript
-        ret += " interpret:"
-        if self.query_interpretation:
-            ret += self.query_interpretation
-        return ret
+        return self.query_transcript
     
         
-SYSTEM_PROMPT_PREFIX = ""
+SYSTEM_PROMPT_PREFIX = """
+# Critical listening rule
+
+Before responding to any user speech, first determine whether you
+understood the user's words well enough to know what they said.
+
+If the speech is unclear, unintelligible, ambiguous, nonsensical,
+or you are unsure what words were spoken:
+
+- DO NOT guess what the user probably meant.
+- DO NOT invent a plausible interpretation.
+- DO NOT respond to a guessed interpretation.
+- Ask the user to repeat or clarify.
+
+If only part of the utterance is unclear, ask about that specific part.
+
+This rule takes priority over any instructions below.
+
+
+"""
 
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
@@ -123,9 +135,13 @@ class OaiChatIntegrated:
                             "rate": 24000
                         },
                         "transcription": {
-                            "model": "gpt-4o-mini-transcribe",
-                            "language": "sv"
+                            "model": "gpt-transcribe",
+                            "languages": ["sv"],
                         },
+                        # "transcription": {
+                        #     "model": "gpt-4o-mini-transcribe",
+                        #     "language": "sv"
+                        # },
                         "turn_detection": None, # We decide ourselves when it's time for response
 
                     },
@@ -200,7 +216,6 @@ class OaiChatIntegrated:
                             for cbk in self.intermediate_response_text_callbacks:
                                 cbk(text_delta)
                 elif t == "response.done":
-                    self._cur_query.query_interpretation = "xxxx"
                     self._cur_query.response_done = True
                     try_set_query_done()
                 else:
@@ -211,10 +226,9 @@ class OaiChatIntegrated:
 
 
         self.ws = WebSocketApp(
-            "wss://api.openai.com/v1/realtime?model=gpt-realtime",
+            "wss://api.openai.com/v1/realtime?model=gpt-realtime-1.5",
             header=[
                 "Authorization: Bearer " + self.api_key,
-                #"OpenAI-Beta: realtime=v1",
             ],
             on_open=on_open,
             on_message=on_message,
