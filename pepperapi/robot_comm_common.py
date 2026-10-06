@@ -12,11 +12,23 @@ class MsgBase(object):
         self.id = ""
 
 class MsgModuleFunctionCall(MsgBase):
-    def __init__(self, module_name="", func_name="", func_args=[]):
+    def __init__(self, module_name="", func_name="", func_args=[], run_async=False):
         MsgBase.__init__(self)
         self.module_name = module_name
         self.func_name = func_name
         self.func_args = func_args
+        self.run_async = run_async # If True, the server replies with a future_id instead of the result
+
+class MsgFutureCommand(MsgBase):
+    # Operations on a qi.Future that was started by an async MsgModuleFunctionCall
+    CANCEL = "CANCEL"
+    WAIT = "WAIT"
+    GET_STATE = "GET_STATE"
+    def __init__(self, future_id="", cmd="", timeout_ms=None):
+        MsgBase.__init__(self)
+        self.future_id = future_id
+        self.cmd = cmd
+        self.timeout_ms = timeout_ms # Only used by WAIT. None means wait forever
 
 class MsgEventSubscription(MsgBase):
     def __init__(self, event_name="", subscribe=False):
@@ -43,6 +55,8 @@ def read_packet(sock):
         read_cnt = 0
         while read_cnt < cnt:
             chunk = sock.recv(cnt - read_cnt)
+            if not chunk:
+                raise EOFError("Connection closed by peer")
             ba.extend(chunk)
             read_cnt += len(chunk)
         return ba

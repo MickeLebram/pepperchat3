@@ -4,7 +4,7 @@ import struct
 import threading
 import time
 import traceback
-from typing import Callable, Dict, List
+from typing import Callable, Dict, Generic, List, Optional, ParamSpec, TypeVar
 import uuid
 import queue
 from . robot_comm_common import *
@@ -50,6 +50,9 @@ class FunctionCallException(Exception):
     def __init__(self, *args):
         super().__init__(*args)
 
+class FutureCanceledException(Exception):
+    pass
+
   
 class _MessageClient:
     def __init__(self, server_ip, server_port):
@@ -85,23 +88,45 @@ class _MessageClient:
         req = _Request()
         req.lock.acquire()
         self.pending_requests[msg.id] = req
-        with self.sock_lock:
-            send_dict(self.sock, msg.__dict__)
+        if not self.running.is_set():
+            # The connection was lost after the first check, and _recv_loop won't release us
+            self.pending_requests.pop(msg.id, None)
+            return None
+        try:
+            with self.sock_lock:
+                send_dict(self.sock, msg.__dict__)
+        except Exception as e:
+            self.pending_requests.pop(msg.id, None)
+            if not self.closing.is_set():
+                _logger.error(f"Could not send to robot server: {e}")
+            return None
         req.lock.acquire()
+        if req.response is None:
+            return None # Connection lost while waiting
         if error:=req.response.get("error"):
-            if isinstance(msg, MsgModuleFunctionCall):
+            if isinstance(msg, (MsgModuleFunctionCall, MsgFutureCommand)):
                 raise FunctionCallException(error)
         return req.response.get("result")        
 
     def _recv_loop(self):
-        while self.running.is_set():
-            response = read_dict(self.sock)
-            req = self.pending_requests.pop(response.get("msg_id"), None)
-            if req:
-                req.response = response
-                req.lock.release_lock()
-            else:
-                _logger.warning(f"Unmatched reply: {response}")
+        try:
+            while self.running.is_set():
+                response = read_dict(self.sock)
+                req = self.pending_requests.pop(response.get("msg_id"), None)
+                if req:
+                    req.response = response
+                    req.lock.release()
+                else:
+                    _logger.warning(f"Unmatched reply: {response}")
+        except Exception as e:
+            if not self.closing.is_set():
+                _logger.error(f"Lost connection to robot server: {e}")
+        finally:
+            self.running.clear()
+            # Wake up calls still waiting for a reply. They get response None
+            while self.pending_requests:
+                _, req = self.pending_requests.popitem()
+                req.lock.release()
 
     def close(self):
         self.running.clear()
@@ -114,18 +139,109 @@ class _MessageClient:
 
 
 _client:_MessageClient = None
+
+T = TypeVar("T")
+P = ParamSpec("P")
+
+class RemoteFuture(Generic[T]):
+    """
+    Handle to a qi.Future on the robot, created by call_async.
+    Once the call has finished, the final state is kept here and the robot forgets the future.
+    """
+    def __init__(self, future_id:str):
+        self.id = future_id
+        self._state = {"state": "running"}
+
+    def _command(self, cmd:str, timeout_ms:Optional[int] = None) -> str:
+        if self._state["state"] == "running":
+            state = _client.send_msg(MsgFutureCommand(self.id, cmd, timeout_ms)) if _client else None
+            if state is None:
+                raise ConnectionError("Lost connection to the robot server")
+            self._state = state
+        return self._state["state"]
+
+    def cancel(self):
+        """Asks the robot to cancel the call. It may take a moment before the call has actually stopped."""
+        self._command(MsgFutureCommand.CANCEL)
+
+    def wait(self, timeout_ms:Optional[int] = None) -> bool:
+        """Waits for the call to finish. Returns False if timeout_ms passed first."""
+        return self._command(MsgFutureCommand.WAIT, timeout_ms) != "running"
+
+    def value(self, timeout_ms:Optional[int] = None) -> T:
+        """Waits for the call to finish and returns its result. Raises if the call failed or was canceled."""
+        state = self._command(MsgFutureCommand.WAIT, timeout_ms)
+        if state == "running":
+            raise TimeoutError(f"Future {self.id} did not finish within {timeout_ms} ms")
+        if state == "canceled":
+            raise FutureCanceledException(f"Future {self.id} was canceled")
+        if state == "error":
+            raise FunctionCallException(self._state.get("error"))
+        return self._state.get("value")
+
+    def is_running(self) -> bool:
+        return self._command(MsgFutureCommand.GET_STATE) == "running"
+
+    def is_finished(self) -> bool:
+        return not self.is_running()
+
+    def is_canceled(self) -> bool:
+        return self._command(MsgFutureCommand.GET_STATE) == "canceled"
+
+    def has_error(self) -> bool:
+        return self._command(MsgFutureCommand.GET_STATE) == "error"
+
+    def error(self) -> Optional[str]:
+        self._command(MsgFutureCommand.GET_STATE)
+        return self._state.get("error")
+
+# Set by call_async so that the next send_mfc on this thread runs asynchronously on the robot.
+# __init__ runs once per thread, so every thread starts with active = False
+class _AsyncCallFlag(threading.local):
+    def __init__(self):
+        self.active = False
+
+_async_call = _AsyncCallFlag()
+
 def robot_connected():
     return _client and _client.running.is_set()
 
 def send_mfc(module_name, func_name, func_args = []):
     if not _client:
         return None
+    run_async = _async_call.active
+    _async_call.active = False
     msg = MsgModuleFunctionCall(
         module_name=module_name,
         func_name=func_name,
-        func_args=func_args
+        func_args=func_args,
+        run_async=run_async
     )
-    return _client.send_msg(msg)
+    result = _client.send_msg(msg)
+    if run_async:
+        if result is None and not robot_connected():
+            raise ConnectionError("Not connected to the robot server")
+        if not isinstance(result, dict) or "future_id" not in result:
+            raise FunctionCallException("The robot server does not support async calls. Please update robot_server.py and robot_comm_common.py on the robot.")
+        return RemoteFuture(result["future_id"])
+    return result
+
+def call_async(func:Callable[P, T], *args:P.args, **kwargs:P.kwargs) -> RemoteFuture[T]:
+    """
+    Starts a robot function call without waiting for it to finish, e.g.
+        fut = call_async(ALAnimationPlayer.run, "animations/Stand/Gestures/Hey_1")
+        fut.cancel()
+    """
+    _async_call.active = True
+    try:
+        fut = func(*args, **kwargs)
+    finally:
+        _async_call.active = False
+    if fut is None and not robot_connected():
+        raise ConnectionError("Not connected to the robot server")
+    if not isinstance(fut, RemoteFuture):
+        raise TypeError(f"{getattr(func, '__name__', func)} did not call the robot, so it can't be used with call_async")
+    return fut
 
 def close():
     for el in EventListener.instances_by_event_name.values():
