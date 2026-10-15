@@ -58,10 +58,14 @@ def main():
             api.ALLeds.earLedsSetAngle(270, .01, True)
         else:
             api.ALLeds.earLedsSetAngle(90, .01, False)
-    
+
+    def perform_robot_action(action:str):
+        print("PERFORM:",action)
+        
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
-        system_prompt=config.get_prompt(),
+        conversation_prompt=config.get_prompt(),
+        robot_action_callback=perform_robot_action
     )
     oai.query_update_callbacks.append(on_query_update)
     oai.intermediate_response_text_callbacks.append(pts.push_text)

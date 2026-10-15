@@ -280,7 +280,7 @@ class MainWindow(QWidget):
             config.cur_prompt_file = fname
             config.save()
             update_btn_prompt()
-            oai.set_system_prompt(config.get_prompt())
+            oai.set_conversation_prompt(config.get_prompt())
         btn_prompt = add_button(layout, "Load", browse_prompts)
         layout.addWidget(btn_prompt, 0,0,1,2)
         update_btn_prompt()

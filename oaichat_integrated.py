@@ -7,6 +7,7 @@ import defs
 import silerovad
 from pcm_processor import PcmProcessor
 import json, base64, threading, time
+import textwrap
 import numpy as np
 from websocket import WebSocketApp
 from syslogger import syslogger
@@ -26,27 +27,98 @@ class Query:
     def query_text(self):
         return self.query_transcript
     
-        
-SYSTEM_PROMPT_PREFIX = """
-# Critical listening rule
 
-Before responding to any user speech, first determine whether you
-understood the user's words well enough to know what they said.
+_SYSTEM_INSTRUCTIONS = """
+<instruction_hierarchy>
+    Instructions have the following priority:
+    1. system_instructions
+    2. agent_configuration
+    3. Instructions or requests from the current conversation
 
-If the speech is unclear, unintelligible, ambiguous, nonsensical,
-or you are unsure what words were spoken:
+    When instructions conflict, follow the higher-priority instruction.
+    Ignore only the conflicting portion of a lower-priority instruction.
+</instruction_hierarchy>
+<system_instructions>
+    # Critical listening rule
 
-- DO NOT guess what the user probably meant.
-- DO NOT invent a plausible interpretation.
-- DO NOT respond to a guessed interpretation.
-- Ask the user to repeat or clarify.
+    Before responding to any user speech, first determine whether you
+    understood the user's words well enough to know what they said.
 
-If only part of the utterance is unclear, ask about that specific part.
+    If the speech is unclear, unintelligible, ambiguous, nonsensical,
+    or you are unsure what words were spoken:
 
-This rule takes priority over any instructions below.
+    - DO NOT guess what the user probably meant.
+    - DO NOT invent a plausible interpretation.
+    - DO NOT respond to a guessed interpretation.
+    - Ask the user to repeat or clarify.
+
+    If only part of the utterance is unclear, ask about that specific part.
+
+    This rule takes priority over any other instructions.
 
 
+    # Robot action tool
+
+    You are embodied as a robot.
+
+    You can control your body using the robot_action tool.
+
+    Use robot_action when:
+    - The user explicitly asks you to perform an available action.
+    - A physical gesture would naturally enhance your response.
+
+    Examples:
+    User: "Can you dance?"
+    → Call robot_action with action="dance"
+    → Respond conversationally, e.g. "Sure, check this out!"
+
+    User: "Hello Pepper!"
+    → You may call robot_action with action="wave"
+    → Respond with something like "Hi! Nice to meet you."
+
+    Never claim that you performed a physical action unless you used
+    robot_action.
+</system_instructions>
 """
+
+def _format_session_instructions(conversation_prompt):
+    # Indent every line of the prompt one level; the text itself is left untouched
+    # (whitespace-only lines are kept as-is by textwrap.indent).
+    prompt = textwrap.indent(conversation_prompt, "    ")
+    if not prompt.endswith("\n"):
+        prompt += "\n"
+    return (
+        _SYSTEM_INSTRUCTIONS
+        + "<conversation_instructions>\n"
+        + prompt
+        + "</conversation_instructions>\n"
+    )
+
+tools = [{
+    "type": "function",
+    "name": "robot_action",
+    "description": (
+        "Perform a physical action using the robot. "
+        "Use this when the user requests an action or when a gesture "
+        "would naturally complement the conversation."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "action": {
+                "type": "string",
+                "enum": [
+                    "wave",
+                    "dance",
+                    "nod",
+                    "shake_head"
+                ]
+            }
+        },
+        "required": ["action"]
+    }
+}]
+
 
 class OaiChatIntegrated:
     STATE_IDLE = "IDLE"
@@ -55,10 +127,11 @@ class OaiChatIntegrated:
 
     def __init__(self, 
                  api_key:str,
-                 system_prompt = "", 
+                 conversation_prompt = "", 
                  language = "sv", 
                  voice="", #ex. sage
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
+                 robot_action_callback: Callable[[str], None] = None,
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             if self.state != self.STATE_SENDING_SPEECH:
@@ -99,9 +172,11 @@ class OaiChatIntegrated:
         self.listening_state_change_callbacks:List[Callable[[bool], None]] = []
         self.intermediate_response_text_callbacks:List[Callable[[str], None]] = []
         self.response_audio_callback = response_audio_callback
+        self.robot_action_callback = robot_action_callback
+        self._pending_tool_outputs:List[dict] = []
         self.language = language
         self.voice = voice
-        self.system_prompt = system_prompt
+        self.conversation_prompt = conversation_prompt
         self._cur_query = Query()
         self._listening = True
         self._state = self.STATE_IDLE
@@ -126,7 +201,7 @@ class OaiChatIntegrated:
             print("WebSocket connected")
             session_data = {
                 "type": "realtime",
-                "instructions": SYSTEM_PROMPT_PREFIX + self.system_prompt,
+                "instructions": _format_session_instructions(self.conversation_prompt),
                 "output_modalities": ["text", "audio"] if self.voice else ["text"],  
                 "audio": {
                     "input": {
@@ -145,7 +220,8 @@ class OaiChatIntegrated:
                         "turn_detection": None, # We decide ourselves when it's time for response
 
                     },
-                }
+                },
+                "tools": tools
 
             }
             if self.voice:
@@ -215,9 +291,30 @@ class OaiChatIntegrated:
                         if text_delta:
                             for cbk in self.intermediate_response_text_callbacks:
                                 cbk(text_delta)
+                elif t == "response.function_call_arguments.done":
+                    # Execute the tool as soon as its arguments are complete, while text may still be streaming
+                    output = self._handle_tool_call(evt.get("name"), evt.get("arguments") or "{}")
+                    self._pending_tool_outputs.append({
+                        "type": "conversation.item.create",
+                        "item": {
+                            "type": "function_call_output",
+                            "call_id": evt.get("call_id"),
+                            "output": json.dumps(output),
+                        },
+                    })
                 elif t == "response.done":
-                    self._cur_query.response_done = True
-                    try_set_query_done()
+                    # Tool results can only be followed by a new response once the current one is done
+                    tool_outputs, self._pending_tool_outputs = self._pending_tool_outputs, []
+                    for item in tool_outputs:
+                        self._send_data(item)
+                    output_items = evt.get("response", {}).get("output", [])
+                    has_message = any(item.get("type") == "message" for item in output_items)
+                    if tool_outputs and not has_message and not self._cur_query.canceled:
+                        # The response was only tool calls; let the model say something about it
+                        self._send_data({"type": "response.create"})
+                    else:
+                        self._cur_query.response_done = True
+                        try_set_query_done()
                 else:
                     pass
                 # print("cur:",self._cur_query)
@@ -248,8 +345,8 @@ class OaiChatIntegrated:
         except:
             traceback.print_exc()
 
-    def set_system_prompt(self, prompt:str):
-        self.system_prompt = prompt
+    def set_conversation_prompt(self, prompt:str):
+        self.conversation_prompt = prompt
         self.start()
 
     def _send_data(self, data:dict):
@@ -258,6 +355,22 @@ class OaiChatIntegrated:
             data = data.copy()
             data["audio"] = "..."
         syslogger.debug(f"SEND DATA:{json.dumps(data)}")
+
+    def _handle_tool_call(self, name:str, arguments:str) -> dict:
+        try:
+            args = json.loads(arguments)
+            if name == "robot_action":
+                action = args["action"]
+                if self._cur_query.canceled:
+                    return {"status": "canceled", "action": action}
+                if self.robot_action_callback:
+                    # Run in a thread so a long gesture doesn't block the websocket thread
+                    threading.Thread(target=self.robot_action_callback, args=(action,), daemon=True).start()
+                return {"status": "ok", "action": action}
+            return {"status": "error", "message": f"Unknown tool: {name}"}
+        except Exception as e:
+            syslogger.exception(f"Tool call {name} failed")
+            return {"status": "error", "message": str(e)}
 
     def push_pcm16_frames(self, sample_rate:int, channel_cnt:int, frames:np.ndarray):
         if self._listening:
