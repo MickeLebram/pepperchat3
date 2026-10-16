@@ -4,6 +4,7 @@ numpy
 pyaudio
 scipy
 torch
+torchaudio
 silero-vad
 websocket-client
 platformdirs
