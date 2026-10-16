@@ -1,335 +1,9 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
 
 def version() -> str:
 	"""
@@ -338,21 +12,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALSegmentation3D", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +32,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALSegmentation3D", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +52,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALSegmentation3D", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +77,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALSegmentation3D", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +102,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALSegmentation3D", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALSegmentation3D", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +122,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALSegmentation3D", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,31 +147,60 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALSegmentation3D", "getUsage", [name])
 
-def subscribe_1(name:str, period:int, precision:float) -> None:
+@overload
+def subscribe(name:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (subscribe)
+	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
 	
+	Parameters
+	----------
+	name:str
+		Name of the module which subscribes.
+	
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "subscribe",
+	#     "parametersSignature": "(s)",
+	#     "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which subscribes."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def subscribe(name:str, period:int, precision:float, /) -> None:
+	"""
 	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
 	
 	Parameters
@@ -661,64 +212,50 @@ def subscribe_1(name:str, period:int, precision:float) -> None:
 	precision:float
 		Precision of the extractor if relevant.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "v",
-	    "name": "subscribe",
-	    "parametersSignature": "(sif)",
-	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which subscribes."
-	        },
-	        {
-	            "name": "period",
-	            "description": "Refresh period (in milliseconds) if relevant."
-	        },
-	        {
-	            "name": "precision",
-	            "description": "Precision of the extractor if relevant."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALSegmentation3D", "subscribe", [name, period, precision])
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "v",
+	#     "name": "subscribe",
+	#     "parametersSignature": "(sif)",
+	#     "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which subscribes."
+	#         },
+	#         {
+	#             "name": "period",
+	#             "description": "Refresh period (in milliseconds) if relevant."
+	#         },
+	#         {
+	#             "name": "precision",
+	#             "description": "Precision of the extractor if relevant."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
 
-def subscribe_2(name:str) -> None:
+def subscribe(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (subscribe)
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot:
+	- subscribe(name:str)
+	- subscribe(name:str, period:int, precision:float)
 	
-	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
-	
-	Parameters
-	----------
-	name:str
-		Name of the module which subscribes.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "subscribe",
-	    "parametersSignature": "(s)",
-	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which subscribes."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALSegmentation3D", "subscribe", [name])
+	if kwargs:
+		raise TypeError("ALSegmentation3D.subscribe has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALSegmentation3D", "subscribe", list(args))
 
 def unsubscribe(name:str) -> None:
 	"""
@@ -728,26 +265,23 @@ def unsubscribe(name:str) -> None:
 	----------
 	name:str
 		Name of the module which had subscribed.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "unsubscribe",
-	    "parametersSignature": "(s)",
-	    "description": "Unsubscribes from the extractor.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which had subscribed."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "unsubscribe", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "unsubscribe",
+	#     "parametersSignature": "(s)",
+	#     "description": "Unsubscribes from the extractor.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which had subscribed."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "unsubscribe", [name])
 
 def updatePeriod(name:str, period:int) -> None:
 	"""
@@ -759,30 +293,27 @@ def updatePeriod(name:str, period:int) -> None:
 		Name of the module which has subscribed.
 	period:int
 		Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "updatePeriod",
-	    "parametersSignature": "(si)",
-	    "description": "Updates the period if relevant.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        },
-	        {
-	            "name": "period",
-	            "description": "Refresh period (in milliseconds)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "updatePeriod", [name, period])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "updatePeriod",
+	#     "parametersSignature": "(si)",
+	#     "description": "Updates the period if relevant.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         },
+	#         {
+	#             "name": "period",
+	#             "description": "Refresh period (in milliseconds)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "updatePeriod", [name, period])
 
 def updatePrecision(name:str, precision:float) -> None:
 	"""
@@ -794,30 +325,27 @@ def updatePrecision(name:str, precision:float) -> None:
 		Name of the module which has subscribed.
 	precision:float
 		Precision of the extractor.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "updatePrecision",
-	    "parametersSignature": "(sf)",
-	    "description": "Updates the precision if relevant.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        },
-	        {
-	            "name": "precision",
-	            "description": "Precision of the extractor."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "updatePrecision", [name, precision])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "updatePrecision",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Updates the precision if relevant.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         },
+	#         {
+	#             "name": "precision",
+	#             "description": "Precision of the extractor."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "updatePrecision", [name, precision])
 
 def getCurrentPeriod() -> int:
 	"""
@@ -826,21 +354,18 @@ def getCurrentPeriod() -> int:
 	Returns
 	----------
 	Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "i",
-	    "name": "getCurrentPeriod",
-	    "parametersSignature": "()",
-	    "description": "Gets the current period.",
-	    "parameters": [],
-	    "returnDescription": "Refresh period (in milliseconds)."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getCurrentPeriod", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "i",
+	#     "name": "getCurrentPeriod",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current period.",
+	#     "parameters": [],
+	#     "returnDescription": "Refresh period (in milliseconds)."
+	# }
+	return call_method("ALSegmentation3D", "getCurrentPeriod", [])
 
 def getCurrentPrecision() -> float:
 	"""
@@ -849,21 +374,18 @@ def getCurrentPrecision() -> float:
 	Returns
 	----------
 	Precision of the extractor.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "f",
-	    "name": "getCurrentPrecision",
-	    "parametersSignature": "()",
-	    "description": "Gets the current precision.",
-	    "parameters": [],
-	    "returnDescription": "Precision of the extractor."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getCurrentPrecision", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "f",
+	#     "name": "getCurrentPrecision",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current precision.",
+	#     "parameters": [],
+	#     "returnDescription": "Precision of the extractor."
+	# }
+	return call_method("ALSegmentation3D", "getCurrentPrecision", [])
 
 def getMyPeriod(name:str) -> int:
 	"""
@@ -877,26 +399,23 @@ def getMyPeriod(name:str) -> int:
 	Returns
 	----------
 	Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "i",
-	    "name": "getMyPeriod",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the period for a specific subscription.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        }
-	    ],
-	    "returnDescription": "Refresh period (in milliseconds)."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getMyPeriod", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "i",
+	#     "name": "getMyPeriod",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the period for a specific subscription.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         }
+	#     ],
+	#     "returnDescription": "Refresh period (in milliseconds)."
+	# }
+	return call_method("ALSegmentation3D", "getMyPeriod", [name])
 
 def getMyPrecision(name:str) -> float:
 	"""
@@ -910,26 +429,23 @@ def getMyPrecision(name:str) -> float:
 	Returns
 	----------
 	precision of the extractor
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "f",
-	    "name": "getMyPrecision",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the precision for a specific subscription.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "name of the module which has subscribed"
-	        }
-	    ],
-	    "returnDescription": "precision of the extractor"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getMyPrecision", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "f",
+	#     "name": "getMyPrecision",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the precision for a specific subscription.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "name of the module which has subscribed"
+	#         }
+	#     ],
+	#     "returnDescription": "precision of the extractor"
+	# }
+	return call_method("ALSegmentation3D", "getMyPrecision", [name])
 
 def getSubscribersInfo() -> object:
 	"""
@@ -938,21 +454,18 @@ def getSubscribersInfo() -> object:
 	Returns
 	----------
 	Array of names and parameters of all subscribers.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "m",
-	    "name": "getSubscribersInfo",
-	    "parametersSignature": "()",
-	    "description": "Gets the parameters given by the module.",
-	    "parameters": [],
-	    "returnDescription": "Array of names and parameters of all subscribers."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getSubscribersInfo", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "m",
+	#     "name": "getSubscribersInfo",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the parameters given by the module.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of names and parameters of all subscribers."
+	# }
+	return call_method("ALSegmentation3D", "getSubscribersInfo", [])
 
 def getOutputNames() -> List[str]:
 	"""
@@ -961,21 +474,18 @@ def getOutputNames() -> List[str]:
 	Returns
 	----------
 	Array of values updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "[s]",
-	    "name": "getOutputNames",
-	    "parametersSignature": "()",
-	    "description": "Get the list of values updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of values updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getOutputNames", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "[s]",
+	#     "name": "getOutputNames",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of values updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of values updated by this extractor in ALMemory"
+	# }
+	return call_method("ALSegmentation3D", "getOutputNames", [])
 
 def getEventList() -> List[str]:
 	"""
@@ -984,21 +494,18 @@ def getEventList() -> List[str]:
 	Returns
 	----------
 	Array of events updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "[s]",
-	    "name": "getEventList",
-	    "parametersSignature": "()",
-	    "description": "Get the list of events updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of events updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getEventList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "[s]",
+	#     "name": "getEventList",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of events updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of events updated by this extractor in ALMemory"
+	# }
+	return call_method("ALSegmentation3D", "getEventList", [])
 
 def getMemoryKeyList() -> List[str]:
 	"""
@@ -1007,21 +514,18 @@ def getMemoryKeyList() -> List[str]:
 	Returns
 	----------
 	Array of events updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "[s]",
-	    "name": "getMemoryKeyList",
-	    "parametersSignature": "()",
-	    "description": "Get the list of events updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of events updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getMemoryKeyList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "[s]",
+	#     "name": "getMemoryKeyList",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of events updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of events updated by this extractor in ALMemory"
+	# }
+	return call_method("ALSegmentation3D", "getMemoryKeyList", [])
 
 def isPaused() -> bool:
 	"""
@@ -1030,21 +534,18 @@ def isPaused() -> bool:
 	Returns
 	----------
 	True if the extractor is paused, False if not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "b",
-	    "name": "isPaused",
-	    "parametersSignature": "()",
-	    "description": "Gets extractor pause status",
-	    "parameters": [],
-	    "returnDescription": "True if the extractor is paused, False if not"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "isPaused", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "b",
+	#     "name": "isPaused",
+	#     "parametersSignature": "()",
+	#     "description": "Gets extractor pause status",
+	#     "parameters": [],
+	#     "returnDescription": "True if the extractor is paused, False if not"
+	# }
+	return call_method("ALSegmentation3D", "isPaused", [])
 
 def pause(status:bool) -> None:
 	"""
@@ -1054,26 +555,23 @@ def pause(status:bool) -> None:
 	----------
 	status:bool
 		New pause satus
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "v",
-	    "name": "pause",
-	    "parametersSignature": "(b)",
-	    "description": "Changes the pause status of the extractor",
-	    "parameters": [
-	        {
-	            "name": "status",
-	            "description": "New pause satus"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "pause", [status])
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "v",
+	#     "name": "pause",
+	#     "parametersSignature": "(b)",
+	#     "description": "Changes the pause status of the extractor",
+	#     "parameters": [
+	#         {
+	#             "name": "status",
+	#             "description": "New pause satus"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "pause", [status])
 
 def isProcessing() -> bool:
 	"""
@@ -1082,21 +580,18 @@ def isProcessing() -> bool:
 	Returns
 	----------
 	True if the extractor is currently processing images, False if not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "b",
-	    "name": "isProcessing",
-	    "parametersSignature": "()",
-	    "description": "Gets extractor running status",
-	    "parameters": [],
-	    "returnDescription": "True if the extractor is currently processing images, False if not"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "isProcessing", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "b",
+	#     "name": "isProcessing",
+	#     "parametersSignature": "()",
+	#     "description": "Gets extractor running status",
+	#     "parameters": [],
+	#     "returnDescription": "True if the extractor is currently processing images, False if not"
+	# }
+	return call_method("ALSegmentation3D", "isProcessing", [])
 
 def setFrameRate(value:int) -> bool:
 	"""
@@ -1110,26 +605,23 @@ def setFrameRate(value:int) -> bool:
 	Returns
 	----------
 	True if the update succeeded, False if not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "b",
-	    "name": "setFrameRate",
-	    "parametersSignature": "(i)",
-	    "description": "Sets extractor framerate",
-	    "parameters": [
-	        {
-	            "name": "value",
-	            "description": "New framerate"
-	        }
-	    ],
-	    "returnDescription": "True if the update succeeded, False if not"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setFrameRate", [value])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "b",
+	#     "name": "setFrameRate",
+	#     "parametersSignature": "(i)",
+	#     "description": "Sets extractor framerate",
+	#     "parameters": [
+	#         {
+	#             "name": "value",
+	#             "description": "New framerate"
+	#         }
+	#     ],
+	#     "returnDescription": "True if the update succeeded, False if not"
+	# }
+	return call_method("ALSegmentation3D", "setFrameRate", [value])
 
 def getFrameRate() -> int:
 	"""
@@ -1138,21 +630,18 @@ def getFrameRate() -> int:
 	Returns
 	----------
 	Current value of the framerate of the extractor
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "i",
-	    "name": "getFrameRate",
-	    "parametersSignature": "()",
-	    "description": "Gets extractor framerate",
-	    "parameters": [],
-	    "returnDescription": "Current value of the framerate of the extractor"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getFrameRate", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "i",
+	#     "name": "getFrameRate",
+	#     "parametersSignature": "()",
+	#     "description": "Gets extractor framerate",
+	#     "parameters": [],
+	#     "returnDescription": "Current value of the framerate of the extractor"
+	# }
+	return call_method("ALSegmentation3D", "getFrameRate", [])
 
 def setResolution(resolution:int) -> bool:
 	"""
@@ -1166,26 +655,23 @@ def setResolution(resolution:int) -> bool:
 	Returns
 	----------
 	True if the update succeeded, False if not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "b",
-	    "name": "setResolution",
-	    "parametersSignature": "(i)",
-	    "description": "Sets extractor resolution",
-	    "parameters": [
-	        {
-	            "name": "resolution",
-	            "description": "New resolution"
-	        }
-	    ],
-	    "returnDescription": "True if the update succeeded, False if not"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setResolution", [resolution])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "b",
+	#     "name": "setResolution",
+	#     "parametersSignature": "(i)",
+	#     "description": "Sets extractor resolution",
+	#     "parameters": [
+	#         {
+	#             "name": "resolution",
+	#             "description": "New resolution"
+	#         }
+	#     ],
+	#     "returnDescription": "True if the update succeeded, False if not"
+	# }
+	return call_method("ALSegmentation3D", "setResolution", [resolution])
 
 def getResolution() -> int:
 	"""
@@ -1194,21 +680,18 @@ def getResolution() -> int:
 	Returns
 	----------
 	Current value of the resolution of the extractor
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "i",
-	    "name": "getResolution",
-	    "parametersSignature": "()",
-	    "description": "Gets extractor resolution",
-	    "parameters": [],
-	    "returnDescription": "Current value of the resolution of the extractor"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getResolution", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "i",
+	#     "name": "getResolution",
+	#     "parametersSignature": "()",
+	#     "description": "Gets extractor resolution",
+	#     "parameters": [],
+	#     "returnDescription": "Current value of the resolution of the extractor"
+	# }
+	return call_method("ALSegmentation3D", "getResolution", [])
 
 def setActiveCamera(cameraId:int) -> bool:
 	"""
@@ -1222,26 +705,23 @@ def setActiveCamera(cameraId:int) -> bool:
 	Returns
 	----------
 	True if the update succeeded, False if not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "b",
-	    "name": "setActiveCamera",
-	    "parametersSignature": "(i)",
-	    "description": "Sets extractor active camera",
-	    "parameters": [
-	        {
-	            "name": "cameraId",
-	            "description": "Id of the camera that will become the active camera"
-	        }
-	    ],
-	    "returnDescription": "True if the update succeeded, False if not"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setActiveCamera", [cameraId])
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "b",
+	#     "name": "setActiveCamera",
+	#     "parametersSignature": "(i)",
+	#     "description": "Sets extractor active camera",
+	#     "parameters": [
+	#         {
+	#             "name": "cameraId",
+	#             "description": "Id of the camera that will become the active camera"
+	#         }
+	#     ],
+	#     "returnDescription": "True if the update succeeded, False if not"
+	# }
+	return call_method("ALSegmentation3D", "setActiveCamera", [cameraId])
 
 def getActiveCamera() -> int:
 	"""
@@ -1250,21 +730,18 @@ def getActiveCamera() -> int:
 	Returns
 	----------
 	Id of the current active camera of the extractor
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "i",
-	    "name": "getActiveCamera",
-	    "parametersSignature": "()",
-	    "description": "Gets extractor active camera",
-	    "parameters": [],
-	    "returnDescription": "Id of the current active camera of the extractor"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getActiveCamera", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "i",
+	#     "name": "getActiveCamera",
+	#     "parametersSignature": "()",
+	#     "description": "Gets extractor active camera",
+	#     "parameters": [],
+	#     "returnDescription": "Id of the current active camera of the extractor"
+	# }
+	return call_method("ALSegmentation3D", "getActiveCamera", [])
 
 def getTopOfBlob(distance:float, frame:int, applyVerticalOffset:bool) -> object:
 	"""
@@ -1282,34 +759,31 @@ def getTopOfBlob(distance:float, frame:int, applyVerticalOffset:bool) -> object:
 	Returns
 	----------
 	Position of the top of the corresponding blob (if one is found) in the given frame (Format: [yaw,pitch,distance] in FRAME_IMAGE, [x,y,z] in the other frame).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "m",
-	    "name": "getTopOfBlob",
-	    "parametersSignature": "(fib)",
-	    "description": "Returns the position of the top of the blob most in the center of the depth image, at the given distance, in the given frame.",
-	    "parameters": [
-	        {
-	            "name": "distance",
-	            "description": "Estimation of the distance (in meters) of the blob or -1 for the nearest blob"
-	        },
-	        {
-	            "name": "frame",
-	            "description": "Frame in which to return the position (-1: FRAME_IMAGE, 0: FRAME_TORSO, 1: FRAME_WORLD, 2: FRAME_ROBOT"
-	        },
-	        {
-	            "name": "applyVerticalOffset",
-	            "description": "True to apply the VerticalOffset when computing the position, False otherwise"
-	        }
-	    ],
-	    "returnDescription": "Position of the top of the corresponding blob (if one is found) in the given frame (Format: [yaw,pitch,distance] in FRAME_IMAGE, [x,y,z] in the other frame)."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getTopOfBlob", [distance, frame, applyVerticalOffset])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "m",
+	#     "name": "getTopOfBlob",
+	#     "parametersSignature": "(fib)",
+	#     "description": "Returns the position of the top of the blob most in the center of the depth image, at the given distance, in the given frame.",
+	#     "parameters": [
+	#         {
+	#             "name": "distance",
+	#             "description": "Estimation of the distance (in meters) of the blob or -1 for the nearest blob"
+	#         },
+	#         {
+	#             "name": "frame",
+	#             "description": "Frame in which to return the position (-1: FRAME_IMAGE, 0: FRAME_TORSO, 1: FRAME_WORLD, 2: FRAME_ROBOT"
+	#         },
+	#         {
+	#             "name": "applyVerticalOffset",
+	#             "description": "True to apply the VerticalOffset when computing the position, False otherwise"
+	#         }
+	#     ],
+	#     "returnDescription": "Position of the top of the corresponding blob (if one is found) in the given frame (Format: [yaw,pitch,distance] in FRAME_IMAGE, [x,y,z] in the other frame)."
+	# }
+	return call_method("ALSegmentation3D", "getTopOfBlob", [distance, frame, applyVerticalOffset])
 
 def setBlobTrackingEnabled(status:bool) -> None:
 	"""
@@ -1319,26 +793,23 @@ def setBlobTrackingEnabled(status:bool) -> None:
 	----------
 	status:bool
 		True to turn it on, False to turn it off.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "v",
-	    "name": "setBlobTrackingEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Turn the blob tracker on or off. When the blob tracker is running, events containing the position of the top of the tracked blob are raised.",
-	    "parameters": [
-	        {
-	            "name": "status",
-	            "description": "True to turn it on, False to turn it off."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setBlobTrackingEnabled", [status])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "v",
+	#     "name": "setBlobTrackingEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Turn the blob tracker on or off. When the blob tracker is running, events containing the position of the top of the tracked blob are raised.",
+	#     "parameters": [
+	#         {
+	#             "name": "status",
+	#             "description": "True to turn it on, False to turn it off."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "setBlobTrackingEnabled", [status])
 
 def isBlobTrackingEnabled() -> bool:
 	"""
@@ -1347,21 +818,18 @@ def isBlobTrackingEnabled() -> bool:
 	Returns
 	----------
 	True if the blob tracker is enabled, False otherwise.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "b",
-	    "name": "isBlobTrackingEnabled",
-	    "parametersSignature": "()",
-	    "description": "Gets the current status of the blob tracker. When the blob tracker is running, events containing the position of the top of the tracked blob are raised.",
-	    "parameters": [],
-	    "returnDescription": "True if the blob tracker is enabled, False otherwise."
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "isBlobTrackingEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "b",
+	#     "name": "isBlobTrackingEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current status of the blob tracker. When the blob tracker is running, events containing the position of the top of the tracked blob are raised.",
+	#     "parameters": [],
+	#     "returnDescription": "True if the blob tracker is enabled, False otherwise."
+	# }
+	return call_method("ALSegmentation3D", "isBlobTrackingEnabled", [])
 
 def setBlobTrackingDistance(distance:float) -> None:
 	"""
@@ -1371,45 +839,39 @@ def setBlobTrackingDistance(distance:float) -> None:
 	----------
 	distance:float
 		New value (in meters)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "v",
-	    "name": "setBlobTrackingDistance",
-	    "parametersSignature": "(f)",
-	    "description": "Sets the distance (in meters) for the blob tracker",
-	    "parameters": [
-	        {
-	            "name": "distance",
-	            "description": "New value (in meters)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setBlobTrackingDistance", [distance])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "v",
+	#     "name": "setBlobTrackingDistance",
+	#     "parametersSignature": "(f)",
+	#     "description": "Sets the distance (in meters) for the blob tracker",
+	#     "parameters": [
+	#         {
+	#             "name": "distance",
+	#             "description": "New value (in meters)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "setBlobTrackingDistance", [distance])
 
 def getBlobTrackingDistance() -> float:
 	"""
 	Gets the distance (in meters) for the blob tracker
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "f",
-	    "name": "getBlobTrackingDistance",
-	    "parametersSignature": "()",
-	    "description": "Gets the distance (in meters) for the blob tracker",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getBlobTrackingDistance", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "f",
+	#     "name": "getBlobTrackingDistance",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the distance (in meters) for the blob tracker",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "getBlobTrackingDistance", [])
 
 def setVerticalOffset(value:float) -> None:
 	"""
@@ -1419,26 +881,23 @@ def setVerticalOffset(value:float) -> None:
 	----------
 	value:float
 		New vertical offset (in meters), added if positive, substracted if negative
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "v",
-	    "name": "setVerticalOffset",
-	    "parametersSignature": "(f)",
-	    "description": "Sets the value of vertical offset (in meters) for the blob tracker",
-	    "parameters": [
-	        {
-	            "name": "value",
-	            "description": "New vertical offset (in meters), added if positive, substracted if negative"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setVerticalOffset", [value])
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "v",
+	#     "name": "setVerticalOffset",
+	#     "parametersSignature": "(f)",
+	#     "description": "Sets the value of vertical offset (in meters) for the blob tracker",
+	#     "parameters": [
+	#         {
+	#             "name": "value",
+	#             "description": "New vertical offset (in meters), added if positive, substracted if negative"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "setVerticalOffset", [value])
 
 def getVerticalOffset() -> float:
 	"""
@@ -1447,21 +906,18 @@ def getVerticalOffset() -> float:
 	Returns
 	----------
 	Current vertical offset of the blob tracker
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "f",
-	    "name": "getVerticalOffset",
-	    "parametersSignature": "()",
-	    "description": "Sets the value of vertical offset (in meters) for the blob tracker",
-	    "parameters": [],
-	    "returnDescription": "Current vertical offset of the blob tracker"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getVerticalOffset", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "f",
+	#     "name": "getVerticalOffset",
+	#     "parametersSignature": "()",
+	#     "description": "Sets the value of vertical offset (in meters) for the blob tracker",
+	#     "parameters": [],
+	#     "returnDescription": "Current vertical offset of the blob tracker"
+	# }
+	return call_method("ALSegmentation3D", "getVerticalOffset", [])
 
 def setDeltaDepthThreshold(value:float) -> None:
 	"""
@@ -1471,26 +927,23 @@ def setDeltaDepthThreshold(value:float) -> None:
 	----------
 	value:float
 		New depth threshold (in meters) for the segmentation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "v",
-	    "name": "setDeltaDepthThreshold",
-	    "parametersSignature": "(f)",
-	    "description": "Sets the value of the depth threshold (in meters) used for the segmentation",
-	    "parameters": [
-	        {
-	            "name": "value",
-	            "description": "New depth threshold (in meters) for the segmentation"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "setDeltaDepthThreshold", [value])
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "v",
+	#     "name": "setDeltaDepthThreshold",
+	#     "parametersSignature": "(f)",
+	#     "description": "Sets the value of the depth threshold (in meters) used for the segmentation",
+	#     "parameters": [
+	#         {
+	#             "name": "value",
+	#             "description": "New depth threshold (in meters) for the segmentation"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALSegmentation3D", "setDeltaDepthThreshold", [value])
 
 def getDeltaDepthThreshold() -> float:
 	"""
@@ -1499,19 +952,16 @@ def getDeltaDepthThreshold() -> float:
 	Returns
 	----------
 	Current depth threshold (in meters)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 144,
-	    "returnSignature": "f",
-	    "name": "getDeltaDepthThreshold",
-	    "parametersSignature": "()",
-	    "description": "Gets the value of the depth threshold (in meters) used for the segmentation",
-	    "parameters": [],
-	    "returnDescription": "Current depth threshold (in meters)"
-	}
-	'''
 	"""
-	return send_mfc("ALSegmentation3D", "getDeltaDepthThreshold", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 144,
+	#     "returnSignature": "f",
+	#     "name": "getDeltaDepthThreshold",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the value of the depth threshold (in meters) used for the segmentation",
+	#     "parameters": [],
+	#     "returnDescription": "Current depth threshold (in meters)"
+	# }
+	return call_method("ALSegmentation3D", "getDeltaDepthThreshold", [])
 

@@ -1,335 +1,9 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 ALMotion provides methods that help make Nao move. It contains commands for manipulating joint angles, joint stiffness, and a higher level API for controling walks.
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
 
 def version() -> str:
 	"""
@@ -338,21 +12,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALMotion", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +32,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALMotion", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +52,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALMotion", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +77,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALMotion", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +102,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALMotion", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +122,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALMotion", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,64 +147,55 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALMotion", "getUsage", [name])
 
 def wakeUp() -> bool:
 	"""
 	The robot will wake up: set Motor ON and go to initial position if needed
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "b",
-	    "name": "wakeUp",
-	    "parametersSignature": "()",
-	    "description": "The robot will wake up: set Motor ON and go to initial position if needed",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wakeUp", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "b",
+	#     "name": "wakeUp",
+	#     "parametersSignature": "()",
+	#     "description": "The robot will wake up: set Motor ON and go to initial position if needed",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wakeUp", [])
 
 def rest() -> None:
 	"""
 	The robot will rest: go to a relax and safe position and set Motor OFF
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "rest",
-	    "parametersSignature": "()",
-	    "description": "The robot will rest: go to a relax and safe position and set Motor OFF",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "rest", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "rest",
+	#     "parametersSignature": "()",
+	#     "description": "The robot will rest: go to a relax and safe position and set Motor OFF",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "rest", [])
 
 def _rest(chainName:str) -> None:
 	"""
@@ -692,26 +205,23 @@ def _rest(chainName:str) -> None:
 	----------
 	chainName:str
 		The name of the chain to rest.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "_rest",
-	    "parametersSignature": "(s)",
-	    "description": "The robot will rest: go to a relax and safe position on the chain and set Motor OFF",
-	    "parameters": [
-	        {
-	            "name": "chainName",
-	            "description": "The name of the chain to rest."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_rest", [chainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "_rest",
+	#     "parametersSignature": "(s)",
+	#     "description": "The robot will rest: go to a relax and safe position on the chain and set Motor OFF",
+	#     "parameters": [
+	#         {
+	#             "name": "chainName",
+	#             "description": "The name of the chain to rest."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_rest", [chainName])
 
 def _stopChain(chainName:str) -> None:
 	"""
@@ -721,26 +231,23 @@ def _stopChain(chainName:str) -> None:
 	----------
 	chainName:str
 		The name of the chain to rest. Can be "LArm", "RArm", or "Arms".
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "_stopChain",
-	    "parametersSignature": "(s)",
-	    "description": "The robot will immediately unstiffness the chain.",
-	    "parameters": [
-	        {
-	            "name": "chainName",
-	            "description": "The name of the chain to rest. Can be \"LArm\", \"RArm\", or \"Arms\"."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_stopChain", [chainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "_stopChain",
+	#     "parametersSignature": "(s)",
+	#     "description": "The robot will immediately unstiffness the chain.",
+	#     "parameters": [
+	#         {
+	#             "name": "chainName",
+	#             "description": "The name of the chain to rest. Can be \"LArm\", \"RArm\", or \"Arms\"."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_stopChain", [chainName])
 
 def _restReflex(whyString:str, stateList:object) -> None:
 	"""
@@ -752,68 +259,59 @@ def _restReflex(whyString:str, stateList:object) -> None:
 		A string describing the root cause of the request.
 	stateList:object
 		An ALValue [[[name list], a string or array of angles], ...].
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "_restReflex",
-	    "parametersSignature": "(sm)",
-	    "description": "The robot propose several adapted rest.",
-	    "parameters": [
-	        {
-	            "name": "whyString",
-	            "description": "A string describing the root cause of the request."
-	        },
-	        {
-	            "name": "stateList",
-	            "description": "An ALValue [[[name list], a string or array of angles], ...]."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_restReflex", [whyString, stateList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "_restReflex",
+	#     "parametersSignature": "(sm)",
+	#     "description": "The robot propose several adapted rest.",
+	#     "parameters": [
+	#         {
+	#             "name": "whyString",
+	#             "description": "A string describing the root cause of the request."
+	#         },
+	#         {
+	#             "name": "stateList",
+	#             "description": "An ALValue [[[name list], a string or array of angles], ...]."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_restReflex", [whyString, stateList])
 
 def _blockedLegReflex() -> None:
 	"""
 	Go to a stable rest posture given the blocked joints
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "v",
-	    "name": "_blockedLegReflex",
-	    "parametersSignature": "()",
-	    "description": "Go to a stable rest posture given the blocked joints",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_blockedLegReflex", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "v",
+	#     "name": "_blockedLegReflex",
+	#     "parametersSignature": "()",
+	#     "description": "Go to a stable rest posture given the blocked joints",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_blockedLegReflex", [])
 
 def _shutdown() -> None:
 	"""
 	The robot will rest: wakeUp is not allowed anymore.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "v",
-	    "name": "_shutdown",
-	    "parametersSignature": "()",
-	    "description": "The robot will rest: wakeUp is not allowed anymore.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_shutdown", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "v",
+	#     "name": "_shutdown",
+	#     "parametersSignature": "()",
+	#     "description": "The robot will rest: wakeUp is not allowed anymore.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_shutdown", [])
 
 def _setMotionPosture(postureName:str, bodyAngles:List[float]) -> bool:
 	"""
@@ -829,30 +327,27 @@ def _setMotionPosture(postureName:str, bodyAngles:List[float]) -> bool:
 	Returns
 	----------
 	Success to set the desired motion posture.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "b",
-	    "name": "_setMotionPosture",
-	    "parametersSignature": "(s[f])",
-	    "description": "Set the reference posture for fallmanager, stand init, idle posture, breath, etc.",
-	    "parameters": [
-	        {
-	            "name": "postureName",
-	            "description": "The posture name"
-	        },
-	        {
-	            "name": "bodyAngles",
-	            "description": "The body angles. Use getBodyNames api with parameter JointActuators."
-	        }
-	    ],
-	    "returnDescription": "Success to set the desired motion posture."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setMotionPosture", [postureName, bodyAngles])
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "b",
+	#     "name": "_setMotionPosture",
+	#     "parametersSignature": "(s[f])",
+	#     "description": "Set the reference posture for fallmanager, stand init, idle posture, breath, etc.",
+	#     "parameters": [
+	#         {
+	#             "name": "postureName",
+	#             "description": "The posture name"
+	#         },
+	#         {
+	#             "name": "bodyAngles",
+	#             "description": "The body angles. Use getBodyNames api with parameter JointActuators."
+	#         }
+	#     ],
+	#     "returnDescription": "Success to set the desired motion posture."
+	# }
+	return call_method("ALMotion", "_setMotionPosture", [postureName, bodyAngles])
 
 def _getMotionPosture(postureName:str) -> List[float]:
 	"""
@@ -866,26 +361,23 @@ def _getMotionPosture(postureName:str) -> List[float]:
 	Returns
 	----------
 	Use getBodyNames api with parameter JointActuators.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "[f]",
-	    "name": "_getMotionPosture",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "postureName",
-	            "description": "The posture name"
-	        }
-	    ],
-	    "returnDescription": "Use getBodyNames api with parameter JointActuators."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getMotionPosture", [postureName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "[f]",
+	#     "name": "_getMotionPosture",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "postureName",
+	#             "description": "The posture name"
+	#         }
+	#     ],
+	#     "returnDescription": "Use getBodyNames api with parameter JointActuators."
+	# }
+	return call_method("ALMotion", "_getMotionPosture", [postureName])
 
 def _getMotionPostureList() -> List[str]:
 	"""
@@ -894,21 +386,18 @@ def _getMotionPostureList() -> List[str]:
 	Returns
 	----------
 	All the postures in motion posture library
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "[s]",
-	    "name": "_getMotionPostureList",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": "All the postures in motion posture library"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getMotionPostureList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "[s]",
+	#     "name": "_getMotionPostureList",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": "All the postures in motion posture library"
+	# }
+	return call_method("ALMotion", "_getMotionPostureList", [])
 
 def robotIsWakeUp() -> bool:
 	"""
@@ -917,21 +406,18 @@ def robotIsWakeUp() -> bool:
 	Returns
 	----------
 	True if the robot is already wakeUp.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "b",
-	    "name": "robotIsWakeUp",
-	    "parametersSignature": "()",
-	    "description": "return true if the robot is already wakeUp",
-	    "parameters": [],
-	    "returnDescription": "True if the robot is already wakeUp."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "robotIsWakeUp", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "b",
+	#     "name": "robotIsWakeUp",
+	#     "parametersSignature": "()",
+	#     "description": "return true if the robot is already wakeUp",
+	#     "parameters": [],
+	#     "returnDescription": "True if the robot is already wakeUp."
+	# }
+	return call_method("ALMotion", "robotIsWakeUp", [])
 
 def stiffnessInterpolation(names:object, stiffnessLists:object, timeLists:object) -> None:
 	"""
@@ -945,34 +431,31 @@ def stiffnessInterpolation(names:object, stiffnessLists:object, timeLists:object
 		An stiffness, list of stiffnesses or list of list of stiffnesses
 	timeLists:object
 		A time, list of times or list of list of times.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "v",
-	    "name": "stiffnessInterpolation",
-	    "parametersSignature": "(mmm)",
-	    "description": "Interpolates one or multiple joints to a target stiffness or along timed trajectories of stiffness. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        },
-	        {
-	            "name": "stiffnessLists",
-	            "description": "An stiffness, list of stiffnesses or list of list of stiffnesses"
-	        },
-	        {
-	            "name": "timeLists",
-	            "description": "A time, list of times or list of list of times."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "stiffnessInterpolation", [names, stiffnessLists, timeLists])
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "v",
+	#     "name": "stiffnessInterpolation",
+	#     "parametersSignature": "(mmm)",
+	#     "description": "Interpolates one or multiple joints to a target stiffness or along timed trajectories of stiffness. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         },
+	#         {
+	#             "name": "stiffnessLists",
+	#             "description": "An stiffness, list of stiffnesses or list of list of stiffnesses"
+	#         },
+	#         {
+	#             "name": "timeLists",
+	#             "description": "A time, list of times or list of list of times."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "stiffnessInterpolation", [names, stiffnessLists, timeLists])
 
 def setStiffnesses(names:object, stiffnesses:object) -> None:
 	"""
@@ -984,30 +467,27 @@ def setStiffnesses(names:object, stiffnesses:object) -> None:
 		Names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
 	stiffnesses:object
 		One or more stiffnesses between zero and one.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "v",
-	    "name": "setStiffnesses",
-	    "parametersSignature": "(mm)",
-	    "description": "Sets the stiffness of one or more joints. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        },
-	        {
-	            "name": "stiffnesses",
-	            "description": "One or more stiffnesses between zero and one."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setStiffnesses", [names, stiffnesses])
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "v",
+	#     "name": "setStiffnesses",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Sets the stiffness of one or more joints. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         },
+	#         {
+	#             "name": "stiffnesses",
+	#             "description": "One or more stiffnesses between zero and one."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setStiffnesses", [names, stiffnesses])
 
 def _setStiffnesses(names:object, stiffnesses:object) -> None:
 	"""
@@ -1019,30 +499,27 @@ def _setStiffnesses(names:object, stiffnesses:object) -> None:
 		Names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
 	stiffnesses:object
 		One or more stiffnesses between zero and one.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "v",
-	    "name": "_setStiffnesses",
-	    "parametersSignature": "(mm)",
-	    "description": "Sets the stiffness of one or more joints. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        },
-	        {
-	            "name": "stiffnesses",
-	            "description": "One or more stiffnesses between zero and one."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setStiffnesses", [names, stiffnesses])
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "v",
+	#     "name": "_setStiffnesses",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Sets the stiffness of one or more joints. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         },
+	#         {
+	#             "name": "stiffnesses",
+	#             "description": "One or more stiffnesses between zero and one."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setStiffnesses", [names, stiffnesses])
 
 def _setSafeStiffnesses(jointIndexes:List[int], actuatorIndexes:List[int], stiffness:float) -> None:
 	"""
@@ -1056,34 +533,31 @@ def _setSafeStiffnesses(jointIndexes:List[int], actuatorIndexes:List[int], stiff
 		Vector of actuator indexes
 	stiffness:float
 		The stiffness to maintain between zero and one.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "v",
-	    "name": "_setSafeStiffnesses",
-	    "parametersSignature": "([I][I]f)",
-	    "description": "Set the custom stiffnesses to maintain on the given joints and actuators to ensure safety. ",
-	    "parameters": [
-	        {
-	            "name": "jointIndexes",
-	            "description": "Vector of joint indexes"
-	        },
-	        {
-	            "name": "actuatorIndexes",
-	            "description": "Vector of actuator indexes"
-	        },
-	        {
-	            "name": "stiffness",
-	            "description": "The stiffness to maintain between zero and one."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setSafeStiffnesses", [jointIndexes, actuatorIndexes, stiffness])
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "v",
+	#     "name": "_setSafeStiffnesses",
+	#     "parametersSignature": "([I][I]f)",
+	#     "description": "Set the custom stiffnesses to maintain on the given joints and actuators to ensure safety. ",
+	#     "parameters": [
+	#         {
+	#             "name": "jointIndexes",
+	#             "description": "Vector of joint indexes"
+	#         },
+	#         {
+	#             "name": "actuatorIndexes",
+	#             "description": "Vector of actuator indexes"
+	#         },
+	#         {
+	#             "name": "stiffness",
+	#             "description": "The stiffness to maintain between zero and one."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setSafeStiffnesses", [jointIndexes, actuatorIndexes, stiffness])
 
 def _disableSafeStiffnesses(jointIndexes:List[int], actuatorIndexes:List[int]) -> None:
 	"""
@@ -1095,30 +569,27 @@ def _disableSafeStiffnesses(jointIndexes:List[int], actuatorIndexes:List[int]) -
 		Vector of joint indexes
 	actuatorIndexes:List[int]
 		Vector of actuator indexes
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "v",
-	    "name": "_disableSafeStiffnesses",
-	    "parametersSignature": "([I][I])",
-	    "description": "Disable the safe stiffnesses set for the given joints and actuators.",
-	    "parameters": [
-	        {
-	            "name": "jointIndexes",
-	            "description": "Vector of joint indexes"
-	        },
-	        {
-	            "name": "actuatorIndexes",
-	            "description": "Vector of actuator indexes"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_disableSafeStiffnesses", [jointIndexes, actuatorIndexes])
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "v",
+	#     "name": "_disableSafeStiffnesses",
+	#     "parametersSignature": "([I][I])",
+	#     "description": "Disable the safe stiffnesses set for the given joints and actuators.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointIndexes",
+	#             "description": "Vector of joint indexes"
+	#         },
+	#         {
+	#             "name": "actuatorIndexes",
+	#             "description": "Vector of actuator indexes"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_disableSafeStiffnesses", [jointIndexes, actuatorIndexes])
 
 def getStiffnesses(jointName:object) -> List[float]:
 	"""
@@ -1132,26 +603,23 @@ def getStiffnesses(jointName:object) -> List[float]:
 	Returns
 	----------
 	One or more stiffnesses. 1.0 indicates maximum stiffness. 0.0 indicated minimum stiffness
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "[f]",
-	    "name": "getStiffnesses",
-	    "parametersSignature": "(m)",
-	    "description": "Gets stiffness of a joint or group of joints",
-	    "parameters": [
-	        {
-	            "name": "jointName",
-	            "description": "Name of the joints, chains, \"Body\", \"Joints\" or \"Actuators\"."
-	        }
-	    ],
-	    "returnDescription": "One or more stiffnesses. 1.0 indicates maximum stiffness. 0.0 indicated minimum stiffness"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getStiffnesses", [jointName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "[f]",
+	#     "name": "getStiffnesses",
+	#     "parametersSignature": "(m)",
+	#     "description": "Gets stiffness of a joint or group of joints",
+	#     "parameters": [
+	#         {
+	#             "name": "jointName",
+	#             "description": "Name of the joints, chains, \"Body\", \"Joints\" or \"Actuators\"."
+	#         }
+	#     ],
+	#     "returnDescription": "One or more stiffnesses. 1.0 indicates maximum stiffness. 0.0 indicated minimum stiffness"
+	# }
+	return call_method("ALMotion", "getStiffnesses", [jointName])
 
 def angleInterpolation(names:object, angleLists:object, timeLists:object, isAbsolute:bool) -> None:
 	"""
@@ -1167,38 +635,35 @@ def angleInterpolation(names:object, angleLists:object, timeLists:object, isAbso
 		A time, list of times or list of list of times in seconds
 	isAbsolute:bool
 		If true, the movement is described in absolute angles, else the angles are relative to the current angle.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "v",
-	    "name": "angleInterpolation",
-	    "parametersSignature": "(mmmb)",
-	    "description": "Interpolates one or multiple joints to a target angle or along timed trajectories. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        },
-	        {
-	            "name": "angleLists",
-	            "description": "An angle, list of angles or list of list of angles in radians"
-	        },
-	        {
-	            "name": "timeLists",
-	            "description": "A time, list of times or list of list of times in seconds"
-	        },
-	        {
-	            "name": "isAbsolute",
-	            "description": "If true, the movement is described in absolute angles, else the angles are relative to the current angle."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "angleInterpolation", [names, angleLists, timeLists, isAbsolute])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "v",
+	#     "name": "angleInterpolation",
+	#     "parametersSignature": "(mmmb)",
+	#     "description": "Interpolates one or multiple joints to a target angle or along timed trajectories. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "angleLists",
+	#             "description": "An angle, list of angles or list of list of angles in radians"
+	#         },
+	#         {
+	#             "name": "timeLists",
+	#             "description": "A time, list of times or list of list of times in seconds"
+	#         },
+	#         {
+	#             "name": "isAbsolute",
+	#             "description": "If true, the movement is described in absolute angles, else the angles are relative to the current angle."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "angleInterpolation", [names, angleLists, timeLists, isAbsolute])
 
 def angleInterpolationWithSpeed(names:object, targetAngles:object, maxSpeedFraction:float) -> None:
 	"""
@@ -1212,34 +677,31 @@ def angleInterpolationWithSpeed(names:object, targetAngles:object, maxSpeedFract
 		An angle, or list of angles in radians
 	maxSpeedFraction:float
 		A fraction.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "v",
-	    "name": "angleInterpolationWithSpeed",
-	    "parametersSignature": "(mmf)",
-	    "description": "Interpolates one or multiple joints to a target angle, using a fraction of max speed. Only one target angle is allowed for each joint. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        },
-	        {
-	            "name": "targetAngles",
-	            "description": "An angle, or list of angles in radians"
-	        },
-	        {
-	            "name": "maxSpeedFraction",
-	            "description": "A fraction."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "angleInterpolationWithSpeed", [names, targetAngles, maxSpeedFraction])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "v",
+	#     "name": "angleInterpolationWithSpeed",
+	#     "parametersSignature": "(mmf)",
+	#     "description": "Interpolates one or multiple joints to a target angle, using a fraction of max speed. Only one target angle is allowed for each joint. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         },
+	#         {
+	#             "name": "targetAngles",
+	#             "description": "An angle, or list of angles in radians"
+	#         },
+	#         {
+	#             "name": "maxSpeedFraction",
+	#             "description": "A fraction."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "angleInterpolationWithSpeed", [names, targetAngles, maxSpeedFraction])
 
 def angleInterpolationBezier(jointNames:List[str], times:object, controlPoints:object) -> None:
 	"""
@@ -1253,39 +715,35 @@ def angleInterpolationBezier(jointNames:List[str], times:object, controlPoints:o
 		An ragged ALValue matrix of floats. Each line corresponding to a motor, and column element to a control point.
 	controlPoints:object
 		An ALValue array of arrays each containing [float angle, Handle1, Handle2], where Handle is [int InterpolationType, float dAngle, float dTime] descibing the handle offsets relative to the angle and time of the point. The first bezier param describes the handle that controls the curve preceeding the point, the second describes the curve following the point.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "v",
-	    "name": "angleInterpolationBezier",
-	    "parametersSignature": "([s]mm)",
-	    "description": "Interpolates a sequence of timed angles for several motors using bezier control points. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "jointNames",
-	            "description": "A vector of joint names"
-	        },
-	        {
-	            "name": "times",
-	            "description": "An ragged ALValue matrix of floats. Each line corresponding to a motor, and column element to a control point."
-	        },
-	        {
-	            "name": "controlPoints",
-	            "description": "An ALValue array of arrays each containing [float angle, Handle1, Handle2], where Handle is [int InterpolationType, float dAngle, float dTime] descibing the handle offsets relative to the angle and time of the point. The first bezier param describes the handle that controls the curve preceeding the point, the second describes the curve following the point."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "angleInterpolationBezier", [jointNames, times, controlPoints])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "v",
+	#     "name": "angleInterpolationBezier",
+	#     "parametersSignature": "([s]mm)",
+	#     "description": "Interpolates a sequence of timed angles for several motors using bezier control points. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointNames",
+	#             "description": "A vector of joint names"
+	#         },
+	#         {
+	#             "name": "times",
+	#             "description": "An ragged ALValue matrix of floats. Each line corresponding to a motor, and column element to a control point."
+	#         },
+	#         {
+	#             "name": "controlPoints",
+	#             "description": "An ALValue array of arrays each containing [float angle, Handle1, Handle2], where Handle is [int InterpolationType, float dAngle, float dTime] descibing the handle offsets relative to the angle and time of the point. The first bezier param describes the handle that controls the curve preceeding the point, the second describes the curve following the point."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "angleInterpolationBezier", [jointNames, times, controlPoints])
 
-def setAngles_1(names:object, angles:object, fractionMaxSpeed:float) -> None:
+@overload
+def setAngles(names:object, angles:object, fractionMaxSpeed:float, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (setAngles)
-	
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
@@ -1297,38 +755,44 @@ def setAngles_1(names:object, angles:object, fractionMaxSpeed:float) -> None:
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "v",
-	    "name": "setAngles",
-	    "parametersSignature": "(mmf)",
-	    "description": "Sets angles. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        },
-	        {
-	            "name": "angles",
-	            "description": "One or more angles in radians"
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "The fraction of maximum speed to use"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "setAngles", [names, angles, fractionMaxSpeed])
-
-def setAngles_2(names:object, angles:object, fractionMaxSpeeds:List[float]) -> None:
-	"""
-	Note: This is one of the overloads of the original method (setAngles)
+	Bridge notes
+	------------
+	setAngles has 2 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
+	To choose explicitly, use:
+	- setAngles_list_float(object, object, List[float])
+	- setAngles_float(object, object, float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "v",
+	#     "name": "setAngles",
+	#     "parametersSignature": "(mmf)",
+	#     "description": "Sets angles. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "angles",
+	#             "description": "One or more angles in radians"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def setAngles(names:object, angles:object, fractionMaxSpeeds:List[float], /) -> None:
+	"""
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
@@ -1340,33 +804,138 @@ def setAngles_2(names:object, angles:object, fractionMaxSpeeds:List[float]) -> N
 	fractionMaxSpeeds:List[float]
 		The vector of fraction of maximum speed to use
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "v",
-	    "name": "setAngles",
-	    "parametersSignature": "(mm[f])",
-	    "description": "Sets angles. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        },
-	        {
-	            "name": "angles",
-	            "description": "One or more angles in radians"
-	        },
-	        {
-	            "name": "fractionMaxSpeeds",
-	            "description": "The vector of fraction of maximum speed to use"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	setAngles has 2 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
+	
+	To choose explicitly, use:
+	- setAngles_list_float(object, object, List[float])
+	- setAngles_float(object, object, float)
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "setAngles", [names, angles, fractionMaxSpeeds])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "v",
+	#     "name": "setAngles",
+	#     "parametersSignature": "(mm[f])",
+	#     "description": "Sets angles. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "angles",
+	#             "description": "One or more angles in radians"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeeds",
+	#             "description": "The vector of fraction of maximum speed to use"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def setAngles(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	setAngles has 2 variants on the robot:
+	- setAngles(names:object, angles:object, fractionMaxSpeed:float), explicitly setAngles_float
+	- setAngles(names:object, angles:object, fractionMaxSpeeds:List[float]), explicitly setAngles_list_float
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion.setAngles has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "setAngles", list(args))
+
+def setAngles_list_float(names:object, angles:object, fractionMaxSpeeds:List[float]) -> None:
+	"""
+	Sets angles. This is a non-blocking call.
+	
+	Parameters
+	----------
+	names:object
+		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
+	angles:object
+		One or more angles in radians
+	fractionMaxSpeeds:List[float]
+		The vector of fraction of maximum speed to use
+	
+	Bridge notes
+	------------
+	Explicit variant of setAngles(object, object, List[float]). Calling setAngles instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "v",
+	#     "name": "setAngles",
+	#     "parametersSignature": "(mm[f])",
+	#     "description": "Sets angles. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "angles",
+	#             "description": "One or more angles in radians"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeeds",
+	#             "description": "The vector of fraction of maximum speed to use"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setAngles", [names, angles, fractionMaxSpeeds])
+
+def setAngles_float(names:object, angles:object, fractionMaxSpeed:float) -> None:
+	"""
+	Sets angles. This is a non-blocking call.
+	
+	Parameters
+	----------
+	names:object
+		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
+	angles:object
+		One or more angles in radians
+	fractionMaxSpeed:float
+		The fraction of maximum speed to use
+	
+	Bridge notes
+	------------
+	Explicit variant of setAngles(object, object, float). Calling setAngles instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "v",
+	#     "name": "setAngles",
+	#     "parametersSignature": "(mmf)",
+	#     "description": "Sets angles. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "angles",
+	#             "description": "One or more angles in radians"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setAngles", [names, angles, fractionMaxSpeed])
 
 def changeAngles(names:object, changes:object, fractionMaxSpeed:float) -> None:
 	"""
@@ -1380,34 +949,31 @@ def changeAngles(names:object, changes:object, fractionMaxSpeed:float) -> None:
 		One or more changes in radians
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "v",
-	    "name": "changeAngles",
-	    "parametersSignature": "(mmf)",
-	    "description": "Changes Angles. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        },
-	        {
-	            "name": "changes",
-	            "description": "One or more changes in radians"
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "The fraction of maximum speed to use"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "changeAngles", [names, changes, fractionMaxSpeed])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "v",
+	#     "name": "changeAngles",
+	#     "parametersSignature": "(mmf)",
+	#     "description": "Changes Angles. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         },
+	#         {
+	#             "name": "changes",
+	#             "description": "One or more changes in radians"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "changeAngles", [names, changes, fractionMaxSpeed])
 
 def getAngles(names:object, useSensors:bool) -> List[float]:
 	"""
@@ -1423,30 +989,27 @@ def getAngles(names:object, useSensors:bool) -> List[float]:
 	Returns
 	----------
 	Joint angles in radians.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "[f]",
-	    "name": "getAngles",
-	    "parametersSignature": "(mb)",
-	    "description": "Gets the angles of the joints",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Names the joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        },
-	        {
-	            "name": "useSensors",
-	            "description": "If true, sensor angles will be returned"
-	        }
-	    ],
-	    "returnDescription": "Joint angles in radians."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getAngles", [names, useSensors])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "[f]",
+	#     "name": "getAngles",
+	#     "parametersSignature": "(mb)",
+	#     "description": "Gets the angles of the joints",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Names the joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         },
+	#         {
+	#             "name": "useSensors",
+	#             "description": "If true, sensor angles will be returned"
+	#         }
+	#     ],
+	#     "returnDescription": "Joint angles in radians."
+	# }
+	return call_method("ALMotion", "getAngles", [names, useSensors])
 
 def openHand(handName:str) -> None:
 	"""
@@ -1456,26 +1019,23 @@ def openHand(handName:str) -> None:
 	----------
 	handName:str
 		The name of the hand. Could be: "RHand or "LHand"
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "v",
-	    "name": "openHand",
-	    "parametersSignature": "(s)",
-	    "description": "NAO stiffens the motors of desired hand. Then, he opens the hand, then cuts motor current to conserve energy. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "handName",
-	            "description": "The name of the hand. Could be: \"RHand or \"LHand\""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "openHand", [handName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "v",
+	#     "name": "openHand",
+	#     "parametersSignature": "(s)",
+	#     "description": "NAO stiffens the motors of desired hand. Then, he opens the hand, then cuts motor current to conserve energy. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "handName",
+	#             "description": "The name of the hand. Could be: \"RHand or \"LHand\""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "openHand", [handName])
 
 def closeHand(handName:str) -> None:
 	"""
@@ -1485,31 +1045,27 @@ def closeHand(handName:str) -> None:
 	----------
 	handName:str
 		The name of the hand. Could be: "RHand" or "LHand"
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "v",
-	    "name": "closeHand",
-	    "parametersSignature": "(s)",
-	    "description": "NAO stiffens the motors of desired hand. Then, he closes the hand, then cuts motor current to conserve energy. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "handName",
-	            "description": "The name of the hand. Could be: \"RHand\" or \"LHand\""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "closeHand", [handName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "v",
+	#     "name": "closeHand",
+	#     "parametersSignature": "(s)",
+	#     "description": "NAO stiffens the motors of desired hand. Then, he closes the hand, then cuts motor current to conserve energy. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "handName",
+	#             "description": "The name of the hand. Could be: \"RHand\" or \"LHand\""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "closeHand", [handName])
 
-def move_1(x:float, y:float, theta:float) -> None:
+@overload
+def move(x:float, y:float, theta:float, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (move)
-	
 	Makes the robot move at the given velocity. This is a non-blocking call.
 	
 	Parameters
@@ -1521,38 +1077,40 @@ def move_1(x:float, y:float, theta:float) -> None:
 	theta:float
 		The velocity around z axis [rd.s-1].
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "v",
-	    "name": "move",
-	    "parametersSignature": "(fff)",
-	    "description": "Makes the robot move at the given velocity. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The velocity along x axis [m.s-1]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The velocity along y axis [m.s-1]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The velocity around z axis [rd.s-1]."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "move", [x, y, theta])
-
-def move_2(x:float, y:float, theta:float, moveConfig:object) -> None:
-	"""
-	Note: This is one of the overloads of the original method (move)
+	Bridge notes
+	------------
+	move has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "v",
+	#     "name": "move",
+	#     "parametersSignature": "(fff)",
+	#     "description": "Makes the robot move at the given velocity. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The velocity along x axis [m.s-1]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The velocity along y axis [m.s-1]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The velocity around z axis [rd.s-1]."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def move(x:float, y:float, theta:float, moveConfig:object, /) -> None:
+	"""
 	Makes the robot move at the given velocity. This is a non-blocking call.
 	
 	Parameters
@@ -1566,42 +1124,58 @@ def move_2(x:float, y:float, theta:float, moveConfig:object) -> None:
 	moveConfig:object
 		An ALValue with custom move configuration.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "v",
-	    "name": "move",
-	    "parametersSignature": "(fffm)",
-	    "description": "Makes the robot move at the given velocity. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The velocity along x axis [m.s-1]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The velocity along y axis [m.s-1]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The velocity around z axis [rd.s-1]."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "move", [x, y, theta, moveConfig])
-
-def moveToward_1(x:float, y:float, theta:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (moveToward)
+	Bridge notes
+	------------
+	move has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "v",
+	#     "name": "move",
+	#     "parametersSignature": "(fffm)",
+	#     "description": "Makes the robot move at the given velocity. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The velocity along x axis [m.s-1]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The velocity along y axis [m.s-1]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The velocity around z axis [rd.s-1]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def move(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	move has 2 variants on the robot:
+	- move(x:float, y:float, theta:float)
+	- move(x:float, y:float, theta:float, moveConfig:object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion.move has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "move", list(args))
+
+@overload
+def moveToward(x:float, y:float, theta:float, /) -> None:
+	"""
 	Makes the robot move at the given normalized velocity. This is a non-blocking call.
 	
 	Parameters
@@ -1613,38 +1187,40 @@ def moveToward_1(x:float, y:float, theta:float) -> None:
 	theta:float
 		The normalized velocity around z axis (between -1 and 1).
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "v",
-	    "name": "moveToward",
-	    "parametersSignature": "(fff)",
-	    "description": "Makes the robot move at the given normalized velocity. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The normalized velocity along x axis (between -1 and 1)."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The normalized velocity along y axis (between -1 and 1)."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The normalized velocity around z axis (between -1 and 1)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveToward", [x, y, theta])
-
-def moveToward_2(x:float, y:float, theta:float, moveConfig:object) -> None:
-	"""
-	Note: This is one of the overloads of the original method (moveToward)
+	Bridge notes
+	------------
+	moveToward has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "v",
+	#     "name": "moveToward",
+	#     "parametersSignature": "(fff)",
+	#     "description": "Makes the robot move at the given normalized velocity. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The normalized velocity along x axis (between -1 and 1)."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The normalized velocity along y axis (between -1 and 1)."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The normalized velocity around z axis (between -1 and 1)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def moveToward(x:float, y:float, theta:float, moveConfig:object, /) -> None:
+	"""
 	Makes the robot move at the given normalized velocity. This is a non-blocking call.
 	
 	Parameters
@@ -1658,42 +1234,156 @@ def moveToward_2(x:float, y:float, theta:float, moveConfig:object) -> None:
 	moveConfig:object
 		An ALValue with custom move configuration.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "v",
-	    "name": "moveToward",
-	    "parametersSignature": "(fffm)",
-	    "description": "Makes the robot move at the given normalized velocity. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The normalized velocity along x axis (between -1 and 1)."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The normalized velocity along y axis (between -1 and 1)."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The normalized velocity around z axis (between -1 and 1)."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveToward", [x, y, theta, moveConfig])
-
-def moveTo_1(x:float, y:float, theta:float) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (moveTo)
+	Bridge notes
+	------------
+	moveToward has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "v",
+	#     "name": "moveToward",
+	#     "parametersSignature": "(fffm)",
+	#     "description": "Makes the robot move at the given normalized velocity. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The normalized velocity along x axis (between -1 and 1)."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The normalized velocity along y axis (between -1 and 1)."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The normalized velocity around z axis (between -1 and 1)."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def moveToward(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	moveToward has 2 variants on the robot:
+	- moveToward(x:float, y:float, theta:float)
+	- moveToward(x:float, y:float, theta:float, moveConfig:object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion.moveToward has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "moveToward", list(args))
+
+@overload
+def moveTo(controlPoint:object, /) -> bool:
+	"""
+	Makes the robot move to the given relative positions. This is a blocking call.
+	
+	Parameters
+	----------
+	controlPoint:object
+		An ALValue with the control points in FRAME_ROBOT.
+		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
+	
+	Returns
+	----------
+	true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
+	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(m)",
+	#     "description": "Makes the robot move to the given relative positions. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "controlPoint",
+	#             "description": "An ALValue with the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def moveTo(controlPoint:object, moveConfig:object, /) -> bool:
+	"""
+	Makes the robot move to the given relative positions. This is a blocking call.
+	
+	Parameters
+	----------
+	controlPoint:object
+		An ALValue with all the control points in FRAME_ROBOT.
+		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
+	moveConfig:object
+		An ALValue with custom move configuration.
+	
+	Returns
+	----------
+	true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
+	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 152,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Makes the robot move to the given relative positions. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "controlPoint",
+	#             "description": "An ALValue with all the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def moveTo(x:float, y:float, theta:float, /) -> bool:
+	"""
 	Makes the robot move at the given position. This is a blocking call.
 	
 	Parameters
@@ -1709,38 +1399,48 @@ def moveTo_1(x:float, y:float, theta:float) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 147,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(fff)",
-	    "description": "Makes the robot move at the given position. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveTo", [x, y, theta])
-
-def moveTo_2(x:float, y:float, theta:float, time:float) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (moveTo)
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(fff)",
+	#     "description": "Makes the robot move at the given position. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def moveTo(x:float, y:float, theta:float, time:float, /) -> bool:
+	"""
 	Makes the robot move at the given position in fixed time. This is a blocking call.
 	
 	Parameters
@@ -1758,42 +1458,52 @@ def moveTo_2(x:float, y:float, theta:float, time:float) -> bool:
 	----------
 	a boolean equal to true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 148,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(ffff)",
-	    "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        },
-	        {
-	            "name": "time",
-	            "description": "The time to reach the target position [s]."
-	        }
-	    ],
-	    "returnDescription": "a boolean equal to true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveTo", [x, y, theta, time])
-
-def moveTo_3(x:float, y:float, theta:float, moveConfig:object) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (moveTo)
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(ffff)",
+	#     "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "time",
+	#             "description": "The time to reach the target position [s]."
+	#         }
+	#     ],
+	#     "returnDescription": "a boolean equal to true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def moveTo(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
+	"""
 	Makes the robot move at the given position. This is a blocking call.
 	
 	Parameters
@@ -1811,42 +1521,52 @@ def moveTo_3(x:float, y:float, theta:float, moveConfig:object) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 149,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(fffm)",
-	    "description": "Makes the robot move at the given position. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveTo", [x, y, theta, moveConfig])
-
-def moveTo_4(x:float, y:float, theta:float, time:float, moveConfig:object) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (moveTo)
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(fffm)",
+	#     "description": "Makes the robot move at the given position. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def moveTo(x:float, y:float, theta:float, time:float, moveConfig:object, /) -> bool:
+	"""
 	Makes the robot move at the given position in fixed time. This is a blocking call.
 	
 	Parameters
@@ -1866,46 +1586,73 @@ def moveTo_4(x:float, y:float, theta:float, time:float, moveConfig:object) -> bo
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 150,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(ffffm)",
-	    "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        },
-	        {
-	            "name": "time",
-	            "description": "The time to reach the target position [s]."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "moveTo", [x, y, theta, time, moveConfig])
-
-def moveTo_5(controlPoint:object) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (moveTo)
+	Bridge notes
+	------------
+	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
+	To choose explicitly, use:
+	- moveTo_1(object)
+	- moveTo_2(object, object)
+	- moveTo_3(float, float, float)
+	- moveTo_4(float, float, float, float)
+	- moveTo_5(float, float, float, object)
+	- moveTo_6(float, float, float, float, object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(ffffm)",
+	#     "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "time",
+	#             "description": "The time to reach the target position [s]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+def moveTo(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	moveTo has 6 variants on the robot:
+	- moveTo(controlPoint:object), explicitly moveTo_1
+	- moveTo(controlPoint:object, moveConfig:object), explicitly moveTo_2
+	- moveTo(x:float, y:float, theta:float), explicitly moveTo_3
+	- moveTo(x:float, y:float, theta:float, time:float), explicitly moveTo_4
+	- moveTo(x:float, y:float, theta:float, moveConfig:object), explicitly moveTo_5
+	- moveTo(x:float, y:float, theta:float, time:float, moveConfig:object), explicitly moveTo_6
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion.moveTo has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "moveTo", list(args))
+
+def moveTo_1(controlPoint:object) -> bool:
+	"""
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
@@ -1918,30 +1665,29 @@ def moveTo_5(controlPoint:object) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 151,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(m)",
-	    "description": "Makes the robot move to the given relative positions. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "controlPoint",
-	            "description": "An ALValue with the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
+	Bridge notes
+	------------
+	Explicit variant of moveTo(object). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
-	return send_mfc("ALMotion", "moveTo", [controlPoint])
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(m)",
+	#     "description": "Makes the robot move to the given relative positions. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "controlPoint",
+	#             "description": "An ALValue with the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [controlPoint])
 
-def moveTo_6(controlPoint:object, moveConfig:object) -> bool:
+def moveTo_2(controlPoint:object, moveConfig:object) -> bool:
 	"""
-	Note: This is one of the overloads of the original method (moveTo)
-	
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
@@ -1956,34 +1702,242 @@ def moveTo_6(controlPoint:object, moveConfig:object) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 152,
-	    "returnSignature": "b",
-	    "name": "moveTo",
-	    "parametersSignature": "(mm)",
-	    "description": "Makes the robot move to the given relative positions. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "controlPoint",
-	            "description": "An ALValue with all the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
+	Bridge notes
+	------------
+	Explicit variant of moveTo(object, object). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
-	return send_mfc("ALMotion", "moveTo", [controlPoint, moveConfig])
+	# NAOqi metadata:
+	# {
+	#     "uid": 152,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Makes the robot move to the given relative positions. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "controlPoint",
+	#             "description": "An ALValue with all the control points in FRAME_ROBOT.\nEach control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]"
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [controlPoint, moveConfig])
 
-def _moveToPod_1(x:float, y:float, theta:float) -> bool:
+def moveTo_3(x:float, y:float, theta:float) -> bool:
 	"""
-	Note: This is one of the overloads of the original method (_moveToPod)
+	Makes the robot move at the given position. This is a blocking call.
 	
+	Parameters
+	----------
+	x:float
+		The position along x axis [m].
+	y:float
+		The position along y axis [m].
+	theta:float
+		The position around z axis [rd].
+	
+	Returns
+	----------
+	true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	Explicit variant of moveTo(float, float, float). Calling moveTo instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(fff)",
+	#     "description": "Makes the robot move at the given position. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [x, y, theta])
+
+def moveTo_4(x:float, y:float, theta:float, time:float) -> bool:
+	"""
+	Makes the robot move at the given position in fixed time. This is a blocking call.
+	
+	Parameters
+	----------
+	x:float
+		The position along x axis [m].
+	y:float
+		The position along y axis [m].
+	theta:float
+		The position around z axis [rd].
+	time:float
+		The time to reach the target position [s].
+	
+	Returns
+	----------
+	a boolean equal to true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	Explicit variant of moveTo(float, float, float, float). Calling moveTo instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(ffff)",
+	#     "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "time",
+	#             "description": "The time to reach the target position [s]."
+	#         }
+	#     ],
+	#     "returnDescription": "a boolean equal to true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [x, y, theta, time])
+
+def moveTo_5(x:float, y:float, theta:float, moveConfig:object) -> bool:
+	"""
+	Makes the robot move at the given position. This is a blocking call.
+	
+	Parameters
+	----------
+	x:float
+		The position along x axis [m].
+	y:float
+		The position along y axis [m].
+	theta:float
+		The position around z axis [rd].
+	moveConfig:object
+		An ALValue with custom move configuration.
+	
+	Returns
+	----------
+	true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	Explicit variant of moveTo(float, float, float, object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(fffm)",
+	#     "description": "Makes the robot move at the given position. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [x, y, theta, moveConfig])
+
+def moveTo_6(x:float, y:float, theta:float, time:float, moveConfig:object) -> bool:
+	"""
+	Makes the robot move at the given position in fixed time. This is a blocking call.
+	
+	Parameters
+	----------
+	x:float
+		The position along x axis [m].
+	y:float
+		The position along y axis [m].
+	theta:float
+		The position around z axis [rd].
+	time:float
+		The time to reach the target position [s].
+	moveConfig:object
+		An ALValue with custom move configuration.
+	
+	Returns
+	----------
+	true if the moveTo finished successfully
+	
+	Bridge notes
+	------------
+	Explicit variant of moveTo(float, float, float, float, object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "b",
+	#     "name": "moveTo",
+	#     "parametersSignature": "(ffffm)",
+	#     "description": "Makes the robot move at the given position in fixed time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "time",
+	#             "description": "The time to reach the target position [s]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	return call_method("ALMotion", "moveTo", [x, y, theta, time, moveConfig])
+
+@overload
+def _moveToPod(x:float, y:float, theta:float, /) -> bool:
+	"""
 	Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config
 	
 	Parameters
@@ -1999,38 +1953,40 @@ def _moveToPod_1(x:float, y:float, theta:float) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 153,
-	    "returnSignature": "b",
-	    "name": "_moveToPod",
-	    "parametersSignature": "(fff)",
-	    "description": "Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_moveToPod", [x, y, theta])
-
-def _moveToPod_2(x:float, y:float, theta:float, moveConfig:object) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (_moveToPod)
+	Bridge notes
+	------------
+	_moveToPod has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 153,
+	#     "returnSignature": "b",
+	#     "name": "_moveToPod",
+	#     "parametersSignature": "(fff)",
+	#     "description": "Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+@overload
+def _moveToPod(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
+	"""
 	Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config
 	
 	Parameters
@@ -2048,42 +2004,91 @@ def _moveToPod_2(x:float, y:float, theta:float, moveConfig:object) -> bool:
 	----------
 	true if the moveTo finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 154,
-	    "returnSignature": "b",
-	    "name": "_moveToPod",
-	    "parametersSignature": "(fffm)",
-	    "description": "Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config",
-	    "parameters": [
-	        {
-	            "name": "x",
-	            "description": "The position along x axis [m]."
-	        },
-	        {
-	            "name": "y",
-	            "description": "The position along y axis [m]."
-	        },
-	        {
-	            "name": "theta",
-	            "description": "The position around z axis [rd]."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": "true if the moveTo finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_moveToPod", [x, y, theta, moveConfig])
-
-def _followPath_1(path:object, moveConfig:object) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_followPath)
+	Bridge notes
+	------------
+	_moveToPod has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 154,
+	#     "returnSignature": "b",
+	#     "name": "_moveToPod",
+	#     "parametersSignature": "(fffm)",
+	#     "description": "Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config",
+	#     "parameters": [
+	#         {
+	#             "name": "x",
+	#             "description": "The position along x axis [m]."
+	#         },
+	#         {
+	#             "name": "y",
+	#             "description": "The position along y axis [m]."
+	#         },
+	#         {
+	#             "name": "theta",
+	#             "description": "The position around z axis [rd]."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveTo finished successfully"
+	# }
+	...
+
+def _moveToPod(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_moveToPod has 2 variants on the robot:
+	- _moveToPod(x:float, y:float, theta:float)
+	- _moveToPod(x:float, y:float, theta:float, moveConfig:object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion._moveToPod has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "_moveToPod", list(args))
+
+@overload
+def _followPath(path:object, /) -> None:
+	"""
+	Makes the robot follow a given path. This is a non-blocking call.
+	
+	Parameters
+	----------
+	path:object
+		An ALValue describing a 2D path.
+	
+	Bridge notes
+	------------
+	_followPath has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 156,
+	#     "returnSignature": "v",
+	#     "name": "_followPath",
+	#     "parametersSignature": "(m)",
+	#     "description": "Makes the robot follow a given path. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "path",
+	#             "description": "An ALValue describing a 2D path."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _followPath(path:object, moveConfig:object, /) -> None:
+	"""
 	Makes the robot follow a given path. This is a non-blocking call.
 	
 	Parameters
@@ -2093,65 +2098,89 @@ def _followPath_1(path:object, moveConfig:object) -> None:
 	moveConfig:object
 		An ALValue with custom move configuration.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 155,
-	    "returnSignature": "v",
-	    "name": "_followPath",
-	    "parametersSignature": "(mm)",
-	    "description": "Makes the robot follow a given path. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "path",
-	            "description": "An ALValue describing a 2D path."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_followPath", [path, moveConfig])
-
-def _followPath_2(path:object) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_followPath)
+	Bridge notes
+	------------
+	_followPath has 2 variants on the robot, chosen by the number of arguments.
 	
-	Makes the robot follow a given path. This is a non-blocking call.
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 155,
+	#     "returnSignature": "v",
+	#     "name": "_followPath",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Makes the robot follow a given path. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "path",
+	#             "description": "An ALValue describing a 2D path."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def _followPath(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_followPath has 2 variants on the robot:
+	- _followPath(path:object)
+	- _followPath(path:object, moveConfig:object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion._followPath has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "_followPath", list(args))
+
+@overload
+def _followPathInWorld(poseStart:object, path:object, /) -> None:
+	"""
+	Makes the robot follow a given path, in world frame. This is a non-blocking call.
 	
 	Parameters
 	----------
+	poseStart:object
+		A Pose2D setting the start frame of the path, in World.
 	path:object
-		An ALValue describing a 2D path.
+		An ALValue describing a 2D Path.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 156,
-	    "returnSignature": "v",
-	    "name": "_followPath",
-	    "parametersSignature": "(m)",
-	    "description": "Makes the robot follow a given path. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "path",
-	            "description": "An ALValue describing a 2D path."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_followPathInWorld has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "_followPath", [path])
+	# NAOqi metadata:
+	# {
+	#     "uid": 158,
+	#     "returnSignature": "v",
+	#     "name": "_followPathInWorld",
+	#     "parametersSignature": "(mm)",
+	#     "description": "Makes the robot follow a given path, in world frame. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "poseStart",
+	#             "description": "A Pose2D setting the start frame of the path, in World."
+	#         },
+	#         {
+	#             "name": "path",
+	#             "description": "An ALValue describing a 2D Path."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
 
-def _followPathInWorld_1(poseStart:object, path:object, moveConfig:object) -> None:
+@overload
+def _followPathInWorld(poseStart:object, path:object, moveConfig:object, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (_followPathInWorld)
-	
 	Makes the robot follow a given path, in world frame. This is a non-blocking call.
 	
 	Parameters
@@ -2163,70 +2192,50 @@ def _followPathInWorld_1(poseStart:object, path:object, moveConfig:object) -> No
 	moveConfig:object
 		An ALValue with custom move configuration.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 157,
-	    "returnSignature": "v",
-	    "name": "_followPathInWorld",
-	    "parametersSignature": "(mmm)",
-	    "description": "Makes the robot follow a given path, in world frame. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "poseStart",
-	            "description": "A Pose2D setting the start frame of the path, in World."
-	        },
-	        {
-	            "name": "path",
-	            "description": "An ALValue describing a 2D Path."
-	        },
-	        {
-	            "name": "moveConfig",
-	            "description": "An ALValue with custom move configuration."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_followPathInWorld has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "_followPathInWorld", [poseStart, path, moveConfig])
+	# NAOqi metadata:
+	# {
+	#     "uid": 157,
+	#     "returnSignature": "v",
+	#     "name": "_followPathInWorld",
+	#     "parametersSignature": "(mmm)",
+	#     "description": "Makes the robot follow a given path, in world frame. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "poseStart",
+	#             "description": "A Pose2D setting the start frame of the path, in World."
+	#         },
+	#         {
+	#             "name": "path",
+	#             "description": "An ALValue describing a 2D Path."
+	#         },
+	#         {
+	#             "name": "moveConfig",
+	#             "description": "An ALValue with custom move configuration."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
 
-def _followPathInWorld_2(poseStart:object, path:object) -> None:
+def _followPathInWorld(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (_followPathInWorld)
+	Bridge notes
+	------------
+	_followPathInWorld has 2 variants on the robot:
+	- _followPathInWorld(poseStart:object, path:object)
+	- _followPathInWorld(poseStart:object, path:object, moveConfig:object)
 	
-	Makes the robot follow a given path, in world frame. This is a non-blocking call.
-	
-	Parameters
-	----------
-	poseStart:object
-		A Pose2D setting the start frame of the path, in World.
-	path:object
-		An ALValue describing a 2D Path.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 158,
-	    "returnSignature": "v",
-	    "name": "_followPathInWorld",
-	    "parametersSignature": "(mm)",
-	    "description": "Makes the robot follow a given path, in world frame. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "poseStart",
-	            "description": "A Pose2D setting the start frame of the path, in World."
-	        },
-	        {
-	            "name": "path",
-	            "description": "An ALValue describing a 2D Path."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "_followPathInWorld", [poseStart, path])
+	if kwargs:
+		raise TypeError("ALMotion._followPathInWorld has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "_followPathInWorld", list(args))
 
 def _setFollowPathSpeedFactor(speedFactor:float) -> None:
 	"""
@@ -2236,31 +2245,27 @@ def _setFollowPathSpeedFactor(speedFactor:float) -> None:
 	----------
 	speedFactor:float
 		Between 0 and 1, relative to max speed
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 159,
-	    "returnSignature": "v",
-	    "name": "_setFollowPathSpeedFactor",
-	    "parametersSignature": "(f)",
-	    "description": "Changes the reference speed for trajectory following",
-	    "parameters": [
-	        {
-	            "name": "speedFactor",
-	            "description": "Between 0 and 1, relative to max speed"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setFollowPathSpeedFactor", [speedFactor])
+	# NAOqi metadata:
+	# {
+	#     "uid": 159,
+	#     "returnSignature": "v",
+	#     "name": "_setFollowPathSpeedFactor",
+	#     "parametersSignature": "(f)",
+	#     "description": "Changes the reference speed for trajectory following",
+	#     "parameters": [
+	#         {
+	#             "name": "speedFactor",
+	#             "description": "Between 0 and 1, relative to max speed"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setFollowPathSpeedFactor", [speedFactor])
 
-def _moveAlong_1(trajectory:object) -> bool:
+@overload
+def _moveAlong(trajectory:object, /) -> bool:
 	"""
-	Note: This is one of the overloads of the original method (_moveAlong)
-	
 	Move along a trajectory
 	
 	Parameters
@@ -2272,30 +2277,32 @@ def _moveAlong_1(trajectory:object) -> bool:
 	----------
 	true if the moveAlong finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 160,
-	    "returnSignature": "b",
-	    "name": "_moveAlong",
-	    "parametersSignature": "(m)",
-	    "description": "Move along a trajectory",
-	    "parameters": [
-	        {
-	            "name": "trajectory",
-	            "description": "An ALValue describing a trajectory."
-	        }
-	    ],
-	    "returnDescription": "true if the moveAlong finished successfully"
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_moveAlong", [trajectory])
-
-def _moveAlong_2(trajectory:object, scaleFactor:float) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (_moveAlong)
+	Bridge notes
+	------------
+	_moveAlong has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 160,
+	#     "returnSignature": "b",
+	#     "name": "_moveAlong",
+	#     "parametersSignature": "(m)",
+	#     "description": "Move along a trajectory",
+	#     "parameters": [
+	#         {
+	#             "name": "trajectory",
+	#             "description": "An ALValue describing a trajectory."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveAlong finished successfully"
+	# }
+	...
+
+@overload
+def _moveAlong(trajectory:object, scaleFactor:float, /) -> bool:
+	"""
 	Move along a trajectory
 	
 	Parameters
@@ -2309,48 +2316,62 @@ def _moveAlong_2(trajectory:object, scaleFactor:float) -> bool:
 	----------
 	true if the moveAlong finished successfully
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 161,
-	    "returnSignature": "b",
-	    "name": "_moveAlong",
-	    "parametersSignature": "(mf)",
-	    "description": "Move along a trajectory",
-	    "parameters": [
-	        {
-	            "name": "trajectory",
-	            "description": "An ALValue describing a trajectory."
-	        },
-	        {
-	            "name": "scaleFactor",
-	            "description": "A float between 0 and 1 scaling the trajectory."
-	        }
-	    ],
-	    "returnDescription": "true if the moveAlong finished successfully"
-	}
-	'''
+	Bridge notes
+	------------
+	_moveAlong has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "_moveAlong", [trajectory, scaleFactor])
+	# NAOqi metadata:
+	# {
+	#     "uid": 161,
+	#     "returnSignature": "b",
+	#     "name": "_moveAlong",
+	#     "parametersSignature": "(mf)",
+	#     "description": "Move along a trajectory",
+	#     "parameters": [
+	#         {
+	#             "name": "trajectory",
+	#             "description": "An ALValue describing a trajectory."
+	#         },
+	#         {
+	#             "name": "scaleFactor",
+	#             "description": "A float between 0 and 1 scaling the trajectory."
+	#         }
+	#     ],
+	#     "returnDescription": "true if the moveAlong finished successfully"
+	# }
+	...
+
+def _moveAlong(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_moveAlong has 2 variants on the robot:
+	- _moveAlong(trajectory:object)
+	- _moveAlong(trajectory:object, scaleFactor:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion._moveAlong has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "_moveAlong", list(args))
 
 def _stopAndStitchMoveAlong() -> None:
 	"""
 	Stop current trajectory, then resync
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 162,
-	    "returnSignature": "v",
-	    "name": "_stopAndStitchMoveAlong",
-	    "parametersSignature": "()",
-	    "description": "Stop current trajectory, then resync",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_stopAndStitchMoveAlong", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 162,
+	#     "returnSignature": "v",
+	#     "name": "_stopAndStitchMoveAlong",
+	#     "parametersSignature": "()",
+	#     "description": "Stop current trajectory, then resync",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_stopAndStitchMoveAlong", [])
 
 def _getRemainingPath(sampleStep:float) -> object:
 	"""
@@ -2364,26 +2385,23 @@ def _getRemainingPath(sampleStep:float) -> object:
 	Returns
 	----------
 	vector of samples along trajectory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 163,
-	    "returnSignature": "m",
-	    "name": "_getRemainingPath",
-	    "parametersSignature": "(f)",
-	    "description": "Get a vector of samples along the current path",
-	    "parameters": [
-	        {
-	            "name": "sampleStep",
-	            "description": "Distance between two samples, in m"
-	        }
-	    ],
-	    "returnDescription": "vector of samples along trajectory"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getRemainingPath", [sampleStep])
+	# NAOqi metadata:
+	# {
+	#     "uid": 163,
+	#     "returnSignature": "m",
+	#     "name": "_getRemainingPath",
+	#     "parametersSignature": "(f)",
+	#     "description": "Get a vector of samples along the current path",
+	#     "parameters": [
+	#         {
+	#             "name": "sampleStep",
+	#             "description": "Distance between two samples, in m"
+	#         }
+	#     ],
+	#     "returnDescription": "vector of samples along trajectory"
+	# }
+	return call_method("ALMotion", "_getRemainingPath", [sampleStep])
 
 def _getRemainingTrajectory(timeStep:float, preview:float) -> object:
 	"""
@@ -2399,30 +2417,27 @@ def _getRemainingTrajectory(timeStep:float, preview:float) -> object:
 	Returns
 	----------
 	vector of samples along trajectory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 164,
-	    "returnSignature": "m",
-	    "name": "_getRemainingTrajectory",
-	    "parametersSignature": "(ff)",
-	    "description": "Get a vector of samples along the current trajectory",
-	    "parameters": [
-	        {
-	            "name": "timeStep",
-	            "description": "Time between two samples, in s"
-	        },
-	        {
-	            "name": "preview",
-	            "description": "Duration of the preview, in s"
-	        }
-	    ],
-	    "returnDescription": "vector of samples along trajectory"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getRemainingTrajectory", [timeStep, preview])
+	# NAOqi metadata:
+	# {
+	#     "uid": 164,
+	#     "returnSignature": "m",
+	#     "name": "_getRemainingTrajectory",
+	#     "parametersSignature": "(ff)",
+	#     "description": "Get a vector of samples along the current trajectory",
+	#     "parameters": [
+	#         {
+	#             "name": "timeStep",
+	#             "description": "Time between two samples, in s"
+	#         },
+	#         {
+	#             "name": "preview",
+	#             "description": "Duration of the preview, in s"
+	#         }
+	#     ],
+	#     "returnDescription": "vector of samples along trajectory"
+	# }
+	return call_method("ALMotion", "_getRemainingTrajectory", [timeStep, preview])
 
 def _getTrajectoryCompletion() -> float:
 	"""
@@ -2431,21 +2446,18 @@ def _getTrajectoryCompletion() -> float:
 	Returns
 	----------
 	float between 0 and 1
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 165,
-	    "returnSignature": "f",
-	    "name": "_getTrajectoryCompletion",
-	    "parametersSignature": "()",
-	    "description": "Get the ratio of executed trajectory, between 0 and 1",
-	    "parameters": [],
-	    "returnDescription": "float between 0 and 1"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getTrajectoryCompletion", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 165,
+	#     "returnSignature": "f",
+	#     "name": "_getTrajectoryCompletion",
+	#     "parametersSignature": "()",
+	#     "description": "Get the ratio of executed trajectory, between 0 and 1",
+	#     "parameters": [],
+	#     "returnDescription": "float between 0 and 1"
+	# }
+	return call_method("ALMotion", "_getTrajectoryCompletion", [])
 
 def setFootSteps(legName:List[str], footSteps:object, timeList:List[float], clearExisting:bool) -> None:
 	"""
@@ -2461,38 +2473,35 @@ def setFootSteps(legName:List[str], footSteps:object, timeList:List[float], clea
 		time list of each foot step
 	clearExisting:bool
 		Clear existing foot steps.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 170,
-	    "returnSignature": "v",
-	    "name": "setFootSteps",
-	    "parametersSignature": "([s]m[f]b)",
-	    "description": "Makes Nao do foot step planner. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "legName",
-	            "description": "name of the leg to move('LLeg'or 'RLeg')"
-	        },
-	        {
-	            "name": "footSteps",
-	            "description": "[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]"
-	        },
-	        {
-	            "name": "timeList",
-	            "description": "time list of each foot step"
-	        },
-	        {
-	            "name": "clearExisting",
-	            "description": "Clear existing foot steps."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setFootSteps", [legName, footSteps, timeList, clearExisting])
+	# NAOqi metadata:
+	# {
+	#     "uid": 170,
+	#     "returnSignature": "v",
+	#     "name": "setFootSteps",
+	#     "parametersSignature": "([s]m[f]b)",
+	#     "description": "Makes Nao do foot step planner. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "legName",
+	#             "description": "name of the leg to move('LLeg'or 'RLeg')"
+	#         },
+	#         {
+	#             "name": "footSteps",
+	#             "description": "[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]"
+	#         },
+	#         {
+	#             "name": "timeList",
+	#             "description": "time list of each foot step"
+	#         },
+	#         {
+	#             "name": "clearExisting",
+	#             "description": "Clear existing foot steps."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setFootSteps", [legName, footSteps, timeList, clearExisting])
 
 def setFootStepsWithSpeed(legName:List[str], footSteps:object, fractionMaxSpeed:List[float], clearExisting:bool) -> None:
 	"""
@@ -2508,38 +2517,35 @@ def setFootStepsWithSpeed(legName:List[str], footSteps:object, fractionMaxSpeed:
 		speed of each foot step. Must be between 0 and 1.
 	clearExisting:bool
 		Clear existing foot steps.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 171,
-	    "returnSignature": "v",
-	    "name": "setFootStepsWithSpeed",
-	    "parametersSignature": "([s]m[f]b)",
-	    "description": "Makes Nao do foot step planner with speed. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "legName",
-	            "description": "name of the leg to move('LLeg'or 'RLeg')"
-	        },
-	        {
-	            "name": "footSteps",
-	            "description": "[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]"
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "speed of each foot step. Must be between 0 and 1."
-	        },
-	        {
-	            "name": "clearExisting",
-	            "description": "Clear existing foot steps."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setFootStepsWithSpeed", [legName, footSteps, fractionMaxSpeed, clearExisting])
+	# NAOqi metadata:
+	# {
+	#     "uid": 171,
+	#     "returnSignature": "v",
+	#     "name": "setFootStepsWithSpeed",
+	#     "parametersSignature": "([s]m[f]b)",
+	#     "description": "Makes Nao do foot step planner with speed. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "legName",
+	#             "description": "name of the leg to move('LLeg'or 'RLeg')"
+	#         },
+	#         {
+	#             "name": "footSteps",
+	#             "description": "[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "speed of each foot step. Must be between 0 and 1."
+	#         },
+	#         {
+	#             "name": "clearExisting",
+	#             "description": "Clear existing foot steps."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setFootStepsWithSpeed", [legName, footSteps, fractionMaxSpeed, clearExisting])
 
 def getFootSteps() -> object:
 	"""
@@ -2548,59 +2554,50 @@ def getFootSteps() -> object:
 	Returns
 	----------
 	Give two list of foot steps. The first one give the unchangeable foot step. The second list give the changeable foot steps. Il you use setFootSteps or setFootStepsWithSpeed with clearExisting parmater equal true, walk engine execute unchangeable foot step and remove the other.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 172,
-	    "returnSignature": "m",
-	    "name": "getFootSteps",
-	    "parametersSignature": "()",
-	    "description": "Get the foot steps. This is a non-blocking call.",
-	    "parameters": [],
-	    "returnDescription": "Give two list of foot steps. The first one give the unchangeable foot step. The second list give the changeable foot steps. Il you use setFootSteps or setFootStepsWithSpeed with clearExisting parmater equal true, walk engine execute unchangeable foot step and remove the other."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getFootSteps", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 172,
+	#     "returnSignature": "m",
+	#     "name": "getFootSteps",
+	#     "parametersSignature": "()",
+	#     "description": "Get the foot steps. This is a non-blocking call.",
+	#     "parameters": [],
+	#     "returnDescription": "Give two list of foot steps. The first one give the unchangeable foot step. The second list give the changeable foot steps. Il you use setFootSteps or setFootStepsWithSpeed with clearExisting parmater equal true, walk engine execute unchangeable foot step and remove the other."
+	# }
+	return call_method("ALMotion", "getFootSteps", [])
 
 def moveInit() -> None:
 	"""
 	Initialize the move process. Check the robot pose and take a right posture. This is blocking called.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 174,
-	    "returnSignature": "v",
-	    "name": "moveInit",
-	    "parametersSignature": "()",
-	    "description": "Initialize the move process. Check the robot pose and take a right posture. This is blocking called.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "moveInit", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 174,
+	#     "returnSignature": "v",
+	#     "name": "moveInit",
+	#     "parametersSignature": "()",
+	#     "description": "Initialize the move process. Check the robot pose and take a right posture. This is blocking called.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "moveInit", [])
 
 def waitUntilMoveIsFinished() -> None:
 	"""
 	Waits until the move process is finished: This method can be used to block your script/code execution until the move task is totally finished.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 176,
-	    "returnSignature": "v",
-	    "name": "waitUntilMoveIsFinished",
-	    "parametersSignature": "()",
-	    "description": "Waits until the move process is finished: This method can be used to block your script/code execution until the move task is totally finished.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "waitUntilMoveIsFinished", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 176,
+	#     "returnSignature": "v",
+	#     "name": "waitUntilMoveIsFinished",
+	#     "parametersSignature": "()",
+	#     "description": "Waits until the move process is finished: This method can be used to block your script/code execution until the move task is totally finished.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "waitUntilMoveIsFinished", [])
 
 def moveIsActive() -> bool:
 	"""
@@ -2609,41 +2606,35 @@ def moveIsActive() -> bool:
 	Returns
 	----------
 	True if move is active
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 178,
-	    "returnSignature": "b",
-	    "name": "moveIsActive",
-	    "parametersSignature": "()",
-	    "description": "Check if the move process is actif.",
-	    "parameters": [],
-	    "returnDescription": "True if move is active"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "moveIsActive", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 178,
+	#     "returnSignature": "b",
+	#     "name": "moveIsActive",
+	#     "parametersSignature": "()",
+	#     "description": "Check if the move process is actif.",
+	#     "parameters": [],
+	#     "returnDescription": "True if move is active"
+	# }
+	return call_method("ALMotion", "moveIsActive", [])
 
 def stopMove() -> bool:
 	"""
 	Stop Move task safely as fast as possible. The move task is ended less brutally than killMove but more quickly than move(0.0, 0.0, 0.0).
 	This is a blocking call.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 180,
-	    "returnSignature": "b",
-	    "name": "stopMove",
-	    "parametersSignature": "()",
-	    "description": "Stop Move task safely as fast as possible. The move task is ended less brutally than killMove but more quickly than move(0.0, 0.0, 0.0).\nThis is a blocking call.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "stopMove", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 180,
+	#     "returnSignature": "b",
+	#     "name": "stopMove",
+	#     "parametersSignature": "()",
+	#     "description": "Stop Move task safely as fast as possible. The move task is ended less brutally than killMove but more quickly than move(0.0, 0.0, 0.0).\nThis is a blocking call.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "stopMove", [])
 
 def getMoveConfig(config:str) -> object:
 	"""
@@ -2657,26 +2648,23 @@ def getMoveConfig(config:str) -> object:
 	Returns
 	----------
 	An ALvalue with the move config
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 182,
-	    "returnSignature": "m",
-	    "name": "getMoveConfig",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the move config.",
-	    "parameters": [
-	        {
-	            "name": "config",
-	            "description": "a string should be \"Max\", \"Min\", \"Default\""
-	        }
-	    ],
-	    "returnDescription": "An ALvalue with the move config"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMoveConfig", [config])
+	# NAOqi metadata:
+	# {
+	#     "uid": 182,
+	#     "returnSignature": "m",
+	#     "name": "getMoveConfig",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the move config.",
+	#     "parameters": [
+	#         {
+	#             "name": "config",
+	#             "description": "a string should be \"Max\", \"Min\", \"Default\""
+	#         }
+	#     ],
+	#     "returnDescription": "An ALvalue with the move config"
+	# }
+	return call_method("ALMotion", "getMoveConfig", [config])
 
 def getRobotPosition(useSensors:bool) -> List[float]:
 	"""
@@ -2690,26 +2678,23 @@ def getRobotPosition(useSensors:bool) -> List[float]:
 	Returns
 	----------
 	A vector containing the World Absolute Robot Position. (Absolute Position X, Absolute Position Y, Absolute Angle Z)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 183,
-	    "returnSignature": "[f]",
-	    "name": "getRobotPosition",
-	    "parametersSignature": "(b)",
-	    "description": "Gets the World Absolute Robot Position.",
-	    "parameters": [
-	        {
-	            "name": "useSensors",
-	            "description": "If true, use the sensor values"
-	        }
-	    ],
-	    "returnDescription": "A vector containing the World Absolute Robot Position. (Absolute Position X, Absolute Position Y, Absolute Angle Z)"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getRobotPosition", [useSensors])
+	# NAOqi metadata:
+	# {
+	#     "uid": 183,
+	#     "returnSignature": "[f]",
+	#     "name": "getRobotPosition",
+	#     "parametersSignature": "(b)",
+	#     "description": "Gets the World Absolute Robot Position.",
+	#     "parameters": [
+	#         {
+	#             "name": "useSensors",
+	#             "description": "If true, use the sensor values"
+	#         }
+	#     ],
+	#     "returnDescription": "A vector containing the World Absolute Robot Position. (Absolute Position X, Absolute Position Y, Absolute Angle Z)"
+	# }
+	return call_method("ALMotion", "getRobotPosition", [useSensors])
 
 def getNextRobotPosition() -> List[float]:
 	"""
@@ -2721,21 +2706,18 @@ def getNextRobotPosition() -> List[float]:
 	Returns
 	----------
 	A vector containing the World Absolute next Robot position.(Absolute Position X, Absolute Position Y, Absolute Angle Z)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 184,
-	    "returnSignature": "[f]",
-	    "name": "getNextRobotPosition",
-	    "parametersSignature": "()",
-	    "description": "Gets the World Absolute next Robot Position.\nIn fact in the walk algorithm some foot futur foot step are incompressible due to preview control, so this function give the next robot position which is incompressible.\nIf the robot doesn't walk this function is equivalent to getRobotPosition(false)\n",
-	    "parameters": [],
-	    "returnDescription": "A vector containing the World Absolute next Robot position.(Absolute Position X, Absolute Position Y, Absolute Angle Z)"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getNextRobotPosition", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 184,
+	#     "returnSignature": "[f]",
+	#     "name": "getNextRobotPosition",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the World Absolute next Robot Position.\nIn fact in the walk algorithm some foot futur foot step are incompressible due to preview control, so this function give the next robot position which is incompressible.\nIf the robot doesn't walk this function is equivalent to getRobotPosition(false)\n",
+	#     "parameters": [],
+	#     "returnDescription": "A vector containing the World Absolute next Robot position.(Absolute Position X, Absolute Position Y, Absolute Angle Z)"
+	# }
+	return call_method("ALMotion", "getNextRobotPosition", [])
 
 def getRobotVelocity() -> List[float]:
 	"""
@@ -2744,21 +2726,18 @@ def getRobotVelocity() -> List[float]:
 	Returns
 	----------
 	A vector containing the World Absolute Robot Velocity. (Absolute Velocity Translation X [m.s-1], Absolute Velocity Translation Y[m.s-1], Absolute Velocity Rotation WZ [rd.s-1])
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 185,
-	    "returnSignature": "[f]",
-	    "name": "getRobotVelocity",
-	    "parametersSignature": "()",
-	    "description": "Gets the World Absolute Robot Velocity.",
-	    "parameters": [],
-	    "returnDescription": "A vector containing the World Absolute Robot Velocity. (Absolute Velocity Translation X [m.s-1], Absolute Velocity Translation Y[m.s-1], Absolute Velocity Rotation WZ [rd.s-1])"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getRobotVelocity", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 185,
+	#     "returnSignature": "[f]",
+	#     "name": "getRobotVelocity",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the World Absolute Robot Velocity.",
+	#     "parameters": [],
+	#     "returnDescription": "A vector containing the World Absolute Robot Velocity. (Absolute Velocity Translation X [m.s-1], Absolute Velocity Translation Y[m.s-1], Absolute Velocity Rotation WZ [rd.s-1])"
+	# }
+	return call_method("ALMotion", "getRobotVelocity", [])
 
 def _getCumulatedDisplacement() -> List[float]:
 	"""
@@ -2767,21 +2746,18 @@ def _getCumulatedDisplacement() -> List[float]:
 	Returns
 	----------
 	A vector containing the absolute cumulated displacement, in robot frame. (Absolute Displacement X [m], Absolute Displacement Y[m], Absolute Displacement Theta [rd])
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 186,
-	    "returnSignature": "[f]",
-	    "name": "_getCumulatedDisplacement",
-	    "parametersSignature": "()",
-	    "description": "Get the absolute cumulated displacement since robot is up, in robot frame.",
-	    "parameters": [],
-	    "returnDescription": "A vector containing the absolute cumulated displacement, in robot frame. (Absolute Displacement X [m], Absolute Displacement Y[m], Absolute Displacement Theta [rd])"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getCumulatedDisplacement", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 186,
+	#     "returnSignature": "[f]",
+	#     "name": "_getCumulatedDisplacement",
+	#     "parametersSignature": "()",
+	#     "description": "Get the absolute cumulated displacement since robot is up, in robot frame.",
+	#     "parameters": [],
+	#     "returnDescription": "A vector containing the absolute cumulated displacement, in robot frame. (Absolute Displacement X [m], Absolute Displacement Y[m], Absolute Displacement Theta [rd])"
+	# }
+	return call_method("ALMotion", "_getCumulatedDisplacement", [])
 
 def getMoveArmsEnabled(chainName:str) -> bool:
 	"""
@@ -2795,26 +2771,23 @@ def getMoveArmsEnabled(chainName:str) -> bool:
 	Returns
 	----------
 	For LArm and RArm true if the corresponding arm is enabled. For Arms, true if both are enabled. False otherwise.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 189,
-	    "returnSignature": "b",
-	    "name": "getMoveArmsEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "Gets if Arms Motions are enabled during the Move Process.",
-	    "parameters": [
-	        {
-	            "name": "chainName",
-	            "description": "Name of the chain. Could be: \"LArm\", \"RArm\" or \"Arms\""
-	        }
-	    ],
-	    "returnDescription": "For LArm and RArm true if the corresponding arm is enabled. For Arms, true if both are enabled. False otherwise."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMoveArmsEnabled", [chainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 189,
+	#     "returnSignature": "b",
+	#     "name": "getMoveArmsEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets if Arms Motions are enabled during the Move Process.",
+	#     "parameters": [
+	#         {
+	#             "name": "chainName",
+	#             "description": "Name of the chain. Could be: \"LArm\", \"RArm\" or \"Arms\""
+	#         }
+	#     ],
+	#     "returnDescription": "For LArm and RArm true if the corresponding arm is enabled. For Arms, true if both are enabled. False otherwise."
+	# }
+	return call_method("ALMotion", "getMoveArmsEnabled", [chainName])
 
 def setMoveArmsEnabled(leftArmEnabled:bool, rightArmEnabled:bool) -> None:
 	"""
@@ -2826,30 +2799,27 @@ def setMoveArmsEnabled(leftArmEnabled:bool, rightArmEnabled:bool) -> None:
 		if true Left Arm motions are controlled by the Move Task
 	rightArmEnabled:bool
 		if true Right Arm mMotions are controlled by the Move Task
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 190,
-	    "returnSignature": "v",
-	    "name": "setMoveArmsEnabled",
-	    "parametersSignature": "(bb)",
-	    "description": "Sets if Arms Motions are enabled during the Move Process.",
-	    "parameters": [
-	        {
-	            "name": "leftArmEnabled",
-	            "description": "if true Left Arm motions are controlled by the Move Task"
-	        },
-	        {
-	            "name": "rightArmEnabled",
-	            "description": "if true Right Arm mMotions are controlled by the Move Task"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setMoveArmsEnabled", [leftArmEnabled, rightArmEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 190,
+	#     "returnSignature": "v",
+	#     "name": "setMoveArmsEnabled",
+	#     "parametersSignature": "(bb)",
+	#     "description": "Sets if Arms Motions are enabled during the Move Process.",
+	#     "parameters": [
+	#         {
+	#             "name": "leftArmEnabled",
+	#             "description": "if true Left Arm motions are controlled by the Move Task"
+	#         },
+	#         {
+	#             "name": "rightArmEnabled",
+	#             "description": "if true Right Arm mMotions are controlled by the Move Task"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setMoveArmsEnabled", [leftArmEnabled, rightArmEnabled])
 
 def positionInterpolations(effectorNames:object, taskSpaceForAllPaths:object, paths:object, axisMasks:object, relativeTimes:object) -> None:
 	"""
@@ -2867,42 +2837,39 @@ def positionInterpolations(effectorNames:object, taskSpaceForAllPaths:object, pa
 		Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
 	relativeTimes:object
 		Vector of times in seconds corresponding to the path points
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 193,
-	    "returnSignature": "v",
-	    "name": "positionInterpolations",
-	    "parametersSignature": "(mmmmm)",
-	    "description": "Moves end-effectors to the given positions and orientations over time. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "effectorNames",
-	            "description": "Vector of chain names. Could be: \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\" "
-	        },
-	        {
-	            "name": "taskSpaceForAllPaths",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "paths",
-	            "description": "Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians"
-	        },
-	        {
-	            "name": "axisMasks",
-	            "description": "Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
-	        },
-	        {
-	            "name": "relativeTimes",
-	            "description": "Vector of times in seconds corresponding to the path points"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "positionInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
+	# NAOqi metadata:
+	# {
+	#     "uid": 193,
+	#     "returnSignature": "v",
+	#     "name": "positionInterpolations",
+	#     "parametersSignature": "(mmmmm)",
+	#     "description": "Moves end-effectors to the given positions and orientations over time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorNames",
+	#             "description": "Vector of chain names. Could be: \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\" "
+	#         },
+	#         {
+	#             "name": "taskSpaceForAllPaths",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "paths",
+	#             "description": "Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians"
+	#         },
+	#         {
+	#             "name": "axisMasks",
+	#             "description": "Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
+	#         },
+	#         {
+	#             "name": "relativeTimes",
+	#             "description": "Vector of times in seconds corresponding to the path points"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "positionInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
 
 def setPositions(names:object, spaces:object, positions:object, fractionMaxSpeed:float, axisMask:object) -> None:
 	"""
@@ -2920,42 +2887,39 @@ def setPositions(names:object, spaces:object, positions:object, fractionMaxSpeed
 		The fraction of maximum speed to use
 	axisMask:object
 		Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 195,
-	    "returnSignature": "v",
-	    "name": "setPositions",
-	    "parametersSignature": "(mmmfm)",
-	    "description": "Moves multiple end-effectors to the given position and orientation position6d. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "The name or names of effector."
-	        },
-	        {
-	            "name": "spaces",
-	            "description": "The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "positions",
-	            "description": "Position6D arrays"
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "The fraction of maximum speed to use"
-	        },
-	        {
-	            "name": "axisMask",
-	            "description": "Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setPositions", [names, spaces, positions, fractionMaxSpeed, axisMask])
+	# NAOqi metadata:
+	# {
+	#     "uid": 195,
+	#     "returnSignature": "v",
+	#     "name": "setPositions",
+	#     "parametersSignature": "(mmmfm)",
+	#     "description": "Moves multiple end-effectors to the given position and orientation position6d. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of effector."
+	#         },
+	#         {
+	#             "name": "spaces",
+	#             "description": "The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "positions",
+	#             "description": "Position6D arrays"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use"
+	#         },
+	#         {
+	#             "name": "axisMask",
+	#             "description": "Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setPositions", [names, spaces, positions, fractionMaxSpeed, axisMask])
 
 def getPosition(name:str, space:int, useSensorValues:bool) -> List[float]:
 	"""
@@ -2973,34 +2937,31 @@ def getPosition(name:str, space:int, useSensorValues:bool) -> List[float]:
 	Returns
 	----------
 	Vector containing the Position6D using meters and radians (x, y, z, wx, wy, wz)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 197,
-	    "returnSignature": "[f]",
-	    "name": "getPosition",
-	    "parametersSignature": "(sib)",
-	    "description": "Gets a Position relative to the FRAME. Axis definition: the x axis is positive toward Nao's front, the y from right to left and the z is vertical. The angle convention of Position6D is Rot_z(wz).Rot_y(wy).Rot_x(wx).",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the item. Could be: Head, LArm, RArm, LLeg, RLeg, Torso, CameraTop, CameraBottom, MicroFront, MicroRear, MicroLeft, MicroRight, Accelerometer, Gyrometer, Laser, LFsrFR, LFsrFL, LFsrRR, LFsrRL, RFsrFR, RFsrFL, RFsrRR, RFsrRL, USSensor1, USSensor2, USSensor3, USSensor4. Use getSensorNames for the list of sensors supported on your robot."
-	        },
-	        {
-	            "name": "space",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "useSensorValues",
-	            "description": "If true, the sensor values will be used to determine the position."
-	        }
-	    ],
-	    "returnDescription": "Vector containing the Position6D using meters and radians (x, y, z, wx, wy, wz)"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getPosition", [name, space, useSensorValues])
+	# NAOqi metadata:
+	# {
+	#     "uid": 197,
+	#     "returnSignature": "[f]",
+	#     "name": "getPosition",
+	#     "parametersSignature": "(sib)",
+	#     "description": "Gets a Position relative to the FRAME. Axis definition: the x axis is positive toward Nao's front, the y from right to left and the z is vertical. The angle convention of Position6D is Rot_z(wz).Rot_y(wy).Rot_x(wx).",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the item. Could be: Head, LArm, RArm, LLeg, RLeg, Torso, CameraTop, CameraBottom, MicroFront, MicroRear, MicroLeft, MicroRight, Accelerometer, Gyrometer, Laser, LFsrFR, LFsrFL, LFsrRR, LFsrRL, RFsrFR, RFsrFL, RFsrRR, RFsrRL, USSensor1, USSensor2, USSensor3, USSensor4. Use getSensorNames for the list of sensors supported on your robot."
+	#         },
+	#         {
+	#             "name": "space",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "useSensorValues",
+	#             "description": "If true, the sensor values will be used to determine the position."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector containing the Position6D using meters and radians (x, y, z, wx, wy, wz)"
+	# }
+	return call_method("ALMotion", "getPosition", [name, space, useSensorValues])
 
 def transformInterpolations(effectorNames:object, taskSpaceForAllPaths:object, paths:object, axisMasks:object, relativeTimes:object) -> None:
 	"""
@@ -3018,42 +2979,39 @@ def transformInterpolations(effectorNames:object, taskSpaceForAllPaths:object, p
 		Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
 	relativeTimes:object
 		Vector of times in seconds corresponding to the path points
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 200,
-	    "returnSignature": "v",
-	    "name": "transformInterpolations",
-	    "parametersSignature": "(mmmmm)",
-	    "description": "Moves end-effectors to the given positions and orientations over time. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "effectorNames",
-	            "description": "Vector of chain names. Could be: \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\" "
-	        },
-	        {
-	            "name": "taskSpaceForAllPaths",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "paths",
-	            "description": "Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians"
-	        },
-	        {
-	            "name": "axisMasks",
-	            "description": "Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
-	        },
-	        {
-	            "name": "relativeTimes",
-	            "description": "Vector of times in seconds corresponding to the path points"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "transformInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
+	# NAOqi metadata:
+	# {
+	#     "uid": 200,
+	#     "returnSignature": "v",
+	#     "name": "transformInterpolations",
+	#     "parametersSignature": "(mmmmm)",
+	#     "description": "Moves end-effectors to the given positions and orientations over time. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorNames",
+	#             "description": "Vector of chain names. Could be: \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\" "
+	#         },
+	#         {
+	#             "name": "taskSpaceForAllPaths",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "paths",
+	#             "description": "Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians"
+	#         },
+	#         {
+	#             "name": "axisMasks",
+	#             "description": "Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
+	#         },
+	#         {
+	#             "name": "relativeTimes",
+	#             "description": "Vector of times in seconds corresponding to the path points"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "transformInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
 
 def setTransforms(names:object, spaces:object, transforms:object, fractionMaxSpeed:float, axisMask:object) -> None:
 	"""
@@ -3071,42 +3029,39 @@ def setTransforms(names:object, spaces:object, transforms:object, fractionMaxSpe
 		The fraction of maximum speed to use
 	axisMask:object
 		Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 202,
-	    "returnSignature": "v",
-	    "name": "setTransforms",
-	    "parametersSignature": "(mmmfm)",
-	    "description": "Moves multiple end-effectors to the given position and orientation transforms. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "The name or names of effector."
-	        },
-	        {
-	            "name": "spaces",
-	            "description": "The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "transforms",
-	            "description": "Transform arrays"
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "The fraction of maximum speed to use"
-	        },
-	        {
-	            "name": "axisMask",
-	            "description": "Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setTransforms", [names, spaces, transforms, fractionMaxSpeed, axisMask])
+	# NAOqi metadata:
+	# {
+	#     "uid": 202,
+	#     "returnSignature": "v",
+	#     "name": "setTransforms",
+	#     "parametersSignature": "(mmmfm)",
+	#     "description": "Moves multiple end-effectors to the given position and orientation transforms. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "The name or names of effector."
+	#         },
+	#         {
+	#             "name": "spaces",
+	#             "description": "The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "transforms",
+	#             "description": "Transform arrays"
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use"
+	#         },
+	#         {
+	#             "name": "axisMask",
+	#             "description": "Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both "
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setTransforms", [names, spaces, transforms, fractionMaxSpeed, axisMask])
 
 def getTransform(name:str, space:int, useSensorValues:bool) -> List[float]:
 	"""
@@ -3124,34 +3079,31 @@ def getTransform(name:str, space:int, useSensorValues:bool) -> List[float]:
 	Returns
 	----------
 	Vector of 16 floats corresponding to the values of the matrix, line by line.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 204,
-	    "returnSignature": "[f]",
-	    "name": "getTransform",
-	    "parametersSignature": "(sib)",
-	    "description": "Gets an Homogenous Transform relative to the FRAME. Axis definition: the x axis is positive toward Nao's front, the y from right to left and the z is vertical.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the item. Could be: any joint or chain or sensor (Head, LArm, RArm, LLeg, RLeg, Torso, HeadYaw, ..., CameraTop, CameraBottom, MicroFront, MicroRear, MicroLeft, MicroRight, Accelerometer, Gyrometer, Laser, LFsrFR, LFsrFL, LFsrRR, LFsrRL, RFsrFR, RFsrFL, RFsrRR, RFsrRL, USSensor1, USSensor2, USSensor3, USSensor4. Use getSensorNames for the list of sensors supported on your robot."
-	        },
-	        {
-	            "name": "space",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "useSensorValues",
-	            "description": "If true, the sensor values will be used to determine the position."
-	        }
-	    ],
-	    "returnDescription": "Vector of 16 floats corresponding to the values of the matrix, line by line."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getTransform", [name, space, useSensorValues])
+	# NAOqi metadata:
+	# {
+	#     "uid": 204,
+	#     "returnSignature": "[f]",
+	#     "name": "getTransform",
+	#     "parametersSignature": "(sib)",
+	#     "description": "Gets an Homogenous Transform relative to the FRAME. Axis definition: the x axis is positive toward Nao's front, the y from right to left and the z is vertical.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the item. Could be: any joint or chain or sensor (Head, LArm, RArm, LLeg, RLeg, Torso, HeadYaw, ..., CameraTop, CameraBottom, MicroFront, MicroRear, MicroLeft, MicroRight, Accelerometer, Gyrometer, Laser, LFsrFR, LFsrFL, LFsrRR, LFsrRL, RFsrFR, RFsrFL, RFsrRR, RFsrRL, USSensor1, USSensor2, USSensor3, USSensor4. Use getSensorNames for the list of sensors supported on your robot."
+	#         },
+	#         {
+	#             "name": "space",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "useSensorValues",
+	#             "description": "If true, the sensor values will be used to determine the position."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector of 16 floats corresponding to the values of the matrix, line by line."
+	# }
+	return call_method("ALMotion", "getTransform", [name, space, useSensorValues])
 
 def _getSensorTransformAtTime(sensorName:str, time:int) -> List[float]:
 	"""
@@ -3167,30 +3119,27 @@ def _getSensorTransformAtTime(sensorName:str, time:int) -> List[float]:
 	Returns
 	----------
 	Vector of 16 floats corresponding to the values of the matrix, line by line.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 205,
-	    "returnSignature": "[f]",
-	    "name": "_getSensorTransformAtTime",
-	    "parametersSignature": "(sL)",
-	    "description": "Gets an Homogenous Transform in World. ",
-	    "parameters": [
-	        {
-	            "name": "sensorName",
-	            "description": "Name of the sensor"
-	        },
-	        {
-	            "name": "time",
-	            "description": "A qi::ClockTimePoint"
-	        }
-	    ],
-	    "returnDescription": "Vector of 16 floats corresponding to the values of the matrix, line by line."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getSensorTransformAtTime", [sensorName, time])
+	# NAOqi metadata:
+	# {
+	#     "uid": 205,
+	#     "returnSignature": "[f]",
+	#     "name": "_getSensorTransformAtTime",
+	#     "parametersSignature": "(sL)",
+	#     "description": "Gets an Homogenous Transform in World. ",
+	#     "parameters": [
+	#         {
+	#             "name": "sensorName",
+	#             "description": "Name of the sensor"
+	#         },
+	#         {
+	#             "name": "time",
+	#             "description": "A qi::ClockTimePoint"
+	#         }
+	#     ],
+	#     "returnDescription": "Vector of 16 floats corresponding to the values of the matrix, line by line."
+	# }
+	return call_method("ALMotion", "_getSensorTransformAtTime", [sensorName, time])
 
 def wbEnable(isEnabled:bool) -> None:
 	"""
@@ -3200,26 +3149,23 @@ def wbEnable(isEnabled:bool) -> None:
 	----------
 	isEnabled:bool
 		Active / Disactive Whole Body Balancer.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 206,
-	    "returnSignature": "v",
-	    "name": "wbEnable",
-	    "parametersSignature": "(b)",
-	    "description": "UserFriendly Whole Body API: enable Whole Body Balancer. It's a Generalized Inverse Kinematics which deals with cartesian control, balance, redundancy and task priority. The main goal is to generate and stabilized consistent motions without precomputed trajectories and adapt nao's behaviour to the situation. The generalized inverse kinematic problem takes in account equality constraints (keep foot fix), inequality constraints (joint limits, balance, ...) and quadratic minimization (cartesian / articular desired trajectories). We solve each step a quadratic programming on the robot.",
-	    "parameters": [
-	        {
-	            "name": "isEnabled",
-	            "description": "Active / Disactive Whole Body Balancer."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbEnable", [isEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 206,
+	#     "returnSignature": "v",
+	#     "name": "wbEnable",
+	#     "parametersSignature": "(b)",
+	#     "description": "UserFriendly Whole Body API: enable Whole Body Balancer. It's a Generalized Inverse Kinematics which deals with cartesian control, balance, redundancy and task priority. The main goal is to generate and stabilized consistent motions without precomputed trajectories and adapt nao's behaviour to the situation. The generalized inverse kinematic problem takes in account equality constraints (keep foot fix), inequality constraints (joint limits, balance, ...) and quadratic minimization (cartesian / articular desired trajectories). We solve each step a quadratic programming on the robot.",
+	#     "parameters": [
+	#         {
+	#             "name": "isEnabled",
+	#             "description": "Active / Disactive Whole Body Balancer."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbEnable", [isEnabled])
 
 def _enableAutoBalance(isEnabled:bool) -> bool:
 	"""
@@ -3233,26 +3179,23 @@ def _enableAutoBalance(isEnabled:bool) -> bool:
 	Returns
 	----------
 	Success to enable autobalance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 207,
-	    "returnSignature": "b",
-	    "name": "_enableAutoBalance",
-	    "parametersSignature": "(b)",
-	    "description": "Enable autobalance on your robot.",
-	    "parameters": [
-	        {
-	            "name": "isEnabled",
-	            "description": "Enable or Disable autobalance."
-	        }
-	    ],
-	    "returnDescription": "Success to enable autobalance."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_enableAutoBalance", [isEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 207,
+	#     "returnSignature": "b",
+	#     "name": "_enableAutoBalance",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable autobalance on your robot.",
+	#     "parameters": [
+	#         {
+	#             "name": "isEnabled",
+	#             "description": "Enable or Disable autobalance."
+	#         }
+	#     ],
+	#     "returnDescription": "Success to enable autobalance."
+	# }
+	return call_method("ALMotion", "_enableAutoBalance", [isEnabled])
 
 def _changeSupportMode(isEnabled:bool, name:str) -> bool:
 	"""
@@ -3268,30 +3211,27 @@ def _changeSupportMode(isEnabled:bool, name:str) -> bool:
 	Returns
 	----------
 	Successfully changed support mode.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 208,
-	    "returnSignature": "b",
-	    "name": "_changeSupportMode",
-	    "parametersSignature": "(bs)",
-	    "description": "Change the support mode to keep balance on a define leg..",
-	    "parameters": [
-	        {
-	            "name": "isEnabled",
-	            "description": "Active / Disactive Whole Body Balancer."
-	        },
-	        {
-	            "name": "name",
-	            "description": "The name of the support leg (\"Legs\", \"LLeg\" or \"RLeg\"."
-	        }
-	    ],
-	    "returnDescription": "Successfully changed support mode."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_changeSupportMode", [isEnabled, name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 208,
+	#     "returnSignature": "b",
+	#     "name": "_changeSupportMode",
+	#     "parametersSignature": "(bs)",
+	#     "description": "Change the support mode to keep balance on a define leg..",
+	#     "parameters": [
+	#         {
+	#             "name": "isEnabled",
+	#             "description": "Active / Disactive Whole Body Balancer."
+	#         },
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the support leg (\"Legs\", \"LLeg\" or \"RLeg\"."
+	#         }
+	#     ],
+	#     "returnDescription": "Successfully changed support mode."
+	# }
+	return call_method("ALMotion", "_changeSupportMode", [isEnabled, name])
 
 def wbFootState(stateName:str, supportLeg:str) -> None:
 	"""
@@ -3303,30 +3243,27 @@ def wbFootState(stateName:str, supportLeg:str) -> None:
 		Name of the foot state. "Fixed" set the foot fixed. "Plane" constrained the Foot in the plane. "Free" set the foot free.
 	supportLeg:str
 		Name of the foot. "LLeg", "RLeg" or "Legs".
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 209,
-	    "returnSignature": "v",
-	    "name": "wbFootState",
-	    "parametersSignature": "(ss)",
-	    "description": "UserFriendly Whole Body API: set the foot state: fixed foot, constrained in a plane or free.",
-	    "parameters": [
-	        {
-	            "name": "stateName",
-	            "description": "Name of the foot state. \"Fixed\" set the foot fixed. \"Plane\" constrained the Foot in the plane. \"Free\" set the foot free."
-	        },
-	        {
-	            "name": "supportLeg",
-	            "description": "Name of the foot. \"LLeg\", \"RLeg\" or \"Legs\"."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbFootState", [stateName, supportLeg])
+	# NAOqi metadata:
+	# {
+	#     "uid": 209,
+	#     "returnSignature": "v",
+	#     "name": "wbFootState",
+	#     "parametersSignature": "(ss)",
+	#     "description": "UserFriendly Whole Body API: set the foot state: fixed foot, constrained in a plane or free.",
+	#     "parameters": [
+	#         {
+	#             "name": "stateName",
+	#             "description": "Name of the foot state. \"Fixed\" set the foot fixed. \"Plane\" constrained the Foot in the plane. \"Free\" set the foot free."
+	#         },
+	#         {
+	#             "name": "supportLeg",
+	#             "description": "Name of the foot. \"LLeg\", \"RLeg\" or \"Legs\"."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbFootState", [stateName, supportLeg])
 
 def wbEnableBalanceConstraint(isEnable:bool, supportLeg:str) -> None:
 	"""
@@ -3338,30 +3275,27 @@ def wbEnableBalanceConstraint(isEnable:bool, supportLeg:str) -> None:
 		Enable Robot to keep balance.
 	supportLeg:str
 		Name of the support leg: "Legs", "LLeg", "RLeg".
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 210,
-	    "returnSignature": "v",
-	    "name": "wbEnableBalanceConstraint",
-	    "parametersSignature": "(bs)",
-	    "description": "UserFriendly Whole Body API: enable to keep balance in support polygon.",
-	    "parameters": [
-	        {
-	            "name": "isEnable",
-	            "description": "Enable Robot to keep balance."
-	        },
-	        {
-	            "name": "supportLeg",
-	            "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbEnableBalanceConstraint", [isEnable, supportLeg])
+	# NAOqi metadata:
+	# {
+	#     "uid": 210,
+	#     "returnSignature": "v",
+	#     "name": "wbEnableBalanceConstraint",
+	#     "parametersSignature": "(bs)",
+	#     "description": "UserFriendly Whole Body API: enable to keep balance in support polygon.",
+	#     "parameters": [
+	#         {
+	#             "name": "isEnable",
+	#             "description": "Enable Robot to keep balance."
+	#         },
+	#         {
+	#             "name": "supportLeg",
+	#             "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbEnableBalanceConstraint", [isEnable, supportLeg])
 
 def wbGoToBalance(supportLeg:str, duration:float) -> bool:
 	"""
@@ -3377,30 +3311,27 @@ def wbGoToBalance(supportLeg:str, duration:float) -> bool:
 	Returns
 	----------
 	A boolean of the success of the go to balance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 211,
-	    "returnSignature": "b",
-	    "name": "wbGoToBalance",
-	    "parametersSignature": "(sf)",
-	    "description": "Advanced Whole Body API: \"Com\" go to a desired support polygon. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "supportLeg",
-	            "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
-	        },
-	        {
-	            "name": "duration",
-	            "description": "Time in seconds. Must be upper 0.5 s."
-	        }
-	    ],
-	    "returnDescription": "A boolean of the success of the go to balance."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbGoToBalance", [supportLeg, duration])
+	# NAOqi metadata:
+	# {
+	#     "uid": 211,
+	#     "returnSignature": "b",
+	#     "name": "wbGoToBalance",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Advanced Whole Body API: \"Com\" go to a desired support polygon. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "supportLeg",
+	#             "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
+	#         },
+	#         {
+	#             "name": "duration",
+	#             "description": "Time in seconds. Must be upper 0.5 s."
+	#         }
+	#     ],
+	#     "returnDescription": "A boolean of the success of the go to balance."
+	# }
+	return call_method("ALMotion", "wbGoToBalance", [supportLeg, duration])
 
 def wbGoToBalanceWithSpeed(supportLeg:str, fractionMaxSpeed:float) -> bool:
 	"""
@@ -3416,30 +3347,27 @@ def wbGoToBalanceWithSpeed(supportLeg:str, fractionMaxSpeed:float) -> bool:
 	Returns
 	----------
 	A boolean of the success of the go to balance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 212,
-	    "returnSignature": "b",
-	    "name": "wbGoToBalanceWithSpeed",
-	    "parametersSignature": "(sf)",
-	    "description": "Advanced Whole Body API: \"Com\" go to a desired support polygon. This is a blocking call.",
-	    "parameters": [
-	        {
-	            "name": "supportLeg",
-	            "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
-	        },
-	        {
-	            "name": "fractionMaxSpeed",
-	            "description": "The fraction of maximum speed to use."
-	        }
-	    ],
-	    "returnDescription": "A boolean of the success of the go to balance."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbGoToBalanceWithSpeed", [supportLeg, fractionMaxSpeed])
+	# NAOqi metadata:
+	# {
+	#     "uid": 212,
+	#     "returnSignature": "b",
+	#     "name": "wbGoToBalanceWithSpeed",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Advanced Whole Body API: \"Com\" go to a desired support polygon. This is a blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "supportLeg",
+	#             "description": "Name of the support leg: \"Legs\", \"LLeg\", \"RLeg\"."
+	#         },
+	#         {
+	#             "name": "fractionMaxSpeed",
+	#             "description": "The fraction of maximum speed to use."
+	#         }
+	#     ],
+	#     "returnDescription": "A boolean of the success of the go to balance."
+	# }
+	return call_method("ALMotion", "wbGoToBalanceWithSpeed", [supportLeg, fractionMaxSpeed])
 
 def wbEnableEffectorControl(effectorName:str, isEnabled:bool) -> None:
 	"""
@@ -3451,30 +3379,27 @@ def wbEnableEffectorControl(effectorName:str, isEnabled:bool) -> None:
 		Name of the effector : "Head", "LArm" or "RArm". Nao goes to posture init. He manages his balance and keep foot fix. "Head" is controlled in rotation. "LArm" and "RArm" are controlled in position.
 	isEnabled:bool
 		Active / Disactive Effector Control.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 213,
-	    "returnSignature": "v",
-	    "name": "wbEnableEffectorControl",
-	    "parametersSignature": "(sb)",
-	    "description": "UserFriendly Whole Body API: enable whole body cartesian control of an effector.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"Head\", \"LArm\" or \"RArm\". Nao goes to posture init. He manages his balance and keep foot fix. \"Head\" is controlled in rotation. \"LArm\" and \"RArm\" are controlled in position."
-	        },
-	        {
-	            "name": "isEnabled",
-	            "description": "Active / Disactive Effector Control."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbEnableEffectorControl", [effectorName, isEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 213,
+	#     "returnSignature": "v",
+	#     "name": "wbEnableEffectorControl",
+	#     "parametersSignature": "(sb)",
+	#     "description": "UserFriendly Whole Body API: enable whole body cartesian control of an effector.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"Head\", \"LArm\" or \"RArm\". Nao goes to posture init. He manages his balance and keep foot fix. \"Head\" is controlled in rotation. \"LArm\" and \"RArm\" are controlled in position."
+	#         },
+	#         {
+	#             "name": "isEnabled",
+	#             "description": "Active / Disactive Effector Control."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbEnableEffectorControl", [effectorName, isEnabled])
 
 def wbSetEffectorControl(effectorName:str, targetCoordinate:object) -> None:
 	"""
@@ -3486,30 +3411,27 @@ def wbSetEffectorControl(effectorName:str, targetCoordinate:object) -> None:
 		Name of the effector : "Head", "LArm" or "RArm". Nao goes to posture init. He manages his balance and keep foot fix. "Head" is controlled in rotation. "LArm" and "RArm" are controlled in position.
 	targetCoordinate:object
 		"Head" is controlled in rotation (WX, WY, WZ). "LArm" and "RArm" are controlled in position (X, Y, Z). TargetCoordinate must be absolute and expressed in FRAME_ROBOT. If the desired position/orientation is unfeasible, target is resize to the nearest feasible motion.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 214,
-	    "returnSignature": "v",
-	    "name": "wbSetEffectorControl",
-	    "parametersSignature": "(sm)",
-	    "description": "UserFriendly Whole Body API: set new target for controlled effector. This is a non-blocking call.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"Head\", \"LArm\" or \"RArm\". Nao goes to posture init. He manages his balance and keep foot fix. \"Head\" is controlled in rotation. \"LArm\" and \"RArm\" are controlled in position."
-	        },
-	        {
-	            "name": "targetCoordinate",
-	            "description": "\"Head\" is controlled in rotation (WX, WY, WZ). \"LArm\" and \"RArm\" are controlled in position (X, Y, Z). TargetCoordinate must be absolute and expressed in FRAME_ROBOT. If the desired position/orientation is unfeasible, target is resize to the nearest feasible motion."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbSetEffectorControl", [effectorName, targetCoordinate])
+	# NAOqi metadata:
+	# {
+	#     "uid": 214,
+	#     "returnSignature": "v",
+	#     "name": "wbSetEffectorControl",
+	#     "parametersSignature": "(sm)",
+	#     "description": "UserFriendly Whole Body API: set new target for controlled effector. This is a non-blocking call.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"Head\", \"LArm\" or \"RArm\". Nao goes to posture init. He manages his balance and keep foot fix. \"Head\" is controlled in rotation. \"LArm\" and \"RArm\" are controlled in position."
+	#         },
+	#         {
+	#             "name": "targetCoordinate",
+	#             "description": "\"Head\" is controlled in rotation (WX, WY, WZ). \"LArm\" and \"RArm\" are controlled in position (X, Y, Z). TargetCoordinate must be absolute and expressed in FRAME_ROBOT. If the desired position/orientation is unfeasible, target is resize to the nearest feasible motion."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbSetEffectorControl", [effectorName, targetCoordinate])
 
 def wbEnableEffectorOptimization(effectorName:str, isActive:bool) -> None:
 	"""
@@ -3521,30 +3443,27 @@ def wbEnableEffectorOptimization(effectorName:str, isActive:bool) -> None:
 		Name of the effector : "All", "Arms", "Legs", "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso", "Com".
 	isActive:bool
 		if true, the effector control is taken in acount in the optimization criteria.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 215,
-	    "returnSignature": "v",
-	    "name": "wbEnableEffectorOptimization",
-	    "parametersSignature": "(sb)",
-	    "description": "Advanced Whole Body API: enable to control an effector as an optimization.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        },
-	        {
-	            "name": "isActive",
-	            "description": "if true, the effector control is taken in acount in the optimization criteria."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "wbEnableEffectorOptimization", [effectorName, isActive])
+	# NAOqi metadata:
+	# {
+	#     "uid": 215,
+	#     "returnSignature": "v",
+	#     "name": "wbEnableEffectorOptimization",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Advanced Whole Body API: enable to control an effector as an optimization.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         },
+	#         {
+	#             "name": "isActive",
+	#             "description": "if true, the effector control is taken in acount in the optimization criteria."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "wbEnableEffectorOptimization", [effectorName, isActive])
 
 def _wbGetBalanceState() -> str:
 	"""
@@ -3553,21 +3472,18 @@ def _wbGetBalanceState() -> str:
 	Returns
 	----------
 	Name of the Whole Body Balance State ("None", "LLeg", "RLeg" or "Legs"). 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 216,
-	    "returnSignature": "s",
-	    "name": "_wbGetBalanceState",
-	    "parametersSignature": "()",
-	    "description": "UserFriendly Whole Body API: get Whole Body Balance State.",
-	    "parameters": [],
-	    "returnDescription": "Name of the Whole Body Balance State (\"None\", \"LLeg\", \"RLeg\" or \"Legs\"). "
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbGetBalanceState", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 216,
+	#     "returnSignature": "s",
+	#     "name": "_wbGetBalanceState",
+	#     "parametersSignature": "()",
+	#     "description": "UserFriendly Whole Body API: get Whole Body Balance State.",
+	#     "parameters": [],
+	#     "returnDescription": "Name of the Whole Body Balance State (\"None\", \"LLeg\", \"RLeg\" or \"Legs\"). "
+	# }
+	return call_method("ALMotion", "_wbGetBalanceState", [])
 
 def _wbIsActive() -> bool:
 	"""
@@ -3576,40 +3492,34 @@ def _wbIsActive() -> bool:
 	Returns
 	----------
 	Get Whole Body is active.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 217,
-	    "returnSignature": "b",
-	    "name": "_wbIsActive",
-	    "parametersSignature": "()",
-	    "description": "UserFriendly Whole Body API: get Whole Body is active.",
-	    "parameters": [],
-	    "returnDescription": "Get Whole Body is active."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbIsActive", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 217,
+	#     "returnSignature": "b",
+	#     "name": "_wbIsActive",
+	#     "parametersSignature": "()",
+	#     "description": "UserFriendly Whole Body API: get Whole Body is active.",
+	#     "parameters": [],
+	#     "returnDescription": "Get Whole Body is active."
+	# }
+	return call_method("ALMotion", "_wbIsActive", [])
 
 def _wbDefaultConfiguration() -> None:
 	"""
 	UserFriendly Whole Body API: reset the default Whole Body Configuration.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 218,
-	    "returnSignature": "v",
-	    "name": "_wbDefaultConfiguration",
-	    "parametersSignature": "()",
-	    "description": "UserFriendly Whole Body API: reset the default Whole Body Configuration.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbDefaultConfiguration", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 218,
+	#     "returnSignature": "v",
+	#     "name": "_wbDefaultConfiguration",
+	#     "parametersSignature": "()",
+	#     "description": "UserFriendly Whole Body API: reset the default Whole Body Configuration.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbDefaultConfiguration", [])
 
 def _wbGetFootState(supportLeg:str) -> str:
 	"""
@@ -3623,26 +3533,23 @@ def _wbGetFootState(supportLeg:str) -> str:
 	Returns
 	----------
 	Name of the foot state. "Fixed" set the foot fixed. "Plane" constrained the Foot in the plane. "Free" set the foot free.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 219,
-	    "returnSignature": "s",
-	    "name": "_wbGetFootState",
-	    "parametersSignature": "(s)",
-	    "description": "UserFriendly Whole Body API: get the foot state: fixed foot, constrained in a plane or free.",
-	    "parameters": [
-	        {
-	            "name": "supportLeg",
-	            "description": "Name of the foot. \"LLeg\", \"RLeg\" or \"Legs\"."
-	        }
-	    ],
-	    "returnDescription": "Name of the foot state. \"Fixed\" set the foot fixed. \"Plane\" constrained the Foot in the plane. \"Free\" set the foot free."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbGetFootState", [supportLeg])
+	# NAOqi metadata:
+	# {
+	#     "uid": 219,
+	#     "returnSignature": "s",
+	#     "name": "_wbGetFootState",
+	#     "parametersSignature": "(s)",
+	#     "description": "UserFriendly Whole Body API: get the foot state: fixed foot, constrained in a plane or free.",
+	#     "parameters": [
+	#         {
+	#             "name": "supportLeg",
+	#             "description": "Name of the foot. \"LLeg\", \"RLeg\" or \"Legs\"."
+	#         }
+	#     ],
+	#     "returnDescription": "Name of the foot state. \"Fixed\" set the foot fixed. \"Plane\" constrained the Foot in the plane. \"Free\" set the foot free."
+	# }
+	return call_method("ALMotion", "_wbGetFootState", [supportLeg])
 
 def _wbSetJointWeighting(jointNames:str, weightings:float) -> None:
 	"""
@@ -3654,30 +3561,27 @@ def _wbSetJointWeighting(jointNames:str, weightings:float) -> None:
 		Name or names of joints, chains, "Body" or "Joints".
 	weightings:float
 		Weight used in the Whole Body Articular Optimization.Limits : 0 &lt; weighting &lt;= 1000.0. "articularControl" default value : 1000.0.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 220,
-	    "returnSignature": "v",
-	    "name": "_wbSetJointWeighting",
-	    "parametersSignature": "(sf)",
-	    "description": "Advanced Whole Body API: weighting of Joint used in Whole Body Optimization criteria. It is the priority of Joint motion in front of all the other motion task in the quadratic programming optimization.",
-	    "parameters": [
-	        {
-	            "name": "jointNames",
-	            "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
-	        },
-	        {
-	            "name": "weightings",
-	            "description": "Weight used in the Whole Body Articular Optimization.Limits : 0 &lt; weighting &lt;= 1000.0. \"articularControl\" default value : 1000.0."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbSetJointWeighting", [jointNames, weightings])
+	# NAOqi metadata:
+	# {
+	#     "uid": 220,
+	#     "returnSignature": "v",
+	#     "name": "_wbSetJointWeighting",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Advanced Whole Body API: weighting of Joint used in Whole Body Optimization criteria. It is the priority of Joint motion in front of all the other motion task in the quadratic programming optimization.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointNames",
+	#             "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
+	#         },
+	#         {
+	#             "name": "weightings",
+	#             "description": "Weight used in the Whole Body Articular Optimization.Limits : 0 &lt; weighting &lt;= 1000.0. \"articularControl\" default value : 1000.0."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbSetJointWeighting", [jointNames, weightings])
 
 def _wbSetJointStiffness(jointName:str, stiffness:float) -> None:
 	"""
@@ -3689,30 +3593,27 @@ def _wbSetJointStiffness(jointName:str, stiffness:float) -> None:
 		Name or names of joints, chains, "Body" or "Joints".
 	stiffness:float
 		Stiffness used in the Whole Body Articular Optimization.Limits : 0 &lt; stiffness &lt;= 100.0."articularControl" default value : 30.0.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 221,
-	    "returnSignature": "v",
-	    "name": "_wbSetJointStiffness",
-	    "parametersSignature": "(sf)",
-	    "description": "Advanced Whole Body API: stiffness of Joint used in Whole Body Optimization criteria. It is the stiffness of Joint motion control used in the quadratic programming optimization.",
-	    "parameters": [
-	        {
-	            "name": "jointName",
-	            "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
-	        },
-	        {
-	            "name": "stiffness",
-	            "description": "Stiffness used in the Whole Body Articular Optimization.Limits : 0 &lt; stiffness &lt;= 100.0.\"articularControl\" default value : 30.0."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbSetJointStiffness", [jointName, stiffness])
+	# NAOqi metadata:
+	# {
+	#     "uid": 221,
+	#     "returnSignature": "v",
+	#     "name": "_wbSetJointStiffness",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Advanced Whole Body API: stiffness of Joint used in Whole Body Optimization criteria. It is the stiffness of Joint motion control used in the quadratic programming optimization.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointName",
+	#             "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
+	#         },
+	#         {
+	#             "name": "stiffness",
+	#             "description": "Stiffness used in the Whole Body Articular Optimization.Limits : 0 &lt; stiffness &lt;= 100.0.\"articularControl\" default value : 30.0."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbSetJointStiffness", [jointName, stiffness])
 
 def _wbSetArticularLimitPreview(jointName:str, preview:int) -> None:
 	"""
@@ -3724,30 +3625,27 @@ def _wbSetArticularLimitPreview(jointName:str, preview:int) -> None:
 		Name or names of joints, chains, "Body" or "Joints".
 	preview:int
 		Preview used in the Whole Body Inequality Constraints. Between [1 50].articularControl" default value : 1.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 222,
-	    "returnSignature": "v",
-	    "name": "_wbSetArticularLimitPreview",
-	    "parametersSignature": "(si)",
-	    "description": "Advanced Whole Body API: preview of Joint Inequality Constraint. It constraint the max joint velocity computed by the quadratic programming. If preview = 1, joint limits can be achieved in 1 step. If preview = 5, joint limits can be achieved in 5 steps. The more preview is, the less desired motion is realised. But the more preview is, the motion safety is increased.",
-	    "parameters": [
-	        {
-	            "name": "jointName",
-	            "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
-	        },
-	        {
-	            "name": "preview",
-	            "description": "Preview used in the Whole Body Inequality Constraints. Between [1 50].articularControl\" default value : 1."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbSetArticularLimitPreview", [jointName, preview])
+	# NAOqi metadata:
+	# {
+	#     "uid": 222,
+	#     "returnSignature": "v",
+	#     "name": "_wbSetArticularLimitPreview",
+	#     "parametersSignature": "(si)",
+	#     "description": "Advanced Whole Body API: preview of Joint Inequality Constraint. It constraint the max joint velocity computed by the quadratic programming. If preview = 1, joint limits can be achieved in 1 step. If preview = 5, joint limits can be achieved in 5 steps. The more preview is, the less desired motion is realised. But the more preview is, the motion safety is increased.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointName",
+	#             "description": "Name or names of joints, chains, \"Body\" or \"Joints\"."
+	#         },
+	#         {
+	#             "name": "preview",
+	#             "description": "Preview used in the Whole Body Inequality Constraints. Between [1 50].articularControl\" default value : 1."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbSetArticularLimitPreview", [jointName, preview])
 
 def _wbEnableEffectorConstraint(effectorName:str, isActive:bool, axisMask:int) -> None:
 	"""
@@ -3761,34 +3659,31 @@ def _wbEnableEffectorConstraint(effectorName:str, isActive:bool, axisMask:int) -
 		if true, the effector control is taken in acount in the optimization criteria.
 	axisMask:int
 		True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 223,
-	    "returnSignature": "v",
-	    "name": "_wbEnableEffectorConstraint",
-	    "parametersSignature": "(sbi)",
-	    "description": "Advanced Whole Body API: enable to control an effector as a constraint.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        },
-	        {
-	            "name": "isActive",
-	            "description": "if true, the effector control is taken in acount in the optimization criteria."
-	        },
-	        {
-	            "name": "axisMask",
-	            "description": "True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbEnableEffectorConstraint", [effectorName, isActive, axisMask])
+	# NAOqi metadata:
+	# {
+	#     "uid": 223,
+	#     "returnSignature": "v",
+	#     "name": "_wbEnableEffectorConstraint",
+	#     "parametersSignature": "(sbi)",
+	#     "description": "Advanced Whole Body API: enable to control an effector as a constraint.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         },
+	#         {
+	#             "name": "isActive",
+	#             "description": "if true, the effector control is taken in acount in the optimization criteria."
+	#         },
+	#         {
+	#             "name": "axisMask",
+	#             "description": "True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbEnableEffectorConstraint", [effectorName, isActive, axisMask])
 
 def _wbGetEffectorConstraint(effectorName:str) -> object:
 	"""
@@ -3802,26 +3697,23 @@ def _wbGetEffectorConstraint(effectorName:str) -> object:
 	Returns
 	----------
 	[isActive, axisMask].
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 224,
-	    "returnSignature": "m",
-	    "name": "_wbGetEffectorConstraint",
-	    "parametersSignature": "(s)",
-	    "description": "Advanced Whole Body API: get effector constraint state.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        }
-	    ],
-	    "returnDescription": "[isActive, axisMask]."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbGetEffectorConstraint", [effectorName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 224,
+	#     "returnSignature": "m",
+	#     "name": "_wbGetEffectorConstraint",
+	#     "parametersSignature": "(s)",
+	#     "description": "Advanced Whole Body API: get effector constraint state.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         }
+	#     ],
+	#     "returnDescription": "[isActive, axisMask]."
+	# }
+	return call_method("ALMotion", "_wbGetEffectorConstraint", [effectorName])
 
 def _wbAxisMaskEffector(effectorName:str, isOptimized:bool, axisMask:int) -> None:
 	"""
@@ -3835,34 +3727,31 @@ def _wbAxisMaskEffector(effectorName:str, isOptimized:bool, axisMask:int) -> Non
 		if true, the optimized effector axis mask is setting, else it is the constrained effector axis mask.
 	axisMask:int
 		Axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 225,
-	    "returnSignature": "v",
-	    "name": "_wbAxisMaskEffector",
-	    "parametersSignature": "(sbi)",
-	    "description": "Advanced Whole Body API: enable to set the axis mask of an effector.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        },
-	        {
-	            "name": "isOptimized",
-	            "description": "if true, the optimized effector axis mask is setting, else it is the constrained effector axis mask."
-	        },
-	        {
-	            "name": "axisMask",
-	            "description": "Axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbAxisMaskEffector", [effectorName, isOptimized, axisMask])
+	# NAOqi metadata:
+	# {
+	#     "uid": 225,
+	#     "returnSignature": "v",
+	#     "name": "_wbAxisMaskEffector",
+	#     "parametersSignature": "(sbi)",
+	#     "description": "Advanced Whole Body API: enable to set the axis mask of an effector.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         },
+	#         {
+	#             "name": "isOptimized",
+	#             "description": "if true, the optimized effector axis mask is setting, else it is the constrained effector axis mask."
+	#         },
+	#         {
+	#             "name": "axisMask",
+	#             "description": "Axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbAxisMaskEffector", [effectorName, isOptimized, axisMask])
 
 def _wbEnableJointOptimization(jointName:str, isActive:bool) -> None:
 	"""
@@ -3874,30 +3763,27 @@ def _wbEnableJointOptimization(jointName:str, isActive:bool) -> None:
 		 "Body", name of the chain ("LLeg",...) or name of the joint : "HeadYaw", "LKneePitch".
 	isActive:bool
 		if true, the joint control is taken in acount in the optimization criteria.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 226,
-	    "returnSignature": "v",
-	    "name": "_wbEnableJointOptimization",
-	    "parametersSignature": "(sb)",
-	    "description": "Advanced Whole Body API: enable to control a joint as an optimization.",
-	    "parameters": [
-	        {
-	            "name": "jointName",
-	            "description": " \"Body\", name of the chain (\"LLeg\",...) or name of the joint : \"HeadYaw\", \"LKneePitch\"."
-	        },
-	        {
-	            "name": "isActive",
-	            "description": "if true, the joint control is taken in acount in the optimization criteria."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbEnableJointOptimization", [jointName, isActive])
+	# NAOqi metadata:
+	# {
+	#     "uid": 226,
+	#     "returnSignature": "v",
+	#     "name": "_wbEnableJointOptimization",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Advanced Whole Body API: enable to control a joint as an optimization.",
+	#     "parameters": [
+	#         {
+	#             "name": "jointName",
+	#             "description": " \"Body\", name of the chain (\"LLeg\",...) or name of the joint : \"HeadYaw\", \"LKneePitch\"."
+	#         },
+	#         {
+	#             "name": "isActive",
+	#             "description": "if true, the joint control is taken in acount in the optimization criteria."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbEnableJointOptimization", [jointName, isActive])
 
 def _wbGetEffectorOptimization(effectorName:str) -> object:
 	"""
@@ -3911,26 +3797,23 @@ def _wbGetEffectorOptimization(effectorName:str) -> object:
 	Returns
 	----------
 	[isActive, axisMask].
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 227,
-	    "returnSignature": "m",
-	    "name": "_wbGetEffectorOptimization",
-	    "parametersSignature": "(s)",
-	    "description": "Advanced Whole Body API: get effector constraint state.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "Name of the effector : \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        }
-	    ],
-	    "returnDescription": "[isActive, axisMask]."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbGetEffectorOptimization", [effectorName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 227,
+	#     "returnSignature": "m",
+	#     "name": "_wbGetEffectorOptimization",
+	#     "parametersSignature": "(s)",
+	#     "description": "Advanced Whole Body API: get effector constraint state.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "Name of the effector : \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         }
+	#     ],
+	#     "returnDescription": "[isActive, axisMask]."
+	# }
+	return call_method("ALMotion", "_wbGetEffectorOptimization", [effectorName])
 
 def _wbSetEffectorWeight(effectorName:str, weightingList:object) -> None:
 	"""
@@ -3942,30 +3825,27 @@ def _wbSetEffectorWeight(effectorName:str, weightingList:object) -> None:
 		"All", "Arms", "Legs", "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso", "Com".
 	weightingList:object
 		Weighting used in the Whole Body Cartesian Optimization. Limits : 0 &lt; weighting &lt;= 1000.0. Default value is 1000.0. We can give the 6 weights corresponding to the 6 degree of freedom of cartesian motion. (WeightX, WeightY, WeightZ, WeightWX, WeightWY, WeightWZ). We can give 2 weights corresponding to translation and rotation axis (WeightTranslation, WeightTranslation, WeightTranslation, WeightRotation, WeightRotation, WeightRotation). We can give 1 weight, it is the same weight for all the axis (Weight, Weight, Weight, Weight, Weight, Weight).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 228,
-	    "returnSignature": "v",
-	    "name": "_wbSetEffectorWeight",
-	    "parametersSignature": "(sm)",
-	    "description": "Advanced Whole Body API: set Effector Weighting in the Whole Body Optimization. It is the priority of Effector motion in front of all the other motion task in the quadratic programming optimization.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "\"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        },
-	        {
-	            "name": "weightingList",
-	            "description": "Weighting used in the Whole Body Cartesian Optimization. Limits : 0 &lt; weighting &lt;= 1000.0. Default value is 1000.0. We can give the 6 weights corresponding to the 6 degree of freedom of cartesian motion. (WeightX, WeightY, WeightZ, WeightWX, WeightWY, WeightWZ). We can give 2 weights corresponding to translation and rotation axis (WeightTranslation, WeightTranslation, WeightTranslation, WeightRotation, WeightRotation, WeightRotation). We can give 1 weight, it is the same weight for all the axis (Weight, Weight, Weight, Weight, Weight, Weight)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbSetEffectorWeight", [effectorName, weightingList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 228,
+	#     "returnSignature": "v",
+	#     "name": "_wbSetEffectorWeight",
+	#     "parametersSignature": "(sm)",
+	#     "description": "Advanced Whole Body API: set Effector Weighting in the Whole Body Optimization. It is the priority of Effector motion in front of all the other motion task in the quadratic programming optimization.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "\"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         },
+	#         {
+	#             "name": "weightingList",
+	#             "description": "Weighting used in the Whole Body Cartesian Optimization. Limits : 0 &lt; weighting &lt;= 1000.0. Default value is 1000.0. We can give the 6 weights corresponding to the 6 degree of freedom of cartesian motion. (WeightX, WeightY, WeightZ, WeightWX, WeightWY, WeightWZ). We can give 2 weights corresponding to translation and rotation axis (WeightTranslation, WeightTranslation, WeightTranslation, WeightRotation, WeightRotation, WeightRotation). We can give 1 weight, it is the same weight for all the axis (Weight, Weight, Weight, Weight, Weight, Weight)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbSetEffectorWeight", [effectorName, weightingList])
 
 def _wbSetEffectorStiffness(effectorName:str, stiffnessList:object) -> None:
 	"""
@@ -3977,30 +3857,27 @@ def _wbSetEffectorStiffness(effectorName:str, stiffnessList:object) -> None:
 		"All", "Arms", "Legs", "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso", "Com".
 	stiffnessList:object
 		Stiffness used in the Whole Body Cartesian Optimization. Limits : 0 &lt; stiffness &lt;= 100.0. Default value is 10.0. We can give the 6 stiffnesses corresponding to the 6 degree of freedom of cartesian motion. (StiffnessX, StiffnessY, StiffnessZ, StiffnessWX, StiffnessWY, StiffnessWZ). We can give 2 weights corresponding to translation and rotation axis (StiffnessTranslation, StiffnessTranslation, StiffnessTranslation, StiffnessRotation, StiffnessRotation, StiffnessRotation). We can give 1 stiffness, it is the same stiffness for all the axis (Stiffness, Stiffness, Stiffness, Stiffness, Stiffness, Stiffness).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 229,
-	    "returnSignature": "v",
-	    "name": "_wbSetEffectorStiffness",
-	    "parametersSignature": "(sm)",
-	    "description": "Advanced Whole Body API: set Effector Stiffness in Cartesian Control.",
-	    "parameters": [
-	        {
-	            "name": "effectorName",
-	            "description": "\"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
-	        },
-	        {
-	            "name": "stiffnessList",
-	            "description": "Stiffness used in the Whole Body Cartesian Optimization. Limits : 0 &lt; stiffness &lt;= 100.0. Default value is 10.0. We can give the 6 stiffnesses corresponding to the 6 degree of freedom of cartesian motion. (StiffnessX, StiffnessY, StiffnessZ, StiffnessWX, StiffnessWY, StiffnessWZ). We can give 2 weights corresponding to translation and rotation axis (StiffnessTranslation, StiffnessTranslation, StiffnessTranslation, StiffnessRotation, StiffnessRotation, StiffnessRotation). We can give 1 stiffness, it is the same stiffness for all the axis (Stiffness, Stiffness, Stiffness, Stiffness, Stiffness, Stiffness)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_wbSetEffectorStiffness", [effectorName, stiffnessList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 229,
+	#     "returnSignature": "v",
+	#     "name": "_wbSetEffectorStiffness",
+	#     "parametersSignature": "(sm)",
+	#     "description": "Advanced Whole Body API: set Effector Stiffness in Cartesian Control.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectorName",
+	#             "description": "\"All\", \"Arms\", \"Legs\", \"Head\", \"LArm\", \"RArm\", \"LLeg\", \"RLeg\", \"Torso\", \"Com\"."
+	#         },
+	#         {
+	#             "name": "stiffnessList",
+	#             "description": "Stiffness used in the Whole Body Cartesian Optimization. Limits : 0 &lt; stiffness &lt;= 100.0. Default value is 10.0. We can give the 6 stiffnesses corresponding to the 6 degree of freedom of cartesian motion. (StiffnessX, StiffnessY, StiffnessZ, StiffnessWX, StiffnessWY, StiffnessWZ). We can give 2 weights corresponding to translation and rotation axis (StiffnessTranslation, StiffnessTranslation, StiffnessTranslation, StiffnessRotation, StiffnessRotation, StiffnessRotation). We can give 1 stiffness, it is the same stiffness for all the axis (Stiffness, Stiffness, Stiffness, Stiffness, Stiffness, Stiffness)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_wbSetEffectorStiffness", [effectorName, stiffnessList])
 
 def setCollisionProtectionEnabled(pChainName:str, pEnable:bool) -> bool:
 	"""
@@ -4016,30 +3893,27 @@ def setCollisionProtectionEnabled(pChainName:str, pEnable:bool) -> bool:
 	Returns
 	----------
 	A bool which return always true.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 230,
-	    "returnSignature": "b",
-	    "name": "setCollisionProtectionEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "Enable Anticollision protection of the arms of the robot. Use api isCollision to know if a chain is in collision and can be disactivated.",
-	    "parameters": [
-	        {
-	            "name": "pChainName",
-	            "description": "The chain name {\"Arms\", \"LArm\" or \"RArm\"}."
-	        },
-	        {
-	            "name": "pEnable",
-	            "description": "Activate or disactivate the anticollision of the desired Chain."
-	        }
-	    ],
-	    "returnDescription": "A bool which return always true."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setCollisionProtectionEnabled", [pChainName, pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 230,
+	#     "returnSignature": "b",
+	#     "name": "setCollisionProtectionEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Enable Anticollision protection of the arms of the robot. Use api isCollision to know if a chain is in collision and can be disactivated.",
+	#     "parameters": [
+	#         {
+	#             "name": "pChainName",
+	#             "description": "The chain name {\"Arms\", \"LArm\" or \"RArm\"}."
+	#         },
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Activate or disactivate the anticollision of the desired Chain."
+	#         }
+	#     ],
+	#     "returnDescription": "A bool which return always true."
+	# }
+	return call_method("ALMotion", "setCollisionProtectionEnabled", [pChainName, pEnable])
 
 def getCollisionProtectionEnabled(pChainName:str) -> bool:
 	"""
@@ -4053,26 +3927,23 @@ def getCollisionProtectionEnabled(pChainName:str) -> bool:
 	Returns
 	----------
 	Return true is the collision protection of the given Arm is activated.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 231,
-	    "returnSignature": "b",
-	    "name": "getCollisionProtectionEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "Allow to know if the collision protection is activated on the given chain.",
-	    "parameters": [
-	        {
-	            "name": "pChainName",
-	            "description": "The chain name {\"LArm\" or \"RArm\"}."
-	        }
-	    ],
-	    "returnDescription": "Return true is the collision protection of the given Arm is activated."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getCollisionProtectionEnabled", [pChainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 231,
+	#     "returnSignature": "b",
+	#     "name": "getCollisionProtectionEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "Allow to know if the collision protection is activated on the given chain.",
+	#     "parameters": [
+	#         {
+	#             "name": "pChainName",
+	#             "description": "The chain name {\"LArm\" or \"RArm\"}."
+	#         }
+	#     ],
+	#     "returnDescription": "Return true is the collision protection of the given Arm is activated."
+	# }
+	return call_method("ALMotion", "getCollisionProtectionEnabled", [pChainName])
 
 def setExternalCollisionProtectionEnabled(pName:str, pEnable:bool) -> None:
 	"""
@@ -4084,30 +3955,27 @@ def setExternalCollisionProtectionEnabled(pName:str, pEnable:bool) -> None:
 		The name {"All", "Move", "Arms", "LArm" or "RArm"}.
 	pEnable:bool
 		Activate or disactivate the anticollision of the desired name.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 232,
-	    "returnSignature": "v",
-	    "name": "setExternalCollisionProtectionEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "Enable Anticollision protection of the arms and base move  of the robot with external environment.",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "The name {\"All\", \"Move\", \"Arms\", \"LArm\" or \"RArm\"}."
-	        },
-	        {
-	            "name": "pEnable",
-	            "description": "Activate or disactivate the anticollision of the desired name."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setExternalCollisionProtectionEnabled", [pName, pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 232,
+	#     "returnSignature": "v",
+	#     "name": "setExternalCollisionProtectionEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Enable Anticollision protection of the arms and base move  of the robot with external environment.",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "The name {\"All\", \"Move\", \"Arms\", \"LArm\" or \"RArm\"}."
+	#         },
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Activate or disactivate the anticollision of the desired name."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setExternalCollisionProtectionEnabled", [pName, pEnable])
 
 def _enablePhysicalInteractionForChain(pChain:str, pEnabled:bool) -> None:
 	"""
@@ -4119,30 +3987,27 @@ def _enablePhysicalInteractionForChain(pChain:str, pEnabled:bool) -> None:
 		The chain name {"LArm", "RArm", "Arms"}
 	pEnabled:bool
 		True/False
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 233,
-	    "returnSignature": "v",
-	    "name": "_enablePhysicalInteractionForChain",
-	    "parametersSignature": "(sb)",
-	    "description": "Enable/Disable physical interaction on a chain without disabling safety completely",
-	    "parameters": [
-	        {
-	            "name": "pChain",
-	            "description": "The chain name {\"LArm\", \"RArm\", \"Arms\"}"
-	        },
-	        {
-	            "name": "pEnabled",
-	            "description": "True/False"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_enablePhysicalInteractionForChain", [pChain, pEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 233,
+	#     "returnSignature": "v",
+	#     "name": "_enablePhysicalInteractionForChain",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Enable/Disable physical interaction on a chain without disabling safety completely",
+	#     "parameters": [
+	#         {
+	#             "name": "pChain",
+	#             "description": "The chain name {\"LArm\", \"RArm\", \"Arms\"}"
+	#         },
+	#         {
+	#             "name": "pEnabled",
+	#             "description": "True/False"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_enablePhysicalInteractionForChain", [pChain, pEnabled])
 
 def getChainClosestObstaclePosition(pName:str, space:int) -> List[float]:
 	"""
@@ -4158,30 +4023,27 @@ def getChainClosestObstaclePosition(pName:str, space:int) -> List[float]:
 	Returns
 	----------
 	Vector containing the Position3D in meters (x, y, z)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 234,
-	    "returnSignature": "[f]",
-	    "name": "getChainClosestObstaclePosition",
-	    "parametersSignature": "(si)",
-	    "description": "Gets chain closest obstacle Position .",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "The Chain name {\"LArm\" or \"RArm\"}."
-	        },
-	        {
-	            "name": "space",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        }
-	    ],
-	    "returnDescription": "Vector containing the Position3D in meters (x, y, z)"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getChainClosestObstaclePosition", [pName, space])
+	# NAOqi metadata:
+	# {
+	#     "uid": 234,
+	#     "returnSignature": "[f]",
+	#     "name": "getChainClosestObstaclePosition",
+	#     "parametersSignature": "(si)",
+	#     "description": "Gets chain closest obstacle Position .",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "The Chain name {\"LArm\" or \"RArm\"}."
+	#         },
+	#         {
+	#             "name": "space",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector containing the Position3D in meters (x, y, z)"
+	# }
+	return call_method("ALMotion", "getChainClosestObstaclePosition", [pName, space])
 
 def getExternalCollisionProtectionEnabled(pName:str) -> bool:
 	"""
@@ -4195,26 +4057,23 @@ def getExternalCollisionProtectionEnabled(pName:str) -> bool:
 	Returns
 	----------
 	Return true is the external collision protection of the given name is activated.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 235,
-	    "returnSignature": "b",
-	    "name": "getExternalCollisionProtectionEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "Allow to know if the external collision protection is activated on the given name.",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "The name {\"All\", \"Move\", \"Arms\", \"LArm\" or \"RArm\"}."
-	        }
-	    ],
-	    "returnDescription": "Return true is the external collision protection of the given name is activated."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getExternalCollisionProtectionEnabled", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 235,
+	#     "returnSignature": "b",
+	#     "name": "getExternalCollisionProtectionEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "Allow to know if the external collision protection is activated on the given name.",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "The name {\"All\", \"Move\", \"Arms\", \"LArm\" or \"RArm\"}."
+	#         }
+	#     ],
+	#     "returnDescription": "Return true is the external collision protection of the given name is activated."
+	# }
+	return call_method("ALMotion", "getExternalCollisionProtectionEnabled", [pName])
 
 def setOrthogonalSecurityDistance(securityDistance:float) -> None:
 	"""
@@ -4224,26 +4083,23 @@ def setOrthogonalSecurityDistance(securityDistance:float) -> None:
 	----------
 	securityDistance:float
 		The orthogonal security distance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 236,
-	    "returnSignature": "v",
-	    "name": "setOrthogonalSecurityDistance",
-	    "parametersSignature": "(f)",
-	    "description": "Defines the orthogonal security distance used with external collision protection \"Move\".",
-	    "parameters": [
-	        {
-	            "name": "securityDistance",
-	            "description": "The orthogonal security distance."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setOrthogonalSecurityDistance", [securityDistance])
+	# NAOqi metadata:
+	# {
+	#     "uid": 236,
+	#     "returnSignature": "v",
+	#     "name": "setOrthogonalSecurityDistance",
+	#     "parametersSignature": "(f)",
+	#     "description": "Defines the orthogonal security distance used with external collision protection \"Move\".",
+	#     "parameters": [
+	#         {
+	#             "name": "securityDistance",
+	#             "description": "The orthogonal security distance."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setOrthogonalSecurityDistance", [securityDistance])
 
 def getOrthogonalSecurityDistance() -> float:
 	"""
@@ -4252,21 +4108,18 @@ def getOrthogonalSecurityDistance() -> float:
 	Returns
 	----------
 	The current orthogonal security distance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 237,
-	    "returnSignature": "f",
-	    "name": "getOrthogonalSecurityDistance",
-	    "parametersSignature": "()",
-	    "description": "Gets the current orthogonal security distance.",
-	    "parameters": [],
-	    "returnDescription": "The current orthogonal security distance."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getOrthogonalSecurityDistance", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 237,
+	#     "returnSignature": "f",
+	#     "name": "getOrthogonalSecurityDistance",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current orthogonal security distance.",
+	#     "parameters": [],
+	#     "returnDescription": "The current orthogonal security distance."
+	# }
+	return call_method("ALMotion", "getOrthogonalSecurityDistance", [])
 
 def setTangentialSecurityDistance(securityDistance:float) -> None:
 	"""
@@ -4276,26 +4129,23 @@ def setTangentialSecurityDistance(securityDistance:float) -> None:
 	----------
 	securityDistance:float
 		The tangential security distance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 238,
-	    "returnSignature": "v",
-	    "name": "setTangentialSecurityDistance",
-	    "parametersSignature": "(f)",
-	    "description": "Defines the tangential security distance used with external collision protection \"Move\".",
-	    "parameters": [
-	        {
-	            "name": "securityDistance",
-	            "description": "The tangential security distance."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setTangentialSecurityDistance", [securityDistance])
+	# NAOqi metadata:
+	# {
+	#     "uid": 238,
+	#     "returnSignature": "v",
+	#     "name": "setTangentialSecurityDistance",
+	#     "parametersSignature": "(f)",
+	#     "description": "Defines the tangential security distance used with external collision protection \"Move\".",
+	#     "parameters": [
+	#         {
+	#             "name": "securityDistance",
+	#             "description": "The tangential security distance."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setTangentialSecurityDistance", [securityDistance])
 
 def getTangentialSecurityDistance() -> float:
 	"""
@@ -4304,21 +4154,18 @@ def getTangentialSecurityDistance() -> float:
 	Returns
 	----------
 	The current tangential security distance.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 239,
-	    "returnSignature": "f",
-	    "name": "getTangentialSecurityDistance",
-	    "parametersSignature": "()",
-	    "description": "Gets the current tangential security distance.",
-	    "parameters": [],
-	    "returnDescription": "The current tangential security distance."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getTangentialSecurityDistance", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 239,
+	#     "returnSignature": "f",
+	#     "name": "getTangentialSecurityDistance",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current tangential security distance.",
+	#     "parameters": [],
+	#     "returnDescription": "The current tangential security distance."
+	# }
+	return call_method("ALMotion", "getTangentialSecurityDistance", [])
 
 def isCollision(pChainName:str) -> str:
 	"""
@@ -4333,26 +4180,23 @@ def isCollision(pChainName:str) -> str:
 	----------
 	A string which notice the collision state: "none" there are no collision, "near" the collision is taking in account in the anti-collision algorithm, "collision" the chain is in contact with an other body. If the chain asked is "Arms" the most unfavorable result is given. 
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 240,
-	    "returnSignature": "s",
-	    "name": "isCollision",
-	    "parametersSignature": "(s)",
-	    "description": "Give the collision state of a chain. If a chain has a collision state \"none\" or \"near\", it could be desactivated. ",
-	    "parameters": [
-	        {
-	            "name": "pChainName",
-	            "description": "The chain name {\"Arms\", \"LArm\" or \"RArm\"}."
-	        }
-	    ],
-	    "returnDescription": "A string which notice the collision state: \"none\" there are no collision, \"near\" the collision is taking in account in the anti-collision algorithm, \"collision\" the chain is in contact with an other body. If the chain asked is \"Arms\" the most unfavorable result is given. \n"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "isCollision", [pChainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 240,
+	#     "returnSignature": "s",
+	#     "name": "isCollision",
+	#     "parametersSignature": "(s)",
+	#     "description": "Give the collision state of a chain. If a chain has a collision state \"none\" or \"near\", it could be desactivated. ",
+	#     "parameters": [
+	#         {
+	#             "name": "pChainName",
+	#             "description": "The chain name {\"Arms\", \"LArm\" or \"RArm\"}."
+	#         }
+	#     ],
+	#     "returnDescription": "A string which notice the collision state: \"none\" there are no collision, \"near\" the collision is taking in account in the anti-collision algorithm, \"collision\" the chain is in contact with an other body. If the chain asked is \"Arms\" the most unfavorable result is given. \n"
+	# }
+	return call_method("ALMotion", "isCollision", [pChainName])
 
 def _getCollisionStateForObstacleSummary(pChainName:str) -> bool:
 	"""
@@ -4366,26 +4210,23 @@ def _getCollisionStateForObstacleSummary(pChainName:str) -> bool:
 	Returns
 	----------
 	Return true is the collision protection of the given Arm is activated.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 241,
-	    "returnSignature": "b",
-	    "name": "_getCollisionStateForObstacleSummary",
-	    "parametersSignature": "(s)",
-	    "description": "Allow to know if the collision protection is activated on the given chain  and if stiffness of all chain joint is stricly positif.",
-	    "parameters": [
-	        {
-	            "name": "pChainName",
-	            "description": "The chain name {\"LArm\" or \"RArm\"}."
-	        }
-	    ],
-	    "returnDescription": "Return true is the collision protection of the given Arm is activated."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getCollisionStateForObstacleSummary", [pChainName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 241,
+	#     "returnSignature": "b",
+	#     "name": "_getCollisionStateForObstacleSummary",
+	#     "parametersSignature": "(s)",
+	#     "description": "Allow to know if the collision protection is activated on the given chain  and if stiffness of all chain joint is stricly positif.",
+	#     "parameters": [
+	#         {
+	#             "name": "pChainName",
+	#             "description": "The chain name {\"LArm\" or \"RArm\"}."
+	#         }
+	#     ],
+	#     "returnDescription": "Return true is the collision protection of the given Arm is activated."
+	# }
+	return call_method("ALMotion", "_getCollisionStateForObstacleSummary", [pChainName])
 
 def _getCollisionShapes(pName:str) -> object:
 	"""
@@ -4399,26 +4240,23 @@ def _getCollisionShapes(pName:str) -> object:
 	Returns
 	----------
 	Vector of collisions name, radius, parent joint name andparent joint position.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 243,
-	    "returnSignature": "m",
-	    "name": "_getCollisionShapes",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the list of dynamic collisions in torso frame.",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "The name {\"static\" or \"dynamic\"}."
-	        }
-	    ],
-	    "returnDescription": "Vector of collisions name, radius, parent joint name andparent joint position."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getCollisionShapes", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 243,
+	#     "returnSignature": "m",
+	#     "name": "_getCollisionShapes",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the list of dynamic collisions in torso frame.",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "The name {\"static\" or \"dynamic\"}."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector of collisions name, radius, parent joint name andparent joint position."
+	# }
+	return call_method("ALMotion", "_getCollisionShapes", [pName])
 
 def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List[str], pTypeList:List[str], pShapeList:object, pPositionList:object) -> None:
 	"""
@@ -4438,46 +4276,43 @@ def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List
 		A vector of shape data.
 	pPositionList:object
 		An ALValue containing a list of position of the shape.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 244,
-	    "returnSignature": "v",
-	    "name": "_setCollisionShapes",
-	    "parametersSignature": "([s][s][s][s]mm)",
-	    "description": "Set dynamic collision shape for people collision avoidance",
-	    "parameters": [
-	        {
-	            "name": "pNameList",
-	            "description": "A vector of names."
-	        },
-	        {
-	            "name": "pPairList",
-	            "description": "A vector of names. \"All\", \"Sphere\", \"Pill\" or the collision nameof LArm or RArm."
-	        },
-	        {
-	            "name": "pBodyList",
-	            "description": "A vector of body names. Dynamic collision is attached to this body."
-	        },
-	        {
-	            "name": "pTypeList",
-	            "description": "A vector of names. \"Sphere\", \"Plan\", \"Pill\" or \"Tab\"."
-	        },
-	        {
-	            "name": "pShapeList",
-	            "description": "A vector of shape data."
-	        },
-	        {
-	            "name": "pPositionList",
-	            "description": "An ALValue containing a list of position of the shape."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setCollisionShapes", [pNameList, pPairList, pBodyList, pTypeList, pShapeList, pPositionList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 244,
+	#     "returnSignature": "v",
+	#     "name": "_setCollisionShapes",
+	#     "parametersSignature": "([s][s][s][s]mm)",
+	#     "description": "Set dynamic collision shape for people collision avoidance",
+	#     "parameters": [
+	#         {
+	#             "name": "pNameList",
+	#             "description": "A vector of names."
+	#         },
+	#         {
+	#             "name": "pPairList",
+	#             "description": "A vector of names. \"All\", \"Sphere\", \"Pill\" or the collision nameof LArm or RArm."
+	#         },
+	#         {
+	#             "name": "pBodyList",
+	#             "description": "A vector of body names. Dynamic collision is attached to this body."
+	#         },
+	#         {
+	#             "name": "pTypeList",
+	#             "description": "A vector of names. \"Sphere\", \"Plan\", \"Pill\" or \"Tab\"."
+	#         },
+	#         {
+	#             "name": "pShapeList",
+	#             "description": "A vector of shape data."
+	#         },
+	#         {
+	#             "name": "pPositionList",
+	#             "description": "An ALValue containing a list of position of the shape."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setCollisionShapes", [pNameList, pPairList, pBodyList, pTypeList, pShapeList, pPositionList])
 
 def _getDetectedCollisions(pMinimumDistance:float) -> object:
 	"""
@@ -4491,26 +4326,23 @@ def _getDetectedCollisions(pMinimumDistance:float) -> object:
 	Returns
 	----------
 	Vector of collisions: [nameShape1, nameShape2, distance].
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 246,
-	    "returnSignature": "m",
-	    "name": "_getDetectedCollisions",
-	    "parametersSignature": "(f)",
-	    "description": "Gets the list of detected collisions supported on your robot.",
-	    "parameters": [
-	        {
-	            "name": "pMinimumDistance",
-	            "description": "Distance to take into account collision pair."
-	        }
-	    ],
-	    "returnDescription": "Vector of collisions: [nameShape1, nameShape2, distance]."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getDetectedCollisions", [pMinimumDistance])
+	# NAOqi metadata:
+	# {
+	#     "uid": 246,
+	#     "returnSignature": "m",
+	#     "name": "_getDetectedCollisions",
+	#     "parametersSignature": "(f)",
+	#     "description": "Gets the list of detected collisions supported on your robot.",
+	#     "parameters": [
+	#         {
+	#             "name": "pMinimumDistance",
+	#             "description": "Distance to take into account collision pair."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector of collisions: [nameShape1, nameShape2, distance]."
+	# }
+	return call_method("ALMotion", "_getDetectedCollisions", [pMinimumDistance])
 
 def _getDetectedCollisionsFull() -> object:
 	"""
@@ -4519,21 +4351,18 @@ def _getDetectedCollisionsFull() -> object:
 	Returns
 	----------
 	Vector of collisions: [nameShape1, nameShape2, distance].
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 247,
-	    "returnSignature": "m",
-	    "name": "_getDetectedCollisionsFull",
-	    "parametersSignature": "()",
-	    "description": "Gets the list of detected collisions supported on your robot.",
-	    "parameters": [],
-	    "returnDescription": "Vector of collisions: [nameShape1, nameShape2, distance]."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getDetectedCollisionsFull", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 247,
+	#     "returnSignature": "m",
+	#     "name": "_getDetectedCollisionsFull",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the list of detected collisions supported on your robot.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of collisions: [nameShape1, nameShape2, distance]."
+	# }
+	return call_method("ALMotion", "_getDetectedCollisionsFull", [])
 
 def _getDangerousRegion() -> object:
 	"""
@@ -4542,21 +4371,18 @@ def _getDangerousRegion() -> object:
 	Returns
 	----------
 	A vector of Position2D.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 248,
-	    "returnSignature": "m",
-	    "name": "_getDangerousRegion",
-	    "parametersSignature": "()",
-	    "description": "Gets the polygon checked for safety during move.",
-	    "parameters": [],
-	    "returnDescription": "A vector of Position2D."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getDangerousRegion", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 248,
+	#     "returnSignature": "m",
+	#     "name": "_getDangerousRegion",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the polygon checked for safety during move.",
+	#     "parameters": [],
+	#     "returnDescription": "A vector of Position2D."
+	# }
+	return call_method("ALMotion", "_getDangerousRegion", [])
 
 def setFallManagerEnabled(pEnable:bool) -> None:
 	"""
@@ -4567,26 +4393,23 @@ def setFallManagerEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Activate or disactivate the smart stiffness.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 249,
-	    "returnSignature": "v",
-	    "name": "setFallManagerEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Enable The fall manager protection for the robot. When a fall is detected the robot adopt a joint configuration to protect himself and cut the stiffness.\n. An memory event called \"robotHasFallen\" is generated when the fallManager have been activated.",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Activate or disactivate the smart stiffness."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setFallManagerEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 249,
+	#     "returnSignature": "v",
+	#     "name": "setFallManagerEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable The fall manager protection for the robot. When a fall is detected the robot adopt a joint configuration to protect himself and cut the stiffness.\n. An memory event called \"robotHasFallen\" is generated when the fallManager have been activated.",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Activate or disactivate the smart stiffness."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setFallManagerEnabled", [pEnable])
 
 def getFallManagerEnabled() -> bool:
 	"""
@@ -4596,21 +4419,18 @@ def getFallManagerEnabled() -> bool:
 	----------
 	Return true is the fall manager is activated. 
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 250,
-	    "returnSignature": "b",
-	    "name": "getFallManagerEnabled",
-	    "parametersSignature": "()",
-	    "description": "Give the state of the fall manager.",
-	    "parameters": [],
-	    "returnDescription": "Return true is the fall manager is activated. \n"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getFallManagerEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 250,
+	#     "returnSignature": "b",
+	#     "name": "getFallManagerEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Give the state of the fall manager.",
+	#     "parameters": [],
+	#     "returnDescription": "Return true is the fall manager is activated. \n"
+	# }
+	return call_method("ALMotion", "getFallManagerEnabled", [])
 
 def setPushRecoveryEnabled(pEnable:bool) -> None:
 	"""
@@ -4620,26 +4440,23 @@ def setPushRecoveryEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Enable the push recovery.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 251,
-	    "returnSignature": "v",
-	    "name": "setPushRecoveryEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Enable The push recovery protection for the robot. ",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Enable the push recovery."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setPushRecoveryEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 251,
+	#     "returnSignature": "v",
+	#     "name": "setPushRecoveryEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable The push recovery protection for the robot. ",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Enable the push recovery."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setPushRecoveryEnabled", [pEnable])
 
 def _setPushRecoveryEnabled(pEnable:bool) -> None:
 	"""
@@ -4649,26 +4466,23 @@ def _setPushRecoveryEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Enable the push recovery.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 252,
-	    "returnSignature": "v",
-	    "name": "_setPushRecoveryEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Enable The push recovery protection for the robot. ",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Enable the push recovery."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setPushRecoveryEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 252,
+	#     "returnSignature": "v",
+	#     "name": "_setPushRecoveryEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable The push recovery protection for the robot. ",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Enable the push recovery."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setPushRecoveryEnabled", [pEnable])
 
 def getPushRecoveryEnabled() -> bool:
 	"""
@@ -4678,21 +4492,18 @@ def getPushRecoveryEnabled() -> bool:
 	----------
 	Return true is the push recovery is activated. 
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 253,
-	    "returnSignature": "b",
-	    "name": "getPushRecoveryEnabled",
-	    "parametersSignature": "()",
-	    "description": "Give the state of the push recovery.",
-	    "parameters": [],
-	    "returnDescription": "Return true is the push recovery is activated. \n"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getPushRecoveryEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 253,
+	#     "returnSignature": "b",
+	#     "name": "getPushRecoveryEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Give the state of the push recovery.",
+	#     "parameters": [],
+	#     "returnDescription": "Return true is the push recovery is activated. \n"
+	# }
+	return call_method("ALMotion", "getPushRecoveryEnabled", [])
 
 def setSmartStiffnessEnabled(pEnable:bool) -> None:
 	"""
@@ -4702,26 +4513,23 @@ def setSmartStiffnessEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Activate or disactivate the smart stiffness.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 254,
-	    "returnSignature": "v",
-	    "name": "setSmartStiffnessEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Enable Smart Stiffness for all the joints (True by default), the update take one motion cycle for updating. The smart Stiffness is a gestion of joint maximum torque. More description is available on the red documentation of ALMotion module.",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Activate or disactivate the smart stiffness."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setSmartStiffnessEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 254,
+	#     "returnSignature": "v",
+	#     "name": "setSmartStiffnessEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable Smart Stiffness for all the joints (True by default), the update take one motion cycle for updating. The smart Stiffness is a gestion of joint maximum torque. More description is available on the red documentation of ALMotion module.",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Activate or disactivate the smart stiffness."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setSmartStiffnessEnabled", [pEnable])
 
 def getSmartStiffnessEnabled() -> bool:
 	"""
@@ -4731,21 +4539,18 @@ def getSmartStiffnessEnabled() -> bool:
 	----------
 	Return true is the smart Stiffnes is activated. 
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 255,
-	    "returnSignature": "b",
-	    "name": "getSmartStiffnessEnabled",
-	    "parametersSignature": "()",
-	    "description": "Give the state of the smart Stiffness.",
-	    "parameters": [],
-	    "returnDescription": "Return true is the smart Stiffnes is activated. \n"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getSmartStiffnessEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 255,
+	#     "returnSignature": "b",
+	#     "name": "getSmartStiffnessEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Give the state of the smart Stiffness.",
+	#     "parameters": [],
+	#     "returnDescription": "Return true is the smart Stiffnes is activated. \n"
+	# }
+	return call_method("ALMotion", "getSmartStiffnessEnabled", [])
 
 def setDiagnosisEffectEnabled(pEnable:bool) -> None:
 	"""
@@ -4755,26 +4560,23 @@ def setDiagnosisEffectEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Enable or disable the diagnosis effect.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 256,
-	    "returnSignature": "v",
-	    "name": "setDiagnosisEffectEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "Enable or disable the diagnosis effect into ALMotion",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Enable or disable the diagnosis effect."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setDiagnosisEffectEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 256,
+	#     "returnSignature": "v",
+	#     "name": "setDiagnosisEffectEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable or disable the diagnosis effect into ALMotion",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Enable or disable the diagnosis effect."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setDiagnosisEffectEnabled", [pEnable])
 
 def getDiagnosisEffectEnabled() -> bool:
 	"""
@@ -4784,21 +4586,18 @@ def getDiagnosisEffectEnabled() -> bool:
 	----------
 	Return true is the diagnosis reflex is activated. 
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 257,
-	    "returnSignature": "b",
-	    "name": "getDiagnosisEffectEnabled",
-	    "parametersSignature": "()",
-	    "description": "Give the state of the diagnosis effect.",
-	    "parameters": [],
-	    "returnDescription": "Return true is the diagnosis reflex is activated. \n"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getDiagnosisEffectEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 257,
+	#     "returnSignature": "b",
+	#     "name": "getDiagnosisEffectEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Give the state of the diagnosis effect.",
+	#     "parameters": [],
+	#     "returnDescription": "Return true is the diagnosis reflex is activated. \n"
+	# }
+	return call_method("ALMotion", "getDiagnosisEffectEnabled", [])
 
 def getBodyNames(name:str) -> List[str]:
 	"""
@@ -4812,26 +4611,23 @@ def getBodyNames(name:str) -> List[str]:
 	Returns
 	----------
 	Vector of strings, one for each joint and actuator in the collection
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 259,
-	    "returnSignature": "[s]",
-	    "name": "getBodyNames",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the names of all the joints and actuators in the collection.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of a chain, \"Arms\", \"Legs\", \"Body\", \"Chains\", \"JointActuators\", \"Joints\" or \"Actuators\"."
-	        }
-	    ],
-	    "returnDescription": "Vector of strings, one for each joint and actuator in the collection"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getBodyNames", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 259,
+	#     "returnSignature": "[s]",
+	#     "name": "getBodyNames",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the names of all the joints and actuators in the collection.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of a chain, \"Arms\", \"Legs\", \"Body\", \"Chains\", \"JointActuators\", \"Joints\" or \"Actuators\"."
+	#         }
+	#     ],
+	#     "returnDescription": "Vector of strings, one for each joint and actuator in the collection"
+	# }
+	return call_method("ALMotion", "getBodyNames", [name])
 
 def getSensorNames() -> List[str]:
 	"""
@@ -4840,21 +4636,18 @@ def getSensorNames() -> List[str]:
 	Returns
 	----------
 	Vector of sensor names
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 260,
-	    "returnSignature": "[s]",
-	    "name": "getSensorNames",
-	    "parametersSignature": "()",
-	    "description": "Gets the list of sensors supported on your robot.",
-	    "parameters": [],
-	    "returnDescription": "Vector of sensor names"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getSensorNames", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 260,
+	#     "returnSignature": "[s]",
+	#     "name": "getSensorNames",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the list of sensors supported on your robot.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of sensor names"
+	# }
+	return call_method("ALMotion", "getSensorNames", [])
 
 def getLimits(name:str) -> object:
 	"""
@@ -4868,26 +4661,23 @@ def getLimits(name:str) -> object:
 	Returns
 	----------
 	Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity and maxTorque for all the bodies specified.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 261,
-	    "returnSignature": "m",
-	    "name": "getLimits",
-	    "parametersSignature": "(s)",
-	    "description": "Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of a joint, chain, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        }
-	    ],
-	    "returnDescription": "Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity and maxTorque for all the bodies specified."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getLimits", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 261,
+	#     "returnSignature": "m",
+	#     "name": "getLimits",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of a joint, chain, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         }
+	#     ],
+	#     "returnDescription": "Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity and maxTorque for all the bodies specified."
+	# }
+	return call_method("ALMotion", "getLimits", [name])
 
 def _getFullLimits(name:str) -> object:
 	"""
@@ -4901,26 +4691,23 @@ def _getFullLimits(name:str) -> object:
 	Returns
 	----------
 	Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity, maxTorque, Kc, reduction, efficiency and maxCurrent for all the bodies specified.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 262,
-	    "returnSignature": "m",
-	    "name": "_getFullLimits",
-	    "parametersSignature": "(s)",
-	    "description": "Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of a joint, chain, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        }
-	    ],
-	    "returnDescription": "Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity, maxTorque, Kc, reduction, efficiency and maxCurrent for all the bodies specified."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getFullLimits", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 262,
+	#     "returnSignature": "m",
+	#     "name": "_getFullLimits",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of a joint, chain, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         }
+	#     ],
+	#     "returnDescription": "Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity, maxTorque, Kc, reduction, efficiency and maxCurrent for all the bodies specified."
+	# }
+	return call_method("ALMotion", "_getFullLimits", [name])
 
 def getMotionCycleTime() -> int:
 	"""
@@ -4929,21 +4716,18 @@ def getMotionCycleTime() -> int:
 	Returns
 	----------
 	Expressed in milliseconds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 263,
-	    "returnSignature": "i",
-	    "name": "getMotionCycleTime",
-	    "parametersSignature": "()",
-	    "description": "Get the motion cycle time in milliseconds.",
-	    "parameters": [],
-	    "returnDescription": "Expressed in milliseconds"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMotionCycleTime", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 263,
+	#     "returnSignature": "i",
+	#     "name": "getMotionCycleTime",
+	#     "parametersSignature": "()",
+	#     "description": "Get the motion cycle time in milliseconds.",
+	#     "parameters": [],
+	#     "returnDescription": "Expressed in milliseconds"
+	# }
+	return call_method("ALMotion", "getMotionCycleTime", [])
 
 def _getMotionCycleNumber() -> int:
 	"""
@@ -4952,21 +4736,18 @@ def _getMotionCycleNumber() -> int:
 	Returns
 	----------
 	Expressed in int.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 264,
-	    "returnSignature": "i",
-	    "name": "_getMotionCycleNumber",
-	    "parametersSignature": "()",
-	    "description": "Get the motion cycle number in int.",
-	    "parameters": [],
-	    "returnDescription": "Expressed in int."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getMotionCycleNumber", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 264,
+	#     "returnSignature": "i",
+	#     "name": "_getMotionCycleNumber",
+	#     "parametersSignature": "()",
+	#     "description": "Get the motion cycle number in int.",
+	#     "parameters": [],
+	#     "returnDescription": "Expressed in int."
+	# }
+	return call_method("ALMotion", "_getMotionCycleNumber", [])
 
 def getSummary() -> str:
 	"""
@@ -4975,21 +4756,18 @@ def getSummary() -> str:
 	Returns
 	----------
 	A formated string
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 266,
-	    "returnSignature": "s",
-	    "name": "getSummary",
-	    "parametersSignature": "()",
-	    "description": "Returns a string representation of the Model's state",
-	    "parameters": [],
-	    "returnDescription": "A formated string"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getSummary", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 266,
+	#     "returnSignature": "s",
+	#     "name": "getSummary",
+	#     "parametersSignature": "()",
+	#     "description": "Returns a string representation of the Model's state",
+	#     "parameters": [],
+	#     "returnDescription": "A formated string"
+	# }
+	return call_method("ALMotion", "getSummary", [])
 
 def _getSummary() -> str:
 	"""
@@ -4998,21 +4776,18 @@ def _getSummary() -> str:
 	Returns
 	----------
 	A formated string
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 267,
-	    "returnSignature": "s",
-	    "name": "_getSummary",
-	    "parametersSignature": "()",
-	    "description": "Returns a string representation of the Model's state",
-	    "parameters": [],
-	    "returnDescription": "A formated string"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getSummary", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 267,
+	#     "returnSignature": "s",
+	#     "name": "_getSummary",
+	#     "parametersSignature": "()",
+	#     "description": "Returns a string representation of the Model's state",
+	#     "parameters": [],
+	#     "returnDescription": "A formated string"
+	# }
+	return call_method("ALMotion", "_getSummary", [])
 
 def getMass(pName:str) -> float:
 	"""
@@ -5026,26 +4801,23 @@ def getMass(pName:str) -> float:
 	Returns
 	----------
 	The mass in kg.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 268,
-	    "returnSignature": "f",
-	    "name": "getMass",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the mass of a joint, chain, \"Body\" or \"Joints\".",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "Name of the body which we want the mass. \"Body\", \"Joints\" and \"Com\" give the total mass of nao. For the chain, it gives the total mass of the chain."
-	        }
-	    ],
-	    "returnDescription": "The mass in kg."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getMass", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 268,
+	#     "returnSignature": "f",
+	#     "name": "getMass",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the mass of a joint, chain, \"Body\" or \"Joints\".",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "Name of the body which we want the mass. \"Body\", \"Joints\" and \"Com\" give the total mass of nao. For the chain, it gives the total mass of the chain."
+	#         }
+	#     ],
+	#     "returnDescription": "The mass in kg."
+	# }
+	return call_method("ALMotion", "getMass", [pName])
 
 def getCOM(pName:str, pSpace:int, pUseSensorValues:bool) -> List[float]:
 	"""
@@ -5063,34 +4835,31 @@ def getCOM(pName:str, pSpace:int, pUseSensorValues:bool) -> List[float]:
 	Returns
 	----------
 	The COM position (meter).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 269,
-	    "returnSignature": "[f]",
-	    "name": "getCOM",
-	    "parametersSignature": "(sib)",
-	    "description": "Gets the COM of a joint, chain, \"Body\" or \"Joints\".",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "Name of the body which we want the mass. In chain name case, this function give the com of the chain."
-	        },
-	        {
-	            "name": "pSpace",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "pUseSensorValues",
-	            "description": "If true, the sensor values will be used to determine the position."
-	        }
-	    ],
-	    "returnDescription": "The COM position (meter)."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getCOM", [pName, pSpace, pUseSensorValues])
+	# NAOqi metadata:
+	# {
+	#     "uid": 269,
+	#     "returnSignature": "[f]",
+	#     "name": "getCOM",
+	#     "parametersSignature": "(sib)",
+	#     "description": "Gets the COM of a joint, chain, \"Body\" or \"Joints\".",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "Name of the body which we want the mass. In chain name case, this function give the com of the chain."
+	#         },
+	#         {
+	#             "name": "pSpace",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "pUseSensorValues",
+	#             "description": "If true, the sensor values will be used to determine the position."
+	#         }
+	#     ],
+	#     "returnDescription": "The COM position (meter)."
+	# }
+	return call_method("ALMotion", "getCOM", [pName, pSpace, pUseSensorValues])
 
 def getSupportPolygon(pSpace:int, pUseSensorValues:bool) -> List[List[float]]:
 	"""
@@ -5106,30 +4875,27 @@ def getSupportPolygon(pSpace:int, pUseSensorValues:bool) -> List[List[float]]:
 	Returns
 	----------
 	A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 270,
-	    "returnSignature": "[[f]]",
-	    "name": "getSupportPolygon",
-	    "parametersSignature": "(ib)",
-	    "description": "Gets the support polygon",
-	    "parameters": [
-	        {
-	            "name": "pSpace",
-	            "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "pUseSensorValues",
-	            "description": "If true, the sensor values will be used to determine the position."
-	        }
-	    ],
-	    "returnDescription": "A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getSupportPolygon", [pSpace, pUseSensorValues])
+	# NAOqi metadata:
+	# {
+	#     "uid": 270,
+	#     "returnSignature": "[[f]]",
+	#     "name": "getSupportPolygon",
+	#     "parametersSignature": "(ib)",
+	#     "description": "Gets the support polygon",
+	#     "parameters": [
+	#         {
+	#             "name": "pSpace",
+	#             "description": "Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "pUseSensorValues",
+	#             "description": "If true, the sensor values will be used to determine the position."
+	#         }
+	#     ],
+	#     "returnDescription": "A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame."
+	# }
+	return call_method("ALMotion", "getSupportPolygon", [pSpace, pUseSensorValues])
 
 def _getSupportPolygonBipedDebug(pName:str) -> List[List[float]]:
 	"""
@@ -5143,26 +4909,23 @@ def _getSupportPolygonBipedDebug(pName:str) -> List[List[float]]:
 	Returns
 	----------
 	A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 271,
-	    "returnSignature": "[[f]]",
-	    "name": "_getSupportPolygonBipedDebug",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the support polygon",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "LLeg or RLeg"
-	        }
-	    ],
-	    "returnDescription": "A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getSupportPolygonBipedDebug", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 271,
+	#     "returnSignature": "[[f]]",
+	#     "name": "_getSupportPolygonBipedDebug",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the support polygon",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "LLeg or RLeg"
+	#         }
+	#     ],
+	#     "returnDescription": "A vector containing the x,y coordinates of each of the outer points of the support polygon in specified frame."
+	# }
+	return call_method("ALMotion", "_getSupportPolygonBipedDebug", [pName])
 
 def _getTorque(names:object, useSensor:bool) -> List[float]:
 	"""
@@ -5178,30 +4941,27 @@ def _getTorque(names:object, useSensor:bool) -> List[float]:
 	Returns
 	----------
 	Torques in N.m.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 272,
-	    "returnSignature": "[f]",
-	    "name": "_getTorque",
-	    "parametersSignature": "(mb)",
-	    "description": "Gets the torque of the joints",
-	    "parameters": [
-	        {
-	            "name": "names",
-	            "description": "Names the joints, chains, \"Body\", \"Joints\". "
-	        },
-	        {
-	            "name": "useSensor",
-	            "description": "If true, return the sensor torque."
-	        }
-	    ],
-	    "returnDescription": "Torques in N.m."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getTorque", [names, useSensor])
+	# NAOqi metadata:
+	# {
+	#     "uid": 272,
+	#     "returnSignature": "[f]",
+	#     "name": "_getTorque",
+	#     "parametersSignature": "(mb)",
+	#     "description": "Gets the torque of the joints",
+	#     "parameters": [
+	#         {
+	#             "name": "names",
+	#             "description": "Names the joints, chains, \"Body\", \"Joints\". "
+	#         },
+	#         {
+	#             "name": "useSensor",
+	#             "description": "If true, return the sensor torque."
+	#         }
+	#     ],
+	#     "returnDescription": "Torques in N.m."
+	# }
+	return call_method("ALMotion", "_getTorque", [names, useSensor])
 
 def _getInertia(pName:str) -> List[float]:
 	"""
@@ -5215,26 +4975,23 @@ def _getInertia(pName:str) -> List[float]:
 	Returns
 	----------
 	The inertia matrix (kg.m2).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 273,
-	    "returnSignature": "[f]",
-	    "name": "_getInertia",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the inertia matrice of a joint or \"Torso\".",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "Name of the joint or \"Torso\". Inertia is given in the COM of the body, in poseZero orientation."
-	        }
-	    ],
-	    "returnDescription": "The inertia matrix (kg.m2)."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getInertia", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 273,
+	#     "returnSignature": "[f]",
+	#     "name": "_getInertia",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the inertia matrice of a joint or \"Torso\".",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "Name of the joint or \"Torso\". Inertia is given in the COM of the body, in poseZero orientation."
+	#         }
+	#     ],
+	#     "returnDescription": "The inertia matrix (kg.m2)."
+	# }
+	return call_method("ALMotion", "_getInertia", [pName])
 
 def setMotionConfig(config:object) -> None:
 	"""
@@ -5244,45 +5001,39 @@ def setMotionConfig(config:object) -> None:
 	----------
 	config:object
 		Internal: An array of ALValues [i][0]: name, [i][1]: value
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 274,
-	    "returnSignature": "v",
-	    "name": "setMotionConfig",
-	    "parametersSignature": "(m)",
-	    "description": "Internal Use.",
-	    "parameters": [
-	        {
-	            "name": "config",
-	            "description": "Internal: An array of ALValues [i][0]: name, [i][1]: value"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setMotionConfig", [config])
+	# NAOqi metadata:
+	# {
+	#     "uid": 274,
+	#     "returnSignature": "v",
+	#     "name": "setMotionConfig",
+	#     "parametersSignature": "(m)",
+	#     "description": "Internal Use.",
+	#     "parameters": [
+	#         {
+	#             "name": "config",
+	#             "description": "Internal: An array of ALValues [i][0]: name, [i][1]: value"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setMotionConfig", [config])
 
 def _naoqiIsReadyCallback() -> None:
 	"""
 	Callback naoqi is ready.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 275,
-	    "returnSignature": "v",
-	    "name": "_naoqiIsReadyCallback",
-	    "parametersSignature": "()",
-	    "description": "Callback naoqi is ready.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_naoqiIsReadyCallback", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 275,
+	#     "returnSignature": "v",
+	#     "name": "_naoqiIsReadyCallback",
+	#     "parametersSignature": "()",
+	#     "description": "Callback naoqi is ready.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_naoqiIsReadyCallback", [])
 
 def _preferenceUpdatedCallback(p0:str, p1:object, p2:str) -> None:
 	"""
@@ -5296,64 +5047,18 @@ def _preferenceUpdatedCallback(p0:str, p1:object, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 276,
-	    "returnSignature": "v",
-	    "name": "_preferenceUpdatedCallback",
-	    "parametersSignature": "(sms)",
-	    "description": "Callback preferences changed.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_preferenceUpdatedCallback", [p0, p1, p2])
-
-def _trackerLookAt(pNames:List[str], pTargetPositions:List[float], pLimits:List[object]) -> None:
-	"""
-	Interpolate with head with prediction.
-	This function is mainly use by the tracker modules.
-	
-	
-	Parameters
-	----------
-	pNames:List[str]
-		list of Joints Names.
-	pTargetPositions:List[float]
-		list of Joints angles.
-	pLimits:List[object]
-		list of Joints limits.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 277,
-	    "returnSignature": "v",
-	    "name": "_trackerLookAt",
-	    "parametersSignature": "([s][f][X])",
-	    "description": "Interpolate with head with prediction.\nThis function is mainly use by the tracker modules.\n",
-	    "parameters": [
-	        {
-	            "name": "pNames",
-	            "description": "list of Joints Names."
-	        },
-	        {
-	            "name": "pTargetPositions",
-	            "description": "list of Joints angles."
-	        },
-	        {
-	            "name": "pLimits",
-	            "description": "list of Joints limits."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_trackerLookAt", [pNames, pTargetPositions, pLimits])
+	# NAOqi metadata:
+	# {
+	#     "uid": 276,
+	#     "returnSignature": "v",
+	#     "name": "_preferenceUpdatedCallback",
+	#     "parametersSignature": "(sms)",
+	#     "description": "Callback preferences changed.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_preferenceUpdatedCallback", [p0, p1, p2])
 
 def _lookAtWbPersistent(pTargetWy:float, pTargetWz:float) -> None:
 	"""
@@ -5365,30 +5070,27 @@ def _lookAtWbPersistent(pTargetWy:float, pTargetWz:float) -> None:
 		The target position wy in FRAME_ROBOT
 	pTargetWz:float
 		The target position wz in FRAME_ROBOT
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 278,
-	    "returnSignature": "v",
-	    "name": "_lookAtWbPersistent",
-	    "parametersSignature": "(ff)",
-	    "description": "lookAt in Whole Body mode.",
-	    "parameters": [
-	        {
-	            "name": "pTargetWy",
-	            "description": "The target position wy in FRAME_ROBOT"
-	        },
-	        {
-	            "name": "pTargetWz",
-	            "description": "The target position wz in FRAME_ROBOT"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_lookAtWbPersistent", [pTargetWy, pTargetWz])
+	# NAOqi metadata:
+	# {
+	#     "uid": 278,
+	#     "returnSignature": "v",
+	#     "name": "_lookAtWbPersistent",
+	#     "parametersSignature": "(ff)",
+	#     "description": "lookAt in Whole Body mode.",
+	#     "parameters": [
+	#         {
+	#             "name": "pTargetWy",
+	#             "description": "The target position wy in FRAME_ROBOT"
+	#         },
+	#         {
+	#             "name": "pTargetWz",
+	#             "description": "The target position wz in FRAME_ROBOT"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_lookAtWbPersistent", [pTargetWy, pTargetWz])
 
 def _lookAtWb(pTargetWy:float, pTargetWz:float) -> None:
 	"""
@@ -5400,30 +5102,27 @@ def _lookAtWb(pTargetWy:float, pTargetWz:float) -> None:
 		The target position wy in FRAME_ROBOT
 	pTargetWz:float
 		The target position wz in FRAME_ROBOT
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 279,
-	    "returnSignature": "v",
-	    "name": "_lookAtWb",
-	    "parametersSignature": "(ff)",
-	    "description": "lookAt in Whole Body mode.",
-	    "parameters": [
-	        {
-	            "name": "pTargetWy",
-	            "description": "The target position wy in FRAME_ROBOT"
-	        },
-	        {
-	            "name": "pTargetWz",
-	            "description": "The target position wz in FRAME_ROBOT"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_lookAtWb", [pTargetWy, pTargetWz])
+	# NAOqi metadata:
+	# {
+	#     "uid": 279,
+	#     "returnSignature": "v",
+	#     "name": "_lookAtWb",
+	#     "parametersSignature": "(ff)",
+	#     "description": "lookAt in Whole Body mode.",
+	#     "parameters": [
+	#         {
+	#             "name": "pTargetWy",
+	#             "description": "The target position wy in FRAME_ROBOT"
+	#         },
+	#         {
+	#             "name": "pTargetWz",
+	#             "description": "The target position wz in FRAME_ROBOT"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_lookAtWb", [pTargetWy, pTargetWz])
 
 def _trackerPointAt(pNames:List[str], pTargetPositions:List[float]) -> None:
 	"""
@@ -5437,30 +5136,27 @@ def _trackerPointAt(pNames:List[str], pTargetPositions:List[float]) -> None:
 		list of Joints Names.
 	pTargetPositions:List[float]
 		list of Joints angles.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 280,
-	    "returnSignature": "v",
-	    "name": "_trackerPointAt",
-	    "parametersSignature": "([s][f])",
-	    "description": "Interpolate with hands with prediction.\nThis function is mainly use by the tracker modules.\n",
-	    "parameters": [
-	        {
-	            "name": "pNames",
-	            "description": "list of Joints Names."
-	        },
-	        {
-	            "name": "pTargetPositions",
-	            "description": "list of Joints angles."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_trackerPointAt", [pNames, pTargetPositions])
+	# NAOqi metadata:
+	# {
+	#     "uid": 280,
+	#     "returnSignature": "v",
+	#     "name": "_trackerPointAt",
+	#     "parametersSignature": "([s][f])",
+	#     "description": "Interpolate with hands with prediction.\nThis function is mainly use by the tracker modules.\n",
+	#     "parameters": [
+	#         {
+	#             "name": "pNames",
+	#             "description": "list of Joints Names."
+	#         },
+	#         {
+	#             "name": "pTargetPositions",
+	#             "description": "list of Joints angles."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_trackerPointAt", [pNames, pTargetPositions])
 
 def _trackerWithSpeed(pNames:List[str], pTargetPositions:List[float], pTimeSinceDetectionMs:List[float], pMaxSpeedFraction:bool, pUseOfWholeBody:bool) -> None:
 	"""
@@ -5479,50 +5175,50 @@ def _trackerWithSpeed(pNames:List[str], pTargetPositions:List[float], pTimeSince
 	pUseOfWholeBody:bool
 		If true, the target is follow in cartesian space by the Head with whole Body constraints.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 281,
-	    "returnSignature": "v",
-	    "name": "_trackerWithSpeed",
-	    "parametersSignature": "([s][f][f]bb)",
-	    "description": "Interpolate with speed without prediction.",
-	    "parameters": [
-	        {
-	            "name": "pNames",
-	            "description": "list of Joints Names."
-	        },
-	        {
-	            "name": "pTargetPositions",
-	            "description": "list of Joints angles."
-	        },
-	        {
-	            "name": "pTimeSinceDetectionMs",
-	            "description": "The time in Ms since the target was detected"
-	        },
-	        {
-	            "name": "pMaxSpeedFraction",
-	            "description": "fraction max speed list."
-	        },
-	        {
-	            "name": "pUseOfWholeBody",
-	            "description": "If true, the target is follow in cartesian space by the Head with whole Body constraints."
-	        },
-	        {
-	            "name": "pIsPointAt",
-	            "description": "if true use pointAt task else lookAt task."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation lists 6 parameters (pNames, pTargetPositions, pTimeSinceDetectionMs, pMaxSpeedFraction, pUseOfWholeBody, pIsPointAt), but the signature has 5. The first 5 names are used here and may not match the actual parameters.
 	"""
-	return send_mfc("ALMotion", "_trackerWithSpeed", [pNames, pTargetPositions, pTimeSinceDetectionMs, pMaxSpeedFraction, pUseOfWholeBody])
+	# NAOqi metadata:
+	# {
+	#     "uid": 281,
+	#     "returnSignature": "v",
+	#     "name": "_trackerWithSpeed",
+	#     "parametersSignature": "([s][f][f]bb)",
+	#     "description": "Interpolate with speed without prediction.",
+	#     "parameters": [
+	#         {
+	#             "name": "pNames",
+	#             "description": "list of Joints Names."
+	#         },
+	#         {
+	#             "name": "pTargetPositions",
+	#             "description": "list of Joints angles."
+	#         },
+	#         {
+	#             "name": "pTimeSinceDetectionMs",
+	#             "description": "The time in Ms since the target was detected"
+	#         },
+	#         {
+	#             "name": "pMaxSpeedFraction",
+	#             "description": "fraction max speed list."
+	#         },
+	#         {
+	#             "name": "pUseOfWholeBody",
+	#             "description": "If true, the target is follow in cartesian space by the Head with whole Body constraints."
+	#         },
+	#         {
+	#             "name": "pIsPointAt",
+	#             "description": "if true use pointAt task else lookAt task."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_trackerWithSpeed", [pNames, pTargetPositions, pTimeSinceDetectionMs, pMaxSpeedFraction, pUseOfWholeBody])
 
-def _lookAt_1(pTargetPosition:List[float], pFrame:int, pMaxSpeedFraction:float) -> None:
+@overload
+def _lookAt(pTargetPosition:List[float], pFrame:int, pMaxSpeedFraction:float, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (_lookAt)
-	
 	lookAt
 	
 	Parameters
@@ -5534,38 +5230,40 @@ def _lookAt_1(pTargetPosition:List[float], pFrame:int, pMaxSpeedFraction:float) 
 	pMaxSpeedFraction:float
 		fraction max speed.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 282,
-	    "returnSignature": "v",
-	    "name": "_lookAt",
-	    "parametersSignature": "([f]if)",
-	    "description": "lookAt",
-	    "parameters": [
-	        {
-	            "name": "pTargetPosition",
-	            "description": "position 3D to look at."
-	        },
-	        {
-	            "name": "pFrame",
-	            "description": "Target frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "pMaxSpeedFraction",
-	            "description": "fraction max speed."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_lookAt", [pTargetPosition, pFrame, pMaxSpeedFraction])
-
-def _lookAt_2(pTargetPosition:List[float], pFrame:int, pEffectorId:int, pMaxSpeedFraction:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_lookAt)
+	Bridge notes
+	------------
+	_lookAt has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 282,
+	#     "returnSignature": "v",
+	#     "name": "_lookAt",
+	#     "parametersSignature": "([f]if)",
+	#     "description": "lookAt",
+	#     "parameters": [
+	#         {
+	#             "name": "pTargetPosition",
+	#             "description": "position 3D to look at."
+	#         },
+	#         {
+	#             "name": "pFrame",
+	#             "description": "Target frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "pMaxSpeedFraction",
+	#             "description": "fraction max speed."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _lookAt(pTargetPosition:List[float], pFrame:int, pEffectorId:int, pMaxSpeedFraction:float, /) -> None:
+	"""
 	lookAt
 	
 	Parameters
@@ -5579,37 +5277,54 @@ def _lookAt_2(pTargetPosition:List[float], pFrame:int, pEffectorId:int, pMaxSpee
 	pMaxSpeedFraction:float
 		fraction max speed.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 283,
-	    "returnSignature": "v",
-	    "name": "_lookAt",
-	    "parametersSignature": "([f]iif)",
-	    "description": "lookAt",
-	    "parameters": [
-	        {
-	            "name": "pTargetPosition",
-	            "description": "position 3D to look at."
-	        },
-	        {
-	            "name": "pFrame",
-	            "description": "Target frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
-	        },
-	        {
-	            "name": "pEffectorId",
-	            "description": "effector id {Middle of eyes = 0, Camera Top = 1, Camera Bottom = 2}."
-	        },
-	        {
-	            "name": "pMaxSpeedFraction",
-	            "description": "fraction max speed."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_lookAt has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALMotion", "_lookAt", [pTargetPosition, pFrame, pEffectorId, pMaxSpeedFraction])
+	# NAOqi metadata:
+	# {
+	#     "uid": 283,
+	#     "returnSignature": "v",
+	#     "name": "_lookAt",
+	#     "parametersSignature": "([f]iif)",
+	#     "description": "lookAt",
+	#     "parameters": [
+	#         {
+	#             "name": "pTargetPosition",
+	#             "description": "position 3D to look at."
+	#         },
+	#         {
+	#             "name": "pFrame",
+	#             "description": "Target frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}."
+	#         },
+	#         {
+	#             "name": "pEffectorId",
+	#             "description": "effector id {Middle of eyes = 0, Camera Top = 1, Camera Bottom = 2}."
+	#         },
+	#         {
+	#             "name": "pMaxSpeedFraction",
+	#             "description": "fraction max speed."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def _lookAt(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_lookAt has 2 variants on the robot:
+	- _lookAt(pTargetPosition:List[float], pFrame:int, pMaxSpeedFraction:float)
+	- _lookAt(pTargetPosition:List[float], pFrame:int, pEffectorId:int, pMaxSpeedFraction:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALMotion._lookAt has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALMotion", "_lookAt", list(args))
 
 def _stopLookAt(pWithSpeed:bool) -> None:
 	"""
@@ -5621,26 +5336,23 @@ def _stopLookAt(pWithSpeed:bool) -> None:
 	----------
 	pWithSpeed:bool
 		if True stop lookAtWithSpeed task.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 284,
-	    "returnSignature": "v",
-	    "name": "_stopLookAt",
-	    "parametersSignature": "(b)",
-	    "description": "Stop lookAt task\nThis function is mainly use by the tracker modules.\n",
-	    "parameters": [
-	        {
-	            "name": "pWithSpeed",
-	            "description": "if True stop lookAtWithSpeed task."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_stopLookAt", [pWithSpeed])
+	# NAOqi metadata:
+	# {
+	#     "uid": 284,
+	#     "returnSignature": "v",
+	#     "name": "_stopLookAt",
+	#     "parametersSignature": "(b)",
+	#     "description": "Stop lookAt task\nThis function is mainly use by the tracker modules.\n",
+	#     "parameters": [
+	#         {
+	#             "name": "pWithSpeed",
+	#             "description": "if True stop lookAtWithSpeed task."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_stopLookAt", [pWithSpeed])
 
 def _stopPointAt(pWithSpeed:bool) -> None:
 	"""
@@ -5652,26 +5364,23 @@ def _stopPointAt(pWithSpeed:bool) -> None:
 	----------
 	pWithSpeed:bool
 		if True stop pointAtWithSpeed task.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 285,
-	    "returnSignature": "v",
-	    "name": "_stopPointAt",
-	    "parametersSignature": "(b)",
-	    "description": "Stop PointAt task\nThis function is mainly use by the tracker modules.\n",
-	    "parameters": [
-	        {
-	            "name": "pWithSpeed",
-	            "description": "if True stop pointAtWithSpeed task."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_stopPointAt", [pWithSpeed])
+	# NAOqi metadata:
+	# {
+	#     "uid": 285,
+	#     "returnSignature": "v",
+	#     "name": "_stopPointAt",
+	#     "parametersSignature": "(b)",
+	#     "description": "Stop PointAt task\nThis function is mainly use by the tracker modules.\n",
+	#     "parameters": [
+	#         {
+	#             "name": "pWithSpeed",
+	#             "description": "if True stop pointAtWithSpeed task."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_stopPointAt", [pWithSpeed])
 
 def _updateObstacles(obstacles:List[List[float]], blindZones:List[List[List[float]]]) -> None:
 	"""
@@ -5683,30 +5392,27 @@ def _updateObstacles(obstacles:List[List[float]], blindZones:List[List[List[floa
 		List of closest obstacles [[x, y, z]...]
 	blindZones:List[List[List[float]]]
 		List of blind zones [[Position2D, Position2D...]...]
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 286,
-	    "returnSignature": "v",
-	    "name": "_updateObstacles",
-	    "parametersSignature": "([[f]][[[f]]])",
-	    "description": "Update obstacles",
-	    "parameters": [
-	        {
-	            "name": "obstacles",
-	            "description": "List of closest obstacles [[x, y, z]...]"
-	        },
-	        {
-	            "name": "blindZones",
-	            "description": "List of blind zones [[Position2D, Position2D...]...]"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_updateObstacles", [obstacles, blindZones])
+	# NAOqi metadata:
+	# {
+	#     "uid": 286,
+	#     "returnSignature": "v",
+	#     "name": "_updateObstacles",
+	#     "parametersSignature": "([[f]][[[f]]])",
+	#     "description": "Update obstacles",
+	#     "parameters": [
+	#         {
+	#             "name": "obstacles",
+	#             "description": "List of closest obstacles [[x, y, z]...]"
+	#         },
+	#         {
+	#             "name": "blindZones",
+	#             "description": "List of blind zones [[Position2D, Position2D...]...]"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_updateObstacles", [obstacles, blindZones])
 
 def setBreathEnabled(pChain:str, pIsEnabled:bool) -> None:
 	"""
@@ -5720,30 +5426,27 @@ def setBreathEnabled(pChain:str, pIsEnabled:bool) -> None:
 		Chain name.
 	pIsEnabled:bool
 		Enables / disables the chain.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 287,
-	    "returnSignature": "v",
-	    "name": "setBreathEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "This function starts or stops breathing animation on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\nHead breathing animation will work only if Leg animation is active.",
-	    "parameters": [
-	        {
-	            "name": "pChain",
-	            "description": "Chain name."
-	        },
-	        {
-	            "name": "pIsEnabled",
-	            "description": "Enables / disables the chain."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setBreathEnabled", [pChain, pIsEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 287,
+	#     "returnSignature": "v",
+	#     "name": "setBreathEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "This function starts or stops breathing animation on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\nHead breathing animation will work only if Leg animation is active.",
+	#     "parameters": [
+	#         {
+	#             "name": "pChain",
+	#             "description": "Chain name."
+	#         },
+	#         {
+	#             "name": "pIsEnabled",
+	#             "description": "Enables / disables the chain."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setBreathEnabled", [pChain, pIsEnabled])
 
 def getBreathEnabled(pChain:str) -> bool:
 	"""
@@ -5759,26 +5462,23 @@ def getBreathEnabled(pChain:str) -> bool:
 	Returns
 	----------
 	True if breathing animation is enabled on the chain.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 288,
-	    "returnSignature": "b",
-	    "name": "getBreathEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "This function gets the status of breathing animation on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\n",
-	    "parameters": [
-	        {
-	            "name": "pChain",
-	            "description": "Chain name."
-	        }
-	    ],
-	    "returnDescription": "True if breathing animation is enabled on the chain."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getBreathEnabled", [pChain])
+	# NAOqi metadata:
+	# {
+	#     "uid": 288,
+	#     "returnSignature": "b",
+	#     "name": "getBreathEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "This function gets the status of breathing animation on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\n",
+	#     "parameters": [
+	#         {
+	#             "name": "pChain",
+	#             "description": "Chain name."
+	#         }
+	#     ],
+	#     "returnDescription": "True if breathing animation is enabled on the chain."
+	# }
+	return call_method("ALMotion", "getBreathEnabled", [pChain])
 
 def setIdlePostureEnabled(pChain:str, pIsEnabled:bool) -> None:
 	"""
@@ -5791,30 +5491,27 @@ def setIdlePostureEnabled(pChain:str, pIsEnabled:bool) -> None:
 		Chain name.
 	pIsEnabled:bool
 		Enables / disables the chain.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 291,
-	    "returnSignature": "v",
-	    "name": "setIdlePostureEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "Starts or stops idle posture management on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".",
-	    "parameters": [
-	        {
-	            "name": "pChain",
-	            "description": "Chain name."
-	        },
-	        {
-	            "name": "pIsEnabled",
-	            "description": "Enables / disables the chain."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setIdlePostureEnabled", [pChain, pIsEnabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 291,
+	#     "returnSignature": "v",
+	#     "name": "setIdlePostureEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Starts or stops idle posture management on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".",
+	#     "parameters": [
+	#         {
+	#             "name": "pChain",
+	#             "description": "Chain name."
+	#         },
+	#         {
+	#             "name": "pIsEnabled",
+	#             "description": "Enables / disables the chain."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setIdlePostureEnabled", [pChain, pIsEnabled])
 
 def getIdlePostureEnabled(pChain:str) -> bool:
 	"""
@@ -5830,74 +5527,39 @@ def getIdlePostureEnabled(pChain:str) -> bool:
 	Returns
 	----------
 	True if breathing animation is enabled on the chain.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 292,
-	    "returnSignature": "b",
-	    "name": "getIdlePostureEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "This function gets the status of idle posture management on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\n",
-	    "parameters": [
-	        {
-	            "name": "pChain",
-	            "description": "Chain name."
-	        }
-	    ],
-	    "returnDescription": "True if breathing animation is enabled on the chain."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getIdlePostureEnabled", [pChain])
-
-def _setIdleAnimation(AnimFile:object) -> None:
-	"""
-	This function sets the breathing animation.
-	
-	Parameters
-	----------
-	AnimFile:object
-		Animation file (.anim).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 293,
-	    "returnSignature": "v",
-	    "name": "_setIdleAnimation",
-	    "parametersSignature": "(o)",
-	    "description": "This function sets the breathing animation.",
-	    "parameters": [
-	        {
-	            "name": "AnimFile",
-	            "description": "Animation file (.anim)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_setIdleAnimation", [AnimFile])
+	# NAOqi metadata:
+	# {
+	#     "uid": 292,
+	#     "returnSignature": "b",
+	#     "name": "getIdlePostureEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "This function gets the status of idle posture management on a chain.\nChain name can be \"Body\", \"Arms\", \"LArm\", \"RArm\", \"Legs\" or \"Head\".\n",
+	#     "parameters": [
+	#         {
+	#             "name": "pChain",
+	#             "description": "Chain name."
+	#         }
+	#     ],
+	#     "returnDescription": "True if breathing animation is enabled on the chain."
+	# }
+	return call_method("ALMotion", "getIdlePostureEnabled", [pChain])
 
 def _resetIdleDefaultAnimation() -> None:
 	"""
 	This function reset the default breathing animation.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 294,
-	    "returnSignature": "v",
-	    "name": "_resetIdleDefaultAnimation",
-	    "parametersSignature": "()",
-	    "description": "This function reset the default breathing animation.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_resetIdleDefaultAnimation", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 294,
+	#     "returnSignature": "v",
+	#     "name": "_resetIdleDefaultAnimation",
+	#     "parametersSignature": "()",
+	#     "description": "This function reset the default breathing animation.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_resetIdleDefaultAnimation", [])
 
 def getTaskList() -> object:
 	"""
@@ -5906,21 +5568,18 @@ def getTaskList() -> object:
 	Returns
 	----------
 	An ALValue containing an ALValue for each task. The inner ALValue contains: Name, MotionID
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 295,
-	    "returnSignature": "m",
-	    "name": "getTaskList",
-	    "parametersSignature": "()",
-	    "description": "Gets an ALValue structure describing the tasks in the Task List",
-	    "parameters": [],
-	    "returnDescription": "An ALValue containing an ALValue for each task. The inner ALValue contains: Name, MotionID"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "getTaskList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 295,
+	#     "returnSignature": "m",
+	#     "name": "getTaskList",
+	#     "parametersSignature": "()",
+	#     "description": "Gets an ALValue structure describing the tasks in the Task List",
+	#     "parameters": [],
+	#     "returnDescription": "An ALValue containing an ALValue for each task. The inner ALValue contains: Name, MotionID"
+	# }
+	return call_method("ALMotion", "getTaskList", [])
 
 def areResourcesAvailable(resourceNames:List[str]) -> bool:
 	"""
@@ -5934,26 +5593,23 @@ def areResourcesAvailable(resourceNames:List[str]) -> bool:
 	Returns
 	----------
 	True if the resources are available
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 296,
-	    "returnSignature": "b",
-	    "name": "areResourcesAvailable",
-	    "parametersSignature": "([s])",
-	    "description": "Returns true if all the desired resources are available. Only motion API's' blocking call takes resources.",
-	    "parameters": [
-	        {
-	            "name": "resourceNames",
-	            "description": "A vector of resource names such as joints. Use getBodyNames(\"Body\") to have the list of the available joint for your robot."
-	        }
-	    ],
-	    "returnDescription": "True if the resources are available"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "areResourcesAvailable", [resourceNames])
+	# NAOqi metadata:
+	# {
+	#     "uid": 296,
+	#     "returnSignature": "b",
+	#     "name": "areResourcesAvailable",
+	#     "parametersSignature": "([s])",
+	#     "description": "Returns true if all the desired resources are available. Only motion API's' blocking call takes resources.",
+	#     "parameters": [
+	#         {
+	#             "name": "resourceNames",
+	#             "description": "A vector of resource names such as joints. Use getBodyNames(\"Body\") to have the list of the available joint for your robot."
+	#         }
+	#     ],
+	#     "returnDescription": "True if the resources are available"
+	# }
+	return call_method("ALMotion", "areResourcesAvailable", [resourceNames])
 
 def killTask(motionTaskID:int) -> bool:
 	"""
@@ -5967,26 +5623,23 @@ def killTask(motionTaskID:int) -> bool:
 	Returns
 	----------
 	Return true if the specified motionTaskId has been killed.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 297,
-	    "returnSignature": "b",
-	    "name": "killTask",
-	    "parametersSignature": "(i)",
-	    "description": "Kills a motion task.",
-	    "parameters": [
-	        {
-	            "name": "motionTaskID",
-	            "description": "TaskID of the motion task you want to kill."
-	        }
-	    ],
-	    "returnDescription": "Return true if the specified motionTaskId has been killed."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "killTask", [motionTaskID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 297,
+	#     "returnSignature": "b",
+	#     "name": "killTask",
+	#     "parametersSignature": "(i)",
+	#     "description": "Kills a motion task.",
+	#     "parameters": [
+	#         {
+	#             "name": "motionTaskID",
+	#             "description": "TaskID of the motion task you want to kill."
+	#         }
+	#     ],
+	#     "returnDescription": "Return true if the specified motionTaskId has been killed."
+	# }
+	return call_method("ALMotion", "killTask", [motionTaskID])
 
 def killTasksUsingResources(resourceNames:List[str]) -> None:
 	"""
@@ -5996,64 +5649,55 @@ def killTasksUsingResources(resourceNames:List[str]) -> None:
 	----------
 	resourceNames:List[str]
 		A vector of resource joint names
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 298,
-	    "returnSignature": "v",
-	    "name": "killTasksUsingResources",
-	    "parametersSignature": "([s])",
-	    "description": "Kills all tasks that use any of the resources given. Only motion API's' blocking call takes resources and can be killed. Use getBodyNames(\"Body\") to have the list of the available joint for your robot.",
-	    "parameters": [
-	        {
-	            "name": "resourceNames",
-	            "description": "A vector of resource joint names"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "killTasksUsingResources", [resourceNames])
+	# NAOqi metadata:
+	# {
+	#     "uid": 298,
+	#     "returnSignature": "v",
+	#     "name": "killTasksUsingResources",
+	#     "parametersSignature": "([s])",
+	#     "description": "Kills all tasks that use any of the resources given. Only motion API's' blocking call takes resources and can be killed. Use getBodyNames(\"Body\") to have the list of the available joint for your robot.",
+	#     "parameters": [
+	#         {
+	#             "name": "resourceNames",
+	#             "description": "A vector of resource joint names"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "killTasksUsingResources", [resourceNames])
 
 def killMove() -> None:
 	"""
 	Emergency Stop on Move task: This method will end the move task brutally, without attempting to return to a balanced state. The robot could easily fall.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 300,
-	    "returnSignature": "v",
-	    "name": "killMove",
-	    "parametersSignature": "()",
-	    "description": "Emergency Stop on Move task: This method will end the move task brutally, without attempting to return to a balanced state. The robot could easily fall.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "killMove", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 300,
+	#     "returnSignature": "v",
+	#     "name": "killMove",
+	#     "parametersSignature": "()",
+	#     "description": "Emergency Stop on Move task: This method will end the move task brutally, without attempting to return to a balanced state. The robot could easily fall.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "killMove", [])
 
 def killAll() -> None:
 	"""
 	Kills all tasks.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 301,
-	    "returnSignature": "v",
-	    "name": "killAll",
-	    "parametersSignature": "()",
-	    "description": "Kills all tasks.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "killAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 301,
+	#     "returnSignature": "v",
+	#     "name": "killAll",
+	#     "parametersSignature": "()",
+	#     "description": "Kills all tasks.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "killAll", [])
 
 def setEnableNotifications(enable:bool) -> None:
 	"""
@@ -6063,26 +5707,23 @@ def setEnableNotifications(enable:bool) -> None:
 	----------
 	enable:bool
 		If True enable notifications. If False disable notifications.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 302,
-	    "returnSignature": "v",
-	    "name": "setEnableNotifications",
-	    "parametersSignature": "(b)",
-	    "description": "Enable / Disable notifications.",
-	    "parameters": [
-	        {
-	            "name": "enable",
-	            "description": "If True enable notifications. If False disable notifications."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "setEnableNotifications", [enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 302,
+	#     "returnSignature": "v",
+	#     "name": "setEnableNotifications",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable / Disable notifications.",
+	#     "parameters": [
+	#         {
+	#             "name": "enable",
+	#             "description": "If True enable notifications. If False disable notifications."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "setEnableNotifications", [enable])
 
 def areNotificationsEnabled() -> bool:
 	"""
@@ -6091,21 +5732,18 @@ def areNotificationsEnabled() -> bool:
 	Returns
 	----------
 	Return True if notifications are active.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 303,
-	    "returnSignature": "b",
-	    "name": "areNotificationsEnabled",
-	    "parametersSignature": "()",
-	    "description": "Return true if notifications are active.",
-	    "parameters": [],
-	    "returnDescription": "Return True if notifications are active."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "areNotificationsEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 303,
+	#     "returnSignature": "b",
+	#     "name": "areNotificationsEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Return true if notifications are active.",
+	#     "parameters": [],
+	#     "returnDescription": "Return True if notifications are active."
+	# }
+	return call_method("ALMotion", "areNotificationsEnabled", [])
 
 def _getGroundCollision() -> object:
 	"""
@@ -6114,21 +5752,18 @@ def _getGroundCollision() -> object:
 	Returns
 	----------
 	Vector of collision names and position in torso frame
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 304,
-	    "returnSignature": "m",
-	    "name": "_getGroundCollision",
-	    "parametersSignature": "()",
-	    "description": "Gets the list of collision with the ground.",
-	    "parameters": [],
-	    "returnDescription": "Vector of collision names and position in torso frame"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getGroundCollision", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 304,
+	#     "returnSignature": "m",
+	#     "name": "_getGroundCollision",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the list of collision with the ground.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of collision names and position in torso frame"
+	# }
+	return call_method("ALMotion", "_getGroundCollision", [])
 
 def _getGroundCollisionForForceContact() -> object:
 	"""
@@ -6137,21 +5772,18 @@ def _getGroundCollisionForForceContact() -> object:
 	Returns
 	----------
 	Vector of collision names and position in torso frame
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 305,
-	    "returnSignature": "m",
-	    "name": "_getGroundCollisionForForceContact",
-	    "parametersSignature": "()",
-	    "description": "Gets the list of collision with the ground.",
-	    "parameters": [],
-	    "returnDescription": "Vector of collision names and position in torso frame"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getGroundCollisionForForceContact", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 305,
+	#     "returnSignature": "m",
+	#     "name": "_getGroundCollisionForForceContact",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the list of collision with the ground.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of collision names and position in torso frame"
+	# }
+	return call_method("ALMotion", "_getGroundCollisionForForceContact", [])
 
 def _getGroundCollisionForFallManager() -> object:
 	"""
@@ -6160,21 +5792,18 @@ def _getGroundCollisionForFallManager() -> object:
 	Returns
 	----------
 	Vector of collision names and position in torso frame
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 306,
-	    "returnSignature": "m",
-	    "name": "_getGroundCollisionForFallManager",
-	    "parametersSignature": "()",
-	    "description": "Gets the list of collision with the ground.",
-	    "parameters": [],
-	    "returnDescription": "Vector of collision names and position in torso frame"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getGroundCollisionForFallManager", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 306,
+	#     "returnSignature": "m",
+	#     "name": "_getGroundCollisionForFallManager",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the list of collision with the ground.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of collision names and position in torso frame"
+	# }
+	return call_method("ALMotion", "_getGroundCollisionForFallManager", [])
 
 def _getGroundPlaneTf() -> List[float]:
 	"""
@@ -6183,21 +5812,18 @@ def _getGroundPlaneTf() -> List[float]:
 	Returns
 	----------
 	the ground plane transform in torso frame
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 307,
-	    "returnSignature": "[f]",
-	    "name": "_getGroundPlaneTf",
-	    "parametersSignature": "()",
-	    "description": "Gets the ground plane transform in torso frame.",
-	    "parameters": [],
-	    "returnDescription": "the ground plane transform in torso frame"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getGroundPlaneTf", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 307,
+	#     "returnSignature": "[f]",
+	#     "name": "_getGroundPlaneTf",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the ground plane transform in torso frame.",
+	#     "parameters": [],
+	#     "returnDescription": "the ground plane transform in torso frame"
+	# }
+	return call_method("ALMotion", "_getGroundPlaneTf", [])
 
 def _getNormalForceContact() -> List[float]:
 	"""
@@ -6206,21 +5832,18 @@ def _getNormalForceContact() -> List[float]:
 	Returns
 	----------
 	Vector of normal Force contact
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 308,
-	    "returnSignature": "[f]",
-	    "name": "_getNormalForceContact",
-	    "parametersSignature": "()",
-	    "description": "Gets the Normal Force Contact.",
-	    "parameters": [],
-	    "returnDescription": "Vector of normal Force contact"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getNormalForceContact", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 308,
+	#     "returnSignature": "[f]",
+	#     "name": "_getNormalForceContact",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the Normal Force Contact.",
+	#     "parameters": [],
+	#     "returnDescription": "Vector of normal Force contact"
+	# }
+	return call_method("ALMotion", "_getNormalForceContact", [])
 
 def _getRealTorsoInWorld() -> List[float]:
 	"""
@@ -6229,21 +5852,18 @@ def _getRealTorsoInWorld() -> List[float]:
 	Returns
 	----------
 	a transform of the Torso position
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 309,
-	    "returnSignature": "[f]",
-	    "name": "_getRealTorsoInWorld",
-	    "parametersSignature": "()",
-	    "description": "It's a getPosition on Torso with inertial Information.This function is used in chorgraphe in 3D View",
-	    "parameters": [],
-	    "returnDescription": "a transform of the Torso position"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getRealTorsoInWorld", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 309,
+	#     "returnSignature": "[f]",
+	#     "name": "_getRealTorsoInWorld",
+	#     "parametersSignature": "()",
+	#     "description": "It's a getPosition on Torso with inertial Information.This function is used in chorgraphe in 3D View",
+	#     "parameters": [],
+	#     "returnDescription": "a transform of the Torso position"
+	# }
+	return call_method("ALMotion", "_getRealTorsoInWorld", [])
 
 def _getRobotGroundConvexHullDebug() -> object:
 	"""
@@ -6252,21 +5872,18 @@ def _getRobotGroundConvexHullDebug() -> object:
 	Returns
 	----------
 	Array of ALValue arrays containing the sphere position2D and radius.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 310,
-	    "returnSignature": "m",
-	    "name": "_getRobotGroundConvexHullDebug",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": "Array of ALValue arrays containing the sphere position2D and radius."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getRobotGroundConvexHullDebug", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 310,
+	#     "returnSignature": "m",
+	#     "name": "_getRobotGroundConvexHullDebug",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": "Array of ALValue arrays containing the sphere position2D and radius."
+	# }
+	return call_method("ALMotion", "_getRobotGroundConvexHullDebug", [])
 
 def _getRobotGroundConvexHull() -> object:
 	"""
@@ -6275,21 +5892,18 @@ def _getRobotGroundConvexHull() -> object:
 	Returns
 	----------
 	Array of ALValue arrays containing the position2D of each convex hull points.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 311,
-	    "returnSignature": "m",
-	    "name": "_getRobotGroundConvexHull",
-	    "parametersSignature": "()",
-	    "description": "Get the robot convex hull projected on the ground in the ROBOT_FRAME.",
-	    "parameters": [],
-	    "returnDescription": "Array of ALValue arrays containing the position2D of each convex hull points."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getRobotGroundConvexHull", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 311,
+	#     "returnSignature": "m",
+	#     "name": "_getRobotGroundConvexHull",
+	#     "parametersSignature": "()",
+	#     "description": "Get the robot convex hull projected on the ground in the ROBOT_FRAME.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of ALValue arrays containing the position2D of each convex hull points."
+	# }
+	return call_method("ALMotion", "_getRobotGroundConvexHull", [])
 
 def _getJointIsMoving(useSensors:bool) -> List[int]:
 	"""
@@ -6303,26 +5917,23 @@ def _getJointIsMoving(useSensors:bool) -> List[int]:
 	Returns
 	----------
 	a vector of boolean.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 312,
-	    "returnSignature": "[i]",
-	    "name": "_getJointIsMoving",
-	    "parametersSignature": "(b)",
-	    "description": "Gets if the joints is moving",
-	    "parameters": [
-	        {
-	            "name": "useSensors",
-	            "description": "If true, sensor information will be returned"
-	        }
-	    ],
-	    "returnDescription": "a vector of boolean."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getJointIsMoving", [useSensors])
+	# NAOqi metadata:
+	# {
+	#     "uid": 312,
+	#     "returnSignature": "[i]",
+	#     "name": "_getJointIsMoving",
+	#     "parametersSignature": "(b)",
+	#     "description": "Gets if the joints is moving",
+	#     "parameters": [
+	#         {
+	#             "name": "useSensors",
+	#             "description": "If true, sensor information will be returned"
+	#         }
+	#     ],
+	#     "returnDescription": "a vector of boolean."
+	# }
+	return call_method("ALMotion", "_getJointIsMoving", [useSensors])
 
 def _getChainIsMoving(useSensors:bool) -> List[int]:
 	"""
@@ -6336,26 +5947,23 @@ def _getChainIsMoving(useSensors:bool) -> List[int]:
 	Returns
 	----------
 	a vector of boolean.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 313,
-	    "returnSignature": "[i]",
-	    "name": "_getChainIsMoving",
-	    "parametersSignature": "(b)",
-	    "description": "Gets if the chain is moving",
-	    "parameters": [
-	        {
-	            "name": "useSensors",
-	            "description": "If true, sensor information will be returned"
-	        }
-	    ],
-	    "returnDescription": "a vector of boolean."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getChainIsMoving", [useSensors])
+	# NAOqi metadata:
+	# {
+	#     "uid": 313,
+	#     "returnSignature": "[i]",
+	#     "name": "_getChainIsMoving",
+	#     "parametersSignature": "(b)",
+	#     "description": "Gets if the chain is moving",
+	#     "parameters": [
+	#         {
+	#             "name": "useSensors",
+	#             "description": "If true, sensor information will be returned"
+	#         }
+	#     ],
+	#     "returnDescription": "a vector of boolean."
+	# }
+	return call_method("ALMotion", "_getChainIsMoving", [useSensors])
 
 def _setAnimationModeEnabled(pEnable:bool) -> None:
 	"""
@@ -6365,26 +5973,23 @@ def _setAnimationModeEnabled(pEnable:bool) -> None:
 	----------
 	pEnable:bool
 		Activate or disactivate the animation Mode.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 314,
-	    "returnSignature": "v",
-	    "name": "_setAnimationModeEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "In fact, it's an hide way to allow the fall manager to disable the fall manager. Note, it's inverse (true set fall to false)",
-	    "parameters": [
-	        {
-	            "name": "pEnable",
-	            "description": "Activate or disactivate the animation Mode."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setAnimationModeEnabled", [pEnable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 314,
+	#     "returnSignature": "v",
+	#     "name": "_setAnimationModeEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "In fact, it's an hide way to allow the fall manager to disable the fall manager. Note, it's inverse (true set fall to false)",
+	#     "parameters": [
+	#         {
+	#             "name": "pEnable",
+	#             "description": "Activate or disactivate the animation Mode."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setAnimationModeEnabled", [pEnable])
 
 def _getMotionConfig(pName:str) -> str:
 	"""
@@ -6398,26 +6003,23 @@ def _getMotionConfig(pName:str) -> str:
 	Returns
 	----------
 	string contraining all the information.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 315,
-	    "returnSignature": "s",
-	    "name": "_getMotionConfig",
-	    "parametersSignature": "(s)",
-	    "description": "Get the motion configuration.",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "\"All\", \"State\", \"Mode\", \"Protection\", \"Collision\", \"Basic\", \"Move\", \"Tracker\", \"Walk\", \"OmniWheel\", \"Log\", \"RobotState\", \"Duration\", \"Control\", \"SmartStiffness\",\"WB\", \"FallManager\"."
-	        }
-	    ],
-	    "returnDescription": "string contraining all the information."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getMotionConfig", [pName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 315,
+	#     "returnSignature": "s",
+	#     "name": "_getMotionConfig",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get the motion configuration.",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "\"All\", \"State\", \"Mode\", \"Protection\", \"Collision\", \"Basic\", \"Move\", \"Tracker\", \"Walk\", \"OmniWheel\", \"Log\", \"RobotState\", \"Duration\", \"Control\", \"SmartStiffness\",\"WB\", \"FallManager\"."
+	#         }
+	#     ],
+	#     "returnDescription": "string contraining all the information."
+	# }
+	return call_method("ALMotion", "_getMotionConfig", [pName])
 
 def _getSupportPolygonCenter() -> List[float]:
 	"""
@@ -6426,21 +6028,18 @@ def _getSupportPolygonCenter() -> List[float]:
 	Returns
 	----------
 	A vector containing the x,y coordinates of the center of the support polygon
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 316,
-	    "returnSignature": "[f]",
-	    "name": "_getSupportPolygonCenter",
-	    "parametersSignature": "()",
-	    "description": "Gets the center of the support polygon in frame robot.",
-	    "parameters": [],
-	    "returnDescription": "A vector containing the x,y coordinates of the center of the support polygon"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getSupportPolygonCenter", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 316,
+	#     "returnSignature": "[f]",
+	#     "name": "_getSupportPolygonCenter",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the center of the support polygon in frame robot.",
+	#     "parameters": [],
+	#     "returnDescription": "A vector containing the x,y coordinates of the center of the support polygon"
+	# }
+	return call_method("ALMotion", "_getSupportPolygonCenter", [])
 
 def _getComWorld() -> List[float]:
 	"""
@@ -6449,21 +6048,18 @@ def _getComWorld() -> List[float]:
 	Returns
 	----------
 	A Position3D (x,y,z) coordinates of com in World Space
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 317,
-	    "returnSignature": "[f]",
-	    "name": "_getComWorld",
-	    "parametersSignature": "()",
-	    "description": "Gets the support polygon",
-	    "parameters": [],
-	    "returnDescription": "A Position3D (x,y,z) coordinates of com in World Space"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getComWorld", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 317,
+	#     "returnSignature": "[f]",
+	#     "name": "_getComWorld",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the support polygon",
+	#     "parameters": [],
+	#     "returnDescription": "A Position3D (x,y,z) coordinates of com in World Space"
+	# }
+	return call_method("ALMotion", "_getComWorld", [])
 
 def _getWorldRotation() -> List[float]:
 	"""
@@ -6472,21 +6068,18 @@ def _getWorldRotation() -> List[float]:
 	Returns
 	----------
 	A Rotation3D (wx,wy,0) coresponding to world rotation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 318,
-	    "returnSignature": "[f]",
-	    "name": "_getWorldRotation",
-	    "parametersSignature": "()",
-	    "description": "Gets the support polygon",
-	    "parameters": [],
-	    "returnDescription": "A Rotation3D (wx,wy,0) coresponding to world rotation"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getWorldRotation", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 318,
+	#     "returnSignature": "[f]",
+	#     "name": "_getWorldRotation",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the support polygon",
+	#     "parameters": [],
+	#     "returnDescription": "A Rotation3D (wx,wy,0) coresponding to world rotation"
+	# }
+	return call_method("ALMotion", "_getWorldRotation", [])
 
 def _fall(pFallAngle:float) -> None:
 	"""
@@ -6496,45 +6089,39 @@ def _fall(pFallAngle:float) -> None:
 	----------
 	pFallAngle:float
 		The fall angle in degree.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 319,
-	    "returnSignature": "v",
-	    "name": "_fall",
-	    "parametersSignature": "(f)",
-	    "description": "Activate the fall task",
-	    "parameters": [
-	        {
-	            "name": "pFallAngle",
-	            "description": "The fall angle in degree."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_fall", [pFallAngle])
+	# NAOqi metadata:
+	# {
+	#     "uid": 319,
+	#     "returnSignature": "v",
+	#     "name": "_fall",
+	#     "parametersSignature": "(f)",
+	#     "description": "Activate the fall task",
+	#     "parameters": [
+	#         {
+	#             "name": "pFallAngle",
+	#             "description": "The fall angle in degree."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_fall", [pFallAngle])
 
 def _relaxMotorsWhenSitting() -> None:
 	"""
 	A patch to avoid to consume too much current after a SitDown.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 320,
-	    "returnSignature": "v",
-	    "name": "_relaxMotorsWhenSitting",
-	    "parametersSignature": "()",
-	    "description": "A patch to avoid to consume too much current after a SitDown.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_relaxMotorsWhenSitting", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 320,
+	#     "returnSignature": "v",
+	#     "name": "_relaxMotorsWhenSitting",
+	#     "parametersSignature": "()",
+	#     "description": "A patch to avoid to consume too much current after a SitDown.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_relaxMotorsWhenSitting", [])
 
 def _relax(chainName:object, delayInSeconds:float) -> None:
 	"""
@@ -6546,68 +6133,59 @@ def _relax(chainName:object, delayInSeconds:float) -> None:
 		The name of the chain to relax.
 	delayInSeconds:float
 		The duration the low stiffness time.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 321,
-	    "returnSignature": "v",
-	    "name": "_relax",
-	    "parametersSignature": "(mf)",
-	    "description": "Relax a chain.",
-	    "parameters": [
-	        {
-	            "name": "chainName",
-	            "description": "The name of the chain to relax."
-	        },
-	        {
-	            "name": "delayInSeconds",
-	            "description": "The duration the low stiffness time."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_relax", [chainName, delayInSeconds])
+	# NAOqi metadata:
+	# {
+	#     "uid": 321,
+	#     "returnSignature": "v",
+	#     "name": "_relax",
+	#     "parametersSignature": "(mf)",
+	#     "description": "Relax a chain.",
+	#     "parameters": [
+	#         {
+	#             "name": "chainName",
+	#             "description": "The name of the chain to relax."
+	#         },
+	#         {
+	#             "name": "delayInSeconds",
+	#             "description": "The duration the low stiffness time."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_relax", [chainName, delayInSeconds])
 
 def _resetCartesianUnfeasible() -> None:
 	"""
 	Reset to false the bool Cartesian Unfeasible: used for testing motion.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 322,
-	    "returnSignature": "v",
-	    "name": "_resetCartesianUnfeasible",
-	    "parametersSignature": "()",
-	    "description": "Reset to false the bool Cartesian Unfeasible: used for testing motion.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_resetCartesianUnfeasible", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 322,
+	#     "returnSignature": "v",
+	#     "name": "_resetCartesianUnfeasible",
+	#     "parametersSignature": "()",
+	#     "description": "Reset to false the bool Cartesian Unfeasible: used for testing motion.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_resetCartesianUnfeasible", [])
 
 def _setCartesianUnfeasible() -> None:
 	"""
 	et to true the bool Cartesian Unfeasible: used for testing motion.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 323,
-	    "returnSignature": "v",
-	    "name": "_setCartesianUnfeasible",
-	    "parametersSignature": "()",
-	    "description": "et to true the bool Cartesian Unfeasible: used for testing motion.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_setCartesianUnfeasible", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 323,
+	#     "returnSignature": "v",
+	#     "name": "_setCartesianUnfeasible",
+	#     "parametersSignature": "()",
+	#     "description": "et to true the bool Cartesian Unfeasible: used for testing motion.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_setCartesianUnfeasible", [])
 
 def _getCartesianUnfeasible() -> int:
 	"""
@@ -6616,59 +6194,50 @@ def _getCartesianUnfeasible() -> int:
 	Returns
 	----------
 	True if there are one cartesian unfeasible during one motion cycle since last reset.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 324,
-	    "returnSignature": "i",
-	    "name": "_getCartesianUnfeasible",
-	    "parametersSignature": "()",
-	    "description": "Get the Cartesian Unfeasible state since last reset: used for testing motion.",
-	    "parameters": [],
-	    "returnDescription": "True if there are one cartesian unfeasible during one motion cycle since last reset."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getCartesianUnfeasible", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 324,
+	#     "returnSignature": "i",
+	#     "name": "_getCartesianUnfeasible",
+	#     "parametersSignature": "()",
+	#     "description": "Get the Cartesian Unfeasible state since last reset: used for testing motion.",
+	#     "parameters": [],
+	#     "returnDescription": "True if there are one cartesian unfeasible during one motion cycle since last reset."
+	# }
+	return call_method("ALMotion", "_getCartesianUnfeasible", [])
 
 def _saveWholeBodyDump() -> None:
 	"""
 	Save current whole body dump
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 325,
-	    "returnSignature": "v",
-	    "name": "_saveWholeBodyDump",
-	    "parametersSignature": "()",
-	    "description": "Save current whole body dump",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_saveWholeBodyDump", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 325,
+	#     "returnSignature": "v",
+	#     "name": "_saveWholeBodyDump",
+	#     "parametersSignature": "()",
+	#     "description": "Save current whole body dump",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_saveWholeBodyDump", [])
 
 def _resetNumJointCommandDiscontinuities() -> None:
 	"""
 	Reset the number of joint command discontinuous updates.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 326,
-	    "returnSignature": "v",
-	    "name": "_resetNumJointCommandDiscontinuities",
-	    "parametersSignature": "()",
-	    "description": "Reset the number of joint command discontinuous updates.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_resetNumJointCommandDiscontinuities", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 326,
+	#     "returnSignature": "v",
+	#     "name": "_resetNumJointCommandDiscontinuities",
+	#     "parametersSignature": "()",
+	#     "description": "Reset the number of joint command discontinuous updates.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_resetNumJointCommandDiscontinuities", [])
 
 def _getNumJointCommandDiscontinuities() -> int:
 	"""
@@ -6677,21 +6246,18 @@ def _getNumJointCommandDiscontinuities() -> int:
 	Returns
 	----------
 	The number of discontinuities since last reset.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 327,
-	    "returnSignature": "I",
-	    "name": "_getNumJointCommandDiscontinuities",
-	    "parametersSignature": "()",
-	    "description": "Get the number of joint command discontinuous updates since last reset.",
-	    "parameters": [],
-	    "returnDescription": "The number of discontinuities since last reset."
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getNumJointCommandDiscontinuities", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 327,
+	#     "returnSignature": "I",
+	#     "name": "_getNumJointCommandDiscontinuities",
+	#     "parametersSignature": "()",
+	#     "description": "Get the number of joint command discontinuous updates since last reset.",
+	#     "parameters": [],
+	#     "returnDescription": "The number of discontinuities since last reset."
+	# }
+	return call_method("ALMotion", "_getNumJointCommandDiscontinuities", [])
 
 def _resetMotionCommandModelToSensors(pName:object) -> None:
 	"""
@@ -6702,45 +6268,23 @@ def _resetMotionCommandModelToSensors(pName:object) -> None:
 	----------
 	pName:object
 		Names the joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 328,
-	    "returnSignature": "v",
-	    "name": "_resetMotionCommandModelToSensors",
-	    "parametersSignature": "(m)",
-	    "description": "Usefull function to resynchronize ALMotion and DCM \nIn fact we set motion command model with sensors information",
-	    "parameters": [
-	        {
-	            "name": "pName",
-	            "description": "Names the joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_resetMotionCommandModelToSensors", [pName])
-
-def _getMotionToDCM() -> MotionToDCM:
-	"""
-	Get motion to dcm commands
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 329,
-	    "returnSignature": "(iXXXXXXXXb)<MotionToDCM,whenToSendToDcm,anglesJoint,anglesActuator,stiffnessesJoint,stiffnessesActuator,stiffnessesWheel,velocitiesJoint,velocitiesWheel,torquesJoint,enableFuseProtection>",
-	    "name": "_getMotionToDCM",
-	    "parametersSignature": "()",
-	    "description": "Get motion to dcm commands",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMotion", "_getMotionToDCM", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 328,
+	#     "returnSignature": "v",
+	#     "name": "_resetMotionCommandModelToSensors",
+	#     "parametersSignature": "(m)",
+	#     "description": "Usefull function to resynchronize ALMotion and DCM \nIn fact we set motion command model with sensors information",
+	#     "parameters": [
+	#         {
+	#             "name": "pName",
+	#             "description": "Names the joints, chains, \"Body\", \"JointActuators\", \"Joints\" or \"Actuators\". "
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_resetMotionCommandModelToSensors", [pName])
 
 def _getBlindZones() -> object:
 	"""
@@ -6749,21 +6293,18 @@ def _getBlindZones() -> object:
 	Returns
 	----------
 	the blind zones [[[x, y], ..., [x, y]]...]
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 330,
-	    "returnSignature": "m",
-	    "name": "_getBlindZones",
-	    "parametersSignature": "()",
-	    "description": "Get the blind zones convex polygon.",
-	    "parameters": [],
-	    "returnDescription": "the blind zones [[[x, y], ..., [x, y]]...]"
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_getBlindZones", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 330,
+	#     "returnSignature": "m",
+	#     "name": "_getBlindZones",
+	#     "parametersSignature": "()",
+	#     "description": "Get the blind zones convex polygon.",
+	#     "parameters": [],
+	#     "returnDescription": "the blind zones [[[x, y], ..., [x, y]]...]"
+	# }
+	return call_method("ALMotion", "_getBlindZones", [])
 
 def _freeze(pChainName:str, pDuration:float) -> None:
 	"""
@@ -6780,29 +6321,30 @@ def _freeze(pChainName:str, pDuration:float) -> None:
 	----------
 	A cancellable future to unfreeze the chain.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 331,
-	    "returnSignature": "v",
-	    "name": "_freeze",
-	    "parametersSignature": "(sf)",
-	    "description": "Freeze chain movement.",
-	    "parameters": [
-	        {
-	            "name": "pChainName",
-	            "description": "Name of the chain to freeze."
-	        },
-	        {
-	            "name": "pDuration",
-	            "description": "Freeze duration in seconds."
-	        }
-	    ],
-	    "returnDescription": "A cancellable future to unfreeze the chain."
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALMotion", "_freeze", [pChainName, pDuration])
+	# NAOqi metadata:
+	# {
+	#     "uid": 331,
+	#     "returnSignature": "v",
+	#     "name": "_freeze",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Freeze chain movement.",
+	#     "parameters": [
+	#         {
+	#             "name": "pChainName",
+	#             "description": "Name of the chain to freeze."
+	#         },
+	#         {
+	#             "name": "pDuration",
+	#             "description": "Freeze duration in seconds."
+	#         }
+	#     ],
+	#     "returnDescription": "A cancellable future to unfreeze the chain."
+	# }
+	return call_method("ALMotion", "_freeze", [pChainName, pDuration])
 
 def _dumpBlackBoxUntil(pPath:str, pTime:int) -> None:
 	"""
@@ -6814,30 +6356,27 @@ def _dumpBlackBoxUntil(pPath:str, pTime:int) -> None:
 		The path where the blackbox shall be written.
 	pTime:int
 		The dump will include data until `pTime`.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 332,
-	    "returnSignature": "v",
-	    "name": "_dumpBlackBoxUntil",
-	    "parametersSignature": "(sL)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "pPath",
-	            "description": "The path where the blackbox shall be written."
-	        },
-	        {
-	            "name": "pTime",
-	            "description": "The dump will include data until `pTime`."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_dumpBlackBoxUntil", [pPath, pTime])
+	# NAOqi metadata:
+	# {
+	#     "uid": 332,
+	#     "returnSignature": "v",
+	#     "name": "_dumpBlackBoxUntil",
+	#     "parametersSignature": "(sL)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "pPath",
+	#             "description": "The path where the blackbox shall be written."
+	#         },
+	#         {
+	#             "name": "pTime",
+	#             "description": "The dump will include data until `pTime`."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_dumpBlackBoxUntil", [pPath, pTime])
 
 def _dumpBlackBox(pPath:str, pDeltaTime:int) -> None:
 	"""
@@ -6849,28 +6388,25 @@ def _dumpBlackBox(pPath:str, pDeltaTime:int) -> None:
 		The path where the blackbox shall be written.
 	pDeltaTime:int
 		The dump will include data until `qi::Clock::now() + pDeltaTime`. Default to zero.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 333,
-	    "returnSignature": "v",
-	    "name": "_dumpBlackBox",
-	    "parametersSignature": "(sL)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "pPath",
-	            "description": "The path where the blackbox shall be written."
-	        },
-	        {
-	            "name": "pDeltaTime",
-	            "description": "The dump will include data until `qi::Clock::now() + pDeltaTime`. Default to zero."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMotion", "_dumpBlackBox", [pPath, pDeltaTime])
+	# NAOqi metadata:
+	# {
+	#     "uid": 333,
+	#     "returnSignature": "v",
+	#     "name": "_dumpBlackBox",
+	#     "parametersSignature": "(sL)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "pPath",
+	#             "description": "The path where the blackbox shall be written."
+	#         },
+	#         {
+	#             "name": "pDeltaTime",
+	#             "description": "The dump will include data until `qi::Clock::now() + pDeltaTime`. Default to zero."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMotion", "_dumpBlackBox", [pPath, pDeltaTime])
 

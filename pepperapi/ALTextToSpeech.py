@@ -1,335 +1,10 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 This module embeds a speech synthetizer whose role is to convert text commands into sound waves that are then either sent to Nao's loudspeakers or written into a file. This service supports several languages and some parameters of the synthetizer can be tuned to change each language's synthetic voice.
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
 def version() -> str:
 	"""
@@ -338,21 +13,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALTextToSpeech", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +33,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALTextToSpeech", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +53,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALTextToSpeech", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +78,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALTextToSpeech", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +103,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALTextToSpeech", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +123,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALTextToSpeech", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,31 +148,27 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALTextToSpeech", "getUsage", [name])
 
-def say_1(stringToSay:str) -> None:
+@overload
+def say(stringToSay:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (say)
-	
 	Performs the text-to-speech operations : it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8.
 	
 	Parameters
@@ -657,30 +176,32 @@ def say_1(stringToSay:str) -> None:
 	stringToSay:str
 		Text to say, encoded in UTF-8.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "v",
-	    "name": "say",
-	    "parametersSignature": "(s)",
-	    "description": "Performs the text-to-speech operations : it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8.",
-	    "parameters": [
-	        {
-	            "name": "stringToSay",
-	            "description": "Text to say, encoded in UTF-8."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "say", [stringToSay])
-
-def say_2(stringToSay:str, language:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (say)
+	Bridge notes
+	------------
+	say has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "v",
+	#     "name": "say",
+	#     "parametersSignature": "(s)",
+	#     "description": "Performs the text-to-speech operations : it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8.",
+	#     "parameters": [
+	#         {
+	#             "name": "stringToSay",
+	#             "description": "Text to say, encoded in UTF-8."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def say(stringToSay:str, language:str, /) -> None:
+	"""
 	Performs the text-to-speech operations in a specific language: it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8. Once the text is said, the language is set back to its initial value.
 	
 	Parameters
@@ -690,29 +211,46 @@ def say_2(stringToSay:str, language:str) -> None:
 	language:str
 		Language used to say the text.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "say",
-	    "parametersSignature": "(ss)",
-	    "description": "Performs the text-to-speech operations in a specific language: it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8. Once the text is said, the language is set back to its initial value.",
-	    "parameters": [
-	        {
-	            "name": "stringToSay",
-	            "description": "Text to say, encoded in UTF-8."
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language used to say the text."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	say has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALTextToSpeech", "say", [stringToSay, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "say",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Performs the text-to-speech operations in a specific language: it takes a std::string as input and outputs a sound in both speakers. String encoding must be UTF8. Once the text is said, the language is set back to its initial value.",
+	#     "parameters": [
+	#         {
+	#             "name": "stringToSay",
+	#             "description": "Text to say, encoded in UTF-8."
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language used to say the text."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def say(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	say has 2 variants on the robot:
+	- say(stringToSay:str)
+	- say(stringToSay:str, language:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALTextToSpeech.say has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALTextToSpeech", "say", list(args))
 
 def sayToFile(pStringToSay:str, pFileName:str) -> None:
 	"""
@@ -729,48 +267,46 @@ def sayToFile(pStringToSay:str, pFileName:str) -> None:
 	----------
 	Id of the task. Can be used to interrupt it.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "sayToFile",
-	    "parametersSignature": "(ss)",
-	    "description": "Performs the text-to-speech operations: it takes a std::string as input and outputs the corresponding audio signal in the specified file.",
-	    "parameters": [
-	        {
-	            "name": "pStringToSay",
-	            "description": "Text to say, encoded in UTF-8."
-	        },
-	        {
-	            "name": "pFileName",
-	            "description": "RAW file where to store the generated signal. The signal is encoded with a sample rate of 22050Hz, format S16_LE, 2 channels."
-	        }
-	    ],
-	    "returnDescription": "Id of the task. Can be used to interrupt it."
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALTextToSpeech", "sayToFile", [pStringToSay, pFileName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "sayToFile",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Performs the text-to-speech operations: it takes a std::string as input and outputs the corresponding audio signal in the specified file.",
+	#     "parameters": [
+	#         {
+	#             "name": "pStringToSay",
+	#             "description": "Text to say, encoded in UTF-8."
+	#         },
+	#         {
+	#             "name": "pFileName",
+	#             "description": "RAW file where to store the generated signal. The signal is encoded with a sample rate of 22050Hz, format S16_LE, 2 channels."
+	#         }
+	#     ],
+	#     "returnDescription": "Id of the task. Can be used to interrupt it."
+	# }
+	return call_method("ALTextToSpeech", "sayToFile", [pStringToSay, pFileName])
 
 def stopAll() -> None:
 	"""
 	This method stops the current and all the pending tasks immediately.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "stopAll",
-	    "parametersSignature": "()",
-	    "description": "This method stops the current and all the pending tasks immediately.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "stopAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "stopAll",
+	#     "parametersSignature": "()",
+	#     "description": "This method stops the current and all the pending tasks immediately.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "stopAll", [])
 
 def setLanguage(pLanguage:str) -> None:
 	"""
@@ -780,26 +316,23 @@ def setLanguage(pLanguage:str) -> None:
 	----------
 	pLanguage:str
 		Language name. Must belong to the languages available in TTS (can be obtained with the getAvailableLanguages method).  It should be an identifier std::string.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "setLanguage",
-	    "parametersSignature": "(s)",
-	    "description": "Changes the language used by the Text-to-Speech engine. It automatically changes the voice used since each of them is related to a unique language. If you want that change to take effect automatically after reboot of your robot, refer to the robot web page (setting page).",
-	    "parameters": [
-	        {
-	            "name": "pLanguage",
-	            "description": "Language name. Must belong to the languages available in TTS (can be obtained with the getAvailableLanguages method).  It should be an identifier std::string."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "setLanguage", [pLanguage])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "setLanguage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Changes the language used by the Text-to-Speech engine. It automatically changes the voice used since each of them is related to a unique language. If you want that change to take effect automatically after reboot of your robot, refer to the robot web page (setting page).",
+	#     "parameters": [
+	#         {
+	#             "name": "pLanguage",
+	#             "description": "Language name. Must belong to the languages available in TTS (can be obtained with the getAvailableLanguages method).  It should be an identifier std::string."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "setLanguage", [pLanguage])
 
 def getLanguage() -> str:
 	"""
@@ -808,21 +341,18 @@ def getLanguage() -> str:
 	Returns
 	----------
 	Language of the current voice.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "s",
-	    "name": "getLanguage",
-	    "parametersSignature": "()",
-	    "description": "Returns the language currently used by the text-to-speech engine.",
-	    "parameters": [],
-	    "returnDescription": "Language of the current voice."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getLanguage", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "s",
+	#     "name": "getLanguage",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the language currently used by the text-to-speech engine.",
+	#     "parameters": [],
+	#     "returnDescription": "Language of the current voice."
+	# }
+	return call_method("ALTextToSpeech", "getLanguage", [])
 
 def getAvailableLanguages() -> List[str]:
 	"""
@@ -831,21 +361,18 @@ def getAvailableLanguages() -> List[str]:
 	Returns
 	----------
 	Array of std::string that contains the languages installed on the system.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "[s]",
-	    "name": "getAvailableLanguages",
-	    "parametersSignature": "()",
-	    "description": "Outputs the languages installed on the system.",
-	    "parameters": [],
-	    "returnDescription": "Array of std::string that contains the languages installed on the system."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getAvailableLanguages", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "[s]",
+	#     "name": "getAvailableLanguages",
+	#     "parametersSignature": "()",
+	#     "description": "Outputs the languages installed on the system.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of std::string that contains the languages installed on the system."
+	# }
+	return call_method("ALTextToSpeech", "getAvailableLanguages", [])
 
 def getSupportedLanguages() -> List[str]:
 	"""
@@ -854,52 +381,49 @@ def getSupportedLanguages() -> List[str]:
 	Returns
 	----------
 	Array of std::string that contains all the supported languages (may be installed or not).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "[s]",
-	    "name": "getSupportedLanguages",
-	    "parametersSignature": "()",
-	    "description": "Outputs all the languages supported (may be installed or not).",
-	    "parameters": [],
-	    "returnDescription": "Array of std::string that contains all the supported languages (may be installed or not)."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getSupportedLanguages", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "[s]",
+	#     "name": "getSupportedLanguages",
+	#     "parametersSignature": "()",
+	#     "description": "Outputs all the languages supported (may be installed or not).",
+	#     "parameters": [],
+	#     "returnDescription": "Array of std::string that contains all the supported languages (may be installed or not)."
+	# }
+	return call_method("ALTextToSpeech", "getSupportedLanguages", [])
 
 def resetSpeed() -> None:
 	"""
-	*Parsing issues:*
-		*Mismatch between 'parameters' and 'parametersSignature'*
-		
 	Changes the parameters of the voice. For now, it is only possible to reset the voice speed.
 	
 	Returns
 	----------
 	(int) >= 0 if successful, negative error code if failed Vincent : pas sûr que cette fonction balance un truc en sortie
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "v",
-	    "name": "resetSpeed",
-	    "parametersSignature": "()",
-	    "description": "Changes the parameters of the voice. For now, it is only possible to reset the voice speed.",
-	    "parameters": [
-	        {
-	            "name": "pEffectName",
-	            "description": "Name of the parameter."
-	        }
-	    ],
-	    "returnDescription": "(int) >= 0 if successful, negative error code if failed Vincent : pas s\u00fbr que cette fonction balance un truc en sortie"
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation lists a parameter (pEffectName) that the method's signature doesn't have. This function follows the signature and takes no arguments.
+	
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALTextToSpeech", "resetSpeed", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "v",
+	#     "name": "resetSpeed",
+	#     "parametersSignature": "()",
+	#     "description": "Changes the parameters of the voice. For now, it is only possible to reset the voice speed.",
+	#     "parameters": [
+	#         {
+	#             "name": "pEffectName",
+	#             "description": "Name of the parameter."
+	#         }
+	#     ],
+	#     "returnDescription": "(int) >= 0 if successful, negative error code if failed Vincent : pas s\u00fbr que cette fonction balance un truc en sortie"
+	# }
+	return call_method("ALTextToSpeech", "resetSpeed", [])
 
 def setParameter(pEffectName:str, pEffectValue:float) -> None:
 	"""
@@ -921,29 +445,30 @@ def setParameter(pEffectName:str, pEffectValue:float) -> None:
 	----------
 	(int) >= 0 if successful, negative error code if failed Vincent : pas sûr que cette fonction balance un truc en sortie
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "v",
-	    "name": "setParameter",
-	    "parametersSignature": "(sf)",
-	    "description": "Changes the parameters of the voice. The available parameters are: \n \t pitchShift: applies a pitch shifting to the voice. The value indicates the ratio between the new fundamental frequencies and the old ones (examples: 2.0: an octave above, 1.5: a quint above). Correct range is (1.0 -- 4), or 0 to disable effect.\n \t doubleVoice: adds a second voice to the first one. The value indicates the ratio between the second voice fundamental frequency and the first one. Correct range is (1.0 -- 4), or 0 to disable effect \n \t doubleVoiceLevel: the corresponding value is the level of the double voice (1.0: equal to the main voice one). Correct range is (0 -- 4). \n \t doubleVoiceTimeShift: the corresponding value is the delay between the double voice and the main one. Correct range is (0 -- 0.5) \n If the effect value is not available, the effect parameter remains unchanged.",
-	    "parameters": [
-	        {
-	            "name": "pEffectName",
-	            "description": "Name of the parameter."
-	        },
-	        {
-	            "name": "pEffectValue",
-	            "description": "Value of the parameter."
-	        }
-	    ],
-	    "returnDescription": "(int) >= 0 if successful, negative error code if failed Vincent : pas s\u00fbr que cette fonction balance un truc en sortie"
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALTextToSpeech", "setParameter", [pEffectName, pEffectValue])
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "v",
+	#     "name": "setParameter",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Changes the parameters of the voice. The available parameters are: \n \t pitchShift: applies a pitch shifting to the voice. The value indicates the ratio between the new fundamental frequencies and the old ones (examples: 2.0: an octave above, 1.5: a quint above). Correct range is (1.0 -- 4), or 0 to disable effect.\n \t doubleVoice: adds a second voice to the first one. The value indicates the ratio between the second voice fundamental frequency and the first one. Correct range is (1.0 -- 4), or 0 to disable effect \n \t doubleVoiceLevel: the corresponding value is the level of the double voice (1.0: equal to the main voice one). Correct range is (0 -- 4). \n \t doubleVoiceTimeShift: the corresponding value is the delay between the double voice and the main one. Correct range is (0 -- 0.5) \n If the effect value is not available, the effect parameter remains unchanged.",
+	#     "parameters": [
+	#         {
+	#             "name": "pEffectName",
+	#             "description": "Name of the parameter."
+	#         },
+	#         {
+	#             "name": "pEffectValue",
+	#             "description": "Value of the parameter."
+	#         }
+	#     ],
+	#     "returnDescription": "(int) >= 0 if successful, negative error code if failed Vincent : pas s\u00fbr que cette fonction balance un truc en sortie"
+	# }
+	return call_method("ALTextToSpeech", "setParameter", [pEffectName, pEffectValue])
 
 def getParameter(pParameterName:str) -> float:
 	"""
@@ -957,26 +482,23 @@ def getParameter(pParameterName:str) -> float:
 	Returns
 	----------
 	Value of the specified parameter
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "f",
-	    "name": "getParameter",
-	    "parametersSignature": "(s)",
-	    "description": "Returns the value of one of the voice parameters. The available parameters are: \"pitchShift\", \"doubleVoice\",\"doubleVoiceLevel\" and \"doubleVoiceTimeShift\"",
-	    "parameters": [
-	        {
-	            "name": "pParameterName",
-	            "description": "Name of the parameter."
-	        }
-	    ],
-	    "returnDescription": "Value of the specified parameter"
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getParameter", [pParameterName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "f",
+	#     "name": "getParameter",
+	#     "parametersSignature": "(s)",
+	#     "description": "Returns the value of one of the voice parameters. The available parameters are: \"pitchShift\", \"doubleVoice\",\"doubleVoiceLevel\" and \"doubleVoiceTimeShift\"",
+	#     "parameters": [
+	#         {
+	#             "name": "pParameterName",
+	#             "description": "Name of the parameter."
+	#         }
+	#     ],
+	#     "returnDescription": "Value of the specified parameter"
+	# }
+	return call_method("ALTextToSpeech", "getParameter", [pParameterName])
 
 def setVoice(pVoiceID:str) -> None:
 	"""
@@ -986,26 +508,23 @@ def setVoice(pVoiceID:str) -> None:
 	----------
 	pVoiceID:str
 		The voice (as a std::string).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "v",
-	    "name": "setVoice",
-	    "parametersSignature": "(s)",
-	    "description": "Changes the voice used by the text-to-speech engine. The voice identifier must belong to the installed voices, that can be listed using the 'getAvailableVoices' method. If the voice is not available, it remains unchanged. No exception is thrown in this case. For the time being, only two voices are available by default : Kenny22Enhanced (English voice) and Julie22Enhanced (French voice)",
-	    "parameters": [
-	        {
-	            "name": "pVoiceID",
-	            "description": "The voice (as a std::string)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "setVoice", [pVoiceID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "v",
+	#     "name": "setVoice",
+	#     "parametersSignature": "(s)",
+	#     "description": "Changes the voice used by the text-to-speech engine. The voice identifier must belong to the installed voices, that can be listed using the 'getAvailableVoices' method. If the voice is not available, it remains unchanged. No exception is thrown in this case. For the time being, only two voices are available by default : Kenny22Enhanced (English voice) and Julie22Enhanced (French voice)",
+	#     "parameters": [
+	#         {
+	#             "name": "pVoiceID",
+	#             "description": "The voice (as a std::string)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "setVoice", [pVoiceID])
 
 def getVoice() -> str:
 	"""
@@ -1014,21 +533,18 @@ def getVoice() -> str:
 	Returns
 	----------
 	Name of the current voice
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "s",
-	    "name": "getVoice",
-	    "parametersSignature": "()",
-	    "description": "Returns the voice currently used by the text-to-speech engine.",
-	    "parameters": [],
-	    "returnDescription": "Name of the current voice"
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getVoice", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "s",
+	#     "name": "getVoice",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the voice currently used by the text-to-speech engine.",
+	#     "parameters": [],
+	#     "returnDescription": "Name of the current voice"
+	# }
+	return call_method("ALTextToSpeech", "getVoice", [])
 
 def getAvailableVoices() -> List[str]:
 	"""
@@ -1037,21 +553,18 @@ def getAvailableVoices() -> List[str]:
 	Returns
 	----------
 	 Array of std::string containing the voices installed on the system.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "[s]",
-	    "name": "getAvailableVoices",
-	    "parametersSignature": "()",
-	    "description": "Outputs the available voices. The returned list contains the voice IDs.",
-	    "parameters": [],
-	    "returnDescription": " Array of std::string containing the voices installed on the system."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getAvailableVoices", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "[s]",
+	#     "name": "getAvailableVoices",
+	#     "parametersSignature": "()",
+	#     "description": "Outputs the available voices. The returned list contains the voice IDs.",
+	#     "parameters": [],
+	#     "returnDescription": " Array of std::string containing the voices installed on the system."
+	# }
+	return call_method("ALTextToSpeech", "getAvailableVoices", [])
 
 def setVolume(volume:float) -> None:
 	"""
@@ -1061,26 +574,23 @@ def setVolume(volume:float) -> None:
 	----------
 	volume:float
 		Volume (between 0.0 and 1.0).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "v",
-	    "name": "setVolume",
-	    "parametersSignature": "(f)",
-	    "description": "Sets the volume of text-to-speech output.",
-	    "parameters": [
-	        {
-	            "name": "volume",
-	            "description": "Volume (between 0.0 and 1.0)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "setVolume", [volume])
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "v",
+	#     "name": "setVolume",
+	#     "parametersSignature": "(f)",
+	#     "description": "Sets the volume of text-to-speech output.",
+	#     "parameters": [
+	#         {
+	#             "name": "volume",
+	#             "description": "Volume (between 0.0 and 1.0)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "setVolume", [volume])
 
 def getVolume() -> float:
 	"""
@@ -1089,21 +599,18 @@ def getVolume() -> float:
 	Returns
 	----------
 	Volume (integer between 0 and 100).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "f",
-	    "name": "getVolume",
-	    "parametersSignature": "()",
-	    "description": "Fetches the current volume the text to speech.",
-	    "parameters": [],
-	    "returnDescription": "Volume (integer between 0 and 100)."
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "getVolume", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "f",
+	#     "name": "getVolume",
+	#     "parametersSignature": "()",
+	#     "description": "Fetches the current volume the text to speech.",
+	#     "parameters": [],
+	#     "returnDescription": "Volume (integer between 0 and 100)."
+	# }
+	return call_method("ALTextToSpeech", "getVolume", [])
 
 def locale() -> str:
 	"""
@@ -1112,21 +619,18 @@ def locale() -> str:
 	Returns
 	----------
 	A string with xx_XX format (region_country)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "s",
-	    "name": "locale",
-	    "parametersSignature": "()",
-	    "description": "Get the locale associate to the current language.",
-	    "parameters": [],
-	    "returnDescription": "A string with xx_XX format (region_country)"
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "locale", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "s",
+	#     "name": "locale",
+	#     "parametersSignature": "()",
+	#     "description": "Get the locale associate to the current language.",
+	#     "parameters": [],
+	#     "returnDescription": "A string with xx_XX format (region_country)"
+	# }
+	return call_method("ALTextToSpeech", "locale", [])
 
 def loadVoicePreference(pPreferenceName:str) -> None:
 	"""
@@ -1136,26 +640,23 @@ def loadVoicePreference(pPreferenceName:str) -> None:
 	----------
 	pPreferenceName:str
 		Name of the voice preference.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "v",
-	    "name": "loadVoicePreference",
-	    "parametersSignature": "(s)",
-	    "description": "Loads a set of voice parameters defined in a xml file contained in the preferences folder.The name of the xml file must begin with ALTextToSpeech_Voice_ ",
-	    "parameters": [
-	        {
-	            "name": "pPreferenceName",
-	            "description": "Name of the voice preference."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "loadVoicePreference", [pPreferenceName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "v",
+	#     "name": "loadVoicePreference",
+	#     "parametersSignature": "(s)",
+	#     "description": "Loads a set of voice parameters defined in a xml file contained in the preferences folder.The name of the xml file must begin with ALTextToSpeech_Voice_ ",
+	#     "parameters": [
+	#         {
+	#             "name": "pPreferenceName",
+	#             "description": "Name of the voice preference."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "loadVoicePreference", [pPreferenceName])
 
 def _setDefaultLanguage(Language:str) -> None:
 	"""
@@ -1165,26 +666,23 @@ def _setDefaultLanguage(Language:str) -> None:
 	----------
 	Language:str
 		The language among those available on your robot as a String
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "v",
-	    "name": "_setDefaultLanguage",
-	    "parametersSignature": "(s)",
-	    "description": "Sets a language as the default language for the synthesis engine",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "The language among those available on your robot as a String"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_setDefaultLanguage", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "v",
+	#     "name": "_setDefaultLanguage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Sets a language as the default language for the synthesis engine",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "The language among those available on your robot as a String"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_setDefaultLanguage", [Language])
 
 def setLanguageDefaultVoice(Language:str, Voice:str) -> None:
 	"""
@@ -1196,49 +694,43 @@ def setLanguageDefaultVoice(Language:str, Voice:str) -> None:
 		The language among those available on your robot as a String
 	Voice:str
 		The voice among those available on your robot as a String
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "v",
-	    "name": "setLanguageDefaultVoice",
-	    "parametersSignature": "(ss)",
-	    "description": "Sets a voice as the default voice for the corresponding language",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "The language among those available on your robot as a String"
-	        },
-	        {
-	            "name": "Voice",
-	            "description": "The voice among those available on your robot as a String"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "setLanguageDefaultVoice", [Language, Voice])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "v",
+	#     "name": "setLanguageDefaultVoice",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Sets a voice as the default voice for the corresponding language",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "The language among those available on your robot as a String"
+	#         },
+	#         {
+	#             "name": "Voice",
+	#             "description": "The voice among those available on your robot as a String"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "setLanguageDefaultVoice", [Language, Voice])
 
 def _setDefaultVoice() -> None:
 	"""
 	Sets the default voice for the current language, if there's one.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "v",
-	    "name": "_setDefaultVoice",
-	    "parametersSignature": "()",
-	    "description": "Sets the default voice for the current language, if there's one.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_setDefaultVoice", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "v",
+	#     "name": "_setDefaultVoice",
+	#     "parametersSignature": "()",
+	#     "description": "Sets the default voice for the current language, if there's one.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_setDefaultVoice", [])
 
 def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 	"""
@@ -1252,21 +744,18 @@ def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "v",
-	    "name": "_naoStoreApplicationInstalled",
-	    "parametersSignature": "(sms)",
-	    "description": "reload the engine if new application installed is a language",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_naoStoreApplicationInstalled", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "v",
+	#     "name": "_naoStoreApplicationInstalled",
+	#     "parametersSignature": "(sms)",
+	#     "description": "reload the engine if new application installed is a language",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_naoStoreApplicationInstalled", [p0, p1, p2])
 
 def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
 	"""
@@ -1280,59 +769,50 @@ def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "v",
-	    "name": "_naoStoreApplicationUninstalled",
-	    "parametersSignature": "(sms)",
-	    "description": "reload the engine if application uninstalled is a language",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_naoStoreApplicationUninstalled", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "v",
+	#     "name": "_naoStoreApplicationUninstalled",
+	#     "parametersSignature": "(sms)",
+	#     "description": "reload the engine if application uninstalled is a language",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_naoStoreApplicationUninstalled", [p0, p1, p2])
 
 def _pause() -> None:
 	"""
 	Pause the current synthesis
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "v",
-	    "name": "_pause",
-	    "parametersSignature": "()",
-	    "description": "Pause the current synthesis",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_pause", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "v",
+	#     "name": "_pause",
+	#     "parametersSignature": "()",
+	#     "description": "Pause the current synthesis",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_pause", [])
 
 def _resume() -> None:
 	"""
 	Resume the current synthesis
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "v",
-	    "name": "_resume",
-	    "parametersSignature": "()",
-	    "description": "Resume the current synthesis",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_resume", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "v",
+	#     "name": "_resume",
+	#     "parametersSignature": "()",
+	#     "description": "Resume the current synthesis",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_resume", [])
 
 def _enableFilter(enable:bool) -> None:
 	"""
@@ -1342,26 +822,23 @@ def _enableFilter(enable:bool) -> None:
 	----------
 	enable:bool
 		activate or not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "v",
-	    "name": "_enableFilter",
-	    "parametersSignature": "(b)",
-	    "description": "Enables the filtering of audio output",
-	    "parameters": [
-	        {
-	            "name": "enable",
-	            "description": "activate or not"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_enableFilter", [enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "v",
+	#     "name": "_enableFilter",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enables the filtering of audio output",
+	#     "parameters": [
+	#         {
+	#             "name": "enable",
+	#             "description": "activate or not"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_enableFilter", [enable])
 
 def _loadEffect(effectPath:str) -> None:
 	"""
@@ -1371,26 +848,23 @@ def _loadEffect(effectPath:str) -> None:
 	----------
 	effectPath:str
 		path to the file of the effect to load.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "v",
-	    "name": "_loadEffect",
-	    "parametersSignature": "(s)",
-	    "description": "Load an effect on the voice.",
-	    "parameters": [
-	        {
-	            "name": "effectPath",
-	            "description": "path to the file of the effect to load."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_loadEffect", [effectPath])
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "v",
+	#     "name": "_loadEffect",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load an effect on the voice.",
+	#     "parameters": [
+	#         {
+	#             "name": "effectPath",
+	#             "description": "path to the file of the effect to load."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_loadEffect", [effectPath])
 
 def _applyEffect(effectName:str, enable:bool) -> None:
 	"""
@@ -1402,130 +876,148 @@ def _applyEffect(effectName:str, enable:bool) -> None:
 		name of the effect
 	enable:bool
 		activate or not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "v",
-	    "name": "_applyEffect",
-	    "parametersSignature": "(sb)",
-	    "description": "Enables the filtering of audio output",
-	    "parameters": [
-	        {
-	            "name": "effectName",
-	            "description": "name of the effect"
-	        },
-	        {
-	            "name": "enable",
-	            "description": "activate or not"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_applyEffect", [effectName, enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "v",
+	#     "name": "_applyEffect",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Enables the filtering of audio output",
+	#     "parameters": [
+	#         {
+	#             "name": "effectName",
+	#             "description": "name of the effect"
+	#         },
+	#         {
+	#             "name": "enable",
+	#             "description": "activate or not"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_applyEffect", [effectName, enable])
 
 def _diagnosis() -> None:
 	"""
 	Logs info about the current state of the TTS.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "v",
-	    "name": "_diagnosis",
-	    "parametersSignature": "()",
-	    "description": "Logs info about the current state of the TTS.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_diagnosis", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "v",
+	#     "name": "_diagnosis",
+	#     "parametersSignature": "()",
+	#     "description": "Logs info about the current state of the TTS.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_diagnosis", [])
 
 def _showVoiceSettings() -> None:
 	"""
 	Logs voice settings.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "v",
-	    "name": "_showVoiceSettings",
-	    "parametersSignature": "()",
-	    "description": "Logs voice settings.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_showVoiceSettings", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "v",
+	#     "name": "_showVoiceSettings",
+	#     "parametersSignature": "()",
+	#     "description": "Logs voice settings.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_showVoiceSettings", [])
 
 def showDictionary() -> None:
 	"""
 	Shows the Dictionary.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 144,
-	    "returnSignature": "v",
-	    "name": "showDictionary",
-	    "parametersSignature": "()",
-	    "description": "Shows the Dictionary.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "showDictionary", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 144,
+	#     "returnSignature": "v",
+	#     "name": "showDictionary",
+	#     "parametersSignature": "()",
+	#     "description": "Shows the Dictionary.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "showDictionary", [])
 
 def reset() -> None:
 	"""
 	Reset ALTextToSpeech to his default state.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 145,
-	    "returnSignature": "v",
-	    "name": "reset",
-	    "parametersSignature": "()",
-	    "description": "Reset ALTextToSpeech to his default state.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "reset", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 145,
+	#     "returnSignature": "v",
+	#     "name": "reset",
+	#     "parametersSignature": "()",
+	#     "description": "Reset ALTextToSpeech to his default state.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "reset", [])
 
 def _unloadDictionary() -> None:
 	"""
 	Unload the dictionary.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 146,
-	    "returnSignature": "v",
-	    "name": "_unloadDictionary",
-	    "parametersSignature": "()",
-	    "description": "Unload the dictionary.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_unloadDictionary", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 146,
+	#     "returnSignature": "v",
+	#     "name": "_unloadDictionary",
+	#     "parametersSignature": "()",
+	#     "description": "Unload the dictionary.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_unloadDictionary", [])
 
-def deleteFromDictionary_1(word:str, p1:str) -> bool:
+@overload
+def deleteFromDictionary(word:str, /) -> bool:
 	"""
-	Note: This is one of the overloads of the original method (deleteFromDictionary)
+	Unload the dictionary.
 	
+	Parameters
+	----------
+	word:str
+		the word you wish to delete, does not have to be in japanese.
+	
+	Returns
+	----------
+	bool: true if succeeded, false if failed
+	
+	Bridge notes
+	------------
+	deleteFromDictionary has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "b",
+	#     "name": "deleteFromDictionary",
+	#     "parametersSignature": "(s)",
+	#     "description": "Unload the dictionary.",
+	#     "parameters": [
+	#         {
+	#             "name": "word",
+	#             "description": "the word you wish to delete, does not have to be in japanese."
+	#         }
+	#     ],
+	#     "returnDescription": "bool: true if succeeded, false if failed"
+	# }
+	...
+
+@overload
+def deleteFromDictionary(word:str, p1:str, /) -> bool:
+	"""
 	Unload the dictionary.
 	
 	Parameters
@@ -1539,65 +1031,91 @@ def deleteFromDictionary_1(word:str, p1:str) -> bool:
 	----------
 	bool: true if succeeded, false if failed
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 147,
-	    "returnSignature": "b",
-	    "name": "deleteFromDictionary",
-	    "parametersSignature": "(ss)",
-	    "description": "Unload the dictionary.",
-	    "parameters": [
-	        {
-	            "name": "word",
-	            "description": "the word you wish to delete, does not have to be in japanese."
-	        }
-	    ],
-	    "returnDescription": "bool: true if succeeded, false if failed"
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "deleteFromDictionary", [word, p1])
-
-def deleteFromDictionary_2(word:str) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (deleteFromDictionary)
+	Bridge notes
+	------------
+	deleteFromDictionary has 2 variants on the robot, chosen by the number of arguments.
 	
-	Unload the dictionary.
+	Pass arguments by position, not by keyword.
+	
+	NAOqi's documentation only names 1 of 2 parameters. The others are called p1 here.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "b",
+	#     "name": "deleteFromDictionary",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Unload the dictionary.",
+	#     "parameters": [
+	#         {
+	#             "name": "word",
+	#             "description": "the word you wish to delete, does not have to be in japanese."
+	#         }
+	#     ],
+	#     "returnDescription": "bool: true if succeeded, false if failed"
+	# }
+	...
+
+def deleteFromDictionary(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	deleteFromDictionary has 2 variants on the robot:
+	- deleteFromDictionary(word:str)
+	- deleteFromDictionary(word:str, p1:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALTextToSpeech.deleteFromDictionary has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALTextToSpeech", "deleteFromDictionary", list(args))
+
+@overload
+def addToDictionary(text:str, toReplace:str, /) -> bool:
+	"""
+	Add a word to the library
 	
 	Parameters
 	----------
-	word:str
-		the word you wish to delete, does not have to be in japanese.
+	text:str
+		the text you wish to insert.
+	toReplace:str
+		text to replace.
 	
 	Returns
 	----------
 	bool: true if succeeded, false if failed
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 148,
-	    "returnSignature": "b",
-	    "name": "deleteFromDictionary",
-	    "parametersSignature": "(s)",
-	    "description": "Unload the dictionary.",
-	    "parameters": [
-	        {
-	            "name": "word",
-	            "description": "the word you wish to delete, does not have to be in japanese."
-	        }
-	    ],
-	    "returnDescription": "bool: true if succeeded, false if failed"
-	}
-	'''
-	"""
-	return send_mfc("ALTextToSpeech", "deleteFromDictionary", [word])
-
-def addToDictionary_1(type:str, word:str, priority:str, phonetic:str, accent:str) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (addToDictionary)
+	Bridge notes
+	------------
+	addToDictionary has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "b",
+	#     "name": "addToDictionary",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Add a word to the library",
+	#     "parameters": [
+	#         {
+	#             "name": "text",
+	#             "description": "the text you wish to insert."
+	#         },
+	#         {
+	#             "name": "toReplace",
+	#             "description": "text to replace."
+	#         }
+	#     ],
+	#     "returnDescription": "bool: true if succeeded, false if failed"
+	# }
+	...
+
+@overload
+def addToDictionary(type:str, word:str, priority:str, phonetic:str, accent:str, /) -> bool:
+	"""
 	Add a word to the library
 	
 	Parameters
@@ -1617,99 +1135,91 @@ def addToDictionary_1(type:str, word:str, priority:str, phonetic:str, accent:str
 	----------
 	bool: true if succeeded, false if failed
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 149,
-	    "returnSignature": "b",
-	    "name": "addToDictionary",
-	    "parametersSignature": "(sssss)",
-	    "description": "Add a word to the library",
-	    "parameters": [
-	        {
-	            "name": "type",
-	            "description": "the type of word you wish to insert, does not have to be in japanese."
-	        },
-	        {
-	            "name": "word",
-	            "description": "the word you wish to insert, does not have to be in japanese."
-	        },
-	        {
-	            "name": "priority",
-	            "description": "the priority of the word."
-	        },
-	        {
-	            "name": "phonetic",
-	            "description": "the phonetic pronouciation in KATAKANA."
-	        },
-	        {
-	            "name": "accent",
-	            "description": "syllabus and accentuation"
-	        }
-	    ],
-	    "returnDescription": "bool: true if succeeded, false if failed"
-	}
-	'''
+	Bridge notes
+	------------
+	addToDictionary has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALTextToSpeech", "addToDictionary", [type, word, priority, phonetic, accent])
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "b",
+	#     "name": "addToDictionary",
+	#     "parametersSignature": "(sssss)",
+	#     "description": "Add a word to the library",
+	#     "parameters": [
+	#         {
+	#             "name": "type",
+	#             "description": "the type of word you wish to insert, does not have to be in japanese."
+	#         },
+	#         {
+	#             "name": "word",
+	#             "description": "the word you wish to insert, does not have to be in japanese."
+	#         },
+	#         {
+	#             "name": "priority",
+	#             "description": "the priority of the word."
+	#         },
+	#         {
+	#             "name": "phonetic",
+	#             "description": "the phonetic pronouciation in KATAKANA."
+	#         },
+	#         {
+	#             "name": "accent",
+	#             "description": "syllabus and accentuation"
+	#         }
+	#     ],
+	#     "returnDescription": "bool: true if succeeded, false if failed"
+	# }
+	...
 
-def addToDictionary_2(text:str, toReplace:str) -> bool:
+def addToDictionary(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (addToDictionary)
+	Bridge notes
+	------------
+	addToDictionary has 2 variants on the robot:
+	- addToDictionary(text:str, toReplace:str)
+	- addToDictionary(type:str, word:str, priority:str, phonetic:str, accent:str)
 	
-	Add a word to the library
-	
-	Parameters
-	----------
-	text:str
-		the text you wish to insert.
-	toReplace:str
-		text to replace.
-	
-	Returns
-	----------
-	bool: true if succeeded, false if failed
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 150,
-	    "returnSignature": "b",
-	    "name": "addToDictionary",
-	    "parametersSignature": "(ss)",
-	    "description": "Add a word to the library",
-	    "parameters": [
-	        {
-	            "name": "text",
-	            "description": "the text you wish to insert."
-	        },
-	        {
-	            "name": "toReplace",
-	            "description": "text to replace."
-	        }
-	    ],
-	    "returnDescription": "bool: true if succeeded, false if failed"
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALTextToSpeech", "addToDictionary", [text, toReplace])
+	if kwargs:
+		raise TypeError("ALTextToSpeech.addToDictionary has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALTextToSpeech", "addToDictionary", list(args))
 
 def _loadDictionary() -> None:
 	"""
 	TODO
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 151,
-	    "returnSignature": "v",
-	    "name": "_loadDictionary",
-	    "parametersSignature": "()",
-	    "description": "TODO",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALTextToSpeech", "_loadDictionary", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "v",
+	#     "name": "_loadDictionary",
+	#     "parametersSignature": "()",
+	#     "description": "TODO",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALTextToSpeech", "_loadDictionary", [])
+
+class _Signals:
+	synchroTTS: Signal[[int]] = Signal("ALTextToSpeech", "synchroTTS")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALTextToSpeech on the robot.
+	
+	subscribe(callback) calls callback(int) each time the robot sends it.
+	"""
+	languageTTS: Signal[[str]] = Signal("ALTextToSpeech", "languageTTS")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALTextToSpeech on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	"""
+signals = _Signals()
 

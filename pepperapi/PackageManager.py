@@ -1,340 +1,114 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "registerEvent", [p0, p1, p2])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from dataclasses import dataclass, field
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "unregisterEvent", [p0, p1, p2])
+@dataclass
+class PackageInfo2:
+	"""NAOqi signature: (sssssssss{sm})<PackageInfo2,uuid,version,author,channel,organization,date,typeVersion,installer,path,elems>"""
+	uuid: str
+	version: str
+	author: str
+	channel: str
+	organization: str
+	date: str
+	typeVersion: str
+	installer: str
+	path: str
+	elems: Dict[str,object]
 
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "metaObject", [p0])
 
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "terminate", [p0])
+@dataclass
+class BehaviorInfo:
+	"""NAOqi signature: (ss{ss}{ss}s{s[s]}{s[s]}{s[s]}{s[s]}[s]b)<BehaviorInfo,path,nature,langToName,langToDesc,categories,langToTags,langToTriggerSentences,langToLoadingResponses,purposeToCondition,permissions,userRequestable>"""
+	path: str
+	nature: str
+	langToName: Dict[str,str]
+	langToDesc: Dict[str,str]
+	categories: str
+	langToTags: Dict[str,List[str]]
+	langToTriggerSentences: Dict[str,List[str]]
+	langToLoadingResponses: Dict[str,List[str]]
+	purposeToCondition: Dict[str,List[str]]
+	permissions: List[str]
+	userRequestable: bool
 
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "property", [p0])
 
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "setProperty", [p0, p1])
+@dataclass
+class LanguageInfo:
+	"""NAOqi signature: (ssss{ss})<LanguageInfo,path,engineName,engineVersion,locale,langToName>"""
+	path: str
+	engineName: str
+	engineVersion: str
+	locale: str
+	langToName: Dict[str,str]
 
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "properties", [])
 
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "registerEventWithSignature", [p0, p1, p2, p3])
+@dataclass
+class RobotRequirement:
+	"""NAOqi signature: (sssss)<RobotRequirement,model,minHeadVersion,maxHeadVersion,minBodyVersion,maxBodyVersion>"""
+	model: str
+	minHeadVersion: str
+	maxHeadVersion: str
+	minBodyVersion: str
+	maxBodyVersion: str
 
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "isStatsEnabled", [])
 
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "enableStats", [p0])
+@dataclass
+class NaoqiRequirement:
+	"""NAOqi signature: (ss)<NaoqiRequirement,minVersion,maxVersion>"""
+	minVersion: str
+	maxVersion: str
 
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "stats", [])
 
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "clearStats", [])
+@dataclass
+class PackageService:
+	"""NAOqi signature: (ssb)<PackageService,execStart,name,autoRun>"""
+	execStart: str
+	name: str
+	autoRun: bool
 
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "isTraceEnabled", [])
 
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "enableTrace", [p0])
+@dataclass
+class DialogInfo:
+	"""NAOqi signature: (ss{ss})<DialogInfo,topicName,typeVersion,topics>"""
+	topicName: str
+	typeVersion: str
+	topics: Dict[str,str]
 
-def install_1(p0:str) -> bool:
+
+@dataclass
+class PackageInfo:
+	"""NAOqi signature: (ssssssss{ss}{ss}[s][BehaviorInfo][LanguageInfo]s[RobotRequirement][NaoqiRequirement][PackageService][s][DialogInfo][s])<PackageInfo,uuid,path,version,channel,author,organization,date,typeVersion,langToName,langToDesc,supportedLanguages,behaviors,languages,installer,robotRequirements,naoqiRequirements,services,executableFiles,dialogs,descriptionLanguages>"""
+	uuid: str
+	path: str
+	version: str
+	channel: str
+	author: str
+	organization: str
+	date: str
+	typeVersion: str
+	langToName: Dict[str,str]
+	langToDesc: Dict[str,str]
+	supportedLanguages: List[str]
+	behaviors: List[BehaviorInfo]
+	languages: List[LanguageInfo]
+	installer: str
+	robotRequirements: List[RobotRequirement]
+	naoqiRequirements: List[NaoqiRequirement]
+	services: List[PackageService]
+	executableFiles: List[str]
+	dialogs: List[DialogInfo]
+	descriptionLanguages: List[str]
+
+
+@overload
+def install(p0:str, /) -> bool:
 	"""
-	Note: This is one of the overloads of the original method (install)
-	
 	
 	
 	Parameters
@@ -342,48 +116,26 @@ def install_1(p0:str) -> bool:
 	p0:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 100,
-	    "returnSignature": "b",
-	    "name": "install",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	install has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("PackageManager", "install", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 100,
+	#     "returnSignature": "b",
+	#     "name": "install",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def install_2(p0:object) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (install)
-	
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 101,
-	    "returnSignature": "b",
-	    "name": "install",
-	    "parametersSignature": "(o)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "install", [p0])
-
-def installCheckMd5(p0:str, p1:str) -> bool:
+@overload
+def install(p0:str, p1:str, /) -> int:
 	"""
 	
 	
@@ -394,53 +146,27 @@ def installCheckMd5(p0:str, p1:str) -> bool:
 	p1:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 102,
-	    "returnSignature": "b",
-	    "name": "installCheckMd5",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	install has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("PackageManager", "installCheckMd5", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "i",
+	#     "name": "install",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def _install_1(p0:str, p1:str) -> bool:
+@overload
+def install(p0:str, p1:str, p2:str, /) -> int:
 	"""
-	Note: This is one of the overloads of the original method (_install)
-	
-	
-	
-	Parameters
-	----------
-	p0:str
-		
-	p1:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "b",
-	    "name": "_install",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "_install", [p0, p1])
-
-def _install_2(p0:str, p1:str, p2:str) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (_install)
-	
 	
 	
 	Parameters
@@ -452,25 +178,127 @@ def _install_2(p0:str, p1:str, p2:str) -> bool:
 	p2:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "_install",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "_install", [p0, p1, p2])
-
-def _install_3(p0:str, p1:str, p2:str, p3:bool) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (_install)
+	Bridge notes
+	------------
+	install has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "i",
+	#     "name": "install",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+def install(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	install has 3 variants on the robot:
+	- install(p0:str)
+	- install(p0:str, p1:str)
+	- install(p0:str, p1:str, p2:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("PackageManager.install has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("PackageManager", "install", list(args))
+
+def installCheckMd5(p0:str, p1:str) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:str
+		
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 102,
+	#     "returnSignature": "b",
+	#     "name": "installCheckMd5",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "installCheckMd5", [p0, p1])
+
+@overload
+def _install(p0:str, p1:str, /) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:str
+		
+	
+	Bridge notes
+	------------
+	_install has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "b",
+	#     "name": "_install",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _install(p0:str, p1:str, p2:str, /) -> bool:
+	"""
+	
+	
+	Parameters
+	----------
+	p0:str
+		
+	p1:str
+		
+	p2:str
+		
+	
+	Bridge notes
+	------------
+	_install has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "_install",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _install(p0:str, p1:str, p2:str, p3:bool, /) -> bool:
+	"""
 	
 	
 	Parameters
@@ -484,78 +312,38 @@ def _install_3(p0:str, p1:str, p2:str, p3:bool) -> bool:
 	p3:bool
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "b",
-	    "name": "_install",
-	    "parametersSignature": "(sssb)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_install has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("PackageManager", "_install", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "b",
+	#     "name": "_install",
+	#     "parametersSignature": "(sssb)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def _install_4(p0:object, p1:str) -> bool:
+def _install(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (_install)
+	Bridge notes
+	------------
+	_install has 3 variants on the robot:
+	- _install(p0:str, p1:str)
+	- _install(p0:str, p1:str, p2:str)
+	- _install(p0:str, p1:str, p2:str, p3:bool)
 	
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "b",
-	    "name": "_install",
-	    "parametersSignature": "(os)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("PackageManager", "_install", [p0, p1])
-
-def _install_5(p0:object, p1:str, p2:str) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (_install)
-	
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:str
-		
-	p2:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "b",
-	    "name": "_install",
-	    "parametersSignature": "(oss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "_install", [p0, p1, p2])
+	if kwargs:
+		raise TypeError("PackageManager._install has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("PackageManager", "_install", list(args))
 
 def hasPackage(p0:str) -> bool:
 	"""
@@ -565,40 +353,34 @@ def hasPackage(p0:str) -> bool:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "hasPackage",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "hasPackage", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 108,
+	#     "returnSignature": "b",
+	#     "name": "hasPackage",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "hasPackage", [p0])
 
 def packages2() -> List[PackageInfo2]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "[(sssssssss{sm})<PackageInfo2,uuid,version,author,channel,organization,date,typeVersion,installer,path,elems>]",
-	    "name": "packages2",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "packages2", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 109,
+	#     "returnSignature": "[(sssssssss{sm})<PackageInfo2,uuid,version,author,channel,organization,date,typeVersion,installer,path,elems>]",
+	#     "name": "packages2",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "packages2", [], returns=List[PackageInfo2])
 
 def package2(p0:str) -> PackageInfo2:
 	"""
@@ -608,21 +390,18 @@ def package2(p0:str) -> PackageInfo2:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "(sssssssss{sm})<PackageInfo2,uuid,version,author,channel,organization,date,typeVersion,installer,path,elems>",
-	    "name": "package2",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "package2", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 110,
+	#     "returnSignature": "(sssssssss{sm})<PackageInfo2,uuid,version,author,channel,organization,date,typeVersion,installer,path,elems>",
+	#     "name": "package2",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "package2", [p0], returns=PackageInfo2)
 
 def packageIcon(p0:str) -> str:
 	"""
@@ -632,21 +411,18 @@ def packageIcon(p0:str) -> str:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "s",
-	    "name": "packageIcon",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "packageIcon", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 111,
+	#     "returnSignature": "s",
+	#     "name": "packageIcon",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "packageIcon", [p0])
 
 def removePkg(p0:str) -> None:
 	"""
@@ -656,59 +432,50 @@ def removePkg(p0:str) -> None:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "v",
-	    "name": "removePkg",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "removePkg", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "v",
+	#     "name": "removePkg",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "removePkg", [p0])
 
 def getPackages() -> object:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "m",
-	    "name": "getPackages",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "getPackages", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "m",
+	#     "name": "getPackages",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "getPackages", [])
 
 def packages() -> List[PackageInfo]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "[(ssssssss{ss}{ss}[s][(ss{ss}{ss}s{s[s]}{s[s]}{s[s]}{s[s]}[s]b)<BehaviorInfo,path,nature,langToName,langToDesc,categories,langToTags,langToTriggerSentences,langToLoadingResponses,purposeToCondition,permissions,userRequestable>][(ssss{ss})<LanguageInfo,path,engineName,engineVersion,locale,langToName>]s[(sssss)<RobotRequirement,model,minHeadVersion,maxHeadVersion,minBodyVersion,maxBodyVersion>][(ss)<NaoqiRequirement,minVersion,maxVersion>][(ssb)<PackageService,execStart,name,autoRun>][s][(ss{ss})<DialogInfo,topicName,typeVersion,topics>][s])<PackageInfo,uuid,path,version,channel,author,organization,date,typeVersion,langToName,langToDesc,supportedLanguages,behaviors,languages,installer,robotRequirements,naoqiRequirements,services,executableFiles,dialogs,descriptionLanguages>]",
-	    "name": "packages",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "packages", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "[(ssssssss{ss}{ss}[s][(ss{ss}{ss}s{s[s]}{s[s]}{s[s]}{s[s]}[s]b)<BehaviorInfo,path,nature,langToName,langToDesc,categories,langToTags,langToTriggerSentences,langToLoadingResponses,purposeToCondition,permissions,userRequestable>][(ssss{ss})<LanguageInfo,path,engineName,engineVersion,locale,langToName>]s[(sssss)<RobotRequirement,model,minHeadVersion,maxHeadVersion,minBodyVersion,maxBodyVersion>][(ss)<NaoqiRequirement,minVersion,maxVersion>][(ssb)<PackageService,execStart,name,autoRun>][s][(ss{ss})<DialogInfo,topicName,typeVersion,topics>][s])<PackageInfo,uuid,path,version,channel,author,organization,date,typeVersion,langToName,langToDesc,supportedLanguages,behaviors,languages,installer,robotRequirements,naoqiRequirements,services,executableFiles,dialogs,descriptionLanguages>]",
+	#     "name": "packages",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "packages", [], returns=List[PackageInfo])
 
 def package(p0:str) -> PackageInfo:
 	"""
@@ -718,21 +485,18 @@ def package(p0:str) -> PackageInfo:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "(ssssssss{ss}{ss}[s][(ss{ss}{ss}s{s[s]}{s[s]}{s[s]}{s[s]}[s]b)<BehaviorInfo,path,nature,langToName,langToDesc,categories,langToTags,langToTriggerSentences,langToLoadingResponses,purposeToCondition,permissions,userRequestable>][(ssss{ss})<LanguageInfo,path,engineName,engineVersion,locale,langToName>]s[(sssss)<RobotRequirement,model,minHeadVersion,maxHeadVersion,minBodyVersion,maxBodyVersion>][(ss)<NaoqiRequirement,minVersion,maxVersion>][(ssb)<PackageService,execStart,name,autoRun>][s][(ss{ss})<DialogInfo,topicName,typeVersion,topics>][s])<PackageInfo,uuid,path,version,channel,author,organization,date,typeVersion,langToName,langToDesc,supportedLanguages,behaviors,languages,installer,robotRequirements,naoqiRequirements,services,executableFiles,dialogs,descriptionLanguages>",
-	    "name": "package",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "package", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "(ssssssss{ss}{ss}[s][(ss{ss}{ss}s{s[s]}{s[s]}{s[s]}{s[s]}[s]b)<BehaviorInfo,path,nature,langToName,langToDesc,categories,langToTags,langToTriggerSentences,langToLoadingResponses,purposeToCondition,permissions,userRequestable>][(ssss{ss})<LanguageInfo,path,engineName,engineVersion,locale,langToName>]s[(sssss)<RobotRequirement,model,minHeadVersion,maxHeadVersion,minBodyVersion,maxBodyVersion>][(ss)<NaoqiRequirement,minVersion,maxVersion>][(ssb)<PackageService,execStart,name,autoRun>][s][(ss{ss})<DialogInfo,topicName,typeVersion,topics>][s])<PackageInfo,uuid,path,version,channel,author,organization,date,typeVersion,langToName,langToDesc,supportedLanguages,behaviors,languages,installer,robotRequirements,naoqiRequirements,services,executableFiles,dialogs,descriptionLanguages>",
+	#     "name": "package",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "package", [p0], returns=PackageInfo)
 
 def getPackage(p0:str) -> object:
 	"""
@@ -742,21 +506,18 @@ def getPackage(p0:str) -> object:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "m",
-	    "name": "getPackage",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "getPackage", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "m",
+	#     "name": "getPackage",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "getPackage", [p0])
 
 def getPackageIcon(p0:str) -> object:
 	"""
@@ -766,79 +527,18 @@ def getPackageIcon(p0:str) -> object:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "m",
-	    "name": "getPackageIcon",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "getPackageIcon", [p0])
-
-def install_3(p0:str, p1:str) -> int:
-	"""
-	Note: This is one of the overloads of the original method (install)
-	
-	
-	
-	Parameters
-	----------
-	p0:str
-		
-	p1:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "i",
-	    "name": "install",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "install", [p0, p1])
-
-def install_4(p0:str, p1:str, p2:str) -> int:
-	"""
-	Note: This is one of the overloads of the original method (install)
-	
-	
-	
-	Parameters
-	----------
-	p0:str
-		
-	p1:str
-		
-	p2:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "i",
-	    "name": "install",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("PackageManager", "install", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "m",
+	#     "name": "getPackageIcon",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "getPackageIcon", [p0])
 
 def remove(p0:str) -> int:
 	"""
@@ -848,19 +548,83 @@ def remove(p0:str) -> int:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "i",
-	    "name": "remove",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("PackageManager", "remove", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "i",
+	#     "name": "remove",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("PackageManager", "remove", [p0])
+
+class _Signals:
+	onPackageInstalled2: Signal[[PackageInfo2]] = Signal("PackageManager", "onPackageInstalled2", (PackageInfo2,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo2) each time the robot sends it.
+	"""
+	onPackageRemoved2: Signal[[PackageInfo2]] = Signal("PackageManager", "onPackageRemoved2", (PackageInfo2,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo2) each time the robot sends it.
+	"""
+	_onPackageInstalled: Signal[[object]] = Signal("PackageManager", "_onPackageInstalled")
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(object) each time the robot sends it.
+	"""
+	_onPackageRemoved: Signal[[object]] = Signal("PackageManager", "_onPackageRemoved")
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(object) each time the robot sends it.
+	"""
+	packageInstalled: Signal[[PackageInfo]] = Signal("PackageManager", "packageInstalled", (PackageInfo,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo) each time the robot sends it.
+	"""
+	packageRemoved: Signal[[PackageInfo]] = Signal("PackageManager", "packageRemoved", (PackageInfo,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo) each time the robot sends it.
+	"""
+	onPackageInstalled: Signal[[PackageInfo]] = Signal("PackageManager", "onPackageInstalled", (PackageInfo,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo) each time the robot sends it.
+	"""
+	onPackageRemoved: Signal[[PackageInfo]] = Signal("PackageManager", "onPackageRemoved", (PackageInfo,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by PackageManager on the robot.
+	
+	subscribe(callback) calls callback(PackageInfo) each time the robot sends it.
+	"""
+signals = _Signals()
 

@@ -1,335 +1,9 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 This module allows to play wav and mp3 files on NAO
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
 
 def version() -> str:
 	"""
@@ -338,21 +12,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALAudioPlayer", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +32,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALAudioPlayer", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +52,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALAudioPlayer", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +77,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALAudioPlayer", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +102,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALAudioPlayer", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +122,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALAudioPlayer", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,31 +147,27 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALAudioPlayer", "getUsage", [name])
 
-def playFile_1(fileName:str) -> None:
+@overload
+def playFile(fileName:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (playFile)
-	
 	Plays a wav or mp3 file
 	
 	Parameters
@@ -657,30 +175,32 @@ def playFile_1(fileName:str) -> None:
 	fileName:str
 		Path of the sound file
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "v",
-	    "name": "playFile",
-	    "parametersSignature": "(s)",
-	    "description": "Plays a wav or mp3 file",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Path of the sound file"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playFile", [fileName])
-
-def playFile_2(fileName:str, volume:float, pan:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playFile)
+	Bridge notes
+	------------
+	playFile has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "v",
+	#     "name": "playFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "Plays a wav or mp3 file",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Path of the sound file"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playFile(fileName:str, volume:float, pan:float, /) -> None:
+	"""
 	Plays a wav or mp3 file, with specific volume and audio balance
 	
 	Parameters
@@ -692,38 +212,54 @@ def playFile_2(fileName:str, volume:float, pan:float) -> None:
 	pan:float
 		audio balance of the sound file (-1.0 : left / 1.0 : right / 0.0 : centered)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "playFile",
-	    "parametersSignature": "(sff)",
-	    "description": "Plays a wav or mp3 file, with specific volume and audio balance",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Path of the sound file"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right / 0.0 : centered)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playFile", [fileName, volume, pan])
-
-def _playSoundSetFile_1(fileName:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_playSoundSetFile)
+	Bridge notes
+	------------
+	playFile has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "playFile",
+	#     "parametersSignature": "(sff)",
+	#     "description": "Plays a wav or mp3 file, with specific volume and audio balance",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Path of the sound file"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right / 0.0 : centered)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def playFile(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	playFile has 2 variants on the robot:
+	- playFile(fileName:str)
+	- playFile(fileName:str, volume:float, pan:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.playFile has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "playFile", list(args))
+
+@overload
+def _playSoundSetFile(fileName:str, /) -> None:
+	"""
 	Plays a file contained in one of the sound sets loaded
 	
 	Parameters
@@ -731,30 +267,207 @@ def _playSoundSetFile_1(fileName:str) -> None:
 	fileName:str
 		Name of the file without extension
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "_playSoundSetFile",
-	    "parametersSignature": "(s)",
-	    "description": "Plays a file contained in one of the sound sets loaded",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "_playSoundSetFile", [fileName])
-
-def playSoundSetFile_1(fileName:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playSoundSetFile)
+	Bridge notes
+	------------
+	_playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "_playSoundSetFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "Plays a file contained in one of the sound sets loaded",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _playSoundSetFile(soundSetName:str, fileName:str, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	soundSetName:str
+		Name of the soundset
+	fileName:str
+		Name of the file without extension
+	
+	Bridge notes
+	------------
+	_playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "v",
+	#     "name": "_playSoundSetFile",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "soundSetName",
+	#             "description": "Name of the soundset"
+	#         },
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _playSoundSetFile(fileName:str, position:float, volume:float, pan:float, loop:bool, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	fileName:str
+		Name of the file without extension
+	position:float
+		Position in second where the playing has to begin
+	volume:float
+		volume of the sound file (must be between 0.0 and 1.0)
+	pan:float
+		audio balance of the sound file (-1.0 : left / 1.0 : right)
+	loop:bool
+		specify if the file must be played in loop
+	
+	Bridge notes
+	------------
+	_playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "v",
+	#     "name": "_playSoundSetFile",
+	#     "parametersSignature": "(sfffb)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         },
+	#         {
+	#             "name": "loop",
+	#             "description": "specify if the file must be played in loop"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _playSoundSetFile(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	soundSetName:str
+		Name of the soundset
+	fileName:str
+		Name of the file without extension
+	position:float
+		Position in second where the playing has to begin
+	volume:float
+		volume of the sound file (must be between 0.0 and 1.0)
+	pan:float
+		audio balance of the sound file (-1.0 : left / 1.0 : right)
+	loop:bool
+		specify if the file must be played in loop
+	
+	Bridge notes
+	------------
+	_playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "v",
+	#     "name": "_playSoundSetFile",
+	#     "parametersSignature": "(ssfffb)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "soundSetName",
+	#             "description": "Name of the soundset"
+	#         },
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         },
+	#         {
+	#             "name": "loop",
+	#             "description": "specify if the file must be played in loop"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def _playSoundSetFile(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_playSoundSetFile has 4 variants on the robot:
+	- _playSoundSetFile(fileName:str)
+	- _playSoundSetFile(soundSetName:str, fileName:str)
+	- _playSoundSetFile(fileName:str, position:float, volume:float, pan:float, loop:bool)
+	- _playSoundSetFile(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer._playSoundSetFile has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "_playSoundSetFile", list(args))
+
+@overload
+def playSoundSetFile(fileName:str, /) -> None:
+	"""
 	Plays a file contained in one of the sound sets loaded
 	
 	Parameters
@@ -762,25 +475,203 @@ def playSoundSetFile_1(fileName:str) -> None:
 	fileName:str
 		Name of the file without extension
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "playSoundSetFile",
-	    "parametersSignature": "(s)",
-	    "description": "Plays a file contained in one of the sound sets loaded",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAudioPlayer", "playSoundSetFile", [fileName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "playSoundSetFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "Plays a file contained in one of the sound sets loaded",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playSoundSetFile(soundSetName:str, fileName:str, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	soundSetName:str
+		Name of the soundset
+	fileName:str
+		Name of the file without extension
+	
+	Bridge notes
+	------------
+	playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "v",
+	#     "name": "playSoundSetFile",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "soundSetName",
+	#             "description": "Name of the soundset"
+	#         },
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playSoundSetFile(fileName:str, position:float, volume:float, pan:float, loop:bool, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	fileName:str
+		Name of the file without extension
+	position:float
+		Position in second where the playing has to begin
+	volume:float
+		volume of the sound file (must be between 0.0 and 1.0)
+	pan:float
+		audio balance of the sound file (-1.0 : left / 1.0 : right)
+	loop:bool
+		specify if the file must be played in loop
+	
+	Bridge notes
+	------------
+	playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "v",
+	#     "name": "playSoundSetFile",
+	#     "parametersSignature": "(sfffb)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         },
+	#         {
+	#             "name": "loop",
+	#             "description": "specify if the file must be played in loop"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playSoundSetFile(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool, /) -> None:
+	"""
+	Plays a file contained in a given sound set
+	
+	Parameters
+	----------
+	soundSetName:str
+		Name of the soundset
+	fileName:str
+		Name of the file without extension
+	position:float
+		Position in second where the playing has to begin
+	volume:float
+		volume of the sound file (must be between 0.0 and 1.0)
+	pan:float
+		audio balance of the sound file (-1.0 : left / 1.0 : right)
+	loop:bool
+		specify if the file must be played in loop
+	
+	Bridge notes
+	------------
+	playSoundSetFile has 4 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "v",
+	#     "name": "playSoundSetFile",
+	#     "parametersSignature": "(ssfffb)",
+	#     "description": "Plays a file contained in a given sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "soundSetName",
+	#             "description": "Name of the soundset"
+	#         },
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         },
+	#         {
+	#             "name": "loop",
+	#             "description": "specify if the file must be played in loop"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def playSoundSetFile(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	playSoundSetFile has 4 variants on the robot:
+	- playSoundSetFile(fileName:str)
+	- playSoundSetFile(soundSetName:str, fileName:str)
+	- playSoundSetFile(fileName:str, position:float, volume:float, pan:float, loop:bool)
+	- playSoundSetFile(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.playSoundSetFile has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "playSoundSetFile", list(args))
 
 def _playSystemSoundSetFile(fileName:str) -> None:
 	"""
@@ -790,332 +681,23 @@ def _playSystemSoundSetFile(fileName:str) -> None:
 	----------
 	fileName:str
 		Name of the file without extension
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "_playSystemSoundSetFile",
-	    "parametersSignature": "(s)",
-	    "description": "Plays a file contained in one of the sound sets loaded",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_playSystemSoundSetFile", [fileName])
-
-def _playSoundSetFile_2(soundSetName:str, fileName:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	soundSetName:str
-		Name of the soundset
-	fileName:str
-		Name of the file without extension
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "v",
-	    "name": "_playSoundSetFile",
-	    "parametersSignature": "(ss)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "soundSetName",
-	            "description": "Name of the soundset"
-	        },
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "_playSoundSetFile", [soundSetName, fileName])
-
-def playSoundSetFile_2(soundSetName:str, fileName:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	soundSetName:str
-		Name of the soundset
-	fileName:str
-		Name of the file without extension
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "v",
-	    "name": "playSoundSetFile",
-	    "parametersSignature": "(ss)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "soundSetName",
-	            "description": "Name of the soundset"
-	        },
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playSoundSetFile", [soundSetName, fileName])
-
-def _playSoundSetFile_3(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	soundSetName:str
-		Name of the soundset
-	fileName:str
-		Name of the file without extension
-	position:float
-		Position in second where the playing has to begin
-	volume:float
-		volume of the sound file (must be between 0.0 and 1.0)
-	pan:float
-		audio balance of the sound file (-1.0 : left / 1.0 : right)
-	loop:bool
-		specify if the file must be played in loop
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "v",
-	    "name": "_playSoundSetFile",
-	    "parametersSignature": "(ssfffb)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "soundSetName",
-	            "description": "Name of the soundset"
-	        },
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        },
-	        {
-	            "name": "loop",
-	            "description": "specify if the file must be played in loop"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "_playSoundSetFile", [soundSetName, fileName, position, volume, pan, loop])
-
-def playSoundSetFile_3(soundSetName:str, fileName:str, position:float, volume:float, pan:float, loop:bool) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	soundSetName:str
-		Name of the soundset
-	fileName:str
-		Name of the file without extension
-	position:float
-		Position in second where the playing has to begin
-	volume:float
-		volume of the sound file (must be between 0.0 and 1.0)
-	pan:float
-		audio balance of the sound file (-1.0 : left / 1.0 : right)
-	loop:bool
-		specify if the file must be played in loop
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "v",
-	    "name": "playSoundSetFile",
-	    "parametersSignature": "(ssfffb)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "soundSetName",
-	            "description": "Name of the soundset"
-	        },
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        },
-	        {
-	            "name": "loop",
-	            "description": "specify if the file must be played in loop"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playSoundSetFile", [soundSetName, fileName, position, volume, pan, loop])
-
-def _playSoundSetFile_4(fileName:str, position:float, volume:float, pan:float, loop:bool) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	fileName:str
-		Name of the file without extension
-	position:float
-		Position in second where the playing has to begin
-	volume:float
-		volume of the sound file (must be between 0.0 and 1.0)
-	pan:float
-		audio balance of the sound file (-1.0 : left / 1.0 : right)
-	loop:bool
-		specify if the file must be played in loop
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "v",
-	    "name": "_playSoundSetFile",
-	    "parametersSignature": "(sfffb)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        },
-	        {
-	            "name": "loop",
-	            "description": "specify if the file must be played in loop"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "_playSoundSetFile", [fileName, position, volume, pan, loop])
-
-def playSoundSetFile_4(fileName:str, position:float, volume:float, pan:float, loop:bool) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playSoundSetFile)
-	
-	Plays a file contained in a given sound set
-	
-	Parameters
-	----------
-	fileName:str
-		Name of the file without extension
-	position:float
-		Position in second where the playing has to begin
-	volume:float
-		volume of the sound file (must be between 0.0 and 1.0)
-	pan:float
-		audio balance of the sound file (-1.0 : left / 1.0 : right)
-	loop:bool
-		specify if the file must be played in loop
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "v",
-	    "name": "playSoundSetFile",
-	    "parametersSignature": "(sfffb)",
-	    "description": "Plays a file contained in a given sound set",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the file without extension"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        },
-	        {
-	            "name": "loop",
-	            "description": "specify if the file must be played in loop"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playSoundSetFile", [fileName, position, volume, pan, loop])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "_playSystemSoundSetFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "Plays a file contained in one of the sound sets loaded",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the file without extension"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_playSystemSoundSetFile", [fileName])
 
 def _loadSoundSet(setName:str) -> None:
 	"""
@@ -1125,26 +707,23 @@ def _loadSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "v",
-	    "name": "_loadSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Load a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_loadSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "v",
+	#     "name": "_loadSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_loadSoundSet", [setName])
 
 def loadSoundSet(setName:str) -> None:
 	"""
@@ -1154,26 +733,23 @@ def loadSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "v",
-	    "name": "loadSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Load a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "loadSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "v",
+	#     "name": "loadSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "loadSoundSet", [setName])
 
 def _unloadSoundSet(setName:str) -> None:
 	"""
@@ -1183,26 +759,23 @@ def _unloadSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "v",
-	    "name": "_unloadSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Unload a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_unloadSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "v",
+	#     "name": "_unloadSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Unload a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_unloadSoundSet", [setName])
 
 def unloadSoundSet(setName:str) -> None:
 	"""
@@ -1212,26 +785,23 @@ def unloadSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "v",
-	    "name": "unloadSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Unload a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "unloadSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "v",
+	#     "name": "unloadSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Unload a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "unloadSoundSet", [setName])
 
 def _loadSystemSoundSet(setName:str) -> None:
 	"""
@@ -1241,26 +811,23 @@ def _loadSystemSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "v",
-	    "name": "_loadSystemSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Load a system sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_loadSystemSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "v",
+	#     "name": "_loadSystemSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load a system sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_loadSystemSoundSet", [setName])
 
 def _setDefaultSystemSoundSet(setName:str) -> None:
 	"""
@@ -1270,26 +837,23 @@ def _setDefaultSystemSoundSet(setName:str) -> None:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "v",
-	    "name": "_setDefaultSystemSoundSet",
-	    "parametersSignature": "(s)",
-	    "description": "Sets the default soundset used for system sounds",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_setDefaultSystemSoundSet", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "v",
+	#     "name": "_setDefaultSystemSoundSet",
+	#     "parametersSignature": "(s)",
+	#     "description": "Sets the default soundset used for system sounds",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_setDefaultSystemSoundSet", [setName])
 
 def _getSoundSetFileNames(setName:str) -> List[str]:
 	"""
@@ -1299,26 +863,23 @@ def _getSoundSetFileNames(setName:str) -> List[str]:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "[s]",
-	    "name": "_getSoundSetFileNames",
-	    "parametersSignature": "(s)",
-	    "description": "Return the list of files contained in a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getSoundSetFileNames", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "[s]",
+	#     "name": "_getSoundSetFileNames",
+	#     "parametersSignature": "(s)",
+	#     "description": "Return the list of files contained in a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getSoundSetFileNames", [setName])
 
 def getSoundSetFileNames(setName:str) -> List[str]:
 	"""
@@ -1328,121 +889,103 @@ def getSoundSetFileNames(setName:str) -> List[str]:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "[s]",
-	    "name": "getSoundSetFileNames",
-	    "parametersSignature": "(s)",
-	    "description": "Return the list of files contained in a sound set",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getSoundSetFileNames", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "[s]",
+	#     "name": "getSoundSetFileNames",
+	#     "parametersSignature": "(s)",
+	#     "description": "Return the list of files contained in a sound set",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "getSoundSetFileNames", [setName])
 
 def _getCurrentSystemSoundSet() -> str:
 	"""
 	Return the current sound set loaded
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "s",
-	    "name": "_getCurrentSystemSoundSet",
-	    "parametersSignature": "()",
-	    "description": "Return the current sound set loaded",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getCurrentSystemSoundSet", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "s",
+	#     "name": "_getCurrentSystemSoundSet",
+	#     "parametersSignature": "()",
+	#     "description": "Return the current sound set loaded",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getCurrentSystemSoundSet", [])
 
 def _getLoadedSoundSetsList() -> List[str]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "[s]",
-	    "name": "_getLoadedSoundSetsList",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getLoadedSoundSetsList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "[s]",
+	#     "name": "_getLoadedSoundSetsList",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getLoadedSoundSetsList", [])
 
 def getLoadedSoundSetsList() -> List[str]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "[s]",
-	    "name": "getLoadedSoundSetsList",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getLoadedSoundSetsList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "[s]",
+	#     "name": "getLoadedSoundSetsList",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "getLoadedSoundSetsList", [])
 
 def _getInstalledSoundSetsList() -> List[str]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "[s]",
-	    "name": "_getInstalledSoundSetsList",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getInstalledSoundSetsList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "[s]",
+	#     "name": "_getInstalledSoundSetsList",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getInstalledSoundSetsList", [])
 
 def getInstalledSoundSetsList() -> List[str]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "[s]",
-	    "name": "getInstalledSoundSetsList",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getInstalledSoundSetsList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "[s]",
+	#     "name": "getInstalledSoundSetsList",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "getInstalledSoundSetsList", [])
 
 def _isSoundSetInstalled(setName:str) -> bool:
 	"""
@@ -1452,26 +995,23 @@ def _isSoundSetInstalled(setName:str) -> bool:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "b",
-	    "name": "_isSoundSetInstalled",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_isSoundSetInstalled", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "b",
+	#     "name": "_isSoundSetInstalled",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_isSoundSetInstalled", [setName])
 
 def isSoundSetInstalled(setName:str) -> bool:
 	"""
@@ -1481,26 +1021,23 @@ def isSoundSetInstalled(setName:str) -> bool:
 	----------
 	setName:str
 		name of the set
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "b",
-	    "name": "isSoundSetInstalled",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "isSoundSetInstalled", [setName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "b",
+	#     "name": "isSoundSetInstalled",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "isSoundSetInstalled", [setName])
 
 def _isSoundSetFileInstalled(setName:str, soundName:str) -> bool:
 	"""
@@ -1512,30 +1049,27 @@ def _isSoundSetFileInstalled(setName:str, soundName:str) -> bool:
 		name of the set
 	soundName:str
 		name of the sound
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "b",
-	    "name": "_isSoundSetFileInstalled",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        },
-	        {
-	            "name": "soundName",
-	            "description": "name of the sound"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_isSoundSetFileInstalled", [setName, soundName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "b",
+	#     "name": "_isSoundSetFileInstalled",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         },
+	#         {
+	#             "name": "soundName",
+	#             "description": "name of the sound"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_isSoundSetFileInstalled", [setName, soundName])
 
 def isSoundSetFileInstalled(setName:str, soundName:str) -> bool:
 	"""
@@ -1547,30 +1081,27 @@ def isSoundSetFileInstalled(setName:str, soundName:str) -> bool:
 		name of the set
 	soundName:str
 		name of the sound
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "b",
-	    "name": "isSoundSetFileInstalled",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "setName",
-	            "description": "name of the set"
-	        },
-	        {
-	            "name": "soundName",
-	            "description": "name of the sound"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "isSoundSetFileInstalled", [setName, soundName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "b",
+	#     "name": "isSoundSetFileInstalled",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "setName",
+	#             "description": "name of the set"
+	#         },
+	#         {
+	#             "name": "soundName",
+	#             "description": "name of the sound"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "isSoundSetFileInstalled", [setName, soundName])
 
 def _getSystemSoundSetFileDuration(soundName:str) -> float:
 	"""
@@ -1580,26 +1111,23 @@ def _getSystemSoundSetFileDuration(soundName:str) -> float:
 	----------
 	soundName:str
 		name of the sound
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "f",
-	    "name": "_getSystemSoundSetFileDuration",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "soundName",
-	            "description": "name of the sound"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getSystemSoundSetFileDuration", [soundName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "f",
+	#     "name": "_getSystemSoundSetFileDuration",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "soundName",
+	#             "description": "name of the sound"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getSystemSoundSetFileDuration", [soundName])
 
 def _getSystemSoundSetFilePath(soundName:str) -> str:
 	"""
@@ -1609,31 +1137,27 @@ def _getSystemSoundSetFilePath(soundName:str) -> str:
 	----------
 	soundName:str
 		name of the sound
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "s",
-	    "name": "_getSystemSoundSetFilePath",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "soundName",
-	            "description": "name of the sound"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_getSystemSoundSetFilePath", [soundName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "s",
+	#     "name": "_getSystemSoundSetFilePath",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "soundName",
+	#             "description": "name of the sound"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_getSystemSoundSetFilePath", [soundName])
 
-def playFileInLoop_1(fileName:str) -> None:
+@overload
+def playFileInLoop(fileName:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (playFileInLoop)
-	
 	Plays a wav or mp3 file in loop
 	
 	Parameters
@@ -1641,30 +1165,32 @@ def playFileInLoop_1(fileName:str) -> None:
 	fileName:str
 		Path of the sound file
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 144,
-	    "returnSignature": "v",
-	    "name": "playFileInLoop",
-	    "parametersSignature": "(s)",
-	    "description": "Plays a wav or mp3 file in loop",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Path of the sound file"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playFileInLoop", [fileName])
-
-def playFileInLoop_2(fileName:str, volume:float, pan:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playFileInLoop)
+	Bridge notes
+	------------
+	playFileInLoop has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 144,
+	#     "returnSignature": "v",
+	#     "name": "playFileInLoop",
+	#     "parametersSignature": "(s)",
+	#     "description": "Plays a wav or mp3 file in loop",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Path of the sound file"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playFileInLoop(fileName:str, volume:float, pan:float, /) -> None:
+	"""
 	Plays a wav or mp3 file in loop, with specific volume and audio balance
 	
 	Parameters
@@ -1676,38 +1202,54 @@ def playFileInLoop_2(fileName:str, volume:float, pan:float) -> None:
 	pan:float
 		audio balance of the sound file (-1.0 : left / 1.0 : right)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 145,
-	    "returnSignature": "v",
-	    "name": "playFileInLoop",
-	    "parametersSignature": "(sff)",
-	    "description": "Plays a wav or mp3 file in loop, with specific volume and audio balance",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Path of the sound file"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playFileInLoop", [fileName, volume, pan])
-
-def playFileFromPosition_1(fileName:str, position:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playFileFromPosition)
+	Bridge notes
+	------------
+	playFileInLoop has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 145,
+	#     "returnSignature": "v",
+	#     "name": "playFileInLoop",
+	#     "parametersSignature": "(sff)",
+	#     "description": "Plays a wav or mp3 file in loop, with specific volume and audio balance",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Path of the sound file"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def playFileInLoop(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	playFileInLoop has 2 variants on the robot:
+	- playFileInLoop(fileName:str)
+	- playFileInLoop(fileName:str, volume:float, pan:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.playFileInLoop has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "playFileInLoop", list(args))
+
+@overload
+def playFileFromPosition(fileName:str, position:float, /) -> None:
+	"""
 	Plays a wav or mp3 file from a given position in the file.
 	
 	Parameters
@@ -1717,34 +1259,36 @@ def playFileFromPosition_1(fileName:str, position:float) -> None:
 	position:float
 		Position in second where the playing has to begin
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 146,
-	    "returnSignature": "v",
-	    "name": "playFileFromPosition",
-	    "parametersSignature": "(sf)",
-	    "description": "Plays a wav or mp3 file from a given position in the file.",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the sound file"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playFileFromPosition", [fileName, position])
-
-def playFileFromPosition_2(fileName:str, position:float, volume:float, pan:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playFileFromPosition)
+	Bridge notes
+	------------
+	playFileFromPosition has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 146,
+	#     "returnSignature": "v",
+	#     "name": "playFileFromPosition",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Plays a wav or mp3 file from a given position in the file.",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the sound file"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playFileFromPosition(fileName:str, position:float, volume:float, pan:float, /) -> None:
+	"""
 	Plays a wav or mp3 file from a given position in the file, with specific volume and audio balance
 	
 	Parameters
@@ -1758,37 +1302,54 @@ def playFileFromPosition_2(fileName:str, position:float, volume:float, pan:float
 	pan:float
 		audio balance of the sound file (-1.0 : left / 1.0 : right)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 147,
-	    "returnSignature": "v",
-	    "name": "playFileFromPosition",
-	    "parametersSignature": "(sfff)",
-	    "description": "Plays a wav or mp3 file from a given position in the file, with specific volume and audio balance",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Name of the sound file"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in second where the playing has to begin"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	playFileFromPosition has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAudioPlayer", "playFileFromPosition", [fileName, position, volume, pan])
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "v",
+	#     "name": "playFileFromPosition",
+	#     "parametersSignature": "(sfff)",
+	#     "description": "Plays a wav or mp3 file from a given position in the file, with specific volume and audio balance",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Name of the sound file"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in second where the playing has to begin"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def playFileFromPosition(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	playFileFromPosition has 2 variants on the robot:
+	- playFileFromPosition(fileName:str, position:float)
+	- playFileFromPosition(fileName:str, position:float, volume:float, pan:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.playFileFromPosition has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "playFileFromPosition", list(args))
 
 def goTo(playId:int, position:float) -> None:
 	"""
@@ -1800,49 +1361,43 @@ def goTo(playId:int, position:float) -> None:
 		Id of the process which is playing the file
 	position:float
 		Position in the file (in second)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 148,
-	    "returnSignature": "v",
-	    "name": "goTo",
-	    "parametersSignature": "(if)",
-	    "description": "Goes to a given position in a file which is playing.",
-	    "parameters": [
-	        {
-	            "name": "playId",
-	            "description": "Id of the process which is playing the file"
-	        },
-	        {
-	            "name": "position",
-	            "description": "Position in the file (in second)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "goTo", [playId, position])
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "v",
+	#     "name": "goTo",
+	#     "parametersSignature": "(if)",
+	#     "description": "Goes to a given position in a file which is playing.",
+	#     "parameters": [
+	#         {
+	#             "name": "playId",
+	#             "description": "Id of the process which is playing the file"
+	#         },
+	#         {
+	#             "name": "position",
+	#             "description": "Position in the file (in second)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "goTo", [playId, position])
 
 def stopAll() -> None:
 	"""
 	Stops all the files that are currently playing.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 149,
-	    "returnSignature": "v",
-	    "name": "stopAll",
-	    "parametersSignature": "()",
-	    "description": "Stops all the files that are currently playing.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "stopAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "v",
+	#     "name": "stopAll",
+	#     "parametersSignature": "()",
+	#     "description": "Stops all the files that are currently playing.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "stopAll", [])
 
 def pause(id:int) -> None:
 	"""
@@ -1852,26 +1407,23 @@ def pause(id:int) -> None:
 	----------
 	id:int
 		Id of the process that is playing the file you want to put in pause
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 150,
-	    "returnSignature": "v",
-	    "name": "pause",
-	    "parametersSignature": "(i)",
-	    "description": "Pause a play back",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id of the process that is playing the file you want to put in pause"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "pause", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "v",
+	#     "name": "pause",
+	#     "parametersSignature": "(i)",
+	#     "description": "Pause a play back",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id of the process that is playing the file you want to put in pause"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "pause", [id])
 
 def setVolume(id:int, volume:float) -> None:
 	"""
@@ -1883,30 +1435,27 @@ def setVolume(id:int, volume:float) -> None:
 		Id of the process that is playing the file you want to put louder or less loud
 	volume:float
 		Volume - range 0.0 to 1.0
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 151,
-	    "returnSignature": "v",
-	    "name": "setVolume",
-	    "parametersSignature": "(if)",
-	    "description": "Sets the volume of the player",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id of the process that is playing the file you want to put louder or less loud"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "Volume - range 0.0 to 1.0"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "setVolume", [id, volume])
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "v",
+	#     "name": "setVolume",
+	#     "parametersSignature": "(if)",
+	#     "description": "Sets the volume of the player",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id of the process that is playing the file you want to put louder or less loud"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "Volume - range 0.0 to 1.0"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "setVolume", [id, volume])
 
 def setMasterVolume(volume:float) -> None:
 	"""
@@ -1916,26 +1465,23 @@ def setMasterVolume(volume:float) -> None:
 	----------
 	volume:float
 		Volume - range 0.0 to 1.0
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 152,
-	    "returnSignature": "v",
-	    "name": "setMasterVolume",
-	    "parametersSignature": "(f)",
-	    "description": "Sets the master volume of the player",
-	    "parameters": [
-	        {
-	            "name": "volume",
-	            "description": "Volume - range 0.0 to 1.0"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "setMasterVolume", [volume])
+	# NAOqi metadata:
+	# {
+	#     "uid": 152,
+	#     "returnSignature": "v",
+	#     "name": "setMasterVolume",
+	#     "parametersSignature": "(f)",
+	#     "description": "Sets the master volume of the player",
+	#     "parameters": [
+	#         {
+	#             "name": "volume",
+	#             "description": "Volume - range 0.0 to 1.0"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "setMasterVolume", [volume])
 
 def getVolume(playId:int) -> float:
 	"""
@@ -1949,26 +1495,23 @@ def getVolume(playId:int) -> float:
 	Returns
 	----------
 	Volume of the player - range 0.0 to 1.0.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 153,
-	    "returnSignature": "f",
-	    "name": "getVolume",
-	    "parametersSignature": "(i)",
-	    "description": "Returns the volume of the player",
-	    "parameters": [
-	        {
-	            "name": "playId",
-	            "description": "Id of the process which is playing the file"
-	        }
-	    ],
-	    "returnDescription": "Volume of the player - range 0.0 to 1.0."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getVolume", [playId])
+	# NAOqi metadata:
+	# {
+	#     "uid": 153,
+	#     "returnSignature": "f",
+	#     "name": "getVolume",
+	#     "parametersSignature": "(i)",
+	#     "description": "Returns the volume of the player",
+	#     "parameters": [
+	#         {
+	#             "name": "playId",
+	#             "description": "Id of the process which is playing the file"
+	#         }
+	#     ],
+	#     "returnDescription": "Volume of the player - range 0.0 to 1.0."
+	# }
+	return call_method("ALAudioPlayer", "getVolume", [playId])
 
 def getMasterVolume() -> float:
 	"""
@@ -1977,21 +1520,18 @@ def getMasterVolume() -> float:
 	Returns
 	----------
 	Volume of the master - range 0.0 to 1.0.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 154,
-	    "returnSignature": "f",
-	    "name": "getMasterVolume",
-	    "parametersSignature": "()",
-	    "description": "Returns the master volume of the player",
-	    "parameters": [],
-	    "returnDescription": "Volume of the master - range 0.0 to 1.0."
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getMasterVolume", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 154,
+	#     "returnSignature": "f",
+	#     "name": "getMasterVolume",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the master volume of the player",
+	#     "parameters": [],
+	#     "returnDescription": "Volume of the master - range 0.0 to 1.0."
+	# }
+	return call_method("ALAudioPlayer", "getMasterVolume", [])
 
 def setPanorama(p0:float) -> None:
 	"""
@@ -2006,20 +1546,21 @@ def setPanorama(p0:float) -> None:
 	----------
 	Volume of the player - range 0.0 to 1.0.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 155,
-	    "returnSignature": "v",
-	    "name": "setPanorama",
-	    "parametersSignature": "(f)",
-	    "description": "sets the audio panorama : -1 for left speaker / 1 for right speaker",
-	    "parameters": [],
-	    "returnDescription": "Volume of the player - range 0.0 to 1.0."
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALAudioPlayer", "setPanorama", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 155,
+	#     "returnSignature": "v",
+	#     "name": "setPanorama",
+	#     "parametersSignature": "(f)",
+	#     "description": "sets the audio panorama : -1 for left speaker / 1 for right speaker",
+	#     "parameters": [],
+	#     "returnDescription": "Volume of the player - range 0.0 to 1.0."
+	# }
+	return call_method("ALAudioPlayer", "setPanorama", [p0])
 
 def loadFile(fileName:str) -> int:
 	"""
@@ -2033,26 +1574,23 @@ def loadFile(fileName:str) -> int:
 	Returns
 	----------
 	Id of the file which has been loaded. This file can then be played with the play function
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 156,
-	    "returnSignature": "i",
-	    "name": "loadFile",
-	    "parametersSignature": "(s)",
-	    "description": "Loads a file for ulterior playback",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "Path of the sound file (either mp3 or wav)"
-	        }
-	    ],
-	    "returnDescription": "Id of the file which has been loaded. This file can then be played with the play function"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "loadFile", [fileName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 156,
+	#     "returnSignature": "i",
+	#     "name": "loadFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "Loads a file for ulterior playback",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "Path of the sound file (either mp3 or wav)"
+	#         }
+	#     ],
+	#     "returnDescription": "Id of the file which has been loaded. This file can then be played with the play function"
+	# }
+	return call_method("ALAudioPlayer", "loadFile", [fileName])
 
 def unloadFile(id:int) -> None:
 	"""
@@ -2062,45 +1600,39 @@ def unloadFile(id:int) -> None:
 	----------
 	id:int
 		Id returned by the loadFile function
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 157,
-	    "returnSignature": "v",
-	    "name": "unloadFile",
-	    "parametersSignature": "(i)",
-	    "description": "unloads a file previously loaded with the loadFile function",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "unloadFile", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 157,
+	#     "returnSignature": "v",
+	#     "name": "unloadFile",
+	#     "parametersSignature": "(i)",
+	#     "description": "unloads a file previously loaded with the loadFile function",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "unloadFile", [id])
 
 def unloadAllFiles() -> None:
 	"""
 	unloads all the files already loaded.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 158,
-	    "returnSignature": "v",
-	    "name": "unloadAllFiles",
-	    "parametersSignature": "()",
-	    "description": "unloads all the files already loaded.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "unloadAllFiles", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 158,
+	#     "returnSignature": "v",
+	#     "name": "unloadAllFiles",
+	#     "parametersSignature": "()",
+	#     "description": "unloads all the files already loaded.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "unloadAllFiles", [])
 
 def getLoadedFilesNames() -> List[str]:
 	"""
@@ -2109,21 +1641,18 @@ def getLoadedFilesNames() -> List[str]:
 	Returns
 	----------
 	Array containing the names of the files which has been loaded
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 159,
-	    "returnSignature": "[s]",
-	    "name": "getLoadedFilesNames",
-	    "parametersSignature": "()",
-	    "description": "returns an array containing the names of the currently loaded files",
-	    "parameters": [],
-	    "returnDescription": "Array containing the names of the files which has been loaded"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getLoadedFilesNames", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 159,
+	#     "returnSignature": "[s]",
+	#     "name": "getLoadedFilesNames",
+	#     "parametersSignature": "()",
+	#     "description": "returns an array containing the names of the currently loaded files",
+	#     "parameters": [],
+	#     "returnDescription": "Array containing the names of the files which has been loaded"
+	# }
+	return call_method("ALAudioPlayer", "getLoadedFilesNames", [])
 
 def getLoadedFilesIds() -> List[str]:
 	"""
@@ -2132,26 +1661,22 @@ def getLoadedFilesIds() -> List[str]:
 	Returns
 	----------
 	Array containing the Ids of the files which has been loaded
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 160,
-	    "returnSignature": "[s]",
-	    "name": "getLoadedFilesIds",
-	    "parametersSignature": "()",
-	    "description": "returns an array containing the Ids of the currently loaded files",
-	    "parameters": [],
-	    "returnDescription": "Array containing the Ids of the files which has been loaded"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getLoadedFilesIds", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 160,
+	#     "returnSignature": "[s]",
+	#     "name": "getLoadedFilesIds",
+	#     "parametersSignature": "()",
+	#     "description": "returns an array containing the Ids of the currently loaded files",
+	#     "parameters": [],
+	#     "returnDescription": "Array containing the Ids of the files which has been loaded"
+	# }
+	return call_method("ALAudioPlayer", "getLoadedFilesIds", [])
 
-def play_1(id:int) -> None:
+@overload
+def play(id:int, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (play)
-	
 	Starts the playback of a file preloaded with the loadFile function.
 	
 	Parameters
@@ -2159,30 +1684,32 @@ def play_1(id:int) -> None:
 	id:int
 		Id returned by the loadFile function
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 161,
-	    "returnSignature": "v",
-	    "name": "play",
-	    "parametersSignature": "(i)",
-	    "description": "Starts the playback of a file preloaded with the loadFile function.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "play", [id])
-
-def play_2(id:int, volume:float, pan:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (play)
+	Bridge notes
+	------------
+	play has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 161,
+	#     "returnSignature": "v",
+	#     "name": "play",
+	#     "parametersSignature": "(i)",
+	#     "description": "Starts the playback of a file preloaded with the loadFile function.",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def play(id:int, volume:float, pan:float, /) -> None:
+	"""
 	Starts the playback of a file preloaded with the loadFile function, with specific volume and audio balance
 	
 	Parameters
@@ -2194,38 +1721,54 @@ def play_2(id:int, volume:float, pan:float) -> None:
 	pan:float
 		audio balance of the sound file (-1.0 : left / 1.0 : right)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 162,
-	    "returnSignature": "v",
-	    "name": "play",
-	    "parametersSignature": "(iff)",
-	    "description": "Starts the playback of a file preloaded with the loadFile function, with specific volume and audio balance",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "play", [id, volume, pan])
-
-def playInLoop_1(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playInLoop)
+	Bridge notes
+	------------
+	play has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 162,
+	#     "returnSignature": "v",
+	#     "name": "play",
+	#     "parametersSignature": "(iff)",
+	#     "description": "Starts the playback of a file preloaded with the loadFile function, with specific volume and audio balance",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def play(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	play has 2 variants on the robot:
+	- play(id:int)
+	- play(id:int, volume:float, pan:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.play has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "play", list(args))
+
+@overload
+def playInLoop(id:int, /) -> None:
+	"""
 	Starts the playback in loop of a file preloaded with the loadFile function
 	
 	Parameters
@@ -2233,30 +1776,32 @@ def playInLoop_1(id:int) -> None:
 	id:int
 		Id returned by the loadFile function
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 163,
-	    "returnSignature": "v",
-	    "name": "playInLoop",
-	    "parametersSignature": "(i)",
-	    "description": "Starts the playback in loop of a file preloaded with the loadFile function",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAudioPlayer", "playInLoop", [id])
-
-def playInLoop_2(id:int, volume:float, pan:float) -> None:
-	"""
-	Note: This is one of the overloads of the original method (playInLoop)
+	Bridge notes
+	------------
+	playInLoop has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 163,
+	#     "returnSignature": "v",
+	#     "name": "playInLoop",
+	#     "parametersSignature": "(i)",
+	#     "description": "Starts the playback in loop of a file preloaded with the loadFile function",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def playInLoop(id:int, volume:float, pan:float, /) -> None:
+	"""
 	Plays a wav or mp3 file in loop, with specific volume and audio balance
 	
 	Parameters
@@ -2268,33 +1813,50 @@ def playInLoop_2(id:int, volume:float, pan:float) -> None:
 	pan:float
 		audio balance of the sound file (-1.0 : left / 1.0 : right)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 164,
-	    "returnSignature": "v",
-	    "name": "playInLoop",
-	    "parametersSignature": "(iff)",
-	    "description": "Plays a wav or mp3 file in loop, with specific volume and audio balance",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        },
-	        {
-	            "name": "volume",
-	            "description": "volume of the sound file (must be between 0.0 and 1.0)"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	playInLoop has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAudioPlayer", "playInLoop", [id, volume, pan])
+	# NAOqi metadata:
+	# {
+	#     "uid": 164,
+	#     "returnSignature": "v",
+	#     "name": "playInLoop",
+	#     "parametersSignature": "(iff)",
+	#     "description": "Plays a wav or mp3 file in loop, with specific volume and audio balance",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         },
+	#         {
+	#             "name": "volume",
+	#             "description": "volume of the sound file (must be between 0.0 and 1.0)"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "audio balance of the sound file (-1.0 : left / 1.0 : right)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def playInLoop(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	playInLoop has 2 variants on the robot:
+	- playInLoop(id:int)
+	- playInLoop(id:int, volume:float, pan:float)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAudioPlayer.playInLoop has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAudioPlayer", "playInLoop", list(args))
 
 def playWebStream(streamName:str, p1:float, p2:float) -> None:
 	"""
@@ -2309,25 +1871,26 @@ def playWebStream(streamName:str, p1:float, p2:float) -> None:
 	p2:float
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 165,
-	    "returnSignature": "v",
-	    "name": "playWebStream",
-	    "parametersSignature": "(sff)",
-	    "description": "Starts the playback of a wab audio stream",
-	    "parameters": [
-	        {
-	            "name": "streamName",
-	            "description": "Path of the web audio stream"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation only names 1 of 3 parameters. The others are called p1, p2 here.
 	"""
-	return send_mfc("ALAudioPlayer", "playWebStream", [streamName, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 165,
+	#     "returnSignature": "v",
+	#     "name": "playWebStream",
+	#     "parametersSignature": "(sff)",
+	#     "description": "Starts the playback of a wab audio stream",
+	#     "parameters": [
+	#         {
+	#             "name": "streamName",
+	#             "description": "Path of the web audio stream"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "playWebStream", [streamName, p1, p2])
 
 def getFileLength(playId:int) -> float:
 	"""
@@ -2341,26 +1904,23 @@ def getFileLength(playId:int) -> float:
 	Returns
 	----------
 	Length of the file in seconds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 166,
-	    "returnSignature": "f",
-	    "name": "getFileLength",
-	    "parametersSignature": "(i)",
-	    "description": "Returns the length of the file played",
-	    "parameters": [
-	        {
-	            "name": "playId",
-	            "description": "Id of the process which is playing the file"
-	        }
-	    ],
-	    "returnDescription": "Length of the file in seconds"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getFileLength", [playId])
+	# NAOqi metadata:
+	# {
+	#     "uid": 166,
+	#     "returnSignature": "f",
+	#     "name": "getFileLength",
+	#     "parametersSignature": "(i)",
+	#     "description": "Returns the length of the file played",
+	#     "parameters": [
+	#         {
+	#             "name": "playId",
+	#             "description": "Id of the process which is playing the file"
+	#         }
+	#     ],
+	#     "returnDescription": "Length of the file in seconds"
+	# }
+	return call_method("ALAudioPlayer", "getFileLength", [playId])
 
 def getCurrentPosition(playId:int) -> float:
 	"""
@@ -2374,26 +1934,23 @@ def getCurrentPosition(playId:int) -> float:
 	Returns
 	----------
 	Position in the file in seconds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 167,
-	    "returnSignature": "f",
-	    "name": "getCurrentPosition",
-	    "parametersSignature": "(i)",
-	    "description": "Returns the position in the file which is currently played",
-	    "parameters": [
-	        {
-	            "name": "playId",
-	            "description": "Id of the process which is playing the file"
-	        }
-	    ],
-	    "returnDescription": "Position in the file in seconds"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "getCurrentPosition", [playId])
+	# NAOqi metadata:
+	# {
+	#     "uid": 167,
+	#     "returnSignature": "f",
+	#     "name": "getCurrentPosition",
+	#     "parametersSignature": "(i)",
+	#     "description": "Returns the position in the file which is currently played",
+	#     "parameters": [
+	#         {
+	#             "name": "playId",
+	#             "description": "Id of the process which is playing the file"
+	#         }
+	#     ],
+	#     "returnDescription": "Position in the file in seconds"
+	# }
+	return call_method("ALAudioPlayer", "getCurrentPosition", [playId])
 
 def playSine(frequence:int, gain:int, pan:int, duration:float) -> None:
 	"""
@@ -2409,38 +1966,35 @@ def playSine(frequence:int, gain:int, pan:int, duration:float) -> None:
 		Stereo Pan set to either {-1,0,+1}
 	duration:float
 		Duration of the sine wave in seconds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 168,
-	    "returnSignature": "v",
-	    "name": "playSine",
-	    "parametersSignature": "(iiif)",
-	    "description": "Play a sine wave which specified caracteristics.",
-	    "parameters": [
-	        {
-	            "name": "frequence",
-	            "description": "Frequence in Hertz"
-	        },
-	        {
-	            "name": "gain",
-	            "description": "Volume Gain between 0 and 100"
-	        },
-	        {
-	            "name": "pan",
-	            "description": "Stereo Pan set to either {-1,0,+1}"
-	        },
-	        {
-	            "name": "duration",
-	            "description": "Duration of the sine wave in seconds"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "playSine", [frequence, gain, pan, duration])
+	# NAOqi metadata:
+	# {
+	#     "uid": 168,
+	#     "returnSignature": "v",
+	#     "name": "playSine",
+	#     "parametersSignature": "(iiif)",
+	#     "description": "Play a sine wave which specified caracteristics.",
+	#     "parameters": [
+	#         {
+	#             "name": "frequence",
+	#             "description": "Frequence in Hertz"
+	#         },
+	#         {
+	#             "name": "gain",
+	#             "description": "Volume Gain between 0 and 100"
+	#         },
+	#         {
+	#             "name": "pan",
+	#             "description": "Stereo Pan set to either {-1,0,+1}"
+	#         },
+	#         {
+	#             "name": "duration",
+	#             "description": "Duration of the sine wave in seconds"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "playSine", [frequence, gain, pan, duration])
 
 def _launchSinePlaying(p0:int, p1:int, p2:int, p3:float) -> None:
 	"""
@@ -2456,21 +2010,18 @@ def _launchSinePlaying(p0:int, p1:int, p2:int, p3:float) -> None:
 		
 	p3:float
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 169,
-	    "returnSignature": "v",
-	    "name": "_launchSinePlaying",
-	    "parametersSignature": "(iiif)",
-	    "description": "launch the thread to play sine",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_launchSinePlaying", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 169,
+	#     "returnSignature": "v",
+	#     "name": "_launchSinePlaying",
+	#     "parametersSignature": "(iiif)",
+	#     "description": "launch the thread to play sine",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_launchSinePlaying", [p0, p1, p2, p3])
 
 def _isPlayingThisFile(fileName:str) -> bool:
 	"""
@@ -2484,45 +2035,39 @@ def _isPlayingThisFile(fileName:str) -> bool:
 	Returns
 	----------
 	1 if the file is currently beeing playing / 0 otherwise
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 170,
-	    "returnSignature": "b",
-	    "name": "_isPlayingThisFile",
-	    "parametersSignature": "(s)",
-	    "description": "This function allows to know if the ALAudioPlayer module is currently playing the file you give in argument",
-	    "parameters": [
-	        {
-	            "name": "fileName",
-	            "description": "file name of the file you want to test"
-	        }
-	    ],
-	    "returnDescription": "1 if the file is currently beeing playing / 0 otherwise"
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_isPlayingThisFile", [fileName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 170,
+	#     "returnSignature": "b",
+	#     "name": "_isPlayingThisFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "This function allows to know if the ALAudioPlayer module is currently playing the file you give in argument",
+	#     "parameters": [
+	#         {
+	#             "name": "fileName",
+	#             "description": "file name of the file you want to test"
+	#         }
+	#     ],
+	#     "returnDescription": "1 if the file is currently beeing playing / 0 otherwise"
+	# }
+	return call_method("ALAudioPlayer", "_isPlayingThisFile", [fileName])
 
 def _saySOSIP() -> None:
 	"""
 	Say ip if there is no tts or behavior manager enable (internal use).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 171,
-	    "returnSignature": "v",
-	    "name": "_saySOSIP",
-	    "parametersSignature": "()",
-	    "description": "Say ip if there is no tts or behavior manager enable (internal use).",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "_saySOSIP", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 171,
+	#     "returnSignature": "v",
+	#     "name": "_saySOSIP",
+	#     "parametersSignature": "()",
+	#     "description": "Say ip if there is no tts or behavior manager enable (internal use).",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "_saySOSIP", [])
 
 def disablePitch(id:int) -> None:
 	"""
@@ -2532,26 +2077,23 @@ def disablePitch(id:int) -> None:
 	----------
 	id:int
 		Id returned by the loadFile function
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 172,
-	    "returnSignature": "v",
-	    "name": "disablePitch",
-	    "parametersSignature": "(i)",
-	    "description": "Remove pitch on the current file",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "disablePitch", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 172,
+	#     "returnSignature": "v",
+	#     "name": "disablePitch",
+	#     "parametersSignature": "(i)",
+	#     "description": "Remove pitch on the current file",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "disablePitch", [id])
 
 def setPitch(id:int, level:float) -> None:
 	"""
@@ -2563,28 +2105,25 @@ def setPitch(id:int, level:float) -> None:
 		Id returned by the loadFile function
 	level:float
 		Pitch shifting to apply
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 173,
-	    "returnSignature": "v",
-	    "name": "setPitch",
-	    "parametersSignature": "(if)",
-	    "description": "Set a pith on the current playing file",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "Id returned by the loadFile function"
-	        },
-	        {
-	            "name": "level",
-	            "description": "Pitch shifting to apply"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAudioPlayer", "setPitch", [id, level])
+	# NAOqi metadata:
+	# {
+	#     "uid": 173,
+	#     "returnSignature": "v",
+	#     "name": "setPitch",
+	#     "parametersSignature": "(if)",
+	#     "description": "Set a pith on the current playing file",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "Id returned by the loadFile function"
+	#         },
+	#         {
+	#             "name": "level",
+	#             "description": "Pitch shifting to apply"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAudioPlayer", "setPitch", [id, level])
 

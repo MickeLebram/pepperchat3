@@ -1,335 +1,10 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 ALDialog is the dialog module. It allows loading a dialog file (.top), starts/stops/loads/unloads the dialog
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
 def version() -> str:
 	"""
@@ -338,21 +13,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALDialog", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +33,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALDialog", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +53,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALDialog", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +78,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALDialog", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +103,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALDialog", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +123,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALDialog", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,31 +148,60 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALDialog", "getUsage", [name])
 
-def subscribe_1(name:str, period:int, precision:float) -> None:
+@overload
+def subscribe(name:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (subscribe)
+	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
 	
+	Parameters
+	----------
+	name:str
+		Name of the module which subscribes.
+	
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "subscribe",
+	#     "parametersSignature": "(s)",
+	#     "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which subscribes."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def subscribe(name:str, period:int, precision:float, /) -> None:
+	"""
 	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
 	
 	Parameters
@@ -661,64 +213,50 @@ def subscribe_1(name:str, period:int, precision:float) -> None:
 	precision:float
 		Precision of the extractor if relevant.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "v",
-	    "name": "subscribe",
-	    "parametersSignature": "(sif)",
-	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which subscribes."
-	        },
-	        {
-	            "name": "period",
-	            "description": "Refresh period (in milliseconds) if relevant."
-	        },
-	        {
-	            "name": "precision",
-	            "description": "Precision of the extractor if relevant."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALDialog", "subscribe", [name, period, precision])
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "v",
+	#     "name": "subscribe",
+	#     "parametersSignature": "(sif)",
+	#     "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which subscribes."
+	#         },
+	#         {
+	#             "name": "period",
+	#             "description": "Refresh period (in milliseconds) if relevant."
+	#         },
+	#         {
+	#             "name": "precision",
+	#             "description": "Precision of the extractor if relevant."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
 
-def subscribe_2(name:str) -> None:
+def subscribe(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (subscribe)
+	Bridge notes
+	------------
+	subscribe has 2 variants on the robot:
+	- subscribe(name:str)
+	- subscribe(name:str, period:int, precision:float)
 	
-	Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
-	
-	Parameters
-	----------
-	name:str
-		Name of the module which subscribes.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "subscribe",
-	    "parametersSignature": "(s)",
-	    "description": "Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData(\"keyName\"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which subscribes."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALDialog", "subscribe", [name])
+	if kwargs:
+		raise TypeError("ALDialog.subscribe has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALDialog", "subscribe", list(args))
 
 def unsubscribe(name:str) -> None:
 	"""
@@ -728,26 +266,23 @@ def unsubscribe(name:str) -> None:
 	----------
 	name:str
 		Name of the module which had subscribed.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "unsubscribe",
-	    "parametersSignature": "(s)",
-	    "description": "Unsubscribes from the extractor.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which had subscribed."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "unsubscribe", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "unsubscribe",
+	#     "parametersSignature": "(s)",
+	#     "description": "Unsubscribes from the extractor.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which had subscribed."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "unsubscribe", [name])
 
 def updatePeriod(name:str, period:int) -> None:
 	"""
@@ -759,30 +294,27 @@ def updatePeriod(name:str, period:int) -> None:
 		Name of the module which has subscribed.
 	period:int
 		Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "updatePeriod",
-	    "parametersSignature": "(si)",
-	    "description": "Updates the period if relevant.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        },
-	        {
-	            "name": "period",
-	            "description": "Refresh period (in milliseconds)."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "updatePeriod", [name, period])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "updatePeriod",
+	#     "parametersSignature": "(si)",
+	#     "description": "Updates the period if relevant.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         },
+	#         {
+	#             "name": "period",
+	#             "description": "Refresh period (in milliseconds)."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "updatePeriod", [name, period])
 
 def updatePrecision(name:str, precision:float) -> None:
 	"""
@@ -794,30 +326,27 @@ def updatePrecision(name:str, precision:float) -> None:
 		Name of the module which has subscribed.
 	precision:float
 		Precision of the extractor.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "updatePrecision",
-	    "parametersSignature": "(sf)",
-	    "description": "Updates the precision if relevant.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        },
-	        {
-	            "name": "precision",
-	            "description": "Precision of the extractor."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "updatePrecision", [name, precision])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "updatePrecision",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Updates the precision if relevant.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         },
+	#         {
+	#             "name": "precision",
+	#             "description": "Precision of the extractor."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "updatePrecision", [name, precision])
 
 def getCurrentPeriod() -> int:
 	"""
@@ -826,21 +355,18 @@ def getCurrentPeriod() -> int:
 	Returns
 	----------
 	Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "i",
-	    "name": "getCurrentPeriod",
-	    "parametersSignature": "()",
-	    "description": "Gets the current period.",
-	    "parameters": [],
-	    "returnDescription": "Refresh period (in milliseconds)."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getCurrentPeriod", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "i",
+	#     "name": "getCurrentPeriod",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current period.",
+	#     "parameters": [],
+	#     "returnDescription": "Refresh period (in milliseconds)."
+	# }
+	return call_method("ALDialog", "getCurrentPeriod", [])
 
 def getCurrentPrecision() -> float:
 	"""
@@ -849,21 +375,18 @@ def getCurrentPrecision() -> float:
 	Returns
 	----------
 	Precision of the extractor.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "f",
-	    "name": "getCurrentPrecision",
-	    "parametersSignature": "()",
-	    "description": "Gets the current precision.",
-	    "parameters": [],
-	    "returnDescription": "Precision of the extractor."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getCurrentPrecision", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "f",
+	#     "name": "getCurrentPrecision",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the current precision.",
+	#     "parameters": [],
+	#     "returnDescription": "Precision of the extractor."
+	# }
+	return call_method("ALDialog", "getCurrentPrecision", [])
 
 def getMyPeriod(name:str) -> int:
 	"""
@@ -877,26 +400,23 @@ def getMyPeriod(name:str) -> int:
 	Returns
 	----------
 	Refresh period (in milliseconds).
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "i",
-	    "name": "getMyPeriod",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the period for a specific subscription.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the module which has subscribed."
-	        }
-	    ],
-	    "returnDescription": "Refresh period (in milliseconds)."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getMyPeriod", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "i",
+	#     "name": "getMyPeriod",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the period for a specific subscription.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the module which has subscribed."
+	#         }
+	#     ],
+	#     "returnDescription": "Refresh period (in milliseconds)."
+	# }
+	return call_method("ALDialog", "getMyPeriod", [name])
 
 def getMyPrecision(name:str) -> float:
 	"""
@@ -910,26 +430,23 @@ def getMyPrecision(name:str) -> float:
 	Returns
 	----------
 	precision of the extractor
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "f",
-	    "name": "getMyPrecision",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the precision for a specific subscription.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "name of the module which has subscribed"
-	        }
-	    ],
-	    "returnDescription": "precision of the extractor"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getMyPrecision", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "f",
+	#     "name": "getMyPrecision",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the precision for a specific subscription.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "name of the module which has subscribed"
+	#         }
+	#     ],
+	#     "returnDescription": "precision of the extractor"
+	# }
+	return call_method("ALDialog", "getMyPrecision", [name])
 
 def getSubscribersInfo() -> object:
 	"""
@@ -938,21 +455,18 @@ def getSubscribersInfo() -> object:
 	Returns
 	----------
 	Array of names and parameters of all subscribers.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "m",
-	    "name": "getSubscribersInfo",
-	    "parametersSignature": "()",
-	    "description": "Gets the parameters given by the module.",
-	    "parameters": [],
-	    "returnDescription": "Array of names and parameters of all subscribers."
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getSubscribersInfo", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "m",
+	#     "name": "getSubscribersInfo",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the parameters given by the module.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of names and parameters of all subscribers."
+	# }
+	return call_method("ALDialog", "getSubscribersInfo", [])
 
 def getOutputNames() -> List[str]:
 	"""
@@ -961,21 +475,18 @@ def getOutputNames() -> List[str]:
 	Returns
 	----------
 	Array of values updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "[s]",
-	    "name": "getOutputNames",
-	    "parametersSignature": "()",
-	    "description": "Get the list of values updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of values updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getOutputNames", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "[s]",
+	#     "name": "getOutputNames",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of values updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of values updated by this extractor in ALMemory"
+	# }
+	return call_method("ALDialog", "getOutputNames", [])
 
 def getEventList() -> List[str]:
 	"""
@@ -984,21 +495,18 @@ def getEventList() -> List[str]:
 	Returns
 	----------
 	Array of events updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "[s]",
-	    "name": "getEventList",
-	    "parametersSignature": "()",
-	    "description": "Get the list of events updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of events updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getEventList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "[s]",
+	#     "name": "getEventList",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of events updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of events updated by this extractor in ALMemory"
+	# }
+	return call_method("ALDialog", "getEventList", [])
 
 def getMemoryKeyList() -> List[str]:
 	"""
@@ -1007,21 +515,18 @@ def getMemoryKeyList() -> List[str]:
 	Returns
 	----------
 	Array of events updated by this extractor in ALMemory
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "[s]",
-	    "name": "getMemoryKeyList",
-	    "parametersSignature": "()",
-	    "description": "Get the list of events updated in ALMemory.",
-	    "parameters": [],
-	    "returnDescription": "Array of events updated by this extractor in ALMemory"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getMemoryKeyList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "[s]",
+	#     "name": "getMemoryKeyList",
+	#     "parametersSignature": "()",
+	#     "description": "Get the list of events updated in ALMemory.",
+	#     "parameters": [],
+	#     "returnDescription": "Array of events updated by this extractor in ALMemory"
+	# }
+	return call_method("ALDialog", "getMemoryKeyList", [])
 
 def _wordRecognized(unsuned:str, value:object, message:str) -> None:
 	"""
@@ -1035,34 +540,31 @@ def _wordRecognized(unsuned:str, value:object, message:str) -> None:
 		word recognized value
 	message:str
 		unused message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "v",
-	    "name": "_wordRecognized",
-	    "parametersSignature": "(sms)",
-	    "description": "Callback when speech recognition recognized a word",
-	    "parameters": [
-	        {
-	            "name": "unsuned",
-	            "description": "callback unused parameter"
-	        },
-	        {
-	            "name": "value",
-	            "description": "word recognized value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "unused message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_wordRecognized", [unsuned, value, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "v",
+	#     "name": "_wordRecognized",
+	#     "parametersSignature": "(sms)",
+	#     "description": "Callback when speech recognition recognized a word",
+	#     "parameters": [
+	#         {
+	#             "name": "unsuned",
+	#             "description": "callback unused parameter"
+	#         },
+	#         {
+	#             "name": "value",
+	#             "description": "word recognized value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "unused message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_wordRecognized", [unsuned, value, message])
 
 def getStoppable() -> bool:
 	"""
@@ -1071,21 +573,18 @@ def getStoppable() -> bool:
 	Returns
 	----------
 	Is engine stoppable
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "b",
-	    "name": "getStoppable",
-	    "parametersSignature": "()",
-	    "description": "Is engine stoppable",
-	    "parameters": [],
-	    "returnDescription": "Is engine stoppable"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getStoppable", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "b",
+	#     "name": "getStoppable",
+	#     "parametersSignature": "()",
+	#     "description": "Is engine stoppable",
+	#     "parameters": [],
+	#     "returnDescription": "Is engine stoppable"
+	# }
+	return call_method("ALDialog", "getStoppable", [])
 
 def setStoppable(stoppable:bool) -> None:
 	"""
@@ -1095,26 +594,23 @@ def setStoppable(stoppable:bool) -> None:
 	----------
 	stoppable:bool
 		set if engine can be stopped by user session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "v",
-	    "name": "setStoppable",
-	    "parametersSignature": "(b)",
-	    "description": "Is engine stoppable",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setStoppable", [stoppable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "v",
+	#     "name": "setStoppable",
+	#     "parametersSignature": "(b)",
+	#     "description": "Is engine stoppable",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setStoppable", [stoppable])
 
 def runTopics(stoppable:List[str]) -> List[str]:
 	"""
@@ -1124,26 +620,23 @@ def runTopics(stoppable:List[str]) -> List[str]:
 	----------
 	stoppable:List[str]
 		set if engine can be stopped by user session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "[s]",
-	    "name": "runTopics",
-	    "parametersSignature": "([s])",
-	    "description": "Is engine stoppable",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "runTopics", [stoppable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "[s]",
+	#     "name": "runTopics",
+	#     "parametersSignature": "([s])",
+	#     "description": "Is engine stoppable",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "runTopics", [stoppable])
 
 def stopTopics(stoppable:List[str]) -> None:
 	"""
@@ -1153,26 +646,23 @@ def stopTopics(stoppable:List[str]) -> None:
 	----------
 	stoppable:List[str]
 		set if engine can be stopped by user session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "v",
-	    "name": "stopTopics",
-	    "parametersSignature": "([s])",
-	    "description": "Is engine stoppable",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "stopTopics", [stoppable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "v",
+	#     "name": "stopTopics",
+	#     "parametersSignature": "([s])",
+	#     "description": "Is engine stoppable",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "stopTopics", [stoppable])
 
 def _setPhonetic(source1:str, source2:str, p2:str) -> None:
 	"""
@@ -1187,29 +677,30 @@ def _setPhonetic(source1:str, source2:str, p2:str) -> None:
 	p2:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "v",
-	    "name": "_setPhonetic",
-	    "parametersSignature": "(sss)",
-	    "description": "Set sentence phonetic",
-	    "parameters": [
-	        {
-	            "name": "source",
-	            "description": "source sentence"
-	        },
-	        {
-	            "name": "source",
-	            "description": "source sentence"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation only names 2 of 3 parameters. The others are called p2 here.
 	"""
-	return send_mfc("ALDialog", "_setPhonetic", [source1, source2, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "v",
+	#     "name": "_setPhonetic",
+	#     "parametersSignature": "(sss)",
+	#     "description": "Set sentence phonetic",
+	#     "parameters": [
+	#         {
+	#             "name": "source",
+	#             "description": "source sentence"
+	#         },
+	#         {
+	#             "name": "source",
+	#             "description": "source sentence"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setPhonetic", [source1, source2, p2])
 
 def _pauseEngine(enable:bool) -> None:
 	"""
@@ -1219,26 +710,23 @@ def _pauseEngine(enable:bool) -> None:
 	----------
 	enable:bool
 		true to pause
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "v",
-	    "name": "_pauseEngine",
-	    "parametersSignature": "(b)",
-	    "description": "Pause/unpause dialog engine and asr",
-	    "parameters": [
-	        {
-	            "name": "enable",
-	            "description": "true to pause"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_pauseEngine", [enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "v",
+	#     "name": "_pauseEngine",
+	#     "parametersSignature": "(b)",
+	#     "description": "Pause/unpause dialog engine and asr",
+	#     "parameters": [
+	#         {
+	#             "name": "enable",
+	#             "description": "true to pause"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_pauseEngine", [enable])
 
 def say(stoppable:str, p1:str) -> None:
 	"""
@@ -1251,52 +739,51 @@ def say(stoppable:str, p1:str) -> None:
 	p1:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "v",
-	    "name": "say",
-	    "parametersSignature": "(ss)",
-	    "description": "say a sentence from a topic",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation only names 1 of 2 parameters. The others are called p1 here.
 	"""
-	return send_mfc("ALDialog", "say", [stoppable, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "v",
+	#     "name": "say",
+	#     "parametersSignature": "(ss)",
+	#     "description": "say a sentence from a topic",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "say", [stoppable, p1])
 
 def resetLanguage() -> None:
 	"""
-	*Parsing issues:*
-		*Mismatch between 'parameters' and 'parametersSignature'*
-		
 	ResetLanguage
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "v",
-	    "name": "resetLanguage",
-	    "parametersSignature": "()",
-	    "description": "ResetLanguage",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation lists a parameter (stoppable) that the method's signature doesn't have. This function follows the signature and takes no arguments.
 	"""
-	return send_mfc("ALDialog", "resetLanguage", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "v",
+	#     "name": "resetLanguage",
+	#     "parametersSignature": "()",
+	#     "description": "ResetLanguage",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "resetLanguage", [])
 
 def _getTriggerFromID(stoppable:str, p1:str) -> List[str]:
 	"""
@@ -1309,25 +796,26 @@ def _getTriggerFromID(stoppable:str, p1:str) -> List[str]:
 	p1:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "[s]",
-	    "name": "_getTriggerFromID",
-	    "parametersSignature": "(ss)",
-	    "description": "getTriggerFromID",
-	    "parameters": [
-	        {
-	            "name": "stoppable",
-	            "description": "set if engine can be stopped by user session"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation only names 1 of 2 parameters. The others are called p1 here.
 	"""
-	return send_mfc("ALDialog", "_getTriggerFromID", [stoppable, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "[s]",
+	#     "name": "_getTriggerFromID",
+	#     "parametersSignature": "(ss)",
+	#     "description": "getTriggerFromID",
+	#     "parameters": [
+	#         {
+	#             "name": "stoppable",
+	#             "description": "set if engine can be stopped by user session"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_getTriggerFromID", [stoppable, p1])
 
 def addBlockingEvent(eventName:str) -> None:
 	"""
@@ -1337,26 +825,23 @@ def addBlockingEvent(eventName:str) -> None:
 	----------
 	eventName:str
 		Event name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "v",
-	    "name": "addBlockingEvent",
-	    "parametersSignature": "(s)",
-	    "description": "The event will stop current TSS",
-	    "parameters": [
-	        {
-	            "name": "eventName",
-	            "description": "Event name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "addBlockingEvent", [eventName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "v",
+	#     "name": "addBlockingEvent",
+	#     "parametersSignature": "(s)",
+	#     "description": "The event will stop current TSS",
+	#     "parameters": [
+	#         {
+	#             "name": "eventName",
+	#             "description": "Event name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "addBlockingEvent", [eventName])
 
 def removeBlockingEvent(eventName:str) -> None:
 	"""
@@ -1366,26 +851,23 @@ def removeBlockingEvent(eventName:str) -> None:
 	----------
 	eventName:str
 		Event name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "v",
-	    "name": "removeBlockingEvent",
-	    "parametersSignature": "(s)",
-	    "description": "The event will removed from the blocking list",
-	    "parameters": [
-	        {
-	            "name": "eventName",
-	            "description": "Event name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "removeBlockingEvent", [eventName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "v",
+	#     "name": "removeBlockingEvent",
+	#     "parametersSignature": "(s)",
+	#     "description": "The event will removed from the blocking list",
+	#     "parameters": [
+	#         {
+	#             "name": "eventName",
+	#             "description": "Event name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "removeBlockingEvent", [eventName])
 
 def wordsRecognizedCallback(grammar:object, utterance_Size:int) -> None:
 	"""
@@ -1397,30 +879,27 @@ def wordsRecognizedCallback(grammar:object, utterance_Size:int) -> None:
 		recognized grammar
 	utterance_Size:int
 		Utterance size
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "v",
-	    "name": "wordsRecognizedCallback",
-	    "parametersSignature": "(mi)",
-	    "description": "Asr callback for recognized words",
-	    "parameters": [
-	        {
-	            "name": "grammar",
-	            "description": "recognized grammar"
-	        },
-	        {
-	            "name": "utterance Size",
-	            "description": "Utterance size"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "wordsRecognizedCallback", [grammar, utterance_Size])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "v",
+	#     "name": "wordsRecognizedCallback",
+	#     "parametersSignature": "(mi)",
+	#     "description": "Asr callback for recognized words",
+	#     "parameters": [
+	#         {
+	#             "name": "grammar",
+	#             "description": "recognized grammar"
+	#         },
+	#         {
+	#             "name": "utterance Size",
+	#             "description": "Utterance size"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "wordsRecognizedCallback", [grammar, utterance_Size])
 
 def endOfUtteranceCallback() -> bool:
 	"""
@@ -1429,40 +908,34 @@ def endOfUtteranceCallback() -> bool:
 	Returns
 	----------
 	true if reprocess buffer
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "b",
-	    "name": "endOfUtteranceCallback",
-	    "parametersSignature": "()",
-	    "description": "End of utterance asr callback",
-	    "parameters": [],
-	    "returnDescription": "true if reprocess buffer"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "endOfUtteranceCallback", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "b",
+	#     "name": "endOfUtteranceCallback",
+	#     "parametersSignature": "()",
+	#     "description": "End of utterance asr callback",
+	#     "parameters": [],
+	#     "returnDescription": "true if reprocess buffer"
+	# }
+	return call_method("ALDialog", "endOfUtteranceCallback", [])
 
 def _releaseEngine() -> None:
 	"""
 	Experimental: release engine after call of controlEngine
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "v",
-	    "name": "_releaseEngine",
-	    "parametersSignature": "()",
-	    "description": "Experimental: release engine after call of controlEngine",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_releaseEngine", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "v",
+	#     "name": "_releaseEngine",
+	#     "parametersSignature": "()",
+	#     "description": "Experimental: release engine after call of controlEngine",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_releaseEngine", [])
 
 def _controlEngine(topicName:str, tagName:str) -> List[str]:
 	"""
@@ -1478,30 +951,27 @@ def _controlEngine(topicName:str, tagName:str) -> List[str]:
 	Returns
 	----------
 	Robot answer list
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "[s]",
-	    "name": "_controlEngine",
-	    "parametersSignature": "(ss)",
-	    "description": "Experimental: controlEngine and say a tag",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        },
-	        {
-	            "name": "tagName",
-	            "description": "tag name"
-	        }
-	    ],
-	    "returnDescription": "Robot answer list"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_controlEngine", [topicName, tagName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "[s]",
+	#     "name": "_controlEngine",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Experimental: controlEngine and say a tag",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         },
+	#         {
+	#             "name": "tagName",
+	#             "description": "tag name"
+	#         }
+	#     ],
+	#     "returnDescription": "Robot answer list"
+	# }
+	return call_method("ALDialog", "_controlEngine", [topicName, tagName])
 
 def _hasPreference() -> bool:
 	"""
@@ -1510,21 +980,18 @@ def _hasPreference() -> bool:
 	Returns
 	----------
 	true if has preference
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "b",
-	    "name": "_hasPreference",
-	    "parametersSignature": "()",
-	    "description": "hasPreference",
-	    "parameters": [],
-	    "returnDescription": "true if has preference"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_hasPreference", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "b",
+	#     "name": "_hasPreference",
+	#     "parametersSignature": "()",
+	#     "description": "hasPreference",
+	#     "parameters": [],
+	#     "returnDescription": "true if has preference"
+	# }
+	return call_method("ALDialog", "_hasPreference", [])
 
 def _eventReceived(eventName:str, eventValue:object, message:str) -> None:
 	"""
@@ -1538,34 +1005,31 @@ def _eventReceived(eventName:str, eventValue:object, message:str) -> None:
 		event value
 	message:str
 		unused event message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 144,
-	    "returnSignature": "v",
-	    "name": "_eventReceived",
-	    "parametersSignature": "(sms)",
-	    "description": "Callback when dialog received a event",
-	    "parameters": [
-	        {
-	            "name": "eventName",
-	            "description": "event name received"
-	        },
-	        {
-	            "name": "eventValue",
-	            "description": "event value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "unused event message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_eventReceived", [eventName, eventValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 144,
+	#     "returnSignature": "v",
+	#     "name": "_eventReceived",
+	#     "parametersSignature": "(sms)",
+	#     "description": "Callback when dialog received a event",
+	#     "parameters": [
+	#         {
+	#             "name": "eventName",
+	#             "description": "event name received"
+	#         },
+	#         {
+	#             "name": "eventValue",
+	#             "description": "event value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "unused event message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_eventReceived", [eventName, eventValue, message])
 
 def _statusChanged(internalCallBackEvent:str, internalCallbackValue:object, message:str) -> None:
 	"""
@@ -1579,34 +1043,31 @@ def _statusChanged(internalCallBackEvent:str, internalCallbackValue:object, mess
 		unused
 	message:str
 		unused
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 145,
-	    "returnSignature": "v",
-	    "name": "_statusChanged",
-	    "parametersSignature": "(sms)",
-	    "description": "Callback when ASR status changes",
-	    "parameters": [
-	        {
-	            "name": "internalCallBackEvent",
-	            "description": "unused"
-	        },
-	        {
-	            "name": "internalCallbackValue",
-	            "description": "unused"
-	        },
-	        {
-	            "name": "message",
-	            "description": "unused"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_statusChanged", [internalCallBackEvent, internalCallbackValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 145,
+	#     "returnSignature": "v",
+	#     "name": "_statusChanged",
+	#     "parametersSignature": "(sms)",
+	#     "description": "Callback when ASR status changes",
+	#     "parameters": [
+	#         {
+	#             "name": "internalCallBackEvent",
+	#             "description": "unused"
+	#         },
+	#         {
+	#             "name": "internalCallbackValue",
+	#             "description": "unused"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "unused"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_statusChanged", [internalCallBackEvent, internalCallbackValue, message])
 
 def gotoTag(topicName:str, tagName:str) -> None:
 	"""
@@ -1618,30 +1079,27 @@ def gotoTag(topicName:str, tagName:str) -> None:
 		topic name
 	tagName:str
 		tag name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 146,
-	    "returnSignature": "v",
-	    "name": "gotoTag",
-	    "parametersSignature": "(ss)",
-	    "description": "Callback when ASR status changes",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        },
-	        {
-	            "name": "tagName",
-	            "description": "tag name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "gotoTag", [topicName, tagName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 146,
+	#     "returnSignature": "v",
+	#     "name": "gotoTag",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Callback when ASR status changes",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         },
+	#         {
+	#             "name": "tagName",
+	#             "description": "tag name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "gotoTag", [topicName, tagName])
 
 def noPick(topicName:str) -> None:
 	"""
@@ -1651,26 +1109,23 @@ def noPick(topicName:str) -> None:
 	----------
 	topicName:str
 		Topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 147,
-	    "returnSignature": "v",
-	    "name": "noPick",
-	    "parametersSignature": "(s)",
-	    "description": "noPick",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "noPick", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "v",
+	#     "name": "noPick",
+	#     "parametersSignature": "(s)",
+	#     "description": "noPick",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "noPick", [topicName])
 
 def _connectionChanged(internalCallBackEvent:str, internalCallbackValue:object, message:str) -> None:
 	"""
@@ -1684,53 +1139,47 @@ def _connectionChanged(internalCallBackEvent:str, internalCallbackValue:object, 
 		unused
 	message:str
 		unused
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 148,
-	    "returnSignature": "v",
-	    "name": "_connectionChanged",
-	    "parametersSignature": "(sms)",
-	    "description": "Callback when remote connection changes",
-	    "parameters": [
-	        {
-	            "name": "internalCallBackEvent",
-	            "description": "unused"
-	        },
-	        {
-	            "name": "internalCallbackValue",
-	            "description": "unused"
-	        },
-	        {
-	            "name": "message",
-	            "description": "unused"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_connectionChanged", [internalCallBackEvent, internalCallbackValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "v",
+	#     "name": "_connectionChanged",
+	#     "parametersSignature": "(sms)",
+	#     "description": "Callback when remote connection changes",
+	#     "parameters": [
+	#         {
+	#             "name": "internalCallBackEvent",
+	#             "description": "unused"
+	#         },
+	#         {
+	#             "name": "internalCallbackValue",
+	#             "description": "unused"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "unused"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_connectionChanged", [internalCallBackEvent, internalCallbackValue, message])
 
 def compileAll() -> None:
 	"""
 	compile all for ASR
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 149,
-	    "returnSignature": "v",
-	    "name": "compileAll",
-	    "parametersSignature": "()",
-	    "description": "compile all for ASR",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "compileAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "v",
+	#     "name": "compileAll",
+	#     "parametersSignature": "()",
+	#     "description": "compile all for ASR",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "compileAll", [])
 
 def compileBundle(p0:str) -> None:
 	"""
@@ -1740,21 +1189,18 @@ def compileBundle(p0:str) -> None:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 150,
-	    "returnSignature": "v",
-	    "name": "compileBundle",
-	    "parametersSignature": "(s)",
-	    "description": "compile all for ASR",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "compileBundle", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "v",
+	#     "name": "compileBundle",
+	#     "parametersSignature": "(s)",
+	#     "description": "compile all for ASR",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "compileBundle", [p0])
 
 def createContext(p0:str, p1:str, p2:str) -> None:
 	"""
@@ -1768,21 +1214,18 @@ def createContext(p0:str, p1:str, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 151,
-	    "returnSignature": "v",
-	    "name": "createContext",
-	    "parametersSignature": "(sss)",
-	    "description": "Create a context",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "createContext", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "v",
+	#     "name": "createContext",
+	#     "parametersSignature": "(sss)",
+	#     "description": "Create a context",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "createContext", [p0, p1, p2])
 
 def loadTopic(topicPath:str) -> str:
 	"""
@@ -1796,26 +1239,23 @@ def loadTopic(topicPath:str) -> str:
 	Returns
 	----------
 	Topic path and filename
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 152,
-	    "returnSignature": "s",
-	    "name": "loadTopic",
-	    "parametersSignature": "(s)",
-	    "description": "Load a topic",
-	    "parameters": [
-	        {
-	            "name": "topicPath",
-	            "description": "topic full path and filename"
-	        }
-	    ],
-	    "returnDescription": "Topic path and filename"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "loadTopic", [topicPath])
+	# NAOqi metadata:
+	# {
+	#     "uid": 152,
+	#     "returnSignature": "s",
+	#     "name": "loadTopic",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load a topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicPath",
+	#             "description": "topic full path and filename"
+	#         }
+	#     ],
+	#     "returnDescription": "Topic path and filename"
+	# }
+	return call_method("ALDialog", "loadTopic", [topicPath])
 
 def loadTopicContent(topicContent:str) -> str:
 	"""
@@ -1829,26 +1269,23 @@ def loadTopicContent(topicContent:str) -> str:
 	Returns
 	----------
 	Topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 153,
-	    "returnSignature": "s",
-	    "name": "loadTopicContent",
-	    "parametersSignature": "(s)",
-	    "description": "Load a topic",
-	    "parameters": [
-	        {
-	            "name": "topicContent",
-	            "description": "topic content"
-	        }
-	    ],
-	    "returnDescription": "Topic name"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "loadTopicContent", [topicContent])
+	# NAOqi metadata:
+	# {
+	#     "uid": 153,
+	#     "returnSignature": "s",
+	#     "name": "loadTopicContent",
+	#     "parametersSignature": "(s)",
+	#     "description": "Load a topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicContent",
+	#             "description": "topic content"
+	#         }
+	#     ],
+	#     "returnDescription": "Topic name"
+	# }
+	return call_method("ALDialog", "loadTopicContent", [topicContent])
 
 def deactivateTopic(topicName:str) -> None:
 	"""
@@ -1858,26 +1295,23 @@ def deactivateTopic(topicName:str) -> None:
 	----------
 	topicName:str
 		topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 154,
-	    "returnSignature": "v",
-	    "name": "deactivateTopic",
-	    "parametersSignature": "(s)",
-	    "description": "Activate a topic",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "deactivateTopic", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 154,
+	#     "returnSignature": "v",
+	#     "name": "deactivateTopic",
+	#     "parametersSignature": "(s)",
+	#     "description": "Activate a topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "deactivateTopic", [topicName])
 
 def activateTopic(topicName:str) -> None:
 	"""
@@ -1887,26 +1321,23 @@ def activateTopic(topicName:str) -> None:
 	----------
 	topicName:str
 		topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 155,
-	    "returnSignature": "v",
-	    "name": "activateTopic",
-	    "parametersSignature": "(s)",
-	    "description": "Activate a topic",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "activateTopic", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 155,
+	#     "returnSignature": "v",
+	#     "name": "activateTopic",
+	#     "parametersSignature": "(s)",
+	#     "description": "Activate a topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "activateTopic", [topicName])
 
 def unloadTopic(topicName:str) -> None:
 	"""
@@ -1916,64 +1347,55 @@ def unloadTopic(topicName:str) -> None:
 	----------
 	topicName:str
 		topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 156,
-	    "returnSignature": "v",
-	    "name": "unloadTopic",
-	    "parametersSignature": "(s)",
-	    "description": "unload a dialog",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "unloadTopic", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 156,
+	#     "returnSignature": "v",
+	#     "name": "unloadTopic",
+	#     "parametersSignature": "(s)",
+	#     "description": "unload a dialog",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "unloadTopic", [topicName])
 
 def forceOutput() -> None:
 	"""
 	Get a proposal
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 157,
-	    "returnSignature": "v",
-	    "name": "forceOutput",
-	    "parametersSignature": "()",
-	    "description": "Get a proposal",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "forceOutput", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 157,
+	#     "returnSignature": "v",
+	#     "name": "forceOutput",
+	#     "parametersSignature": "()",
+	#     "description": "Get a proposal",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "forceOutput", [])
 
 def _isRunDialogInstalled() -> bool:
 	"""
 	isRunDialogInstalled
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 158,
-	    "returnSignature": "b",
-	    "name": "_isRunDialogInstalled",
-	    "parametersSignature": "()",
-	    "description": "isRunDialogInstalled",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isRunDialogInstalled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 158,
+	#     "returnSignature": "b",
+	#     "name": "_isRunDialogInstalled",
+	#     "parametersSignature": "()",
+	#     "description": "isRunDialogInstalled",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_isRunDialogInstalled", [])
 
 def forceInput(input:str) -> None:
 	"""
@@ -1983,26 +1405,23 @@ def forceInput(input:str) -> None:
 	----------
 	input:str
 		input string that simulate humain sentence
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 159,
-	    "returnSignature": "v",
-	    "name": "forceInput",
-	    "parametersSignature": "(s)",
-	    "description": "Give a sentence to the dialog and get the answer",
-	    "parameters": [
-	        {
-	            "name": "input",
-	            "description": "input string that simulate humain sentence"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "forceInput", [input])
+	# NAOqi metadata:
+	# {
+	#     "uid": 159,
+	#     "returnSignature": "v",
+	#     "name": "forceInput",
+	#     "parametersSignature": "(s)",
+	#     "description": "Give a sentence to the dialog and get the answer",
+	#     "parameters": [
+	#         {
+	#             "name": "input",
+	#             "description": "input string that simulate humain sentence"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "forceInput", [input])
 
 def tell(input:str) -> None:
 	"""
@@ -2012,26 +1431,23 @@ def tell(input:str) -> None:
 	----------
 	input:str
 		input string that simulate humain sentence
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 160,
-	    "returnSignature": "v",
-	    "name": "tell",
-	    "parametersSignature": "(s)",
-	    "description": "Give a sentence to the dialog and get the answer",
-	    "parameters": [
-	        {
-	            "name": "input",
-	            "description": "input string that simulate humain sentence"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "tell", [input])
+	# NAOqi metadata:
+	# {
+	#     "uid": 160,
+	#     "returnSignature": "v",
+	#     "name": "tell",
+	#     "parametersSignature": "(s)",
+	#     "description": "Give a sentence to the dialog and get the answer",
+	#     "parameters": [
+	#         {
+	#             "name": "input",
+	#             "description": "input string that simulate humain sentence"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "tell", [input])
 
 def setASRConfidenceThreshold(threshold:float) -> None:
 	"""
@@ -2041,26 +1457,23 @@ def setASRConfidenceThreshold(threshold:float) -> None:
 	----------
 	threshold:float
 		input string that simulate humain sentence
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 161,
-	    "returnSignature": "v",
-	    "name": "setASRConfidenceThreshold",
-	    "parametersSignature": "(f)",
-	    "description": "Set the minimum confidence required to recognize words. Better to use confidence by asr model",
-	    "parameters": [
-	        {
-	            "name": "threshold",
-	            "description": "input string that simulate humain sentence"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setASRConfidenceThreshold", [threshold])
+	# NAOqi metadata:
+	# {
+	#     "uid": 161,
+	#     "returnSignature": "v",
+	#     "name": "setASRConfidenceThreshold",
+	#     "parametersSignature": "(f)",
+	#     "description": "Set the minimum confidence required to recognize words. Better to use confidence by asr model",
+	#     "parameters": [
+	#         {
+	#             "name": "threshold",
+	#             "description": "input string that simulate humain sentence"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setASRConfidenceThreshold", [threshold])
 
 def getASRConfidenceThreshold() -> float:
 	"""
@@ -2069,26 +1482,22 @@ def getASRConfidenceThreshold() -> float:
 	Returns
 	----------
 	current asr confidence
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 162,
-	    "returnSignature": "f",
-	    "name": "getASRConfidenceThreshold",
-	    "parametersSignature": "()",
-	    "description": "Get the minimum confidence required to recognize words",
-	    "parameters": [],
-	    "returnDescription": "current asr confidence"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getASRConfidenceThreshold", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 162,
+	#     "returnSignature": "f",
+	#     "name": "getASRConfidenceThreshold",
+	#     "parametersSignature": "()",
+	#     "description": "Get the minimum confidence required to recognize words",
+	#     "parameters": [],
+	#     "returnDescription": "current asr confidence"
+	# }
+	return call_method("ALDialog", "getASRConfidenceThreshold", [])
 
-def setConfidenceThreshold_1(strategy:str, confidence:float) -> None:
+@overload
+def setConfidenceThreshold(strategy:str, confidence:float, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (setConfidenceThreshold)
-	
 	Set the confidence threshold
 	
 	Parameters
@@ -2098,34 +1507,36 @@ def setConfidenceThreshold_1(strategy:str, confidence:float) -> None:
 	confidence:float
 		desired confidence threshold [0, 1]
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 163,
-	    "returnSignature": "v",
-	    "name": "setConfidenceThreshold",
-	    "parametersSignature": "(sf)",
-	    "description": "Set the confidence threshold",
-	    "parameters": [
-	        {
-	            "name": "strategy",
-	            "description": "BNF / SLM / REMOTE"
-	        },
-	        {
-	            "name": "confidence",
-	            "description": "desired confidence threshold [0, 1]"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "setConfidenceThreshold", [strategy, confidence])
-
-def setConfidenceThreshold_2(strategy:str, confidence:float, language:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (setConfidenceThreshold)
+	Bridge notes
+	------------
+	setConfidenceThreshold has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 163,
+	#     "returnSignature": "v",
+	#     "name": "setConfidenceThreshold",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Set the confidence threshold",
+	#     "parameters": [
+	#         {
+	#             "name": "strategy",
+	#             "description": "BNF / SLM / REMOTE"
+	#         },
+	#         {
+	#             "name": "confidence",
+	#             "description": "desired confidence threshold [0, 1]"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def setConfidenceThreshold(strategy:str, confidence:float, language:str, /) -> None:
+	"""
 	Set the confidence threshold
 	
 	Parameters
@@ -2137,52 +1548,66 @@ def setConfidenceThreshold_2(strategy:str, confidence:float, language:str) -> No
 	language:str
 		language for which we set the threshold
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 164,
-	    "returnSignature": "v",
-	    "name": "setConfidenceThreshold",
-	    "parametersSignature": "(sfs)",
-	    "description": "Set the confidence threshold",
-	    "parameters": [
-	        {
-	            "name": "strategy",
-	            "description": "BNF / SLM / REMOTE"
-	        },
-	        {
-	            "name": "confidence",
-	            "description": "desired confidence threshold [0, 1]"
-	        },
-	        {
-	            "name": "language",
-	            "description": "language for which we set the threshold"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	setConfidenceThreshold has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALDialog", "setConfidenceThreshold", [strategy, confidence, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 164,
+	#     "returnSignature": "v",
+	#     "name": "setConfidenceThreshold",
+	#     "parametersSignature": "(sfs)",
+	#     "description": "Set the confidence threshold",
+	#     "parameters": [
+	#         {
+	#             "name": "strategy",
+	#             "description": "BNF / SLM / REMOTE"
+	#         },
+	#         {
+	#             "name": "confidence",
+	#             "description": "desired confidence threshold [0, 1]"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "language for which we set the threshold"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def setConfidenceThreshold(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	setConfidenceThreshold has 2 variants on the robot:
+	- setConfidenceThreshold(strategy:str, confidence:float)
+	- setConfidenceThreshold(strategy:str, confidence:float, language:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALDialog.setConfidenceThreshold has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALDialog", "setConfidenceThreshold", list(args))
 
 def getAllConfidenceThresholds() -> Dict[str,Dict[str,float]]:
 	"""
 	Get all the confidence thresholds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 165,
-	    "returnSignature": "{s{sf}}",
-	    "name": "getAllConfidenceThresholds",
-	    "parametersSignature": "()",
-	    "description": "Get all the confidence thresholds",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getAllConfidenceThresholds", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 165,
+	#     "returnSignature": "{s{sf}}",
+	#     "name": "getAllConfidenceThresholds",
+	#     "parametersSignature": "()",
+	#     "description": "Get all the confidence thresholds",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "getAllConfidenceThresholds", [])
 
 def getConfidenceThreshold(p0:str, p1:str) -> float:
 	"""
@@ -2194,40 +1619,34 @@ def getConfidenceThreshold(p0:str, p1:str) -> float:
 		
 	p1:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 166,
-	    "returnSignature": "f",
-	    "name": "getConfidenceThreshold",
-	    "parametersSignature": "(ss)",
-	    "description": "Get all the confidence thresholds",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getConfidenceThreshold", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 166,
+	#     "returnSignature": "f",
+	#     "name": "getConfidenceThreshold",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Get all the confidence thresholds",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "getConfidenceThreshold", [p0, p1])
 
 def removeAllLanguageThresholds() -> None:
 	"""
 	Remove all language specific confidence thresholds
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 167,
-	    "returnSignature": "v",
-	    "name": "removeAllLanguageThresholds",
-	    "parametersSignature": "()",
-	    "description": "Remove all language specific confidence thresholds",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "removeAllLanguageThresholds", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 167,
+	#     "returnSignature": "v",
+	#     "name": "removeAllLanguageThresholds",
+	#     "parametersSignature": "()",
+	#     "description": "Remove all language specific confidence thresholds",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "removeAllLanguageThresholds", [])
 
 def _setConfidence(strategy:str, threshold:float) -> None:
 	"""
@@ -2239,30 +1658,27 @@ def _setConfidence(strategy:str, threshold:float) -> None:
 		BNF or SLM
 	threshold:float
 		threshold [0,1]
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 168,
-	    "returnSignature": "v",
-	    "name": "_setConfidence",
-	    "parametersSignature": "(sf)",
-	    "description": "Set the minimum confidence required to recognize words for a strategy",
-	    "parameters": [
-	        {
-	            "name": "strategy",
-	            "description": "BNF or SLM"
-	        },
-	        {
-	            "name": "threshold",
-	            "description": "threshold [0,1]"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setConfidence", [strategy, threshold])
+	# NAOqi metadata:
+	# {
+	#     "uid": 168,
+	#     "returnSignature": "v",
+	#     "name": "_setConfidence",
+	#     "parametersSignature": "(sf)",
+	#     "description": "Set the minimum confidence required to recognize words for a strategy",
+	#     "parameters": [
+	#         {
+	#             "name": "strategy",
+	#             "description": "BNF or SLM"
+	#         },
+	#         {
+	#             "name": "threshold",
+	#             "description": "threshold [0,1]"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setConfidence", [strategy, threshold])
 
 def _getConfidence(strategy:str) -> float:
 	"""
@@ -2276,26 +1692,23 @@ def _getConfidence(strategy:str) -> float:
 	Returns
 	----------
 	current asr confidence for model
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 169,
-	    "returnSignature": "f",
-	    "name": "_getConfidence",
-	    "parametersSignature": "(s)",
-	    "description": "Get the minimum confidence required to recognize words of a strategy",
-	    "parameters": [
-	        {
-	            "name": "strategy",
-	            "description": "BNF or SLM"
-	        }
-	    ],
-	    "returnDescription": "current asr confidence for model"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_getConfidence", [strategy])
+	# NAOqi metadata:
+	# {
+	#     "uid": 169,
+	#     "returnSignature": "f",
+	#     "name": "_getConfidence",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get the minimum confidence required to recognize words of a strategy",
+	#     "parameters": [
+	#         {
+	#             "name": "strategy",
+	#             "description": "BNF or SLM"
+	#         }
+	#     ],
+	#     "returnDescription": "current asr confidence for model"
+	# }
+	return call_method("ALDialog", "_getConfidence", [strategy])
 
 def openSession(id:int) -> None:
 	"""
@@ -2305,45 +1718,39 @@ def openSession(id:int) -> None:
 	----------
 	id:int
 		user id
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 170,
-	    "returnSignature": "v",
-	    "name": "openSession",
-	    "parametersSignature": "(i)",
-	    "description": "Open a session",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "user id"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "openSession", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 170,
+	#     "returnSignature": "v",
+	#     "name": "openSession",
+	#     "parametersSignature": "(i)",
+	#     "description": "Open a session",
+	#     "parameters": [
+	#         {
+	#             "name": "id",
+	#             "description": "user id"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "openSession", [id])
 
 def _getBackend() -> str:
 	"""
 	Get backend
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 171,
-	    "returnSignature": "s",
-	    "name": "_getBackend",
-	    "parametersSignature": "()",
-	    "description": "Get backend",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_getBackend", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 171,
+	#     "returnSignature": "s",
+	#     "name": "_getBackend",
+	#     "parametersSignature": "()",
+	#     "description": "Get backend",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_getBackend", [])
 
 def _openTestSession(p0:str, p1:str, p2:bool, p3:bool, p4:str, p5:str) -> str:
 	"""
@@ -2363,45 +1770,38 @@ def _openTestSession(p0:str, p1:str, p2:bool, p3:bool, p4:str, p5:str) -> str:
 		
 	p5:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 172,
-	    "returnSignature": "s",
-	    "name": "_openTestSession",
-	    "parametersSignature": "(ssbbss)",
-	    "description": "Open a test session",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_openTestSession", [p0, p1, p2, p3, p4, p5])
+	# NAOqi metadata:
+	# {
+	#     "uid": 172,
+	#     "returnSignature": "s",
+	#     "name": "_openTestSession",
+	#     "parametersSignature": "(ssbbss)",
+	#     "description": "Open a test session",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_openTestSession", [p0, p1, p2, p3, p4, p5])
 
 def _closeTestSession() -> None:
 	"""
 	close a test session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 173,
-	    "returnSignature": "v",
-	    "name": "_closeTestSession",
-	    "parametersSignature": "()",
-	    "description": "close a test session",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_closeTestSession", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 173,
+	#     "returnSignature": "v",
+	#     "name": "_closeTestSession",
+	#     "parametersSignature": "()",
+	#     "description": "close a test session",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_closeTestSession", [])
 
-def _runTotTest_1(tot:str) -> List[Dict[str,str]]:
+@overload
+def _runTotTest(tot:str, /) -> List[Dict[str,str]]:
 	"""
-	Note: This is one of the overloads of the original method (_runTotTest)
-	
 	Open a test session
 	
 	Parameters
@@ -2409,30 +1809,32 @@ def _runTotTest_1(tot:str) -> List[Dict[str,str]]:
 	tot:str
 		tot file to test
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 174,
-	    "returnSignature": "[{ss}]",
-	    "name": "_runTotTest",
-	    "parametersSignature": "(s)",
-	    "description": "Open a test session",
-	    "parameters": [
-	        {
-	            "name": "tot",
-	            "description": "tot file to test"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "_runTotTest", [tot])
-
-def _runTotTest_2(tot:str, wavMode:str) -> List[Dict[str,str]]:
-	"""
-	Note: This is one of the overloads of the original method (_runTotTest)
+	Bridge notes
+	------------
+	_runTotTest has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 174,
+	#     "returnSignature": "[{ss}]",
+	#     "name": "_runTotTest",
+	#     "parametersSignature": "(s)",
+	#     "description": "Open a test session",
+	#     "parameters": [
+	#         {
+	#             "name": "tot",
+	#             "description": "tot file to test"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _runTotTest(tot:str, wavMode:str, /) -> List[Dict[str,str]]:
+	"""
 	Open a test session
 	
 	Parameters
@@ -2442,34 +1844,36 @@ def _runTotTest_2(tot:str, wavMode:str) -> List[Dict[str,str]]:
 	wavMode:str
 		input wav mode
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 175,
-	    "returnSignature": "[{ss}]",
-	    "name": "_runTotTest",
-	    "parametersSignature": "(ss)",
-	    "description": "Open a test session",
-	    "parameters": [
-	        {
-	            "name": "tot",
-	            "description": "tot file to test"
-	        },
-	        {
-	            "name": "wavMode",
-	            "description": "input wav mode"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "_runTotTest", [tot, wavMode])
-
-def _runTotTest_3(tot:str, wavMode:str, wavTranscriptionFile:str) -> List[Dict[str,str]]:
-	"""
-	Note: This is one of the overloads of the original method (_runTotTest)
+	Bridge notes
+	------------
+	_runTotTest has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 175,
+	#     "returnSignature": "[{ss}]",
+	#     "name": "_runTotTest",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Open a test session",
+	#     "parameters": [
+	#         {
+	#             "name": "tot",
+	#             "description": "tot file to test"
+	#         },
+	#         {
+	#             "name": "wavMode",
+	#             "description": "input wav mode"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _runTotTest(tot:str, wavMode:str, wavTranscriptionFile:str, /) -> List[Dict[str,str]]:
+	"""
 	Open a test session
 	
 	Parameters
@@ -2481,71 +1885,83 @@ def _runTotTest_3(tot:str, wavMode:str, wavTranscriptionFile:str) -> List[Dict[s
 	wavTranscriptionFile:str
 		file containing correspondances between a wav file and his transcription
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 176,
-	    "returnSignature": "[{ss}]",
-	    "name": "_runTotTest",
-	    "parametersSignature": "(sss)",
-	    "description": "Open a test session",
-	    "parameters": [
-	        {
-	            "name": "tot",
-	            "description": "tot file to test"
-	        },
-	        {
-	            "name": "wavMode",
-	            "description": "input wav mode"
-	        },
-	        {
-	            "name": "wavTranscriptionFile",
-	            "description": "file containing correspondances between a wav file and his transcription"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_runTotTest has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALDialog", "_runTotTest", [tot, wavMode, wavTranscriptionFile])
+	# NAOqi metadata:
+	# {
+	#     "uid": 176,
+	#     "returnSignature": "[{ss}]",
+	#     "name": "_runTotTest",
+	#     "parametersSignature": "(sss)",
+	#     "description": "Open a test session",
+	#     "parameters": [
+	#         {
+	#             "name": "tot",
+	#             "description": "tot file to test"
+	#         },
+	#         {
+	#             "name": "wavMode",
+	#             "description": "input wav mode"
+	#         },
+	#         {
+	#             "name": "wavTranscriptionFile",
+	#             "description": "file containing correspondances between a wav file and his transcription"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def _runTotTest(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_runTotTest has 3 variants on the robot:
+	- _runTotTest(tot:str)
+	- _runTotTest(tot:str, wavMode:str)
+	- _runTotTest(tot:str, wavMode:str, wavTranscriptionFile:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALDialog._runTotTest has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALDialog", "_runTotTest", list(args))
 
 def closeSession() -> None:
 	"""
 	Close the current session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 177,
-	    "returnSignature": "v",
-	    "name": "closeSession",
-	    "parametersSignature": "()",
-	    "description": "Close the current session",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "closeSession", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 177,
+	#     "returnSignature": "v",
+	#     "name": "closeSession",
+	#     "parametersSignature": "()",
+	#     "description": "Close the current session",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "closeSession", [])
 
 def closeTestSession() -> None:
 	"""
 	Close the test session
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 178,
-	    "returnSignature": "v",
-	    "name": "closeTestSession",
-	    "parametersSignature": "()",
-	    "description": "Close the test session",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "closeTestSession", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 178,
+	#     "returnSignature": "v",
+	#     "name": "closeTestSession",
+	#     "parametersSignature": "()",
+	#     "description": "Close the test session",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "closeTestSession", [])
 
 def _generatePOT(application:str, topics:List[str], language:str, destination:str) -> None:
 	"""
@@ -2561,38 +1977,35 @@ def _generatePOT(application:str, topics:List[str], language:str, destination:st
 		the language of the content in the application used to generate the .pot file
 	destination:str
 		the .pot destination
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 180,
-	    "returnSignature": "v",
-	    "name": "_generatePOT",
-	    "parametersSignature": "(s[s]ss)",
-	    "description": "generate a .pot file containing all the sentences of a given application",
-	    "parameters": [
-	        {
-	            "name": "application",
-	            "description": "application name"
-	        },
-	        {
-	            "name": "topics",
-	            "description": "the topics in the application whose content is included in the .pot file"
-	        },
-	        {
-	            "name": "language",
-	            "description": "the language of the content in the application used to generate the .pot file"
-	        },
-	        {
-	            "name": "destination",
-	            "description": "the .pot destination"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_generatePOT", [application, topics, language, destination])
+	# NAOqi metadata:
+	# {
+	#     "uid": 180,
+	#     "returnSignature": "v",
+	#     "name": "_generatePOT",
+	#     "parametersSignature": "(s[s]ss)",
+	#     "description": "generate a .pot file containing all the sentences of a given application",
+	#     "parameters": [
+	#         {
+	#             "name": "application",
+	#             "description": "application name"
+	#         },
+	#         {
+	#             "name": "topics",
+	#             "description": "the topics in the application whose content is included in the .pot file"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "the language of the content in the application used to generate the .pot file"
+	#         },
+	#         {
+	#             "name": "destination",
+	#             "description": "the .pot destination"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_generatePOT", [application, topics, language, destination])
 
 def setDelay(eventName:str, Delay:int) -> None:
 	"""
@@ -2604,30 +2017,27 @@ def setDelay(eventName:str, Delay:int) -> None:
 		Event name
 	Delay:int
 		Delay in second
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 181,
-	    "returnSignature": "v",
-	    "name": "setDelay",
-	    "parametersSignature": "(si)",
-	    "description": "change event's delay",
-	    "parameters": [
-	        {
-	            "name": "eventName",
-	            "description": "Event name"
-	        },
-	        {
-	            "name": "Delay",
-	            "description": "Delay in second"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setDelay", [eventName, Delay])
+	# NAOqi metadata:
+	# {
+	#     "uid": 181,
+	#     "returnSignature": "v",
+	#     "name": "setDelay",
+	#     "parametersSignature": "(si)",
+	#     "description": "change event's delay",
+	#     "parameters": [
+	#         {
+	#             "name": "eventName",
+	#             "description": "Event name"
+	#         },
+	#         {
+	#             "name": "Delay",
+	#             "description": "Delay in second"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setDelay", [eventName, Delay])
 
 def setNumberOfScopes(numberOfScope:int) -> None:
 	"""
@@ -2637,31 +2047,27 @@ def setNumberOfScopes(numberOfScope:int) -> None:
 	----------
 	numberOfScope:int
 		number of scope
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 182,
-	    "returnSignature": "v",
-	    "name": "setNumberOfScopes",
-	    "parametersSignature": "(i)",
-	    "description": "Set how many scopes remains open",
-	    "parameters": [
-	        {
-	            "name": "numberOfScope",
-	            "description": "number of scope"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setNumberOfScopes", [numberOfScope])
+	# NAOqi metadata:
+	# {
+	#     "uid": 182,
+	#     "returnSignature": "v",
+	#     "name": "setNumberOfScopes",
+	#     "parametersSignature": "(i)",
+	#     "description": "Set how many scopes remains open",
+	#     "parameters": [
+	#         {
+	#             "name": "numberOfScope",
+	#             "description": "number of scope"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setNumberOfScopes", [numberOfScope])
 
-def setConcept_1(conceptName:str, language:str, content:List[str]) -> None:
+@overload
+def setConcept(conceptName:str, language:str, content:List[str], /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (setConcept)
-	
 	Set the content of a dynamic concept
 	
 	Parameters
@@ -2673,42 +2079,46 @@ def setConcept_1(conceptName:str, language:str, content:List[str]) -> None:
 	content:List[str]
 		content of the concept
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 183,
-	    "returnSignature": "v",
-	    "name": "setConcept",
-	    "parametersSignature": "(ss[s])",
-	    "description": "Set the content of a dynamic concept",
-	    "parameters": [
-	        {
-	            "name": "conceptName",
-	            "description": "Name of the concept"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language of the concept"
-	        },
-	        {
-	            "name": "content",
-	            "description": "content of the concept"
-	        },
-	        {
-	            "name": "store",
-	            "description": "Store concept in database if true"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALDialog", "setConcept", [conceptName, language, content])
-
-def setConcept_2(conceptName:str, language:str, content:List[str], store:bool) -> None:
-	"""
-	Note: This is one of the overloads of the original method (setConcept)
+	Bridge notes
+	------------
+	setConcept has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	
+	NAOqi's documentation lists 4 parameters (conceptName, language, content, store), but the signature has 3. The first 3 names are used here and may not match the actual parameters.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 183,
+	#     "returnSignature": "v",
+	#     "name": "setConcept",
+	#     "parametersSignature": "(ss[s])",
+	#     "description": "Set the content of a dynamic concept",
+	#     "parameters": [
+	#         {
+	#             "name": "conceptName",
+	#             "description": "Name of the concept"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language of the concept"
+	#         },
+	#         {
+	#             "name": "content",
+	#             "description": "content of the concept"
+	#         },
+	#         {
+	#             "name": "store",
+	#             "description": "Store concept in database if true"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def setConcept(conceptName:str, language:str, content:List[str], store:bool, /) -> None:
+	"""
 	Set the content of a dynamic concept
 	
 	Parameters
@@ -2722,37 +2132,54 @@ def setConcept_2(conceptName:str, language:str, content:List[str], store:bool) -
 	store:bool
 		determine if the concept will be save in the database
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 184,
-	    "returnSignature": "v",
-	    "name": "setConcept",
-	    "parametersSignature": "(ss[s]b)",
-	    "description": "Set the content of a dynamic concept",
-	    "parameters": [
-	        {
-	            "name": "conceptName",
-	            "description": "Name of the concept"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language of the concept"
-	        },
-	        {
-	            "name": "content",
-	            "description": "content of the concept"
-	        },
-	        {
-	            "name": "store",
-	            "description": "determine if the concept will be save in the database"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	setConcept has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALDialog", "setConcept", [conceptName, language, content, store])
+	# NAOqi metadata:
+	# {
+	#     "uid": 184,
+	#     "returnSignature": "v",
+	#     "name": "setConcept",
+	#     "parametersSignature": "(ss[s]b)",
+	#     "description": "Set the content of a dynamic concept",
+	#     "parameters": [
+	#         {
+	#             "name": "conceptName",
+	#             "description": "Name of the concept"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language of the concept"
+	#         },
+	#         {
+	#             "name": "content",
+	#             "description": "content of the concept"
+	#         },
+	#         {
+	#             "name": "store",
+	#             "description": "determine if the concept will be save in the database"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def setConcept(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	setConcept has 2 variants on the robot:
+	- setConcept(conceptName:str, language:str, content:List[str])
+	- setConcept(conceptName:str, language:str, content:List[str], store:bool)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALDialog.setConcept has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALDialog", "setConcept", list(args))
 
 def setConceptKeepInCache(conceptName:str, language:str, content:List[str]) -> None:
 	"""
@@ -2766,34 +2193,31 @@ def setConceptKeepInCache(conceptName:str, language:str, content:List[str]) -> N
 		language
 	content:List[str]
 		concept content
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 185,
-	    "returnSignature": "v",
-	    "name": "setConceptKeepInCache",
-	    "parametersSignature": "(ss[s])",
-	    "description": "set the content of a dynamic concept",
-	    "parameters": [
-	        {
-	            "name": "conceptName",
-	            "description": "concept name"
-	        },
-	        {
-	            "name": "language",
-	            "description": "language"
-	        },
-	        {
-	            "name": "content",
-	            "description": "concept content"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setConceptKeepInCache", [conceptName, language, content])
+	# NAOqi metadata:
+	# {
+	#     "uid": 185,
+	#     "returnSignature": "v",
+	#     "name": "setConceptKeepInCache",
+	#     "parametersSignature": "(ss[s])",
+	#     "description": "set the content of a dynamic concept",
+	#     "parameters": [
+	#         {
+	#             "name": "conceptName",
+	#             "description": "concept name"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "language"
+	#         },
+	#         {
+	#             "name": "content",
+	#             "description": "concept content"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setConceptKeepInCache", [conceptName, language, content])
 
 def addToConcept(conceptName:str, language:str, content:List[str]) -> None:
 	"""
@@ -2807,34 +2231,31 @@ def addToConcept(conceptName:str, language:str, content:List[str]) -> None:
 		Language of the concept
 	content:List[str]
 		content of the concept
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 186,
-	    "returnSignature": "v",
-	    "name": "addToConcept",
-	    "parametersSignature": "(ss[s])",
-	    "description": "add to the content of a dynamic concept",
-	    "parameters": [
-	        {
-	            "name": "conceptName",
-	            "description": "Name of the concept"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language of the concept"
-	        },
-	        {
-	            "name": "content",
-	            "description": "content of the concept"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "addToConcept", [conceptName, language, content])
+	# NAOqi metadata:
+	# {
+	#     "uid": 186,
+	#     "returnSignature": "v",
+	#     "name": "addToConcept",
+	#     "parametersSignature": "(ss[s])",
+	#     "description": "add to the content of a dynamic concept",
+	#     "parameters": [
+	#         {
+	#             "name": "conceptName",
+	#             "description": "Name of the concept"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language of the concept"
+	#         },
+	#         {
+	#             "name": "content",
+	#             "description": "content of the concept"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "addToConcept", [conceptName, language, content])
 
 def getConcept(conceptName:str, language:str) -> List[str]:
 	"""
@@ -2846,30 +2267,27 @@ def getConcept(conceptName:str, language:str) -> List[str]:
 		Name of the concept
 	language:str
 		Language of the concept
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 187,
-	    "returnSignature": "[s]",
-	    "name": "getConcept",
-	    "parametersSignature": "(ss)",
-	    "description": "get the content of a dynamic concept",
-	    "parameters": [
-	        {
-	            "name": "conceptName",
-	            "description": "Name of the concept"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language of the concept"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getConcept", [conceptName, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 187,
+	#     "returnSignature": "[s]",
+	#     "name": "getConcept",
+	#     "parametersSignature": "(ss)",
+	#     "description": "get the content of a dynamic concept",
+	#     "parameters": [
+	#         {
+	#             "name": "conceptName",
+	#             "description": "Name of the concept"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language of the concept"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "getConcept", [conceptName, language])
 
 def _setPushMode(pushMode:int) -> None:
 	"""
@@ -2879,26 +2297,23 @@ def _setPushMode(pushMode:int) -> None:
 	----------
 	pushMode:int
 		Push mode from 0 to 4
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 188,
-	    "returnSignature": "v",
-	    "name": "_setPushMode",
-	    "parametersSignature": "(i)",
-	    "description": "Set push mode. Frequence of robot question",
-	    "parameters": [
-	        {
-	            "name": "pushMode",
-	            "description": "Push mode from 0 to 4"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setPushMode", [pushMode])
+	# NAOqi metadata:
+	# {
+	#     "uid": 188,
+	#     "returnSignature": "v",
+	#     "name": "_setPushMode",
+	#     "parametersSignature": "(i)",
+	#     "description": "Set push mode. Frequence of robot question",
+	#     "parameters": [
+	#         {
+	#             "name": "pushMode",
+	#             "description": "Push mode from 0 to 4"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setPushMode", [pushMode])
 
 def enableTriggerSentences(enableTriggerSentences:bool) -> None:
 	"""
@@ -2908,26 +2323,23 @@ def enableTriggerSentences(enableTriggerSentences:bool) -> None:
 	----------
 	enableTriggerSentences:bool
 		Enable trigger sentences if true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 189,
-	    "returnSignature": "v",
-	    "name": "enableTriggerSentences",
-	    "parametersSignature": "(b)",
-	    "description": "enableTriggerSentences",
-	    "parameters": [
-	        {
-	            "name": "enableTriggerSentences",
-	            "description": "Enable trigger sentences if true"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "enableTriggerSentences", [enableTriggerSentences])
+	# NAOqi metadata:
+	# {
+	#     "uid": 189,
+	#     "returnSignature": "v",
+	#     "name": "enableTriggerSentences",
+	#     "parametersSignature": "(b)",
+	#     "description": "enableTriggerSentences",
+	#     "parameters": [
+	#         {
+	#             "name": "enableTriggerSentences",
+	#             "description": "Enable trigger sentences if true"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "enableTriggerSentences", [enableTriggerSentences])
 
 def enableCategory(enableCategory:bool) -> None:
 	"""
@@ -2937,64 +2349,55 @@ def enableCategory(enableCategory:bool) -> None:
 	----------
 	enableCategory:bool
 		Enable category if true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 190,
-	    "returnSignature": "v",
-	    "name": "enableCategory",
-	    "parametersSignature": "(b)",
-	    "description": "enableCategory",
-	    "parameters": [
-	        {
-	            "name": "enableCategory",
-	            "description": "Enable category if true"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "enableCategory", [enableCategory])
+	# NAOqi metadata:
+	# {
+	#     "uid": 190,
+	#     "returnSignature": "v",
+	#     "name": "enableCategory",
+	#     "parametersSignature": "(b)",
+	#     "description": "enableCategory",
+	#     "parameters": [
+	#         {
+	#             "name": "enableCategory",
+	#             "description": "Enable category if true"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "enableCategory", [enableCategory])
 
 def startPush() -> None:
 	"""
 	Start push mode
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 191,
-	    "returnSignature": "v",
-	    "name": "startPush",
-	    "parametersSignature": "()",
-	    "description": "Start push mode",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "startPush", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 191,
+	#     "returnSignature": "v",
+	#     "name": "startPush",
+	#     "parametersSignature": "()",
+	#     "description": "Start push mode",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "startPush", [])
 
 def stopPush() -> None:
 	"""
 	Stop push mode
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 192,
-	    "returnSignature": "v",
-	    "name": "stopPush",
-	    "parametersSignature": "()",
-	    "description": "Stop push mode",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "stopPush", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 192,
+	#     "returnSignature": "v",
+	#     "name": "stopPush",
+	#     "parametersSignature": "()",
+	#     "description": "Stop push mode",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "stopPush", [])
 
 def setAnimatedSpeechConfiguration(animatedSpeechConfiguration:object) -> None:
 	"""
@@ -3004,26 +2407,23 @@ def setAnimatedSpeechConfiguration(animatedSpeechConfiguration:object) -> None:
 	----------
 	animatedSpeechConfiguration:object
 		See animated speech documentation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 193,
-	    "returnSignature": "v",
-	    "name": "setAnimatedSpeechConfiguration",
-	    "parametersSignature": "(m)",
-	    "description": "Set the configuration of animated speech for the current dialog.",
-	    "parameters": [
-	        {
-	            "name": "animatedSpeechConfiguration",
-	            "description": "See animated speech documentation"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setAnimatedSpeechConfiguration", [animatedSpeechConfiguration])
+	# NAOqi metadata:
+	# {
+	#     "uid": 193,
+	#     "returnSignature": "v",
+	#     "name": "setAnimatedSpeechConfiguration",
+	#     "parametersSignature": "(m)",
+	#     "description": "Set the configuration of animated speech for the current dialog.",
+	#     "parameters": [
+	#         {
+	#             "name": "animatedSpeechConfiguration",
+	#             "description": "See animated speech documentation"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setAnimatedSpeechConfiguration", [animatedSpeechConfiguration])
 
 def getAnimatedSpeechConfiguration() -> object:
 	"""
@@ -3032,21 +2432,18 @@ def getAnimatedSpeechConfiguration() -> object:
 	Returns
 	----------
 	See animated speech documentation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 194,
-	    "returnSignature": "m",
-	    "name": "getAnimatedSpeechConfiguration",
-	    "parametersSignature": "()",
-	    "description": "Get the configuration of animated speech for the current dialog.",
-	    "parameters": [],
-	    "returnDescription": "See animated speech documentation"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getAnimatedSpeechConfiguration", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 194,
+	#     "returnSignature": "m",
+	#     "name": "getAnimatedSpeechConfiguration",
+	#     "parametersSignature": "()",
+	#     "description": "Get the configuration of animated speech for the current dialog.",
+	#     "parameters": [],
+	#     "returnDescription": "See animated speech documentation"
+	# }
+	return call_method("ALDialog", "getAnimatedSpeechConfiguration", [])
 
 def applicationBlackList(applicationList:List[str]) -> None:
 	"""
@@ -3056,26 +2453,23 @@ def applicationBlackList(applicationList:List[str]) -> None:
 	----------
 	applicationList:List[str]
 		List of applications that cannot be launched by dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 195,
-	    "returnSignature": "v",
-	    "name": "applicationBlackList",
-	    "parametersSignature": "([s])",
-	    "description": "Black list a list of application",
-	    "parameters": [
-	        {
-	            "name": "applicationList",
-	            "description": "List of applications that cannot be launched by dialog"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "applicationBlackList", [applicationList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 195,
+	#     "returnSignature": "v",
+	#     "name": "applicationBlackList",
+	#     "parametersSignature": "([s])",
+	#     "description": "Black list a list of application",
+	#     "parameters": [
+	#         {
+	#             "name": "applicationList",
+	#             "description": "List of applications that cannot be launched by dialog"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "applicationBlackList", [applicationList])
 
 def isContentNeedsUpdate() -> bool:
 	"""
@@ -3084,21 +2478,18 @@ def isContentNeedsUpdate() -> bool:
 	Returns
 	----------
 	True if content was updated since last compilation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 196,
-	    "returnSignature": "b",
-	    "name": "isContentNeedsUpdate",
-	    "parametersSignature": "()",
-	    "description": "True if new content was installed",
-	    "parameters": [],
-	    "returnDescription": "True if content was updated since last compilation"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "isContentNeedsUpdate", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 196,
+	#     "returnSignature": "b",
+	#     "name": "isContentNeedsUpdate",
+	#     "parametersSignature": "()",
+	#     "description": "True if new content was installed",
+	#     "parameters": [],
+	#     "returnDescription": "True if content was updated since last compilation"
+	# }
+	return call_method("ALDialog", "isContentNeedsUpdate", [])
 
 def _addDialogFromTopicBox(topicPathName:str, includeDirectory:str) -> str:
 	"""
@@ -3114,49 +2505,43 @@ def _addDialogFromTopicBox(topicPathName:str, includeDirectory:str) -> str:
 	Returns
 	----------
 	Topic name (not filename)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 197,
-	    "returnSignature": "s",
-	    "name": "_addDialogFromTopicBox",
-	    "parametersSignature": "(ss)",
-	    "description": "private method to be able to set in specific include dir",
-	    "parameters": [
-	        {
-	            "name": "topicPathName",
-	            "description": "Topic path and filename"
-	        },
-	        {
-	            "name": "includeDirectory",
-	            "description": "Root of the behavior"
-	        }
-	    ],
-	    "returnDescription": "Topic name (not filename)"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_addDialogFromTopicBox", [topicPathName, includeDirectory])
+	# NAOqi metadata:
+	# {
+	#     "uid": 197,
+	#     "returnSignature": "s",
+	#     "name": "_addDialogFromTopicBox",
+	#     "parametersSignature": "(ss)",
+	#     "description": "private method to be able to set in specific include dir",
+	#     "parameters": [
+	#         {
+	#             "name": "topicPathName",
+	#             "description": "Topic path and filename"
+	#         },
+	#         {
+	#             "name": "includeDirectory",
+	#             "description": "Root of the behavior"
+	#         }
+	#     ],
+	#     "returnDescription": "Topic name (not filename)"
+	# }
+	return call_method("ALDialog", "_addDialogFromTopicBox", [topicPathName, includeDirectory])
 
 def _cleanEventStack() -> None:
 	"""
 	Clean event stack
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 198,
-	    "returnSignature": "v",
-	    "name": "_cleanEventStack",
-	    "parametersSignature": "()",
-	    "description": "Clean event stack",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_cleanEventStack", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 198,
+	#     "returnSignature": "v",
+	#     "name": "_cleanEventStack",
+	#     "parametersSignature": "()",
+	#     "description": "Clean event stack",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_cleanEventStack", [])
 
 def _updateAIClient(libraryPath:str) -> None:
 	"""
@@ -3166,26 +2551,23 @@ def _updateAIClient(libraryPath:str) -> None:
 	----------
 	libraryPath:str
 		library path
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 199,
-	    "returnSignature": "v",
-	    "name": "_updateAIClient",
-	    "parametersSignature": "(s)",
-	    "description": "Connect to custom AI client",
-	    "parameters": [
-	        {
-	            "name": "libraryPath",
-	            "description": "library path"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_updateAIClient", [libraryPath])
+	# NAOqi metadata:
+	# {
+	#     "uid": 199,
+	#     "returnSignature": "v",
+	#     "name": "_updateAIClient",
+	#     "parametersSignature": "(s)",
+	#     "description": "Connect to custom AI client",
+	#     "parameters": [
+	#         {
+	#             "name": "libraryPath",
+	#             "description": "library path"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_updateAIClient", [libraryPath])
 
 def _addTopicsInGroup(groupName:str, topicNameList:List[str]) -> None:
 	"""
@@ -3197,30 +2579,27 @@ def _addTopicsInGroup(groupName:str, topicNameList:List[str]) -> None:
 		User group name
 	topicNameList:List[str]
 		Topic to add in group
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 200,
-	    "returnSignature": "v",
-	    "name": "_addTopicsInGroup",
-	    "parametersSignature": "(s[s])",
-	    "description": "Create a user group",
-	    "parameters": [
-	        {
-	            "name": "groupName",
-	            "description": "User group name"
-	        },
-	        {
-	            "name": "topicNameList",
-	            "description": "Topic to add in group"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_addTopicsInGroup", [groupName, topicNameList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 200,
+	#     "returnSignature": "v",
+	#     "name": "_addTopicsInGroup",
+	#     "parametersSignature": "(s[s])",
+	#     "description": "Create a user group",
+	#     "parameters": [
+	#         {
+	#             "name": "groupName",
+	#             "description": "User group name"
+	#         },
+	#         {
+	#             "name": "topicNameList",
+	#             "description": "Topic to add in group"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_addTopicsInGroup", [groupName, topicNameList])
 
 def _activateGroup(groupName:str) -> None:
 	"""
@@ -3230,26 +2609,23 @@ def _activateGroup(groupName:str) -> None:
 	----------
 	groupName:str
 		group name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 201,
-	    "returnSignature": "v",
-	    "name": "_activateGroup",
-	    "parametersSignature": "(s)",
-	    "description": "Group to activate",
-	    "parameters": [
-	        {
-	            "name": "groupName",
-	            "description": "group name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_activateGroup", [groupName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 201,
+	#     "returnSignature": "v",
+	#     "name": "_activateGroup",
+	#     "parametersSignature": "(s)",
+	#     "description": "Group to activate",
+	#     "parameters": [
+	#         {
+	#             "name": "groupName",
+	#             "description": "group name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_activateGroup", [groupName])
 
 def _deactivateGroup(groupName:str) -> None:
 	"""
@@ -3259,26 +2635,23 @@ def _deactivateGroup(groupName:str) -> None:
 	----------
 	groupName:str
 		group name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 202,
-	    "returnSignature": "v",
-	    "name": "_deactivateGroup",
-	    "parametersSignature": "(s)",
-	    "description": "private method to be able to set in specific include dir",
-	    "parameters": [
-	        {
-	            "name": "groupName",
-	            "description": "group name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_deactivateGroup", [groupName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 202,
+	#     "returnSignature": "v",
+	#     "name": "_deactivateGroup",
+	#     "parametersSignature": "(s)",
+	#     "description": "private method to be able to set in specific include dir",
+	#     "parameters": [
+	#         {
+	#             "name": "groupName",
+	#             "description": "group name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_deactivateGroup", [groupName])
 
 def _suggestNextTopic(topicName:str, suggestionValidity:int) -> None:
 	"""
@@ -3290,30 +2663,27 @@ def _suggestNextTopic(topicName:str, suggestionValidity:int) -> None:
 		group name
 	suggestionValidity:int
 		Suggestion validity in second
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 203,
-	    "returnSignature": "v",
-	    "name": "_suggestNextTopic",
-	    "parametersSignature": "(si)",
-	    "description": "suggest next topic",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "group name"
-	        },
-	        {
-	            "name": "suggestionValidity",
-	            "description": "Suggestion validity in second"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_suggestNextTopic", [topicName, suggestionValidity])
+	# NAOqi metadata:
+	# {
+	#     "uid": 203,
+	#     "returnSignature": "v",
+	#     "name": "_suggestNextTopic",
+	#     "parametersSignature": "(si)",
+	#     "description": "suggest next topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "group name"
+	#         },
+	#         {
+	#             "name": "suggestionValidity",
+	#             "description": "Suggestion validity in second"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_suggestNextTopic", [topicName, suggestionValidity])
 
 def _suggestUserNextTopic(topicName:str, suggestionValidity:int, userID:int) -> None:
 	"""
@@ -3327,53 +2697,47 @@ def _suggestUserNextTopic(topicName:str, suggestionValidity:int, userID:int) -> 
 		Suggestion validity in second
 	userID:int
 		Suggestion validity for userID
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 204,
-	    "returnSignature": "v",
-	    "name": "_suggestUserNextTopic",
-	    "parametersSignature": "(sii)",
-	    "description": "suggest next topic",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "group name"
-	        },
-	        {
-	            "name": "suggestionValidity",
-	            "description": "Suggestion validity in second"
-	        },
-	        {
-	            "name": "userID",
-	            "description": "Suggestion validity for userID"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_suggestUserNextTopic", [topicName, suggestionValidity, userID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 204,
+	#     "returnSignature": "v",
+	#     "name": "_suggestUserNextTopic",
+	#     "parametersSignature": "(sii)",
+	#     "description": "suggest next topic",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "group name"
+	#         },
+	#         {
+	#             "name": "suggestionValidity",
+	#             "description": "Suggestion validity in second"
+	#         },
+	#         {
+	#             "name": "userID",
+	#             "description": "Suggestion validity for userID"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_suggestUserNextTopic", [topicName, suggestionValidity, userID])
 
 def _preloadMain() -> None:
 	"""
 	preload main dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 205,
-	    "returnSignature": "v",
-	    "name": "_preloadMain",
-	    "parametersSignature": "()",
-	    "description": "preload main dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_preloadMain", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 205,
+	#     "returnSignature": "v",
+	#     "name": "_preloadMain",
+	#     "parametersSignature": "()",
+	#     "description": "preload main dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_preloadMain", [])
 
 def _mainLanguage(languageName:str) -> None:
 	"""
@@ -3383,64 +2747,55 @@ def _mainLanguage(languageName:str) -> None:
 	----------
 	languageName:str
 		monoLanguageName
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 206,
-	    "returnSignature": "v",
-	    "name": "_mainLanguage",
-	    "parametersSignature": "(s)",
-	    "description": "Define only language to use",
-	    "parameters": [
-	        {
-	            "name": "languageName",
-	            "description": "monoLanguageName"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_mainLanguage", [languageName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 206,
+	#     "returnSignature": "v",
+	#     "name": "_mainLanguage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Define only language to use",
+	#     "parameters": [
+	#         {
+	#             "name": "languageName",
+	#             "description": "monoLanguageName"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_mainLanguage", [languageName])
 
 def _runMainNoActivation() -> None:
 	"""
 	run main dialog without speaking
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 207,
-	    "returnSignature": "v",
-	    "name": "_runMainNoActivation",
-	    "parametersSignature": "()",
-	    "description": "run main dialog without speaking",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_runMainNoActivation", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 207,
+	#     "returnSignature": "v",
+	#     "name": "_runMainNoActivation",
+	#     "parametersSignature": "()",
+	#     "description": "run main dialog without speaking",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_runMainNoActivation", [])
 
 def _runMain() -> None:
 	"""
 	run main dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 208,
-	    "returnSignature": "v",
-	    "name": "_runMain",
-	    "parametersSignature": "()",
-	    "description": "run main dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_runMain", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 208,
+	#     "returnSignature": "v",
+	#     "name": "_runMain",
+	#     "parametersSignature": "()",
+	#     "description": "run main dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_runMain", [])
 
 def _startDialog(engagementMode:str) -> None:
 	"""
@@ -3450,26 +2805,23 @@ def _startDialog(engagementMode:str) -> None:
 	----------
 	engagementMode:str
 		engagementMode
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 209,
-	    "returnSignature": "v",
-	    "name": "_startDialog",
-	    "parametersSignature": "(s)",
-	    "description": "run main dialog",
-	    "parameters": [
-	        {
-	            "name": "engagementMode",
-	            "description": "engagementMode"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_startDialog", [engagementMode])
+	# NAOqi metadata:
+	# {
+	#     "uid": 209,
+	#     "returnSignature": "v",
+	#     "name": "_startDialog",
+	#     "parametersSignature": "(s)",
+	#     "description": "run main dialog",
+	#     "parameters": [
+	#         {
+	#             "name": "engagementMode",
+	#             "description": "engagementMode"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_startDialog", [engagementMode])
 
 def _setEngagementMode(engagementMode:str) -> None:
 	"""
@@ -3479,26 +2831,23 @@ def _setEngagementMode(engagementMode:str) -> None:
 	----------
 	engagementMode:str
 		engagementMode
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 210,
-	    "returnSignature": "v",
-	    "name": "_setEngagementMode",
-	    "parametersSignature": "(s)",
-	    "description": "change engagement mode",
-	    "parameters": [
-	        {
-	            "name": "engagementMode",
-	            "description": "engagementMode"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setEngagementMode", [engagementMode])
+	# NAOqi metadata:
+	# {
+	#     "uid": 210,
+	#     "returnSignature": "v",
+	#     "name": "_setEngagementMode",
+	#     "parametersSignature": "(s)",
+	#     "description": "change engagement mode",
+	#     "parameters": [
+	#         {
+	#             "name": "engagementMode",
+	#             "description": "engagementMode"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setEngagementMode", [engagementMode])
 
 def _pause(p0:bool) -> None:
 	"""
@@ -3508,116 +2857,98 @@ def _pause(p0:bool) -> None:
 	----------
 	p0:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 211,
-	    "returnSignature": "v",
-	    "name": "_pause",
-	    "parametersSignature": "(b)",
-	    "description": "change engagement mode",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_pause", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 211,
+	#     "returnSignature": "v",
+	#     "name": "_pause",
+	#     "parametersSignature": "(b)",
+	#     "description": "change engagement mode",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_pause", [p0])
 
 def _endPause() -> None:
 	"""
 	change engagement mode
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 212,
-	    "returnSignature": "v",
-	    "name": "_endPause",
-	    "parametersSignature": "()",
-	    "description": "change engagement mode",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_endPause", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 212,
+	#     "returnSignature": "v",
+	#     "name": "_endPause",
+	#     "parametersSignature": "()",
+	#     "description": "change engagement mode",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_endPause", [])
 
 def runDialog() -> None:
 	"""
 	run main dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 213,
-	    "returnSignature": "v",
-	    "name": "runDialog",
-	    "parametersSignature": "()",
-	    "description": "run main dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "runDialog", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 213,
+	#     "returnSignature": "v",
+	#     "name": "runDialog",
+	#     "parametersSignature": "()",
+	#     "description": "run main dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "runDialog", [])
 
 def _resetPreload() -> None:
 	"""
 	reset preload settings
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 214,
-	    "returnSignature": "v",
-	    "name": "_resetPreload",
-	    "parametersSignature": "()",
-	    "description": "reset preload settings",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_resetPreload", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 214,
+	#     "returnSignature": "v",
+	#     "name": "_resetPreload",
+	#     "parametersSignature": "()",
+	#     "description": "reset preload settings",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_resetPreload", [])
 
 def _stopMain() -> None:
 	"""
 	stop main dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 215,
-	    "returnSignature": "v",
-	    "name": "_stopMain",
-	    "parametersSignature": "()",
-	    "description": "stop main dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_stopMain", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 215,
+	#     "returnSignature": "v",
+	#     "name": "_stopMain",
+	#     "parametersSignature": "()",
+	#     "description": "stop main dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_stopMain", [])
 
 def stopDialog() -> None:
 	"""
 	stop main dialog
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 216,
-	    "returnSignature": "v",
-	    "name": "stopDialog",
-	    "parametersSignature": "()",
-	    "description": "stop main dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "stopDialog", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 216,
+	#     "returnSignature": "v",
+	#     "name": "stopDialog",
+	#     "parametersSignature": "()",
+	#     "description": "stop main dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "stopDialog", [])
 
 def _loadStrategyConfiguration(strategyFile:str) -> None:
 	"""
@@ -3627,26 +2958,23 @@ def _loadStrategyConfiguration(strategyFile:str) -> None:
 	----------
 	strategyFile:str
 		Strategy path and filename
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 217,
-	    "returnSignature": "v",
-	    "name": "_loadStrategyConfiguration",
-	    "parametersSignature": "(s)",
-	    "description": "load a strategy configuration",
-	    "parameters": [
-	        {
-	            "name": "strategyFile",
-	            "description": "Strategy path and filename"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_loadStrategyConfiguration", [strategyFile])
+	# NAOqi metadata:
+	# {
+	#     "uid": 217,
+	#     "returnSignature": "v",
+	#     "name": "_loadStrategyConfiguration",
+	#     "parametersSignature": "(s)",
+	#     "description": "load a strategy configuration",
+	#     "parameters": [
+	#         {
+	#             "name": "strategyFile",
+	#             "description": "Strategy path and filename"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_loadStrategyConfiguration", [strategyFile])
 
 def setVariablePath(topic:str, event:str, path:str) -> None:
 	"""
@@ -3660,34 +2988,31 @@ def setVariablePath(topic:str, event:str, path:str) -> None:
 		Event name
 	path:str
 		New event name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 218,
-	    "returnSignature": "v",
-	    "name": "setVariablePath",
-	    "parametersSignature": "(sss)",
-	    "description": "setVariablePath redifine a variable name on the fly",
-	    "parameters": [
-	        {
-	            "name": "topic",
-	            "description": "Source topic name"
-	        },
-	        {
-	            "name": "event",
-	            "description": "Event name"
-	        },
-	        {
-	            "name": "path",
-	            "description": "New event name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setVariablePath", [topic, event, path])
+	# NAOqi metadata:
+	# {
+	#     "uid": 218,
+	#     "returnSignature": "v",
+	#     "name": "setVariablePath",
+	#     "parametersSignature": "(sss)",
+	#     "description": "setVariablePath redifine a variable name on the fly",
+	#     "parameters": [
+	#         {
+	#             "name": "topic",
+	#             "description": "Source topic name"
+	#         },
+	#         {
+	#             "name": "event",
+	#             "description": "Event name"
+	#         },
+	#         {
+	#             "name": "path",
+	#             "description": "New event name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setVariablePath", [topic, event, path])
 
 def _registerIO(boxName:str, topicName:str, inputList:List[str], outputList:List[str]) -> None:
 	"""
@@ -3703,38 +3028,35 @@ def _registerIO(boxName:str, topicName:str, inputList:List[str], outputList:List
 		Input list
 	outputList:List[str]
 		Output list
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 219,
-	    "returnSignature": "v",
-	    "name": "_registerIO",
-	    "parametersSignature": "(ss[s][s])",
-	    "description": "register IO",
-	    "parameters": [
-	        {
-	            "name": "boxName",
-	            "description": "Box name"
-	        },
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        },
-	        {
-	            "name": "inputList",
-	            "description": "Input list"
-	        },
-	        {
-	            "name": "outputList",
-	            "description": "Output list"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_registerIO", [boxName, topicName, inputList, outputList])
+	# NAOqi metadata:
+	# {
+	#     "uid": 219,
+	#     "returnSignature": "v",
+	#     "name": "_registerIO",
+	#     "parametersSignature": "(ss[s][s])",
+	#     "description": "register IO",
+	#     "parameters": [
+	#         {
+	#             "name": "boxName",
+	#             "description": "Box name"
+	#         },
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         },
+	#         {
+	#             "name": "inputList",
+	#             "description": "Input list"
+	#         },
+	#         {
+	#             "name": "outputList",
+	#             "description": "Output list"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_registerIO", [boxName, topicName, inputList, outputList])
 
 def _unregisterIO(boxName:str, topicName:str) -> None:
 	"""
@@ -3747,37 +3069,38 @@ def _unregisterIO(boxName:str, topicName:str) -> None:
 	topicName:str
 		Topic name
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 220,
-	    "returnSignature": "v",
-	    "name": "_unregisterIO",
-	    "parametersSignature": "(ss)",
-	    "description": "unregister IO",
-	    "parameters": [
-	        {
-	            "name": "boxName",
-	            "description": "Box name"
-	        },
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        },
-	        {
-	            "name": "inputList",
-	            "description": "Input list"
-	        },
-	        {
-	            "name": "outputList",
-	            "description": "Output list"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation lists 4 parameters (boxName, topicName, inputList, outputList), but the signature has 2. The first 2 names are used here and may not match the actual parameters.
 	"""
-	return send_mfc("ALDialog", "_unregisterIO", [boxName, topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 220,
+	#     "returnSignature": "v",
+	#     "name": "_unregisterIO",
+	#     "parametersSignature": "(ss)",
+	#     "description": "unregister IO",
+	#     "parameters": [
+	#         {
+	#             "name": "boxName",
+	#             "description": "Box name"
+	#         },
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         },
+	#         {
+	#             "name": "inputList",
+	#             "description": "Input list"
+	#         },
+	#         {
+	#             "name": "outputList",
+	#             "description": "Output list"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_unregisterIO", [boxName, topicName])
 
 def _messageIn(boxName:str, topicName:str, variableName:str, value:object) -> None:
 	"""
@@ -3793,38 +3116,35 @@ def _messageIn(boxName:str, topicName:str, variableName:str, value:object) -> No
 		Variable name
 	value:object
 		Value
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 221,
-	    "returnSignature": "v",
-	    "name": "_messageIn",
-	    "parametersSignature": "(sssm)",
-	    "description": "Send a message input",
-	    "parameters": [
-	        {
-	            "name": "boxName",
-	            "description": "Box name"
-	        },
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        },
-	        {
-	            "name": "variableName",
-	            "description": "Variable name"
-	        },
-	        {
-	            "name": "value",
-	            "description": "Value"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_messageIn", [boxName, topicName, variableName, value])
+	# NAOqi metadata:
+	# {
+	#     "uid": 221,
+	#     "returnSignature": "v",
+	#     "name": "_messageIn",
+	#     "parametersSignature": "(sssm)",
+	#     "description": "Send a message input",
+	#     "parameters": [
+	#         {
+	#             "name": "boxName",
+	#             "description": "Box name"
+	#         },
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         },
+	#         {
+	#             "name": "variableName",
+	#             "description": "Variable name"
+	#         },
+	#         {
+	#             "name": "value",
+	#             "description": "Value"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_messageIn", [boxName, topicName, variableName, value])
 
 def setLanguage(Language:str) -> None:
 	"""
@@ -3834,26 +3154,23 @@ def setLanguage(Language:str) -> None:
 	----------
 	Language:str
 		Set dialog language (frf, enu, jpj...)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 222,
-	    "returnSignature": "v",
-	    "name": "setLanguage",
-	    "parametersSignature": "(s)",
-	    "description": "setLanguage",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "Set dialog language (frf, enu, jpj...)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setLanguage", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 222,
+	#     "returnSignature": "v",
+	#     "name": "setLanguage",
+	#     "parametersSignature": "(s)",
+	#     "description": "setLanguage",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "Set dialog language (frf, enu, jpj...)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setLanguage", [Language])
 
 def getLanguage() -> str:
 	"""
@@ -3862,21 +3179,18 @@ def getLanguage() -> str:
 	Returns
 	----------
 	get the dialog language
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 223,
-	    "returnSignature": "s",
-	    "name": "getLanguage",
-	    "parametersSignature": "()",
-	    "description": "getLanguage",
-	    "parameters": [],
-	    "returnDescription": "get the dialog language"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLanguage", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 223,
+	#     "returnSignature": "s",
+	#     "name": "getLanguage",
+	#     "parametersSignature": "()",
+	#     "description": "getLanguage",
+	#     "parameters": [],
+	#     "returnDescription": "get the dialog language"
+	# }
+	return call_method("ALDialog", "getLanguage", [])
 
 def _startUpdate(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -3890,34 +3204,31 @@ def _startUpdate(variableName:str, variableValue:object, message:str) -> None:
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 224,
-	    "returnSignature": "v",
-	    "name": "_startUpdate",
-	    "parametersSignature": "(sms)",
-	    "description": "startUpdate",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_startUpdate", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 224,
+	#     "returnSignature": "v",
+	#     "name": "_startUpdate",
+	#     "parametersSignature": "(sms)",
+	#     "description": "startUpdate",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_startUpdate", [variableName, variableValue, message])
 
 def _startApp(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -3931,34 +3242,31 @@ def _startApp(variableName:str, variableValue:object, message:str) -> None:
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 225,
-	    "returnSignature": "v",
-	    "name": "_startApp",
-	    "parametersSignature": "(sms)",
-	    "description": "startUpdate",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_startApp", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 225,
+	#     "returnSignature": "v",
+	#     "name": "_startApp",
+	#     "parametersSignature": "(sms)",
+	#     "description": "startUpdate",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_startApp", [variableName, variableValue, message])
 
 def _packageInstalled(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -3972,34 +3280,31 @@ def _packageInstalled(variableName:str, variableValue:object, message:str) -> No
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 226,
-	    "returnSignature": "v",
-	    "name": "_packageInstalled",
-	    "parametersSignature": "(sms)",
-	    "description": "packageInstalled",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_packageInstalled", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 226,
+	#     "returnSignature": "v",
+	#     "name": "_packageInstalled",
+	#     "parametersSignature": "(sms)",
+	#     "description": "packageInstalled",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_packageInstalled", [variableName, variableValue, message])
 
 def _packageRemoved(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -4013,34 +3318,31 @@ def _packageRemoved(variableName:str, variableValue:object, message:str) -> None
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 227,
-	    "returnSignature": "v",
-	    "name": "_packageRemoved",
-	    "parametersSignature": "(sms)",
-	    "description": "_packageRemoved",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_packageRemoved", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 227,
+	#     "returnSignature": "v",
+	#     "name": "_packageRemoved",
+	#     "parametersSignature": "(sms)",
+	#     "description": "_packageRemoved",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_packageRemoved", [variableName, variableValue, message])
 
 def dialogAnswered(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -4054,34 +3356,31 @@ def dialogAnswered(variableName:str, variableValue:object, message:str) -> None:
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 228,
-	    "returnSignature": "v",
-	    "name": "dialogAnswered",
-	    "parametersSignature": "(sms)",
-	    "description": "dialogAnswered",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "dialogAnswered", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 228,
+	#     "returnSignature": "v",
+	#     "name": "dialogAnswered",
+	#     "parametersSignature": "(sms)",
+	#     "description": "dialogAnswered",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "dialogAnswered", [variableName, variableValue, message])
 
 def _compilationFinished(variableName:str, variableValue:object, message:str) -> None:
 	"""
@@ -4095,34 +3394,31 @@ def _compilationFinished(variableName:str, variableValue:object, message:str) ->
 		variable value
 	message:str
 		message
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 229,
-	    "returnSignature": "v",
-	    "name": "_compilationFinished",
-	    "parametersSignature": "(sms)",
-	    "description": "compilationFinished",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "variable value"
-	        },
-	        {
-	            "name": "message",
-	            "description": "message"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_compilationFinished", [variableName, variableValue, message])
+	# NAOqi metadata:
+	# {
+	#     "uid": 229,
+	#     "returnSignature": "v",
+	#     "name": "_compilationFinished",
+	#     "parametersSignature": "(sms)",
+	#     "description": "compilationFinished",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "variable value"
+	#         },
+	#         {
+	#             "name": "message",
+	#             "description": "message"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_compilationFinished", [variableName, variableValue, message])
 
 def setFocus(topicName:str) -> None:
 	"""
@@ -4132,26 +3428,23 @@ def setFocus(topicName:str) -> None:
 	----------
 	topicName:str
 		Topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 230,
-	    "returnSignature": "v",
-	    "name": "setFocus",
-	    "parametersSignature": "(s)",
-	    "description": "Give focus to a dialog",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "setFocus", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 230,
+	#     "returnSignature": "v",
+	#     "name": "setFocus",
+	#     "parametersSignature": "(s)",
+	#     "description": "Give focus to a dialog",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "setFocus", [topicName])
 
 def getFocus() -> str:
 	"""
@@ -4160,21 +3453,18 @@ def getFocus() -> str:
 	Returns
 	----------
 	Current focus name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 231,
-	    "returnSignature": "s",
-	    "name": "getFocus",
-	    "parametersSignature": "()",
-	    "description": "Give focus to a dialog",
-	    "parameters": [],
-	    "returnDescription": "Current focus name"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getFocus", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 231,
+	#     "returnSignature": "s",
+	#     "name": "getFocus",
+	#     "parametersSignature": "()",
+	#     "description": "Give focus to a dialog",
+	#     "parameters": [],
+	#     "returnDescription": "Current focus name"
+	# }
+	return call_method("ALDialog", "getFocus", [])
 
 def gotoTopic(topicName:str) -> None:
 	"""
@@ -4184,26 +3474,23 @@ def gotoTopic(topicName:str) -> None:
 	----------
 	topicName:str
 		Topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 232,
-	    "returnSignature": "v",
-	    "name": "gotoTopic",
-	    "parametersSignature": "(s)",
-	    "description": "Set the focus to a topic and make a proposal",
-	    "parameters": [
-	        {
-	            "name": "topicName",
-	            "description": "Topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "gotoTopic", [topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 232,
+	#     "returnSignature": "v",
+	#     "name": "gotoTopic",
+	#     "parametersSignature": "(s)",
+	#     "description": "Set the focus to a topic and make a proposal",
+	#     "parameters": [
+	#         {
+	#             "name": "topicName",
+	#             "description": "Topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "gotoTopic", [topicName])
 
 def _enableOneBNFActivated(enableFullBNF:bool) -> None:
 	"""
@@ -4213,26 +3500,23 @@ def _enableOneBNFActivated(enableFullBNF:bool) -> None:
 	----------
 	enableFullBNF:bool
 		Add all possible sentences in speech recognition
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 233,
-	    "returnSignature": "v",
-	    "name": "_enableOneBNFActivated",
-	    "parametersSignature": "(b)",
-	    "description": "Enable AI System",
-	    "parameters": [
-	        {
-	            "name": "enableFullBNF",
-	            "description": "Add all possible sentences in speech recognition"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_enableOneBNFActivated", [enableFullBNF])
+	# NAOqi metadata:
+	# {
+	#     "uid": 233,
+	#     "returnSignature": "v",
+	#     "name": "_enableOneBNFActivated",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable AI System",
+	#     "parameters": [
+	#         {
+	#             "name": "enableFullBNF",
+	#             "description": "Add all possible sentences in speech recognition"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_enableOneBNFActivated", [enableFullBNF])
 
 def _enableAISystem(enableAISystem:bool) -> None:
 	"""
@@ -4242,26 +3526,23 @@ def _enableAISystem(enableAISystem:bool) -> None:
 	----------
 	enableAISystem:bool
 		Enable AI system
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 234,
-	    "returnSignature": "v",
-	    "name": "_enableAISystem",
-	    "parametersSignature": "(b)",
-	    "description": "Enable AI System",
-	    "parameters": [
-	        {
-	            "name": "enableAISystem",
-	            "description": "Enable AI system"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_enableAISystem", [enableAISystem])
+	# NAOqi metadata:
+	# {
+	#     "uid": 234,
+	#     "returnSignature": "v",
+	#     "name": "_enableAISystem",
+	#     "parametersSignature": "(b)",
+	#     "description": "Enable AI System",
+	#     "parameters": [
+	#         {
+	#             "name": "enableAISystem",
+	#             "description": "Enable AI system"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_enableAISystem", [enableAISystem])
 
 def addFallback(language:str, name:str) -> None:
 	"""
@@ -4273,30 +3554,27 @@ def addFallback(language:str, name:str) -> None:
 		The language of the plugin
 	name:str
 		The name of the plugin
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 235,
-	    "returnSignature": "v",
-	    "name": "addFallback",
-	    "parametersSignature": "(ss)",
-	    "description": "Add a fallback plugin",
-	    "parameters": [
-	        {
-	            "name": "language",
-	            "description": "The language of the plugin"
-	        },
-	        {
-	            "name": "name",
-	            "description": "The name of the plugin"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "addFallback", [language, name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 235,
+	#     "returnSignature": "v",
+	#     "name": "addFallback",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Add a fallback plugin",
+	#     "parameters": [
+	#         {
+	#             "name": "language",
+	#             "description": "The language of the plugin"
+	#         },
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the plugin"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "addFallback", [language, name])
 
 def removeFallback(language:str, name:str) -> None:
 	"""
@@ -4308,30 +3586,27 @@ def removeFallback(language:str, name:str) -> None:
 		The language of the plugin
 	name:str
 		The name of the plugin
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 236,
-	    "returnSignature": "v",
-	    "name": "removeFallback",
-	    "parametersSignature": "(ss)",
-	    "description": "Remove a fallback plugin",
-	    "parameters": [
-	        {
-	            "name": "language",
-	            "description": "The language of the plugin"
-	        },
-	        {
-	            "name": "name",
-	            "description": "The name of the plugin"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "removeFallback", [language, name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 236,
+	#     "returnSignature": "v",
+	#     "name": "removeFallback",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Remove a fallback plugin",
+	#     "parameters": [
+	#         {
+	#             "name": "language",
+	#             "description": "The language of the plugin"
+	#         },
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the plugin"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "removeFallback", [language, name])
 
 def _loadPrecompiledFile(filepath:str, bundleName:str, language:str) -> None:
 	"""
@@ -4345,34 +3620,31 @@ def _loadPrecompiledFile(filepath:str, bundleName:str, language:str) -> None:
 		Bundle name
 	language:str
 		Language name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 237,
-	    "returnSignature": "v",
-	    "name": "_loadPrecompiledFile",
-	    "parametersSignature": "(sss)",
-	    "description": "Load precompiled file",
-	    "parameters": [
-	        {
-	            "name": "filepath",
-	            "description": "File path and filename"
-	        },
-	        {
-	            "name": "bundleName",
-	            "description": "Bundle name"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_loadPrecompiledFile", [filepath, bundleName, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 237,
+	#     "returnSignature": "v",
+	#     "name": "_loadPrecompiledFile",
+	#     "parametersSignature": "(sss)",
+	#     "description": "Load precompiled file",
+	#     "parameters": [
+	#         {
+	#             "name": "filepath",
+	#             "description": "File path and filename"
+	#         },
+	#         {
+	#             "name": "bundleName",
+	#             "description": "Bundle name"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_loadPrecompiledFile", [filepath, bundleName, language])
 
 def _loadSLM(SLMFile:str, language:str) -> None:
 	"""
@@ -4384,30 +3656,27 @@ def _loadSLM(SLMFile:str, language:str) -> None:
 		SLM path and filename
 	language:str
 		Language name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 238,
-	    "returnSignature": "v",
-	    "name": "_loadSLM",
-	    "parametersSignature": "(ss)",
-	    "description": "Load SLM",
-	    "parameters": [
-	        {
-	            "name": "SLMFile",
-	            "description": "SLM path and filename"
-	        },
-	        {
-	            "name": "language",
-	            "description": "Language name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_loadSLM", [SLMFile, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 238,
+	#     "returnSignature": "v",
+	#     "name": "_loadSLM",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Load SLM",
+	#     "parameters": [
+	#         {
+	#             "name": "SLMFile",
+	#             "description": "SLM path and filename"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "Language name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_loadSLM", [SLMFile, language])
 
 def getLoadedTopics(language:str) -> List[str]:
 	"""
@@ -4421,26 +3690,23 @@ def getLoadedTopics(language:str) -> List[str]:
 	Returns
 	----------
 	List of loaded topics
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 239,
-	    "returnSignature": "[s]",
-	    "name": "getLoadedTopics",
-	    "parametersSignature": "(s)",
-	    "description": "List loaded topics",
-	    "parameters": [
-	        {
-	            "name": "language",
-	            "description": "Language name"
-	        }
-	    ],
-	    "returnDescription": "List of loaded topics"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLoadedTopics", [language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 239,
+	#     "returnSignature": "[s]",
+	#     "name": "getLoadedTopics",
+	#     "parametersSignature": "(s)",
+	#     "description": "List loaded topics",
+	#     "parameters": [
+	#         {
+	#             "name": "language",
+	#             "description": "Language name"
+	#         }
+	#     ],
+	#     "returnDescription": "List of loaded topics"
+	# }
+	return call_method("ALDialog", "getLoadedTopics", [language])
 
 def getAllLoadedTopics() -> List[str]:
 	"""
@@ -4449,21 +3715,18 @@ def getAllLoadedTopics() -> List[str]:
 	Returns
 	----------
 	List of loaded topics
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 240,
-	    "returnSignature": "[s]",
-	    "name": "getAllLoadedTopics",
-	    "parametersSignature": "()",
-	    "description": "List loaded topics independent of language",
-	    "parameters": [],
-	    "returnDescription": "List of loaded topics"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getAllLoadedTopics", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 240,
+	#     "returnSignature": "[s]",
+	#     "name": "getAllLoadedTopics",
+	#     "parametersSignature": "()",
+	#     "description": "List loaded topics independent of language",
+	#     "parameters": [],
+	#     "returnDescription": "List of loaded topics"
+	# }
+	return call_method("ALDialog", "getAllLoadedTopics", [])
 
 def getActivatedTopics() -> List[str]:
 	"""
@@ -4472,21 +3735,18 @@ def getActivatedTopics() -> List[str]:
 	Returns
 	----------
 	List of activated topics
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 241,
-	    "returnSignature": "[s]",
-	    "name": "getActivatedTopics",
-	    "parametersSignature": "()",
-	    "description": "Get activated topics",
-	    "parameters": [],
-	    "returnDescription": "List of activated topics"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getActivatedTopics", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 241,
+	#     "returnSignature": "[s]",
+	#     "name": "getActivatedTopics",
+	#     "parametersSignature": "()",
+	#     "description": "Get activated topics",
+	#     "parameters": [],
+	#     "returnDescription": "List of activated topics"
+	# }
+	return call_method("ALDialog", "getActivatedTopics", [])
 
 def _setBehaviorEvent(Event:str) -> None:
 	"""
@@ -4496,26 +3756,23 @@ def _setBehaviorEvent(Event:str) -> None:
 	----------
 	Event:str
 		Event name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 242,
-	    "returnSignature": "v",
-	    "name": "_setBehaviorEvent",
-	    "parametersSignature": "(s)",
-	    "description": "fast behavior start",
-	    "parameters": [
-	        {
-	            "name": "Event",
-	            "description": "Event name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setBehaviorEvent", [Event])
+	# NAOqi metadata:
+	# {
+	#     "uid": 242,
+	#     "returnSignature": "v",
+	#     "name": "_setBehaviorEvent",
+	#     "parametersSignature": "(s)",
+	#     "description": "fast behavior start",
+	#     "parameters": [
+	#         {
+	#             "name": "Event",
+	#             "description": "Event name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setBehaviorEvent", [Event])
 
 def _fastModelActivation(enable:bool) -> None:
 	"""
@@ -4525,26 +3782,23 @@ def _fastModelActivation(enable:bool) -> None:
 	----------
 	enable:bool
 		Enable fast activation
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 243,
-	    "returnSignature": "v",
-	    "name": "_fastModelActivation",
-	    "parametersSignature": "(b)",
-	    "description": "triggers and proposal are activated in the model at compilation time",
-	    "parameters": [
-	        {
-	            "name": "enable",
-	            "description": "Enable fast activation"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_fastModelActivation", [enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 243,
+	#     "returnSignature": "v",
+	#     "name": "_fastModelActivation",
+	#     "parametersSignature": "(b)",
+	#     "description": "triggers and proposal are activated in the model at compilation time",
+	#     "parameters": [
+	#         {
+	#             "name": "enable",
+	#             "description": "Enable fast activation"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_fastModelActivation", [enable])
 
 def _byPassFastApproximateMatching(fastApproximative:bool) -> None:
 	"""
@@ -4554,26 +3808,23 @@ def _byPassFastApproximateMatching(fastApproximative:bool) -> None:
 	----------
 	fastApproximative:bool
 		enable fast approximative matching
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 244,
-	    "returnSignature": "v",
-	    "name": "_byPassFastApproximateMatching",
-	    "parametersSignature": "(b)",
-	    "description": "byPass fast approximative matching",
-	    "parameters": [
-	        {
-	            "name": "fastApproximative",
-	            "description": "enable fast approximative matching"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_byPassFastApproximateMatching", [fastApproximative])
+	# NAOqi metadata:
+	# {
+	#     "uid": 244,
+	#     "returnSignature": "v",
+	#     "name": "_byPassFastApproximateMatching",
+	#     "parametersSignature": "(b)",
+	#     "description": "byPass fast approximative matching",
+	#     "parameters": [
+	#         {
+	#             "name": "fastApproximative",
+	#             "description": "enable fast approximative matching"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_byPassFastApproximateMatching", [fastApproximative])
 
 def activateTag(tagName:str, topicName:str) -> None:
 	"""
@@ -4585,30 +3836,27 @@ def activateTag(tagName:str, topicName:str) -> None:
 		tag name
 	topicName:str
 		topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 245,
-	    "returnSignature": "v",
-	    "name": "activateTag",
-	    "parametersSignature": "(ss)",
-	    "description": "activate a tag",
-	    "parameters": [
-	        {
-	            "name": "tagName",
-	            "description": "tag name"
-	        },
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "activateTag", [tagName, topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 245,
+	#     "returnSignature": "v",
+	#     "name": "activateTag",
+	#     "parametersSignature": "(ss)",
+	#     "description": "activate a tag",
+	#     "parameters": [
+	#         {
+	#             "name": "tagName",
+	#             "description": "tag name"
+	#         },
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "activateTag", [tagName, topicName])
 
 def deactivateTag(tagName:str, topicName:str) -> None:
 	"""
@@ -4620,30 +3868,27 @@ def deactivateTag(tagName:str, topicName:str) -> None:
 		tag name
 	topicName:str
 		topic name
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 246,
-	    "returnSignature": "v",
-	    "name": "deactivateTag",
-	    "parametersSignature": "(ss)",
-	    "description": "deactivate a tag",
-	    "parameters": [
-	        {
-	            "name": "tagName",
-	            "description": "tag name"
-	        },
-	        {
-	            "name": "topicName",
-	            "description": "topic name"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "deactivateTag", [tagName, topicName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 246,
+	#     "returnSignature": "v",
+	#     "name": "deactivateTag",
+	#     "parametersSignature": "(ss)",
+	#     "description": "deactivate a tag",
+	#     "parameters": [
+	#         {
+	#             "name": "tagName",
+	#             "description": "tag name"
+	#         },
+	#         {
+	#             "name": "topicName",
+	#             "description": "topic name"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "deactivateTag", [tagName, topicName])
 
 def _fallback(Question:str, Language:str) -> str:
 	"""
@@ -4655,49 +3900,43 @@ def _fallback(Question:str, Language:str) -> str:
 		User question
 	Language:str
 		Language
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 247,
-	    "returnSignature": "s",
-	    "name": "_fallback",
-	    "parametersSignature": "(ss)",
-	    "description": "fallback (experimentatl)",
-	    "parameters": [
-	        {
-	            "name": "Question",
-	            "description": "User question"
-	        },
-	        {
-	            "name": "Language",
-	            "description": "Language"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_fallback", [Question, Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 247,
+	#     "returnSignature": "s",
+	#     "name": "_fallback",
+	#     "parametersSignature": "(ss)",
+	#     "description": "fallback (experimentatl)",
+	#     "parameters": [
+	#         {
+	#             "name": "Question",
+	#             "description": "User question"
+	#         },
+	#         {
+	#             "name": "Language",
+	#             "description": "Language"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_fallback", [Question, Language])
 
 def resetAll() -> None:
 	"""
 	Reset all engine
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 248,
-	    "returnSignature": "v",
-	    "name": "resetAll",
-	    "parametersSignature": "()",
-	    "description": "Reset all engine",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "resetAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 248,
+	#     "returnSignature": "v",
+	#     "name": "resetAll",
+	#     "parametersSignature": "()",
+	#     "description": "Reset all engine",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "resetAll", [])
 
 def _setSynchronicity(p0:bool) -> None:
 	"""
@@ -4707,40 +3946,34 @@ def _setSynchronicity(p0:bool) -> None:
 	----------
 	p0:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 249,
-	    "returnSignature": "v",
-	    "name": "_setSynchronicity",
-	    "parametersSignature": "(b)",
-	    "description": "set Synchronicity",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setSynchronicity", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 249,
+	#     "returnSignature": "v",
+	#     "name": "_setSynchronicity",
+	#     "parametersSignature": "(b)",
+	#     "description": "set Synchronicity",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setSynchronicity", [p0])
 
 def _getSynchronicity() -> bool:
 	"""
 	get Synchronicity
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 250,
-	    "returnSignature": "b",
-	    "name": "_getSynchronicity",
-	    "parametersSignature": "()",
-	    "description": "get Synchronicity",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_getSynchronicity", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 250,
+	#     "returnSignature": "b",
+	#     "name": "_getSynchronicity",
+	#     "parametersSignature": "()",
+	#     "description": "get Synchronicity",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_getSynchronicity", [])
 
 def insertUserData(variableName:str, variableValue:str, UserID:int) -> None:
 	"""
@@ -4754,34 +3987,31 @@ def insertUserData(variableName:str, variableValue:str, UserID:int) -> None:
 		Variable value
 	UserID:int
 		User ID
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 251,
-	    "returnSignature": "v",
-	    "name": "insertUserData",
-	    "parametersSignature": "(ssi)",
-	    "description": "insert user data into dialog database",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "Variable name"
-	        },
-	        {
-	            "name": "variableValue",
-	            "description": "Variable value"
-	        },
-	        {
-	            "name": "UserID",
-	            "description": "User ID"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "insertUserData", [variableName, variableValue, UserID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 251,
+	#     "returnSignature": "v",
+	#     "name": "insertUserData",
+	#     "parametersSignature": "(ssi)",
+	#     "description": "insert user data into dialog database",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "Variable name"
+	#         },
+	#         {
+	#             "name": "variableValue",
+	#             "description": "Variable value"
+	#         },
+	#         {
+	#             "name": "UserID",
+	#             "description": "User ID"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "insertUserData", [variableName, variableValue, UserID])
 
 def _magicGet(p0:str) -> List[str]:
 	"""
@@ -4791,21 +4021,18 @@ def _magicGet(p0:str) -> List[str]:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 252,
-	    "returnSignature": "[s]",
-	    "name": "_magicGet",
-	    "parametersSignature": "(s)",
-	    "description": "get user data from dialog database",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_magicGet", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 252,
+	#     "returnSignature": "[s]",
+	#     "name": "_magicGet",
+	#     "parametersSignature": "(s)",
+	#     "description": "get user data from dialog database",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_magicGet", [p0])
 
 def getUserData(variableName:str, UserID:int) -> str:
 	"""
@@ -4821,30 +4048,27 @@ def getUserData(variableName:str, UserID:int) -> str:
 	Returns
 	----------
 	Value
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 253,
-	    "returnSignature": "s",
-	    "name": "getUserData",
-	    "parametersSignature": "(si)",
-	    "description": "get user data from dialog database",
-	    "parameters": [
-	        {
-	            "name": "variableName",
-	            "description": "Variable name"
-	        },
-	        {
-	            "name": "UserID",
-	            "description": "User ID"
-	        }
-	    ],
-	    "returnDescription": "Value"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getUserData", [variableName, UserID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 253,
+	#     "returnSignature": "s",
+	#     "name": "getUserData",
+	#     "parametersSignature": "(si)",
+	#     "description": "get user data from dialog database",
+	#     "parameters": [
+	#         {
+	#             "name": "variableName",
+	#             "description": "Variable name"
+	#         },
+	#         {
+	#             "name": "UserID",
+	#             "description": "User ID"
+	#         }
+	#     ],
+	#     "returnDescription": "Value"
+	# }
+	return call_method("ALDialog", "getUserData", [variableName, UserID])
 
 def getUserDataList(UserID:int) -> List[str]:
 	"""
@@ -4858,26 +4082,23 @@ def getUserDataList(UserID:int) -> List[str]:
 	Returns
 	----------
 	Variable list
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 254,
-	    "returnSignature": "[s]",
-	    "name": "getUserDataList",
-	    "parametersSignature": "(i)",
-	    "description": "get user data list from dialog database",
-	    "parameters": [
-	        {
-	            "name": "UserID",
-	            "description": "User ID"
-	        }
-	    ],
-	    "returnDescription": "Variable list"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getUserDataList", [UserID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 254,
+	#     "returnSignature": "[s]",
+	#     "name": "getUserDataList",
+	#     "parametersSignature": "(i)",
+	#     "description": "get user data list from dialog database",
+	#     "parameters": [
+	#         {
+	#             "name": "UserID",
+	#             "description": "User ID"
+	#         }
+	#     ],
+	#     "returnDescription": "Variable list"
+	# }
+	return call_method("ALDialog", "getUserDataList", [UserID])
 
 def getUserList() -> List[int]:
 	"""
@@ -4886,21 +4107,18 @@ def getUserList() -> List[int]:
 	Returns
 	----------
 	User list
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 255,
-	    "returnSignature": "[i]",
-	    "name": "getUserList",
-	    "parametersSignature": "()",
-	    "description": "get user list from dialog database",
-	    "parameters": [],
-	    "returnDescription": "User list"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getUserList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 255,
+	#     "returnSignature": "[i]",
+	#     "name": "getUserList",
+	#     "parametersSignature": "()",
+	#     "description": "get user list from dialog database",
+	#     "parameters": [],
+	#     "returnDescription": "User list"
+	# }
+	return call_method("ALDialog", "getUserList", [])
 
 def removeUserData(UserID:int) -> None:
 	"""
@@ -4910,64 +4128,55 @@ def removeUserData(UserID:int) -> None:
 	----------
 	UserID:int
 		User ID
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 256,
-	    "returnSignature": "v",
-	    "name": "removeUserData",
-	    "parametersSignature": "(i)",
-	    "description": "remove a user from the database",
-	    "parameters": [
-	        {
-	            "name": "UserID",
-	            "description": "User ID"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "removeUserData", [UserID])
+	# NAOqi metadata:
+	# {
+	#     "uid": 256,
+	#     "returnSignature": "v",
+	#     "name": "removeUserData",
+	#     "parametersSignature": "(i)",
+	#     "description": "remove a user from the database",
+	#     "parameters": [
+	#         {
+	#             "name": "UserID",
+	#             "description": "User ID"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "removeUserData", [UserID])
 
 def clearConcepts() -> None:
 	"""
 	clear concepts in DB
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 257,
-	    "returnSignature": "v",
-	    "name": "clearConcepts",
-	    "parametersSignature": "()",
-	    "description": "clear concepts in DB",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "clearConcepts", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 257,
+	#     "returnSignature": "v",
+	#     "name": "clearConcepts",
+	#     "parametersSignature": "()",
+	#     "description": "clear concepts in DB",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "clearConcepts", [])
 
 def _speechDetected() -> None:
 	"""
 	callback
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 258,
-	    "returnSignature": "v",
-	    "name": "_speechDetected",
-	    "parametersSignature": "()",
-	    "description": "callback",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_speechDetected", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 258,
+	#     "returnSignature": "v",
+	#     "name": "_speechDetected",
+	#     "parametersSignature": "()",
+	#     "description": "callback",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_speechDetected", [])
 
 def enableSendingLogToCloud(EnableLog:bool) -> None:
 	"""
@@ -4977,26 +4186,23 @@ def enableSendingLogToCloud(EnableLog:bool) -> None:
 	----------
 	EnableLog:bool
 		Enable log
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 259,
-	    "returnSignature": "v",
-	    "name": "enableSendingLogToCloud",
-	    "parametersSignature": "(b)",
-	    "description": "let the robot send log the cloud",
-	    "parameters": [
-	        {
-	            "name": "EnableLog",
-	            "description": "Enable log"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "enableSendingLogToCloud", [EnableLog])
+	# NAOqi metadata:
+	# {
+	#     "uid": 259,
+	#     "returnSignature": "v",
+	#     "name": "enableSendingLogToCloud",
+	#     "parametersSignature": "(b)",
+	#     "description": "let the robot send log the cloud",
+	#     "parameters": [
+	#         {
+	#             "name": "EnableLog",
+	#             "description": "Enable log"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "enableSendingLogToCloud", [EnableLog])
 
 def _encryptLog(EnableLog:bool) -> None:
 	"""
@@ -5006,26 +4212,23 @@ def _encryptLog(EnableLog:bool) -> None:
 	----------
 	EnableLog:bool
 		Remove user log
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 260,
-	    "returnSignature": "v",
-	    "name": "_encryptLog",
-	    "parametersSignature": "(b)",
-	    "description": "encrypt the logs sent tothe cloud",
-	    "parameters": [
-	        {
-	            "name": "EnableLog",
-	            "description": "Remove user log"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_encryptLog", [EnableLog])
+	# NAOqi metadata:
+	# {
+	#     "uid": 260,
+	#     "returnSignature": "v",
+	#     "name": "_encryptLog",
+	#     "parametersSignature": "(b)",
+	#     "description": "encrypt the logs sent tothe cloud",
+	#     "parameters": [
+	#         {
+	#             "name": "EnableLog",
+	#             "description": "Remove user log"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_encryptLog", [EnableLog])
 
 def isSendingLogToCloud() -> bool:
 	"""
@@ -5034,21 +4237,18 @@ def isSendingLogToCloud() -> bool:
 	Returns
 	----------
 	True if currently logging
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 261,
-	    "returnSignature": "b",
-	    "name": "isSendingLogToCloud",
-	    "parametersSignature": "()",
-	    "description": "check if the robot is sending the log to the cloud",
-	    "parameters": [],
-	    "returnDescription": "True if currently logging"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "isSendingLogToCloud", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 261,
+	#     "returnSignature": "b",
+	#     "name": "isSendingLogToCloud",
+	#     "parametersSignature": "()",
+	#     "description": "check if the robot is sending the log to the cloud",
+	#     "parameters": [],
+	#     "returnDescription": "True if currently logging"
+	# }
+	return call_method("ALDialog", "isSendingLogToCloud", [])
 
 def _isEncryptingLog() -> bool:
 	"""
@@ -5057,21 +4257,18 @@ def _isEncryptingLog() -> bool:
 	Returns
 	----------
 	True if currently encrypt logging
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 262,
-	    "returnSignature": "b",
-	    "name": "_isEncryptingLog",
-	    "parametersSignature": "()",
-	    "description": "check if the robot is encrypting the log sent to the cloud",
-	    "parameters": [],
-	    "returnDescription": "True if currently encrypt logging"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isEncryptingLog", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 262,
+	#     "returnSignature": "b",
+	#     "name": "_isEncryptingLog",
+	#     "parametersSignature": "()",
+	#     "description": "check if the robot is encrypting the log sent to the cloud",
+	#     "parameters": [],
+	#     "returnDescription": "True if currently encrypt logging"
+	# }
+	return call_method("ALDialog", "_isEncryptingLog", [])
 
 def enableLogAudio(p0:bool) -> None:
 	"""
@@ -5086,20 +4283,21 @@ def enableLogAudio(p0:bool) -> None:
 	----------
 	Enable audio log
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 263,
-	    "returnSignature": "v",
-	    "name": "enableLogAudio",
-	    "parametersSignature": "(b)",
-	    "description": "enable sending log audio (recorded conversation) to the cloud",
-	    "parameters": [],
-	    "returnDescription": "Enable audio log"
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's return description above doesn't match the method's signature, which returns nothing. This function follows the signature.
 	"""
-	return send_mfc("ALDialog", "enableLogAudio", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 263,
+	#     "returnSignature": "v",
+	#     "name": "enableLogAudio",
+	#     "parametersSignature": "(b)",
+	#     "description": "enable sending log audio (recorded conversation) to the cloud",
+	#     "parameters": [],
+	#     "returnDescription": "Enable audio log"
+	# }
+	return call_method("ALDialog", "enableLogAudio", [p0])
 
 def _setDeletionCost(MatchingDeletionCost:float) -> None:
 	"""
@@ -5109,26 +4307,23 @@ def _setDeletionCost(MatchingDeletionCost:float) -> None:
 	----------
 	MatchingDeletionCost:float
 		Deletion cost
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 264,
-	    "returnSignature": "v",
-	    "name": "_setDeletionCost",
-	    "parametersSignature": "(f)",
-	    "description": "The deletion cost (deleting from the sentence to match the model)",
-	    "parameters": [
-	        {
-	            "name": "MatchingDeletionCost",
-	            "description": "Deletion cost"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setDeletionCost", [MatchingDeletionCost])
+	# NAOqi metadata:
+	# {
+	#     "uid": 264,
+	#     "returnSignature": "v",
+	#     "name": "_setDeletionCost",
+	#     "parametersSignature": "(f)",
+	#     "description": "The deletion cost (deleting from the sentence to match the model)",
+	#     "parameters": [
+	#         {
+	#             "name": "MatchingDeletionCost",
+	#             "description": "Deletion cost"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setDeletionCost", [MatchingDeletionCost])
 
 def _setInsertionCost(MatchingInsertCost:float) -> None:
 	"""
@@ -5138,26 +4333,23 @@ def _setInsertionCost(MatchingInsertCost:float) -> None:
 	----------
 	MatchingInsertCost:float
 		Insert cost
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 265,
-	    "returnSignature": "v",
-	    "name": "_setInsertionCost",
-	    "parametersSignature": "(f)",
-	    "description": "The insertion cost (inserting in the sentence to match the model)",
-	    "parameters": [
-	        {
-	            "name": "MatchingInsertCost",
-	            "description": "Insert cost"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setInsertionCost", [MatchingInsertCost])
+	# NAOqi metadata:
+	# {
+	#     "uid": 265,
+	#     "returnSignature": "v",
+	#     "name": "_setInsertionCost",
+	#     "parametersSignature": "(f)",
+	#     "description": "The insertion cost (inserting in the sentence to match the model)",
+	#     "parameters": [
+	#         {
+	#             "name": "MatchingInsertCost",
+	#             "description": "Insert cost"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setInsertionCost", [MatchingInsertCost])
 
 def _setSubstitutionCost(MatchingSubstitutionCost:float) -> None:
 	"""
@@ -5167,26 +4359,23 @@ def _setSubstitutionCost(MatchingSubstitutionCost:float) -> None:
 	----------
 	MatchingSubstitutionCost:float
 		Substitution cost
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 266,
-	    "returnSignature": "v",
-	    "name": "_setSubstitutionCost",
-	    "parametersSignature": "(f)",
-	    "description": "The substitution cost",
-	    "parameters": [
-	        {
-	            "name": "MatchingSubstitutionCost",
-	            "description": "Substitution cost"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setSubstitutionCost", [MatchingSubstitutionCost])
+	# NAOqi metadata:
+	# {
+	#     "uid": 266,
+	#     "returnSignature": "v",
+	#     "name": "_setSubstitutionCost",
+	#     "parametersSignature": "(f)",
+	#     "description": "The substitution cost",
+	#     "parameters": [
+	#         {
+	#             "name": "MatchingSubstitutionCost",
+	#             "description": "Substitution cost"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setSubstitutionCost", [MatchingSubstitutionCost])
 
 def _setStarCost(MatchingStarCost:float) -> None:
 	"""
@@ -5196,26 +4385,23 @@ def _setStarCost(MatchingStarCost:float) -> None:
 	----------
 	MatchingStarCost:float
 		Wildcard cost
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 267,
-	    "returnSignature": "v",
-	    "name": "_setStarCost",
-	    "parametersSignature": "(f)",
-	    "description": "The cost of matching an open element (such as _*)",
-	    "parameters": [
-	        {
-	            "name": "MatchingStarCost",
-	            "description": "Wildcard cost"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setStarCost", [MatchingStarCost])
+	# NAOqi metadata:
+	# {
+	#     "uid": 267,
+	#     "returnSignature": "v",
+	#     "name": "_setStarCost",
+	#     "parametersSignature": "(f)",
+	#     "description": "The cost of matching an open element (such as _*)",
+	#     "parameters": [
+	#         {
+	#             "name": "MatchingStarCost",
+	#             "description": "Wildcard cost"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setStarCost", [MatchingStarCost])
 
 def _setApproximateMatchingThreshold(MatchingThreshold:float) -> None:
 	"""
@@ -5225,26 +4411,23 @@ def _setApproximateMatchingThreshold(MatchingThreshold:float) -> None:
 	----------
 	MatchingThreshold:float
 		Matching threshold
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 268,
-	    "returnSignature": "v",
-	    "name": "_setApproximateMatchingThreshold",
-	    "parametersSignature": "(f)",
-	    "description": "The approximate matching threshold",
-	    "parameters": [
-	        {
-	            "name": "MatchingThreshold",
-	            "description": "Matching threshold"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setApproximateMatchingThreshold", [MatchingThreshold])
+	# NAOqi metadata:
+	# {
+	#     "uid": 268,
+	#     "returnSignature": "v",
+	#     "name": "_setApproximateMatchingThreshold",
+	#     "parametersSignature": "(f)",
+	#     "description": "The approximate matching threshold",
+	#     "parameters": [
+	#         {
+	#             "name": "MatchingThreshold",
+	#             "description": "Matching threshold"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setApproximateMatchingThreshold", [MatchingThreshold])
 
 def _useAcrobaticMatching(EnableAccrobatic:bool) -> None:
 	"""
@@ -5254,26 +4437,23 @@ def _useAcrobaticMatching(EnableAccrobatic:bool) -> None:
 	----------
 	EnableAccrobatic:bool
 		Enable accrobatic matching
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 269,
-	    "returnSignature": "v",
-	    "name": "_useAcrobaticMatching",
-	    "parametersSignature": "(b)",
-	    "description": "Tell to the model to use acrobatic matching",
-	    "parameters": [
-	        {
-	            "name": "EnableAccrobatic",
-	            "description": "Enable accrobatic matching"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_useAcrobaticMatching", [EnableAccrobatic])
+	# NAOqi metadata:
+	# {
+	#     "uid": 269,
+	#     "returnSignature": "v",
+	#     "name": "_useAcrobaticMatching",
+	#     "parametersSignature": "(b)",
+	#     "description": "Tell to the model to use acrobatic matching",
+	#     "parameters": [
+	#         {
+	#             "name": "EnableAccrobatic",
+	#             "description": "Enable accrobatic matching"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_useAcrobaticMatching", [EnableAccrobatic])
 
 def _enableStatisticalMatching(EnableSemantic:bool) -> None:
 	"""
@@ -5283,26 +4463,23 @@ def _enableStatisticalMatching(EnableSemantic:bool) -> None:
 	----------
 	EnableSemantic:bool
 		Enable semantic matching
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 270,
-	    "returnSignature": "v",
-	    "name": "_enableStatisticalMatching",
-	    "parametersSignature": "(b)",
-	    "description": "Tell to the model to use statistical matching",
-	    "parameters": [
-	        {
-	            "name": "EnableSemantic",
-	            "description": "Enable semantic matching"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_enableStatisticalMatching", [EnableSemantic])
+	# NAOqi metadata:
+	# {
+	#     "uid": 270,
+	#     "returnSignature": "v",
+	#     "name": "_enableStatisticalMatching",
+	#     "parametersSignature": "(b)",
+	#     "description": "Tell to the model to use statistical matching",
+	#     "parameters": [
+	#         {
+	#             "name": "EnableSemantic",
+	#             "description": "Enable semantic matching"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_enableStatisticalMatching", [EnableSemantic])
 
 def _enablePhoneticMatching(EnablePhonetic:bool) -> None:
 	"""
@@ -5312,26 +4489,23 @@ def _enablePhoneticMatching(EnablePhonetic:bool) -> None:
 	----------
 	EnablePhonetic:bool
 		Enable phonetic matching
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 271,
-	    "returnSignature": "v",
-	    "name": "_enablePhoneticMatching",
-	    "parametersSignature": "(b)",
-	    "description": "Tell to the model to use phonetic matching",
-	    "parameters": [
-	        {
-	            "name": "EnablePhonetic",
-	            "description": "Enable phonetic matching"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_enablePhoneticMatching", [EnablePhonetic])
+	# NAOqi metadata:
+	# {
+	#     "uid": 271,
+	#     "returnSignature": "v",
+	#     "name": "_enablePhoneticMatching",
+	#     "parametersSignature": "(b)",
+	#     "description": "Tell to the model to use phonetic matching",
+	#     "parameters": [
+	#         {
+	#             "name": "EnablePhonetic",
+	#             "description": "Enable phonetic matching"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_enablePhoneticMatching", [EnablePhonetic])
 
 def _setSemanticModel(semanticPath:str, p1:str) -> None:
 	"""
@@ -5344,25 +4518,26 @@ def _setSemanticModel(semanticPath:str, p1:str) -> None:
 	p1:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 272,
-	    "returnSignature": "v",
-	    "name": "_setSemanticModel",
-	    "parametersSignature": "(ss)",
-	    "description": "Specify the directory and language of the statistical model",
-	    "parameters": [
-	        {
-	            "name": "semanticPath",
-	            "description": "Semantic matching data path"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	NAOqi's documentation only names 1 of 2 parameters. The others are called p1 here.
 	"""
-	return send_mfc("ALDialog", "_setSemanticModel", [semanticPath, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 272,
+	#     "returnSignature": "v",
+	#     "name": "_setSemanticModel",
+	#     "parametersSignature": "(ss)",
+	#     "description": "Specify the directory and language of the statistical model",
+	#     "parameters": [
+	#         {
+	#             "name": "semanticPath",
+	#             "description": "Semantic matching data path"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setSemanticModel", [semanticPath, p1])
 
 def _isOnePassEnabled() -> bool:
 	"""
@@ -5371,21 +4546,18 @@ def _isOnePassEnabled() -> bool:
 	Returns
 	----------
 	Enable only one speech recognition
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 273,
-	    "returnSignature": "b",
-	    "name": "_isOnePassEnabled",
-	    "parametersSignature": "()",
-	    "description": "Is one pass enabled",
-	    "parameters": [],
-	    "returnDescription": "Enable only one speech recognition"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isOnePassEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 273,
+	#     "returnSignature": "b",
+	#     "name": "_isOnePassEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Is one pass enabled",
+	#     "parameters": [],
+	#     "returnDescription": "Enable only one speech recognition"
+	# }
+	return call_method("ALDialog", "_isOnePassEnabled", [])
 
 def _setSLMUpperThreshold(SLMUpper:float) -> None:
 	"""
@@ -5395,26 +4567,23 @@ def _setSLMUpperThreshold(SLMUpper:float) -> None:
 	----------
 	SLMUpper:float
 		SLM Upper Threshold
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 274,
-	    "returnSignature": "v",
-	    "name": "_setSLMUpperThreshold",
-	    "parametersSignature": "(f)",
-	    "description": "set SLM High treshold",
-	    "parameters": [
-	        {
-	            "name": "SLMUpper",
-	            "description": "SLM Upper Threshold"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setSLMUpperThreshold", [SLMUpper])
+	# NAOqi metadata:
+	# {
+	#     "uid": 274,
+	#     "returnSignature": "v",
+	#     "name": "_setSLMUpperThreshold",
+	#     "parametersSignature": "(f)",
+	#     "description": "set SLM High treshold",
+	#     "parameters": [
+	#         {
+	#             "name": "SLMUpper",
+	#             "description": "SLM Upper Threshold"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setSLMUpperThreshold", [SLMUpper])
 
 def _enableSerialization(enableSerialization:bool) -> None:
 	"""
@@ -5424,64 +4593,55 @@ def _enableSerialization(enableSerialization:bool) -> None:
 	----------
 	enableSerialization:bool
 		Enable serialization
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 275,
-	    "returnSignature": "v",
-	    "name": "_enableSerialization",
-	    "parametersSignature": "(b)",
-	    "description": "enable use of serialized models",
-	    "parameters": [
-	        {
-	            "name": "enableSerialization",
-	            "description": "Enable serialization"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_enableSerialization", [enableSerialization])
+	# NAOqi metadata:
+	# {
+	#     "uid": 275,
+	#     "returnSignature": "v",
+	#     "name": "_enableSerialization",
+	#     "parametersSignature": "(b)",
+	#     "description": "enable use of serialized models",
+	#     "parameters": [
+	#         {
+	#             "name": "enableSerialization",
+	#             "description": "Enable serialization"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_enableSerialization", [enableSerialization])
 
 def _deleteSerializationFiles() -> None:
 	"""
 	delete serializations files .ser .ini .bnf .lcf
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 276,
-	    "returnSignature": "v",
-	    "name": "_deleteSerializationFiles",
-	    "parametersSignature": "()",
-	    "description": "delete serializations files .ser .ini .bnf .lcf",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_deleteSerializationFiles", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 276,
+	#     "returnSignature": "v",
+	#     "name": "_deleteSerializationFiles",
+	#     "parametersSignature": "()",
+	#     "description": "delete serializations files .ser .ini .bnf .lcf",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_deleteSerializationFiles", [])
 
 def _cleanPhonetic() -> None:
 	"""
 	Clean phonetic
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 277,
-	    "returnSignature": "v",
-	    "name": "_cleanPhonetic",
-	    "parametersSignature": "()",
-	    "description": "Clean phonetic",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_cleanPhonetic", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 277,
+	#     "returnSignature": "v",
+	#     "name": "_cleanPhonetic",
+	#     "parametersSignature": "()",
+	#     "description": "Clean phonetic",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_cleanPhonetic", [])
 
 def mute(p0:bool) -> None:
 	"""
@@ -5491,21 +4651,18 @@ def mute(p0:bool) -> None:
 	----------
 	p0:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 278,
-	    "returnSignature": "v",
-	    "name": "mute",
-	    "parametersSignature": "(b)",
-	    "description": "mute dialog",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "mute", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 278,
+	#     "returnSignature": "v",
+	#     "name": "mute",
+	#     "parametersSignature": "(b)",
+	#     "description": "mute dialog",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "mute", [p0])
 
 def _copyInputConcepts(copyInput:bool) -> None:
 	"""
@@ -5515,26 +4672,23 @@ def _copyInputConcepts(copyInput:bool) -> None:
 	----------
 	copyInput:bool
 		False to optimize
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 279,
-	    "returnSignature": "v",
-	    "name": "_copyInputConcepts",
-	    "parametersSignature": "(b)",
-	    "description": "Set if the input concepts are copied",
-	    "parameters": [
-	        {
-	            "name": "copyInput",
-	            "description": "False to optimize"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_copyInputConcepts", [copyInput])
+	# NAOqi metadata:
+	# {
+	#     "uid": 279,
+	#     "returnSignature": "v",
+	#     "name": "_copyInputConcepts",
+	#     "parametersSignature": "(b)",
+	#     "description": "Set if the input concepts are copied",
+	#     "parameters": [
+	#         {
+	#             "name": "copyInput",
+	#             "description": "False to optimize"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_copyInputConcepts", [copyInput])
 
 def _copyOutputConcepts(copyOutput:bool) -> None:
 	"""
@@ -5544,26 +4698,23 @@ def _copyOutputConcepts(copyOutput:bool) -> None:
 	----------
 	copyOutput:bool
 		False to optimize
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 280,
-	    "returnSignature": "v",
-	    "name": "_copyOutputConcepts",
-	    "parametersSignature": "(b)",
-	    "description": "Set if the input concepts are copied",
-	    "parameters": [
-	        {
-	            "name": "copyOutput",
-	            "description": "False to optimize"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_copyOutputConcepts", [copyOutput])
+	# NAOqi metadata:
+	# {
+	#     "uid": 280,
+	#     "returnSignature": "v",
+	#     "name": "_copyOutputConcepts",
+	#     "parametersSignature": "(b)",
+	#     "description": "Set if the input concepts are copied",
+	#     "parameters": [
+	#         {
+	#             "name": "copyOutput",
+	#             "description": "False to optimize"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_copyOutputConcepts", [copyOutput])
 
 def generateSentences(destination:str, topic:str, language:str) -> None:
 	"""
@@ -5577,34 +4728,31 @@ def generateSentences(destination:str, topic:str, language:str) -> None:
 		source topic
 	language:str
 		source language
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 281,
-	    "returnSignature": "v",
-	    "name": "generateSentences",
-	    "parametersSignature": "(sss)",
-	    "description": "Generate sentences",
-	    "parameters": [
-	        {
-	            "name": "destination",
-	            "description": "file destination"
-	        },
-	        {
-	            "name": "topic",
-	            "description": "source topic"
-	        },
-	        {
-	            "name": "language",
-	            "description": "source language"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "generateSentences", [destination, topic, language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 281,
+	#     "returnSignature": "v",
+	#     "name": "generateSentences",
+	#     "parametersSignature": "(sss)",
+	#     "description": "Generate sentences",
+	#     "parameters": [
+	#         {
+	#             "name": "destination",
+	#             "description": "file destination"
+	#         },
+	#         {
+	#             "name": "topic",
+	#             "description": "source topic"
+	#         },
+	#         {
+	#             "name": "language",
+	#             "description": "source language"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "generateSentences", [destination, topic, language])
 
 def _setLengthForAfterStarOptimization(length:int) -> None:
 	"""
@@ -5614,26 +4762,23 @@ def _setLengthForAfterStarOptimization(length:int) -> None:
 	----------
 	length:int
 		set length
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 282,
-	    "returnSignature": "v",
-	    "name": "_setLengthForAfterStarOptimization",
-	    "parametersSignature": "(i)",
-	    "description": "Set the sentence length to apply -after star optimization- in matching",
-	    "parameters": [
-	        {
-	            "name": "length",
-	            "description": "set length"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setLengthForAfterStarOptimization", [length])
+	# NAOqi metadata:
+	# {
+	#     "uid": 282,
+	#     "returnSignature": "v",
+	#     "name": "_setLengthForAfterStarOptimization",
+	#     "parametersSignature": "(i)",
+	#     "description": "Set the sentence length to apply -after star optimization- in matching",
+	#     "parameters": [
+	#         {
+	#             "name": "length",
+	#             "description": "set length"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setLengthForAfterStarOptimization", [length])
 
 def _setLengthForBeforeStarOptimization(length:int) -> None:
 	"""
@@ -5643,26 +4788,23 @@ def _setLengthForBeforeStarOptimization(length:int) -> None:
 	----------
 	length:int
 		set length
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 283,
-	    "returnSignature": "v",
-	    "name": "_setLengthForBeforeStarOptimization",
-	    "parametersSignature": "(i)",
-	    "description": "Set the sentence length to apply -before star optimization- in matching",
-	    "parameters": [
-	        {
-	            "name": "length",
-	            "description": "set length"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setLengthForBeforeStarOptimization", [length])
+	# NAOqi metadata:
+	# {
+	#     "uid": 283,
+	#     "returnSignature": "v",
+	#     "name": "_setLengthForBeforeStarOptimization",
+	#     "parametersSignature": "(i)",
+	#     "description": "Set the sentence length to apply -before star optimization- in matching",
+	#     "parameters": [
+	#         {
+	#             "name": "length",
+	#             "description": "set length"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setLengthForBeforeStarOptimization", [length])
 
 def _onUserSessionFocused(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -5676,34 +4818,31 @@ def _onUserSessionFocused(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 284,
-	    "returnSignature": "v",
-	    "name": "_onUserSessionFocused",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_onUserSessionFocused", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 284,
+	#     "returnSignature": "v",
+	#     "name": "_onUserSessionFocused",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_onUserSessionFocused", [p1, p2, p3])
 
 def _onUserDeleted(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -5717,34 +4856,31 @@ def _onUserDeleted(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 285,
-	    "returnSignature": "v",
-	    "name": "_onUserDeleted",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_onUserDeleted", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 285,
+	#     "returnSignature": "v",
+	#     "name": "_onUserDeleted",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_onUserDeleted", [p1, p2, p3])
 
 def _us_getUserData(p1:str, p2:str, p3:str) -> object:
 	"""
@@ -5758,34 +4894,31 @@ def _us_getUserData(p1:str, p2:str, p3:str) -> object:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 286,
-	    "returnSignature": "m",
-	    "name": "_us_getUserData",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_us_getUserData", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 286,
+	#     "returnSignature": "m",
+	#     "name": "_us_getUserData",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_us_getUserData", [p1, p2, p3])
 
 def _setUserSessionObeyed(is_obeyed:bool) -> None:
 	"""
@@ -5795,26 +4928,23 @@ def _setUserSessionObeyed(is_obeyed:bool) -> None:
 	----------
 	is_obeyed:bool
 		Bool. True if dialog should open/close sessions according to ALUserSession
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 287,
-	    "returnSignature": "v",
-	    "name": "_setUserSessionObeyed",
-	    "parametersSignature": "(b)",
-	    "description": "Query if dialog sessions are controlled by ALUserSession",
-	    "parameters": [
-	        {
-	            "name": "is_obeyed",
-	            "description": "Bool. True if dialog should open/close sessions according to ALUserSession"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setUserSessionObeyed", [is_obeyed])
+	# NAOqi metadata:
+	# {
+	#     "uid": 287,
+	#     "returnSignature": "v",
+	#     "name": "_setUserSessionObeyed",
+	#     "parametersSignature": "(b)",
+	#     "description": "Query if dialog sessions are controlled by ALUserSession",
+	#     "parameters": [
+	#         {
+	#             "name": "is_obeyed",
+	#             "description": "Bool. True if dialog should open/close sessions according to ALUserSession"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setUserSessionObeyed", [is_obeyed])
 
 def _isUserSessionObeyed() -> bool:
 	"""
@@ -5823,21 +4953,18 @@ def _isUserSessionObeyed() -> bool:
 	Returns
 	----------
 	Bool. True if dialog will open/close sessions according to ALUserSession
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 288,
-	    "returnSignature": "b",
-	    "name": "_isUserSessionObeyed",
-	    "parametersSignature": "()",
-	    "description": "Query if dialog sessions are controlled by ALUserSession",
-	    "parameters": [],
-	    "returnDescription": "Bool. True if dialog will open/close sessions according to ALUserSession"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isUserSessionObeyed", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 288,
+	#     "returnSignature": "b",
+	#     "name": "_isUserSessionObeyed",
+	#     "parametersSignature": "()",
+	#     "description": "Query if dialog sessions are controlled by ALUserSession",
+	#     "parameters": [],
+	#     "returnDescription": "Bool. True if dialog will open/close sessions according to ALUserSession"
+	# }
+	return call_method("ALDialog", "_isUserSessionObeyed", [])
 
 def getLanguageListISOToNU() -> Dict[str,str]:
 	"""
@@ -5846,21 +4973,18 @@ def getLanguageListISOToNU() -> Dict[str,str]:
 	Returns
 	----------
 	get language map ISO to NU format
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 289,
-	    "returnSignature": "{ss}",
-	    "name": "getLanguageListISOToNU",
-	    "parametersSignature": "()",
-	    "description": "get language map ISO to NU format",
-	    "parameters": [],
-	    "returnDescription": "get language map ISO to NU format"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLanguageListISOToNU", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 289,
+	#     "returnSignature": "{ss}",
+	#     "name": "getLanguageListISOToNU",
+	#     "parametersSignature": "()",
+	#     "description": "get language map ISO to NU format",
+	#     "parameters": [],
+	#     "returnDescription": "get language map ISO to NU format"
+	# }
+	return call_method("ALDialog", "getLanguageListISOToNU", [])
 
 def getLanguageListNUToISO() -> Dict[str,str]:
 	"""
@@ -5869,21 +4993,18 @@ def getLanguageListNUToISO() -> Dict[str,str]:
 	Returns
 	----------
 	get language map NU to ISO format
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 290,
-	    "returnSignature": "{ss}",
-	    "name": "getLanguageListNUToISO",
-	    "parametersSignature": "()",
-	    "description": "get language map NU to ISO format",
-	    "parameters": [],
-	    "returnDescription": "get language map NU to ISO format"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLanguageListNUToISO", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 290,
+	#     "returnSignature": "{ss}",
+	#     "name": "getLanguageListNUToISO",
+	#     "parametersSignature": "()",
+	#     "description": "get language map NU to ISO format",
+	#     "parameters": [],
+	#     "returnDescription": "get language map NU to ISO format"
+	# }
+	return call_method("ALDialog", "getLanguageListNUToISO", [])
 
 def getLanguageListLongToNU() -> Dict[str,str]:
 	"""
@@ -5892,21 +5013,18 @@ def getLanguageListLongToNU() -> Dict[str,str]:
 	Returns
 	----------
 	get language map Long to NU format
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 291,
-	    "returnSignature": "{ss}",
-	    "name": "getLanguageListLongToNU",
-	    "parametersSignature": "()",
-	    "description": "get language map Long to NU format",
-	    "parameters": [],
-	    "returnDescription": "get language map Long to NU format"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLanguageListLongToNU", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 291,
+	#     "returnSignature": "{ss}",
+	#     "name": "getLanguageListLongToNU",
+	#     "parametersSignature": "()",
+	#     "description": "get language map Long to NU format",
+	#     "parameters": [],
+	#     "returnDescription": "get language map Long to NU format"
+	# }
+	return call_method("ALDialog", "getLanguageListLongToNU", [])
 
 def getLanguageListNUToLong() -> Dict[str,str]:
 	"""
@@ -5915,21 +5033,18 @@ def getLanguageListNUToLong() -> Dict[str,str]:
 	Returns
 	----------
 	get language map NU to Long format
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 292,
-	    "returnSignature": "{ss}",
-	    "name": "getLanguageListNUToLong",
-	    "parametersSignature": "()",
-	    "description": "get language map NU to Long format",
-	    "parameters": [],
-	    "returnDescription": "get language map NU to Long format"
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "getLanguageListNUToLong", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 292,
+	#     "returnSignature": "{ss}",
+	#     "name": "getLanguageListNUToLong",
+	#     "parametersSignature": "()",
+	#     "description": "get language map NU to Long format",
+	#     "parameters": [],
+	#     "returnDescription": "get language map NU to Long format"
+	# }
+	return call_method("ALDialog", "getLanguageListNUToLong", [])
 
 def convertNUToLong(Language:str) -> str:
 	"""
@@ -5943,26 +5058,23 @@ def convertNUToLong(Language:str) -> str:
 	Returns
 	----------
 	language in Long format 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 293,
-	    "returnSignature": "s",
-	    "name": "convertNUToLong",
-	    "parametersSignature": "(s)",
-	    "description": "convert language from NU format to Long format",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "language in NU format"
-	        }
-	    ],
-	    "returnDescription": "language in Long format "
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "convertNUToLong", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 293,
+	#     "returnSignature": "s",
+	#     "name": "convertNUToLong",
+	#     "parametersSignature": "(s)",
+	#     "description": "convert language from NU format to Long format",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "language in NU format"
+	#         }
+	#     ],
+	#     "returnDescription": "language in Long format "
+	# }
+	return call_method("ALDialog", "convertNUToLong", [Language])
 
 def convertLongToNU(Language:str) -> str:
 	"""
@@ -5976,26 +5088,23 @@ def convertLongToNU(Language:str) -> str:
 	Returns
 	----------
 	language in NU format 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 294,
-	    "returnSignature": "s",
-	    "name": "convertLongToNU",
-	    "parametersSignature": "(s)",
-	    "description": "convert language from Long format to NU format",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "language in Long format"
-	        }
-	    ],
-	    "returnDescription": "language in NU format "
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "convertLongToNU", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 294,
+	#     "returnSignature": "s",
+	#     "name": "convertLongToNU",
+	#     "parametersSignature": "(s)",
+	#     "description": "convert language from Long format to NU format",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "language in Long format"
+	#         }
+	#     ],
+	#     "returnDescription": "language in NU format "
+	# }
+	return call_method("ALDialog", "convertLongToNU", [Language])
 
 def convertISOToNU(Language:str) -> str:
 	"""
@@ -6009,26 +5118,23 @@ def convertISOToNU(Language:str) -> str:
 	Returns
 	----------
 	language in NU format 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 295,
-	    "returnSignature": "s",
-	    "name": "convertISOToNU",
-	    "parametersSignature": "(s)",
-	    "description": "convert language from ISO format to NU format",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "language in ISO format"
-	        }
-	    ],
-	    "returnDescription": "language in NU format "
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "convertISOToNU", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 295,
+	#     "returnSignature": "s",
+	#     "name": "convertISOToNU",
+	#     "parametersSignature": "(s)",
+	#     "description": "convert language from ISO format to NU format",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "language in ISO format"
+	#         }
+	#     ],
+	#     "returnDescription": "language in NU format "
+	# }
+	return call_method("ALDialog", "convertISOToNU", [Language])
 
 def convertNUToISO(Language:str) -> str:
 	"""
@@ -6042,26 +5148,23 @@ def convertNUToISO(Language:str) -> str:
 	Returns
 	----------
 	language in ISO format 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 296,
-	    "returnSignature": "s",
-	    "name": "convertNUToISO",
-	    "parametersSignature": "(s)",
-	    "description": "convert language from NU format to ISO format",
-	    "parameters": [
-	        {
-	            "name": "Language",
-	            "description": "language in NU format"
-	        }
-	    ],
-	    "returnDescription": "language in ISO format "
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "convertNUToISO", [Language])
+	# NAOqi metadata:
+	# {
+	#     "uid": 296,
+	#     "returnSignature": "s",
+	#     "name": "convertNUToISO",
+	#     "parametersSignature": "(s)",
+	#     "description": "convert language from NU format to ISO format",
+	#     "parameters": [
+	#         {
+	#             "name": "Language",
+	#             "description": "language in NU format"
+	#         }
+	#     ],
+	#     "returnDescription": "language in ISO format "
+	# }
+	return call_method("ALDialog", "convertNUToISO", [Language])
 
 def enableSimulatedApps(simulateApps:bool) -> None:
 	"""
@@ -6071,26 +5174,23 @@ def enableSimulatedApps(simulateApps:bool) -> None:
 	----------
 	simulateApps:bool
 		set simulated apps
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 297,
-	    "returnSignature": "v",
-	    "name": "enableSimulatedApps",
-	    "parametersSignature": "(b)",
-	    "description": "Define if applications will be launched or not",
-	    "parameters": [
-	        {
-	            "name": "simulateApps",
-	            "description": "set simulated apps"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "enableSimulatedApps", [simulateApps])
+	# NAOqi metadata:
+	# {
+	#     "uid": 297,
+	#     "returnSignature": "v",
+	#     "name": "enableSimulatedApps",
+	#     "parametersSignature": "(b)",
+	#     "description": "Define if applications will be launched or not",
+	#     "parameters": [
+	#         {
+	#             "name": "simulateApps",
+	#             "description": "set simulated apps"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "enableSimulatedApps", [simulateApps])
 
 def _setMachineLearningEnable(Enable:bool) -> None:
 	"""
@@ -6100,26 +5200,23 @@ def _setMachineLearningEnable(Enable:bool) -> None:
 	----------
 	Enable:bool
 		whether to enable it or not
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 298,
-	    "returnSignature": "v",
-	    "name": "_setMachineLearningEnable",
-	    "parametersSignature": "(b)",
-	    "description": "Set whether to use machine learning techniques or not",
-	    "parameters": [
-	        {
-	            "name": "Enable",
-	            "description": "whether to enable it or not"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setMachineLearningEnable", [Enable])
+	# NAOqi metadata:
+	# {
+	#     "uid": 298,
+	#     "returnSignature": "v",
+	#     "name": "_setMachineLearningEnable",
+	#     "parametersSignature": "(b)",
+	#     "description": "Set whether to use machine learning techniques or not",
+	#     "parameters": [
+	#         {
+	#             "name": "Enable",
+	#             "description": "whether to enable it or not"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setMachineLearningEnable", [Enable])
 
 def _isMachineLearningEnabled() -> bool:
 	"""
@@ -6128,59 +5225,50 @@ def _isMachineLearningEnabled() -> bool:
 	Returns
 	----------
 	true if machine learning is enabled 
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 299,
-	    "returnSignature": "b",
-	    "name": "_isMachineLearningEnabled",
-	    "parametersSignature": "()",
-	    "description": "Get whether machine learning techniques are used or not",
-	    "parameters": [],
-	    "returnDescription": "true if machine learning is enabled "
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isMachineLearningEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 299,
+	#     "returnSignature": "b",
+	#     "name": "_isMachineLearningEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Get whether machine learning techniques are used or not",
+	#     "parameters": [],
+	#     "returnDescription": "true if machine learning is enabled "
+	# }
+	return call_method("ALDialog", "_isMachineLearningEnabled", [])
 
 def _clearLastMisunderstood() -> None:
 	"""
 	Remove the last misunderstood results
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 300,
-	    "returnSignature": "v",
-	    "name": "_clearLastMisunderstood",
-	    "parametersSignature": "()",
-	    "description": "Remove the last misunderstood results",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_clearLastMisunderstood", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 300,
+	#     "returnSignature": "v",
+	#     "name": "_clearLastMisunderstood",
+	#     "parametersSignature": "()",
+	#     "description": "Remove the last misunderstood results",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_clearLastMisunderstood", [])
 
 def _isLastMisunderstoodEnabled() -> bool:
 	"""
 	Get whether the last misunderstood result is stored and used to improve confidences
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 301,
-	    "returnSignature": "b",
-	    "name": "_isLastMisunderstoodEnabled",
-	    "parametersSignature": "()",
-	    "description": "Get whether the last misunderstood result is stored and used to improve confidences",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_isLastMisunderstoodEnabled", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 301,
+	#     "returnSignature": "b",
+	#     "name": "_isLastMisunderstoodEnabled",
+	#     "parametersSignature": "()",
+	#     "description": "Get whether the last misunderstood result is stored and used to improve confidences",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_isLastMisunderstoodEnabled", [])
 
 def _setLastMisunderstoodEnable(p0:bool) -> None:
 	"""
@@ -6190,19 +5278,27 @@ def _setLastMisunderstoodEnable(p0:bool) -> None:
 	----------
 	p0:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 302,
-	    "returnSignature": "v",
-	    "name": "_setLastMisunderstoodEnable",
-	    "parametersSignature": "(b)",
-	    "description": "Set whether the last misunderstood result is stored and used to improve confidences",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALDialog", "_setLastMisunderstoodEnable", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 302,
+	#     "returnSignature": "v",
+	#     "name": "_setLastMisunderstoodEnable",
+	#     "parametersSignature": "(b)",
+	#     "description": "Set whether the last misunderstood result is stored and used to improve confidences",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALDialog", "_setLastMisunderstoodEnable", [p0])
+
+class _Signals:
+	_activityRequestedByUser: Signal[[str]] = Signal("ALDialog", "_activityRequestedByUser")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALDialog on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	"""
+signals = _Signals()
 

@@ -1,638 +1,259 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALPreferenceManager", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
 def getDomainList() -> List[str]:
 	"""
 	
 	        Return the list of all Preferences Domains.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 100,
-	    "returnSignature": "[s]",
-	    "name": "getDomainList",
-	    "parametersSignature": "()",
-	    "description": "\n        Return the list of all Preferences Domains.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "getDomainList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 100,
+	#     "returnSignature": "[s]",
+	#     "name": "getDomainList",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Return the list of all Preferences Domains.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "getDomainList", [])
 
 def getValues() -> List[List[object]]:
 	"""
 	
 	        Return all Preferences for all Domains with their values.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 101,
-	    "returnSignature": "[[m]]",
-	    "name": "getValues",
-	    "parametersSignature": "()",
-	    "description": "\n        Return all Preferences for all Domains with their values.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "getValues", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 101,
+	#     "returnSignature": "[[m]]",
+	#     "name": "getValues",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Return all Preferences for all Domains with their values.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "getValues", [])
 
-def getValueList(p0:str) -> List[List[object]]:
+def getValueList(domain:str) -> List[List[object]]:
 	"""
 	
 	        Return all Preferences for a Domain with its values.
-	            :param domain: Preference Domain
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 102,
-	    "returnSignature": "[[m]]",
-	    "name": "getValueList",
-	    "parametersSignature": "(s)",
-	    "description": "\n        Return all Preferences for a Domain with its values.\n            :param domain: Preference Domain\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Preference Domain
 	"""
-	return send_mfc("ALPreferenceManager", "getValueList", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 102,
+	#     "returnSignature": "[[m]]",
+	#     "name": "getValueList",
+	#     "parametersSignature": "(s)",
+	#     "description": "\n        Return all Preferences for a Domain with its values.\n            :param domain: Preference Domain\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "getValueList", [domain])
 
-def getValue(p0:str, p1:str) -> object:
+def getValue(domain:str, setting:str) -> object:
 	"""
 	
 	        Return the Preference Value for a Domain and Setting.
 	        Warning! Return None / null if the Preference doesn't exist.
-	            :param domain: Preference Domain
-	            :param setting: Preference Setting
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	p1:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "m",
-	    "name": "getValue",
-	    "parametersSignature": "(ss)",
-	    "description": "\n        Return the Preference Value for a Domain and Setting.\n        Warning! Return None / null if the Preference doesn't exist.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Preference Domain
+	setting:str
+		Preference Setting
 	"""
-	return send_mfc("ALPreferenceManager", "getValue", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "m",
+	#     "name": "getValue",
+	#     "parametersSignature": "(ss)",
+	#     "description": "\n        Return the Preference Value for a Domain and Setting.\n        Warning! Return None / null if the Preference doesn't exist.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "getValue", [domain, setting])
 
-def setValue(p0:str, p1:str, p2:object) -> None:
+def setValue(domain:str, setting:str, value:object) -> None:
 	"""
 	
 	        Set a Preference Value for a Domain and Setting.
 	        If successful, will try to synchronize it with the Cloud directly.
 	        Warning! Only String values are processed, other types are ignored.
-	            :param domain: Preference Domain
-	            :param setting: Preference Setting
-	            :param value: New Preference Value
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	p1:str
-		
-	p2:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "v",
-	    "name": "setValue",
-	    "parametersSignature": "(ssm)",
-	    "description": "\n        Set a Preference Value for a Domain and Setting.\n        If successful, will try to synchronize it with the Cloud directly.\n        Warning! Only String values are processed, other types are ignored.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n            :param value: New Preference Value\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Preference Domain
+	setting:str
+		Preference Setting
+	value:object
+		New Preference Value
 	"""
-	return send_mfc("ALPreferenceManager", "setValue", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "v",
+	#     "name": "setValue",
+	#     "parametersSignature": "(ssm)",
+	#     "description": "\n        Set a Preference Value for a Domain and Setting.\n        If successful, will try to synchronize it with the Cloud directly.\n        Warning! Only String values are processed, other types are ignored.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n            :param value: New Preference Value\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "setValue", [domain, setting, value])
 
-def setValues(p0:Dict[str,Dict[str,object]]) -> None:
+def setValues(values:Dict[str,Dict[str,object]]) -> None:
 	"""
 	
 	        Save a list of Preference Domain, Setting and Values.
 	        If successful, will try to synchronize them with the Cloud directly.
 	        Warning! Only String values are processed, other types are ignored.
-	            :param values: New Preference Values (ex: {'PrefDomain': {'PrefSetting': 'StringValue'}})
-	        
 	
 	Parameters
 	----------
-	p0:Dict[str,Dict[str,object]]
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "v",
-	    "name": "setValues",
-	    "parametersSignature": "({s{sm}})",
-	    "description": "\n        Save a list of Preference Domain, Setting and Values.\n        If successful, will try to synchronize them with the Cloud directly.\n        Warning! Only String values are processed, other types are ignored.\n            :param values: New Preference Values (ex: {'PrefDomain': {'PrefSetting': 'StringValue'}})\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	values:Dict[str,Dict[str,object]]
+		New Preference Values (ex: {'PrefDomain': {'PrefSetting': 'StringValue'}})
 	"""
-	return send_mfc("ALPreferenceManager", "setValues", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "v",
+	#     "name": "setValues",
+	#     "parametersSignature": "({s{sm}})",
+	#     "description": "\n        Save a list of Preference Domain, Setting and Values.\n        If successful, will try to synchronize them with the Cloud directly.\n        Warning! Only String values are processed, other types are ignored.\n            :param values: New Preference Values (ex: {'PrefDomain': {'PrefSetting': 'StringValue'}})\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "setValues", [values])
 
-def removeValue(p0:str, p1:str) -> None:
+def removeValue(domain:str, setting:str) -> None:
 	"""
 	
 	        Remove a Preference.
 	        If successful, will try to synchronize it with the Cloud directly.
-	            :param domain: Preference Domain
-	            :param setting: Preference Setting
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	p1:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "v",
-	    "name": "removeValue",
-	    "parametersSignature": "(ss)",
-	    "description": "\n        Remove a Preference.\n        If successful, will try to synchronize it with the Cloud directly.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Preference Domain
+	setting:str
+		Preference Setting
 	"""
-	return send_mfc("ALPreferenceManager", "removeValue", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "v",
+	#     "name": "removeValue",
+	#     "parametersSignature": "(ss)",
+	#     "description": "\n        Remove a Preference.\n        If successful, will try to synchronize it with the Cloud directly.\n            :param domain: Preference Domain\n            :param setting: Preference Setting\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "removeValue", [domain, setting])
 
-def removeDomainValues(p0:str) -> None:
+def removeDomainValues(domain:str) -> None:
 	"""
 	
 	        Remove a Preference Domain and all its Settings / Values.
 	        If successful, will try to synchronize them with the Cloud directly.
-	            :param domain: Preference Domain
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "v",
-	    "name": "removeDomainValues",
-	    "parametersSignature": "(s)",
-	    "description": "\n        Remove a Preference Domain and all its Settings / Values.\n        If successful, will try to synchronize them with the Cloud directly.\n            :param domain: Preference Domain\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Preference Domain
 	"""
-	return send_mfc("ALPreferenceManager", "removeDomainValues", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "v",
+	#     "name": "removeDomainValues",
+	#     "parametersSignature": "(s)",
+	#     "description": "\n        Remove a Preference Domain and all its Settings / Values.\n        If successful, will try to synchronize them with the Cloud directly.\n            :param domain: Preference Domain\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "removeDomainValues", [domain])
 
-def importPrefFile(p0:str, p1:str, p2:str, p3:bool) -> None:
+def importPrefFile(domain:str, application:str, filename:str, override:bool) -> None:
 	"""
 	
 	        Import an old ALPreferences File into ALPreferenceManager.
 	        Warning! Only String values are processed, other types are ignored.
 	        Ex: qicli call ALPreferenceManager.importPrefFile "motion" "naoqi" "ALMotion.xml" 1
-	            :param domain: Domain for the new Preferences
-	            :param application: Application name to search the file (ex: 'naoqi')
-	            :param filename: ALPreference filename
-	            :param override: Override the values if already exists in ALPreferenceManager
-	        
 	
 	Parameters
 	----------
-	p0:str
-		
-	p1:str
-		
-	p2:str
-		
-	p3:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "v",
-	    "name": "importPrefFile",
-	    "parametersSignature": "(sssb)",
-	    "description": "\n        Import an old ALPreferences File into ALPreferenceManager.\n        Warning! Only String values are processed, other types are ignored.\n        Ex: qicli call ALPreferenceManager.importPrefFile \"motion\" \"naoqi\" \"ALMotion.xml\" 1\n            :param domain: Domain for the new Preferences\n            :param application: Application name to search the file (ex: 'naoqi')\n            :param filename: ALPreference filename\n            :param override: Override the values if already exists in ALPreferenceManager\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	domain:str
+		Domain for the new Preferences
+	application:str
+		Application name to search the file (ex: 'naoqi')
+	filename:str
+		ALPreference filename
+	override:bool
+		Override the values if already exists in ALPreferenceManager
 	"""
-	return send_mfc("ALPreferenceManager", "importPrefFile", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 108,
+	#     "returnSignature": "v",
+	#     "name": "importPrefFile",
+	#     "parametersSignature": "(sssb)",
+	#     "description": "\n        Import an old ALPreferences File into ALPreferenceManager.\n        Warning! Only String values are processed, other types are ignored.\n        Ex: qicli call ALPreferenceManager.importPrefFile \"motion\" \"naoqi\" \"ALMotion.xml\" 1\n            :param domain: Domain for the new Preferences\n            :param application: Application name to search the file (ex: 'naoqi')\n            :param filename: ALPreference filename\n            :param override: Override the values if already exists in ALPreferenceManager\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "importPrefFile", [domain, application, filename, override])
 
 def update() -> None:
 	"""
 	
 	        Synchronize Preferences with the Cloud.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "update",
-	    "parametersSignature": "()",
-	    "description": "\n        Synchronize Preferences with the Cloud.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "update", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 109,
+	#     "returnSignature": "v",
+	#     "name": "update",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Synchronize Preferences with the Cloud.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "update", [])
 
 def _factoryReset() -> None:
 	"""
 	
 	        Reset all Robot Preferences on Cloud and locally.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "v",
-	    "name": "_factoryReset",
-	    "parametersSignature": "()",
-	    "description": "\n        Reset all Robot Preferences on Cloud and locally.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_factoryReset", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 110,
+	#     "returnSignature": "v",
+	#     "name": "_factoryReset",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Reset all Robot Preferences on Cloud and locally.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_factoryReset", [])
 
 def _setFromCloud(p0:str, p1:str, p2:object) -> None:
 	"""
@@ -648,21 +269,18 @@ def _setFromCloud(p0:str, p1:str, p2:object) -> None:
 		
 	p2:object
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "_setFromCloud",
-	    "parametersSignature": "(ssm)",
-	    "description": "\n        Set a Preference in Database without Cloud Synchronization.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_setFromCloud", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 111,
+	#     "returnSignature": "v",
+	#     "name": "_setFromCloud",
+	#     "parametersSignature": "(ssm)",
+	#     "description": "\n        Set a Preference in Database without Cloud Synchronization.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_setFromCloud", [p0, p1, p2])
 
 def _restart(p0:str, p1:str) -> None:
 	"""
@@ -676,103 +294,131 @@ def _restart(p0:str, p1:str) -> None:
 		
 	p1:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "v",
-	    "name": "_restart",
-	    "parametersSignature": "(ss)",
-	    "description": "\n        Reinitialize the Service with a different Cloud URL and Database Path.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_restart", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "v",
+	#     "name": "_restart",
+	#     "parametersSignature": "(ss)",
+	#     "description": "\n        Reinitialize the Service with a different Cloud URL and Database Path.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_restart", [p0, p1])
 
 def _package() -> str:
 	"""
 	
 	        Return the Service Package ID of the Service (uuid in the Manifest).
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "_package",
-	    "parametersSignature": "()",
-	    "description": "\n        Return the Service Package ID of the Service (uuid in the Manifest).\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_package", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "_package",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Return the Service Package ID of the Service (uuid in the Manifest).\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_package", [])
 
 def _ping() -> bool:
 	"""
 	
 	        Return True if the Service is Running.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "b",
-	    "name": "_ping",
-	    "parametersSignature": "()",
-	    "description": "\n        Return True if the Service is Running.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "b",
+	#     "name": "_ping",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Return True if the Service is Running.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_ping", [])
 
 def _unload() -> None:
 	"""
 	
 	        Stop the Service.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "_unload",
-	    "parametersSignature": "()",
-	    "description": "\n        Stop the Service.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_unload", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "_unload",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Stop the Service.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_unload", [])
 
 def _version() -> str:
 	"""
 	
 	        Return the Service Version Number.
 	        
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "s",
-	    "name": "_version",
-	    "parametersSignature": "()",
-	    "description": "\n        Return the Service Version Number.\n        ",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALPreferenceManager", "_version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "s",
+	#     "name": "_version",
+	#     "parametersSignature": "()",
+	#     "description": "\n        Return the Service Version Number.\n        ",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALPreferenceManager", "_version", [])
+
+class _Signals:
+	preferenceAdded: Signal[[str, str, object]] = Signal("ALPreferenceManager", "preferenceAdded")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALPreferenceManager on the robot.
+	
+	subscribe(callback) calls callback(str, str, object) each time the robot sends it.
+	"""
+	preferenceDomainRemoved: Signal[[str]] = Signal("ALPreferenceManager", "preferenceDomainRemoved")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALPreferenceManager on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	"""
+	preferenceRemoved: Signal[[str, str]] = Signal("ALPreferenceManager", "preferenceRemoved")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALPreferenceManager on the robot.
+	
+	subscribe(callback) calls callback(str, str) each time the robot sends it.
+	"""
+	preferenceUpdated: Signal[[str, str, object]] = Signal("ALPreferenceManager", "preferenceUpdated")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALPreferenceManager on the robot.
+	
+	subscribe(callback) calls callback(str, str, object) each time the robot sends it.
+	"""
+	preferencesSynchronized: Signal[[]] = Signal("ALPreferenceManager", "preferencesSynchronized")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALPreferenceManager on the robot.
+	
+	subscribe(callback) calls callback() each time the robot sends it.
+	"""
+signals = _Signals()
 

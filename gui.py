@@ -168,7 +168,7 @@ class AnimationBrowser(QDialog):
                     return False
                 return True
 
-            for anim_path in api.ALAnimationPlayer._getAnimations_1():
+            for anim_path in api.ALAnimationPlayer._getAnimations():
                 if allowed(anim_path):
                     parent = root
                     current_path = ""
@@ -347,6 +347,8 @@ class MainWindow(QWidget):
             if self.cur_tts_speed != slide_tts_speed.value():
                 self.cur_tts_speed = slide_tts_speed.value()
                 api.ALTextToSpeech.setParameter("speed", self.cur_tts_speed)
+                print(api.ALTextToSpeech.getParameter("speed"))
+
         self.sparse_updater = QTimer(self)
         self.sparse_updater.timeout.connect(sparse_update)
         self.sparse_updater.start(100)

@@ -2,15 +2,15 @@ import time
 from apidefs import api
 from syslogger import syslogger
 from config import config
-
+import traceback
 _has_tablet = None
 def has_tablet():
     global _has_tablet
-    if has_tablet is None:
+    if _has_tablet is None:
         try:
             api.ALTabletService._ping()
             _has_tablet = True
-        except api.robot_client.FunctionCallException:
+        except:
             _has_tablet =  False
     return _has_tablet
 

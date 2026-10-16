@@ -94,7 +94,7 @@ class SubtitleServer:
                         pass
                 
                 while not done:
-                    if api.ALTabletService.showWebview_2(self.url):
+                    if api.ALTabletService.showWebview(self.url):
                         print(f"Opened subtitle URL {self.url} on tablet")
                         atexit.register(cleanup)
                         done = True

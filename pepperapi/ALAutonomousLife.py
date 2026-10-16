@@ -1,335 +1,29 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 Manages the focused Activity and Autonomous Life state
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "registerEvent", [p0, p1, p2])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from dataclasses import dataclass, field
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "unregisterEvent", [p0, p1, p2])
+@dataclass
+class AutonomousAbilityStatus:
+	"""NAOqi signature: (sbb)<AutonomousAbilityStatus,name,enabled,running>"""
+	name: str
+	enabled: bool
+	running: bool
 
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "metaObject", [p0])
 
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "terminate", [p0])
+@dataclass
+class ActivityTransitionInfo:
+	"""NAOqi signature: (Lssss)<ActivityTransitionInfo,TransitionTime,PreviousActivityName,PreviousActivityStopReason,FocusedActivityName,FocusedActivityStartReason>"""
+	TransitionTime: int
+	PreviousActivityName: str
+	PreviousActivityStopReason: str
+	FocusedActivityName: str
+	FocusedActivityStartReason: str
 
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "enableTrace", [p0])
 
 def version() -> str:
 	"""
@@ -338,21 +32,18 @@ def version() -> str:
 	Returns
 	----------
 	A string containing the version of the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "s",
-	    "name": "version",
-	    "parametersSignature": "()",
-	    "description": "Returns the version of the module.",
-	    "parameters": [],
-	    "returnDescription": "A string containing the version of the module."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "version", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "s",
+	#     "name": "version",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the version of the module.",
+	#     "parameters": [],
+	#     "returnDescription": "A string containing the version of the module."
+	# }
+	return call_method("ALAutonomousLife", "version", [])
 
 def ping() -> bool:
 	"""
@@ -361,21 +52,18 @@ def ping() -> bool:
 	Returns
 	----------
 	returns true
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "b",
-	    "name": "ping",
-	    "parametersSignature": "()",
-	    "description": "Just a ping. Always returns true",
-	    "parameters": [],
-	    "returnDescription": "returns true"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "ping", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "b",
+	#     "name": "ping",
+	#     "parametersSignature": "()",
+	#     "description": "Just a ping. Always returns true",
+	#     "parameters": [],
+	#     "returnDescription": "returns true"
+	# }
+	return call_method("ALAutonomousLife", "ping", [])
 
 def getMethodList() -> List[str]:
 	"""
@@ -384,21 +72,18 @@ def getMethodList() -> List[str]:
 	Returns
 	----------
 	An array of method names.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "getMethodList",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's method list.",
-	    "parameters": [],
-	    "returnDescription": "An array of method names."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getMethodList", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "getMethodList",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's method list.",
+	#     "parameters": [],
+	#     "returnDescription": "An array of method names."
+	# }
+	return call_method("ALAutonomousLife", "getMethodList", [])
 
 def getMethodHelp(methodName:str) -> object:
 	"""
@@ -412,26 +97,23 @@ def getMethodHelp(methodName:str) -> object:
 	Returns
 	----------
 	A structure containing the method's description.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "m",
-	    "name": "getMethodHelp",
-	    "parametersSignature": "(s)",
-	    "description": "Retrieves a method's description.",
-	    "parameters": [
-	        {
-	            "name": "methodName",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A structure containing the method's description."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getMethodHelp", [methodName])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "m",
+	#     "name": "getMethodHelp",
+	#     "parametersSignature": "(s)",
+	#     "description": "Retrieves a method's description.",
+	#     "parameters": [
+	#         {
+	#             "name": "methodName",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A structure containing the method's description."
+	# }
+	return call_method("ALAutonomousLife", "getMethodHelp", [methodName])
 
 def getModuleHelp() -> object:
 	"""
@@ -440,155 +122,18 @@ def getModuleHelp() -> object:
 	Returns
 	----------
 	A structure describing the module.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "m",
-	    "name": "getModuleHelp",
-	    "parametersSignature": "()",
-	    "description": "Retrieves the module's description.",
-	    "parameters": [],
-	    "returnDescription": "A structure describing the module."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getModuleHelp", [])
-
-def wait_1(id:int, timeoutPeriod:int) -> bool:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post'
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	timeoutPeriod:int
-		The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero.
-	
-	Returns
-	----------
-	True if the timeout period terminated. False if the method returned.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "wait",
-	    "parametersSignature": "(ii)",
-	    "description": "Wait for the end of a long running method that was called using 'post'",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        },
-	        {
-	            "name": "timeoutPeriod",
-	            "description": "The timeout period in ms. To wait indefinately, use a timeoutPeriod of zero."
-	        }
-	    ],
-	    "returnDescription": "True if the timeout period terminated. False if the method returned."
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "wait", [id, timeoutPeriod])
-
-def wait_2(id:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (wait)
-	
-	Wait for the end of a long running method that was called using 'post', returns a cancelable future
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "v",
-	    "name": "wait",
-	    "parametersSignature": "(i)",
-	    "description": "Wait for the end of a long running method that was called using 'post', returns a cancelable future",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "wait", [id])
-
-def isRunning(id:int) -> bool:
-	"""
-	Returns true if the method is currently running.
-	
-	Parameters
-	----------
-	id:int
-		The ID of the method that was returned when calling the method using 'post'
-	
-	Returns
-	----------
-	True if the method is currently running
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "b",
-	    "name": "isRunning",
-	    "parametersSignature": "(i)",
-	    "description": "Returns true if the method is currently running.",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "The ID of the method that was returned when calling the method using 'post'"
-	        }
-	    ],
-	    "returnDescription": "True if the method is currently running"
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "isRunning", [id])
-
-def stop(id:int) -> None:
-	"""
-	returns true if the method is currently running
-	
-	Parameters
-	----------
-	id:int
-		the ID of the method to wait for
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "stop",
-	    "parametersSignature": "(i)",
-	    "description": "returns true if the method is currently running",
-	    "parameters": [
-	        {
-	            "name": "id",
-	            "description": "the ID of the method to wait for"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "stop", [id])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "m",
+	#     "name": "getModuleHelp",
+	#     "parametersSignature": "()",
+	#     "description": "Retrieves the module's description.",
+	#     "parameters": [],
+	#     "returnDescription": "A structure describing the module."
+	# }
+	return call_method("ALAutonomousLife", "getModuleHelp", [])
 
 def getBrokerName() -> str:
 	"""
@@ -597,21 +142,18 @@ def getBrokerName() -> str:
 	Returns
 	----------
 	The name of the parent broker.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "s",
-	    "name": "getBrokerName",
-	    "parametersSignature": "()",
-	    "description": "Gets the name of the parent broker.",
-	    "parameters": [],
-	    "returnDescription": "The name of the parent broker."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getBrokerName", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "s",
+	#     "name": "getBrokerName",
+	#     "parametersSignature": "()",
+	#     "description": "Gets the name of the parent broker.",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the parent broker."
+	# }
+	return call_method("ALAutonomousLife", "getBrokerName", [])
 
 def getUsage(name:str) -> str:
 	"""
@@ -625,26 +167,23 @@ def getUsage(name:str) -> str:
 	Returns
 	----------
 	A string that summarises the usage of the method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "s",
-	    "name": "getUsage",
-	    "parametersSignature": "(s)",
-	    "description": "Gets the method usage string. This summarises how to use the method.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the method."
-	        }
-	    ],
-	    "returnDescription": "A string that summarises the usage of the method."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getUsage", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "s",
+	#     "name": "getUsage",
+	#     "parametersSignature": "(s)",
+	#     "description": "Gets the method usage string. This summarises how to use the method.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the method."
+	#         }
+	#     ],
+	#     "returnDescription": "A string that summarises the usage of the method."
+	# }
+	return call_method("ALAutonomousLife", "getUsage", [name])
 
 def _onPreferenceChanged(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -658,34 +197,31 @@ def _onPreferenceChanged(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "v",
-	    "name": "_onPreferenceChanged",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_onPreferenceChanged", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "v",
+	#     "name": "_onPreferenceChanged",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_onPreferenceChanged", [p1, p2, p3])
 
 def onReady(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -699,34 +235,31 @@ def onReady(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "v",
-	    "name": "onReady",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "onReady", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "v",
+	#     "name": "onReady",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "onReady", [p1, p2, p3])
 
 def _onRobotHealthChanged(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -740,34 +273,31 @@ def _onRobotHealthChanged(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "_onRobotHealthChanged",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_onRobotHealthChanged", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 116,
+	#     "returnSignature": "v",
+	#     "name": "_onRobotHealthChanged",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_onRobotHealthChanged", [p1, p2, p3])
 
 def _onPushRecovery(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -781,34 +311,31 @@ def _onPushRecovery(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "_onPushRecovery",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_onPushRecovery", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 117,
+	#     "returnSignature": "v",
+	#     "name": "_onPushRecovery",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_onPushRecovery", [p1, p2, p3])
 
 def _onFallRecovery(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -822,34 +349,31 @@ def _onFallRecovery(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 118,
-	    "returnSignature": "v",
-	    "name": "_onFallRecovery",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_onFallRecovery", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 118,
+	#     "returnSignature": "v",
+	#     "name": "_onFallRecovery",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_onFallRecovery", [p1, p2, p3])
 
 def _onRobotMoved(p1:str, p2:object, p3:str) -> None:
 	"""
@@ -863,34 +387,31 @@ def _onRobotMoved(p1:str, p2:object, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 119,
-	    "returnSignature": "v",
-	    "name": "_onRobotMoved",
-	    "parametersSignature": "(sms)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        },
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_onRobotMoved", [p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 119,
+	#     "returnSignature": "v",
+	#     "name": "_onRobotMoved",
+	#     "parametersSignature": "(sms)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         },
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_onRobotMoved", [p1, p2, p3])
 
 def _setStateChangeEnabled(enabled:bool) -> None:
 	"""
@@ -900,26 +421,23 @@ def _setStateChangeEnabled(enabled:bool) -> None:
 	----------
 	enabled:bool
 		Enabled/Disable the setState() method.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 120,
-	    "returnSignature": "v",
-	    "name": "_setStateChangeEnabled",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "enabled",
-	            "description": "Enabled/Disable the setState() method."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_setStateChangeEnabled", [enabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 120,
+	#     "returnSignature": "v",
+	#     "name": "_setStateChangeEnabled",
+	#     "parametersSignature": "(b)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "enabled",
+	#             "description": "Enabled/Disable the setState() method."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_setStateChangeEnabled", [enabled])
 
 def _loadConfigFile(p:str) -> None:
 	"""
@@ -929,26 +447,23 @@ def _loadConfigFile(p:str) -> None:
 	----------
 	p:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 121,
-	    "returnSignature": "v",
-	    "name": "_loadConfigFile",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_loadConfigFile", [p])
+	# NAOqi metadata:
+	# {
+	#     "uid": 121,
+	#     "returnSignature": "v",
+	#     "name": "_loadConfigFile",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_loadConfigFile", [p])
 
 def setState(state:str) -> None:
 	"""
@@ -958,26 +473,23 @@ def setState(state:str) -> None:
 	----------
 	state:str
 		The possible states of AutonomousLife are: interactive, solitary, safeguard, disabled
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 122,
-	    "returnSignature": "v",
-	    "name": "setState",
-	    "parametersSignature": "(s)",
-	    "description": "Programatically control the state of Autonomous Life",
-	    "parameters": [
-	        {
-	            "name": "state",
-	            "description": "The possible states of AutonomousLife are: interactive, solitary, safeguard, disabled"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "setState", [state])
+	# NAOqi metadata:
+	# {
+	#     "uid": 122,
+	#     "returnSignature": "v",
+	#     "name": "setState",
+	#     "parametersSignature": "(s)",
+	#     "description": "Programatically control the state of Autonomous Life",
+	#     "parameters": [
+	#         {
+	#             "name": "state",
+	#             "description": "The possible states of AutonomousLife are: interactive, solitary, safeguard, disabled"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "setState", [state])
 
 def getState() -> str:
 	"""
@@ -986,21 +498,18 @@ def getState() -> str:
 	Returns
 	----------
 	Can be: solitary, interactive, safeguard, disabled
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 123,
-	    "returnSignature": "s",
-	    "name": "getState",
-	    "parametersSignature": "()",
-	    "description": "Returns the current state of AutonomousLife",
-	    "parameters": [],
-	    "returnDescription": "Can be: solitary, interactive, safeguard, disabled"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getState", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 123,
+	#     "returnSignature": "s",
+	#     "name": "getState",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the current state of AutonomousLife",
+	#     "parameters": [],
+	#     "returnDescription": "Can be: solitary, interactive, safeguard, disabled"
+	# }
+	return call_method("ALAutonomousLife", "getState", [])
 
 def focusedActivity() -> str:
 	"""
@@ -1009,26 +518,22 @@ def focusedActivity() -> str:
 	Returns
 	----------
 	The name of the focused activity
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 124,
-	    "returnSignature": "s",
-	    "name": "focusedActivity",
-	    "parametersSignature": "()",
-	    "description": "Returns the currently focused activity",
-	    "parameters": [],
-	    "returnDescription": "The name of the focused activity"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "focusedActivity", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 124,
+	#     "returnSignature": "s",
+	#     "name": "focusedActivity",
+	#     "parametersSignature": "()",
+	#     "description": "Returns the currently focused activity",
+	#     "parameters": [],
+	#     "returnDescription": "The name of the focused activity"
+	# }
+	return call_method("ALAutonomousLife", "focusedActivity", [])
 
-def switchFocus_1(activity_name:str) -> None:
+@overload
+def switchFocus(activity_name:str, /) -> None:
 	"""
-	Note: This is one of the overloads of the original method (switchFocus)
-	
 	Set an activity as running with user focus
 	
 	Parameters
@@ -1036,30 +541,32 @@ def switchFocus_1(activity_name:str) -> None:
 	activity_name:str
 		The package_name/activity_name to run
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 125,
-	    "returnSignature": "v",
-	    "name": "switchFocus",
-	    "parametersSignature": "(s)",
-	    "description": "Set an activity as running with user focus",
-	    "parameters": [
-	        {
-	            "name": "activity_name",
-	            "description": "The package_name/activity_name to run"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "switchFocus", [activity_name])
-
-def switchFocus_2(activity_name:str, flags:int) -> None:
-	"""
-	Note: This is one of the overloads of the original method (switchFocus)
+	Bridge notes
+	------------
+	switchFocus has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 125,
+	#     "returnSignature": "v",
+	#     "name": "switchFocus",
+	#     "parametersSignature": "(s)",
+	#     "description": "Set an activity as running with user focus",
+	#     "parameters": [
+	#         {
+	#             "name": "activity_name",
+	#             "description": "The package_name/activity_name to run"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def switchFocus(activity_name:str, flags:int, /) -> None:
+	"""
 	Set an activity as running with user focus
 	
 	Parameters
@@ -1069,34 +576,36 @@ def switchFocus_2(activity_name:str, flags:int) -> None:
 	flags:int
 		Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 126,
-	    "returnSignature": "v",
-	    "name": "switchFocus",
-	    "parametersSignature": "(si)",
-	    "description": "Set an activity as running with user focus",
-	    "parameters": [
-	        {
-	            "name": "activity_name",
-	            "description": "The package_name/activity_name to run"
-	        },
-	        {
-	            "name": "flags",
-	            "description": "Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "switchFocus", [activity_name, flags])
-
-def switchFocus_3(activity_name:str, flags:int, parameters:object) -> None:
-	"""
-	Note: This is one of the overloads of the original method (switchFocus)
+	Bridge notes
+	------------
+	switchFocus has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 126,
+	#     "returnSignature": "v",
+	#     "name": "switchFocus",
+	#     "parametersSignature": "(si)",
+	#     "description": "Set an activity as running with user focus",
+	#     "parameters": [
+	#         {
+	#             "name": "activity_name",
+	#             "description": "The package_name/activity_name to run"
+	#         },
+	#         {
+	#             "name": "flags",
+	#             "description": "Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def switchFocus(activity_name:str, flags:int, parameters:object, /) -> None:
+	"""
 	Set an activity as running with user focus
 	
 	Parameters
@@ -1108,38 +617,55 @@ def switchFocus_3(activity_name:str, flags:int, parameters:object) -> None:
 	parameters:object
 		AnyValue to be passed to activity
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 127,
-	    "returnSignature": "v",
-	    "name": "switchFocus",
-	    "parametersSignature": "(sim)",
-	    "description": "Set an activity as running with user focus",
-	    "parameters": [
-	        {
-	            "name": "activity_name",
-	            "description": "The package_name/activity_name to run"
-	        },
-	        {
-	            "name": "flags",
-	            "description": "Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)"
-	        },
-	        {
-	            "name": "parameters",
-	            "description": "AnyValue to be passed to activity"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "switchFocus", [activity_name, flags, parameters])
-
-def _switchFocus_1(p0:str, p1:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_switchFocus)
+	Bridge notes
+	------------
+	switchFocus has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 127,
+	#     "returnSignature": "v",
+	#     "name": "switchFocus",
+	#     "parametersSignature": "(sim)",
+	#     "description": "Set an activity as running with user focus",
+	#     "parameters": [
+	#         {
+	#             "name": "activity_name",
+	#             "description": "The package_name/activity_name to run"
+	#         },
+	#         {
+	#             "name": "flags",
+	#             "description": "Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)"
+	#         },
+	#         {
+	#             "name": "parameters",
+	#             "description": "AnyValue to be passed to activity"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	...
+
+def switchFocus(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	switchFocus has 3 variants on the robot:
+	- switchFocus(activity_name:str)
+	- switchFocus(activity_name:str, flags:int)
+	- switchFocus(activity_name:str, flags:int, parameters:object)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAutonomousLife.switchFocus has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAutonomousLife", "switchFocus", list(args))
+
+@overload
+def _switchFocus(p0:str, p1:str, /) -> None:
+	"""
 	
 	
 	Parameters
@@ -1149,25 +675,27 @@ def _switchFocus_1(p0:str, p1:str) -> None:
 	p1:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 128,
-	    "returnSignature": "v",
-	    "name": "_switchFocus",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1])
-
-def _switchFocus_2(p0:str, p1:int, p2:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_switchFocus)
+	Bridge notes
+	------------
+	_switchFocus has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 128,
+	#     "returnSignature": "v",
+	#     "name": "_switchFocus",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _switchFocus(p0:str, p1:int, p2:str, /) -> None:
+	"""
 	
 	
 	Parameters
@@ -1179,25 +707,27 @@ def _switchFocus_2(p0:str, p1:int, p2:str) -> None:
 	p2:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 129,
-	    "returnSignature": "v",
-	    "name": "_switchFocus",
-	    "parametersSignature": "(sis)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1, p2])
-
-def _switchFocus_3(p0:str, p1:int, p2:object, p3:str) -> None:
-	"""
-	Note: This is one of the overloads of the original method (_switchFocus)
+	Bridge notes
+	------------
+	_switchFocus has 3 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 129,
+	#     "returnSignature": "v",
+	#     "name": "_switchFocus",
+	#     "parametersSignature": "(sis)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def _switchFocus(p0:str, p1:int, p2:object, p3:str, /) -> None:
+	"""
 	
 	
 	Parameters
@@ -1211,39 +741,54 @@ def _switchFocus_3(p0:str, p1:int, p2:object, p3:str) -> None:
 	p3:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 130,
-	    "returnSignature": "v",
-	    "name": "_switchFocus",
-	    "parametersSignature": "(sims)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	_switchFocus has 3 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAutonomousLife", "_switchFocus", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 130,
+	#     "returnSignature": "v",
+	#     "name": "_switchFocus",
+	#     "parametersSignature": "(sims)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+def _switchFocus(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	_switchFocus has 3 variants on the robot:
+	- _switchFocus(p0:str, p1:str)
+	- _switchFocus(p0:str, p1:int, p2:str)
+	- _switchFocus(p0:str, p1:int, p2:object, p3:str)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAutonomousLife._switchFocus has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAutonomousLife", "_switchFocus", list(args))
 
 def stopFocus() -> None:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 131,
-	    "returnSignature": "v",
-	    "name": "stopFocus",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "stopFocus", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 131,
+	#     "returnSignature": "v",
+	#     "name": "stopFocus",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "stopFocus", [])
 
 def _stopFocus(p0:str) -> None:
 	"""
@@ -1253,40 +798,34 @@ def _stopFocus(p0:str) -> None:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 132,
-	    "returnSignature": "v",
-	    "name": "_stopFocus",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_stopFocus", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 132,
+	#     "returnSignature": "v",
+	#     "name": "_stopFocus",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_stopFocus", [p0])
 
 def stopAll() -> None:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 133,
-	    "returnSignature": "v",
-	    "name": "stopAll",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "stopAll", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 133,
+	#     "returnSignature": "v",
+	#     "name": "stopAll",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "stopAll", [])
 
 def _stopAll(p0:str) -> None:
 	"""
@@ -1296,21 +835,18 @@ def _stopAll(p0:str) -> None:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 134,
-	    "returnSignature": "v",
-	    "name": "_stopAll",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_stopAll", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 134,
+	#     "returnSignature": "v",
+	#     "name": "_stopAll",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_stopAll", [p0])
 
 def getFocusContext(name:str) -> object:
 	"""
@@ -1324,26 +860,23 @@ def getFocusContext(name:str) -> object:
 	Returns
 	----------
 	An array of the ALValue of the memory key and timestamp of when it was set: [seconds, microseconds, value]
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 135,
-	    "returnSignature": "m",
-	    "name": "getFocusContext",
-	    "parametersSignature": "(s)",
-	    "description": "Get a value of an ALMemory key that is used in a condition, which is the value at the previous autonomous activity focus.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the ALMemory key to get.  Will throw if key is not used in any activity conditions."
-	        }
-	    ],
-	    "returnDescription": "An array of the ALValue of the memory key and timestamp of when it was set: [seconds, microseconds, value]"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getFocusContext", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 135,
+	#     "returnSignature": "m",
+	#     "name": "getFocusContext",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get a value of an ALMemory key that is used in a condition, which is the value at the previous autonomous activity focus.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the ALMemory key to get.  Will throw if key is not used in any activity conditions."
+	#         }
+	#     ],
+	#     "returnDescription": "An array of the ALValue of the memory key and timestamp of when it was set: [seconds, microseconds, value]"
+	# }
+	return call_method("ALAutonomousLife", "getFocusContext", [name])
 
 def getActivityContextPermissionViolations(name:str) -> List[str]:
 	"""
@@ -1357,26 +890,23 @@ def getActivityContextPermissionViolations(name:str) -> List[str]:
 	Returns
 	----------
 	An array of strings of the violated permissions. EG: ["nature", "canRunOnPod", "canRunInSleep"]
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 136,
-	    "returnSignature": "[s]",
-	    "name": "getActivityContextPermissionViolations",
-	    "parametersSignature": "(s)",
-	    "description": "Get a list of permissions that would be violated by a given activity in the current context.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "The name of the activity to check."
-	        }
-	    ],
-	    "returnDescription": "An array of strings of the violated permissions. EG: [\"nature\", \"canRunOnPod\", \"canRunInSleep\"]"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getActivityContextPermissionViolations", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 136,
+	#     "returnSignature": "[s]",
+	#     "name": "getActivityContextPermissionViolations",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get a list of permissions that would be violated by a given activity in the current context.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "The name of the activity to check."
+	#         }
+	#     ],
+	#     "returnDescription": "An array of strings of the violated permissions. EG: [\"nature\", \"canRunOnPod\", \"canRunInSleep\"]"
+	# }
+	return call_method("ALAutonomousLife", "getActivityContextPermissionViolations", [name])
 
 def getActivityNature(activity_name:str) -> str:
 	"""
@@ -1390,45 +920,39 @@ def getActivityNature(activity_name:str) -> str:
 	Returns
 	----------
 	Possible values are: solitary, interactive
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 137,
-	    "returnSignature": "s",
-	    "name": "getActivityNature",
-	    "parametersSignature": "(s)",
-	    "description": "Returns the nature of an activity",
-	    "parameters": [
-	        {
-	            "name": "activity_name",
-	            "description": "The package_name/activity_name to check"
-	        }
-	    ],
-	    "returnDescription": "Possible values are: solitary, interactive"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getActivityNature", [activity_name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 137,
+	#     "returnSignature": "s",
+	#     "name": "getActivityNature",
+	#     "parametersSignature": "(s)",
+	#     "description": "Returns the nature of an activity",
+	#     "parameters": [
+	#         {
+	#             "name": "activity_name",
+	#             "description": "The package_name/activity_name to check"
+	#         }
+	#     ],
+	#     "returnDescription": "Possible values are: solitary, interactive"
+	# }
+	return call_method("ALAutonomousLife", "getActivityNature", [activity_name])
 
 def getActivityStatistics() -> Dict[str,Dict[str,int]]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 138,
-	    "returnSignature": "{s{si}}",
-	    "name": "getActivityStatistics",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getActivityStatistics", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 138,
+	#     "returnSignature": "{s{si}}",
+	#     "name": "getActivityStatistics",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "getActivityStatistics", [])
 
 def getAutonomousActivityStatistics() -> Dict[str,Dict[str,int]]:
 	"""
@@ -1437,47 +961,45 @@ def getAutonomousActivityStatistics() -> Dict[str,Dict[str,int]]:
 	Returns
 	----------
 	A map of activity names, with a cooresponding map of  "prevStartTime", "prevCompletionTime", "startCount", "totalDuration". Times are 0 for unlaunched Activities
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 139,
-	    "returnSignature": "{s{si}}",
-	    "name": "getAutonomousActivityStatistics",
-	    "parametersSignature": "()",
-	    "description": "Get launch count, last completion time, etc for activities with autonomous launch trigger conditions.",
-	    "parameters": [],
-	    "returnDescription": "A map of activity names, with a cooresponding map of  \"prevStartTime\", \"prevCompletionTime\", \"startCount\", \"totalDuration\". Times are 0 for unlaunched Activities"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getAutonomousActivityStatistics", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 139,
+	#     "returnSignature": "{s{si}}",
+	#     "name": "getAutonomousActivityStatistics",
+	#     "parametersSignature": "()",
+	#     "description": "Get launch count, last completion time, etc for activities with autonomous launch trigger conditions.",
+	#     "parameters": [],
+	#     "returnDescription": "A map of activity names, with a cooresponding map of  \"prevStartTime\", \"prevCompletionTime\", \"startCount\", \"totalDuration\". Times are 0 for unlaunched Activities"
+	# }
+	return call_method("ALAutonomousLife", "getAutonomousActivityStatistics", [])
 
-def getFocusHistory_1() -> List[Tuple[str,int]]:
+@overload
+def getFocusHistory() -> List[Tuple[str,int]]:
 	"""
-	Note: This is one of the overloads of the original method (getFocusHistory)
 	
 	
+	Bridge notes
+	------------
+	getFocusHistory has 2 variants on the robot, chosen by the number of arguments.
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 140,
-	    "returnSignature": "[(si)]",
-	    "name": "getFocusHistory",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAutonomousLife", "getFocusHistory", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 140,
+	#     "returnSignature": "[(si)]",
+	#     "name": "getFocusHistory",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def getFocusHistory_2(p0:int) -> List[Tuple[str,int]]:
+@overload
+def getFocusHistory(p0:int, /) -> List[Tuple[str,int]]:
 	"""
-	Note: This is one of the overloads of the original method (getFocusHistory)
-	
 	
 	
 	Parameters
@@ -1485,46 +1007,64 @@ def getFocusHistory_2(p0:int) -> List[Tuple[str,int]]:
 	p0:int
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 141,
-	    "returnSignature": "[(si)]",
-	    "name": "getFocusHistory",
-	    "parametersSignature": "(i)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	getFocusHistory has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAutonomousLife", "getFocusHistory", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 141,
+	#     "returnSignature": "[(si)]",
+	#     "name": "getFocusHistory",
+	#     "parametersSignature": "(i)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def getStateHistory_1() -> List[Tuple[str,int]]:
+def getFocusHistory(*args, **kwargs):
 	"""
-	Note: This is one of the overloads of the original method (getStateHistory)
+	Bridge notes
+	------------
+	getFocusHistory has 2 variants on the robot:
+	- getFocusHistory()
+	- getFocusHistory(p0:int)
 	
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 142,
-	    "returnSignature": "[(si)]",
-	    "name": "getStateHistory",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAutonomousLife", "getStateHistory", [])
+	if kwargs:
+		raise TypeError("ALAutonomousLife.getFocusHistory has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAutonomousLife", "getFocusHistory", list(args))
 
-def getStateHistory_2(p0:int) -> List[Tuple[str,int]]:
+@overload
+def getStateHistory() -> List[Tuple[str,int]]:
 	"""
-	Note: This is one of the overloads of the original method (getStateHistory)
 	
+	
+	Bridge notes
+	------------
+	getStateHistory has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 142,
+	#     "returnSignature": "[(si)]",
+	#     "name": "getStateHistory",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def getStateHistory(p0:int, /) -> List[Tuple[str,int]]:
+	"""
 	
 	
 	Parameters
@@ -1532,20 +1072,37 @@ def getStateHistory_2(p0:int) -> List[Tuple[str,int]]:
 	p0:int
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 143,
-	    "returnSignature": "[(si)]",
-	    "name": "getStateHistory",
-	    "parametersSignature": "(i)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	getStateHistory has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALAutonomousLife", "getStateHistory", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 143,
+	#     "returnSignature": "[(si)]",
+	#     "name": "getStateHistory",
+	#     "parametersSignature": "(i)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+def getStateHistory(*args, **kwargs):
+	"""
+	Bridge notes
+	------------
+	getStateHistory has 2 variants on the robot:
+	- getStateHistory()
+	- getStateHistory(p0:int)
+	
+	Pass arguments by position, not by keyword.
+	"""
+	if kwargs:
+		raise TypeError("ALAutonomousLife.getStateHistory has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALAutonomousLife", "getStateHistory", list(args))
 
 def getLifeTime() -> int:
 	"""
@@ -1554,21 +1111,18 @@ def getLifeTime() -> int:
 	Returns
 	----------
 	The int time in seconds as Autonomous Life sees it
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 144,
-	    "returnSignature": "i",
-	    "name": "getLifeTime",
-	    "parametersSignature": "()",
-	    "description": "Get the time in seconds as life sees it.  Based on gettimeofday()",
-	    "parameters": [],
-	    "returnDescription": "The int time in seconds as Autonomous Life sees it"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getLifeTime", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 144,
+	#     "returnSignature": "i",
+	#     "name": "getLifeTime",
+	#     "parametersSignature": "()",
+	#     "description": "Get the time in seconds as life sees it.  Based on gettimeofday()",
+	#     "parameters": [],
+	#     "returnDescription": "The int time in seconds as Autonomous Life sees it"
+	# }
+	return call_method("ALAutonomousLife", "getLifeTime", [])
 
 def setAutonomousAbilityEnabled(p0:str, p1:bool) -> None:
 	"""
@@ -1580,21 +1134,18 @@ def setAutonomousAbilityEnabled(p0:str, p1:bool) -> None:
 		
 	p1:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 145,
-	    "returnSignature": "v",
-	    "name": "setAutonomousAbilityEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "setAutonomousAbilityEnabled", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 145,
+	#     "returnSignature": "v",
+	#     "name": "setAutonomousAbilityEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "setAutonomousAbilityEnabled", [p0, p1])
 
 def getAutonomousAbilityEnabled(autonomousAbility:str) -> bool:
 	"""
@@ -1608,26 +1159,23 @@ def getAutonomousAbilityEnabled(autonomousAbility:str) -> bool:
 	Returns
 	----------
 	True if the Autonomous Ability is enabled, False otherwise.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 146,
-	    "returnSignature": "b",
-	    "name": "getAutonomousAbilityEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "Know is an Autonomous Ability is enabled or not",
-	    "parameters": [
-	        {
-	            "name": "autonomousAbility",
-	            "description": "The Autonomous Ability."
-	        }
-	    ],
-	    "returnDescription": "True if the Autonomous Ability is enabled, False otherwise."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getAutonomousAbilityEnabled", [autonomousAbility])
+	# NAOqi metadata:
+	# {
+	#     "uid": 146,
+	#     "returnSignature": "b",
+	#     "name": "getAutonomousAbilityEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "Know is an Autonomous Ability is enabled or not",
+	#     "parameters": [
+	#         {
+	#             "name": "autonomousAbility",
+	#             "description": "The Autonomous Ability."
+	#         }
+	#     ],
+	#     "returnDescription": "True if the Autonomous Ability is enabled, False otherwise."
+	# }
+	return call_method("ALAutonomousLife", "getAutonomousAbilityEnabled", [autonomousAbility])
 
 def getAutonomousAbilitiesStatus() -> List[AutonomousAbilityStatus]:
 	"""
@@ -1636,59 +1184,50 @@ def getAutonomousAbilitiesStatus() -> List[AutonomousAbilityStatus]:
 	Returns
 	----------
 	The Autonomous Abilities status. A vector containing a status for each autonomous ability. Each status is composed of the autonomous ability name, a boolean to know if it's enabled and another boolean to know if it's running.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 147,
-	    "returnSignature": "[(sbb)<AutonomousAbilityStatus,name,enabled,running>]",
-	    "name": "getAutonomousAbilitiesStatus",
-	    "parametersSignature": "()",
-	    "description": "Get the Autonomous Abilities status (get the autonomous abilities name and booleans to know if they are enabled or running",
-	    "parameters": [],
-	    "returnDescription": "The Autonomous Abilities status. A vector containing a status for each autonomous ability. Each status is composed of the autonomous ability name, a boolean to know if it's enabled and another boolean to know if it's running."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getAutonomousAbilitiesStatus", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 147,
+	#     "returnSignature": "[(sbb)<AutonomousAbilityStatus,name,enabled,running>]",
+	#     "name": "getAutonomousAbilitiesStatus",
+	#     "parametersSignature": "()",
+	#     "description": "Get the Autonomous Abilities status (get the autonomous abilities name and booleans to know if they are enabled or running",
+	#     "parameters": [],
+	#     "returnDescription": "The Autonomous Abilities status. A vector containing a status for each autonomous ability. Each status is composed of the autonomous ability name, a boolean to know if it's enabled and another boolean to know if it's running."
+	# }
+	return call_method("ALAutonomousLife", "getAutonomousAbilitiesStatus", [], returns=List[AutonomousAbilityStatus])
 
 def startMonitoringLaunchpadConditions() -> None:
 	"""
 	Start monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 148,
-	    "returnSignature": "v",
-	    "name": "startMonitoringLaunchpadConditions",
-	    "parametersSignature": "()",
-	    "description": "Start monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "startMonitoringLaunchpadConditions", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 148,
+	#     "returnSignature": "v",
+	#     "name": "startMonitoringLaunchpadConditions",
+	#     "parametersSignature": "()",
+	#     "description": "Start monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "startMonitoringLaunchpadConditions", [])
 
 def stopMonitoringLaunchpadConditions() -> None:
 	"""
 	Stop monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 149,
-	    "returnSignature": "v",
-	    "name": "stopMonitoringLaunchpadConditions",
-	    "parametersSignature": "()",
-	    "description": "Stop monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "stopMonitoringLaunchpadConditions", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 149,
+	#     "returnSignature": "v",
+	#     "name": "stopMonitoringLaunchpadConditions",
+	#     "parametersSignature": "()",
+	#     "description": "Stop monitoring ALMemory and reporting conditional triggers with AutonomousLaunchpad.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "stopMonitoringLaunchpadConditions", [])
 
 def isMonitoringLaunchpadConditions() -> bool:
 	"""
@@ -1697,21 +1236,18 @@ def isMonitoringLaunchpadConditions() -> bool:
 	Returns
 	----------
 	True if AutonomousLaunchpad is monitoring ALMemory and reporting conditional triggers.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 150,
-	    "returnSignature": "b",
-	    "name": "isMonitoringLaunchpadConditions",
-	    "parametersSignature": "()",
-	    "description": "Gets running status of AutonomousLaunchpad",
-	    "parameters": [],
-	    "returnDescription": "True if AutonomousLaunchpad is monitoring ALMemory and reporting conditional triggers."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "isMonitoringLaunchpadConditions", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 150,
+	#     "returnSignature": "b",
+	#     "name": "isMonitoringLaunchpadConditions",
+	#     "parametersSignature": "()",
+	#     "description": "Gets running status of AutonomousLaunchpad",
+	#     "parameters": [],
+	#     "returnDescription": "True if AutonomousLaunchpad is monitoring ALMemory and reporting conditional triggers."
+	# }
+	return call_method("ALAutonomousLife", "isMonitoringLaunchpadConditions", [])
 
 def setLaunchpadPluginEnabled(plugin_name:str, enabled:bool) -> None:
 	"""
@@ -1723,30 +1259,27 @@ def setLaunchpadPluginEnabled(plugin_name:str, enabled:bool) -> None:
 		The name of the plugin to enable/disable
 	enabled:bool
 		Whether or not to enable this plugin
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 151,
-	    "returnSignature": "v",
-	    "name": "setLaunchpadPluginEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "Temporarily enables/disables AutonomousLaunchpad Plugins",
-	    "parameters": [
-	        {
-	            "name": "plugin_name",
-	            "description": "The name of the plugin to enable/disable"
-	        },
-	        {
-	            "name": "enabled",
-	            "description": "Whether or not to enable this plugin"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "setLaunchpadPluginEnabled", [plugin_name, enabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 151,
+	#     "returnSignature": "v",
+	#     "name": "setLaunchpadPluginEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Temporarily enables/disables AutonomousLaunchpad Plugins",
+	#     "parameters": [
+	#         {
+	#             "name": "plugin_name",
+	#             "description": "The name of the plugin to enable/disable"
+	#         },
+	#         {
+	#             "name": "enabled",
+	#             "description": "Whether or not to enable this plugin"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "setLaunchpadPluginEnabled", [plugin_name, enabled])
 
 def getEnabledLaunchpadPlugins() -> List[str]:
 	"""
@@ -1755,21 +1288,18 @@ def getEnabledLaunchpadPlugins() -> List[str]:
 	Returns
 	----------
 	A list of strings of enabled plugins.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 152,
-	    "returnSignature": "[s]",
-	    "name": "getEnabledLaunchpadPlugins",
-	    "parametersSignature": "()",
-	    "description": "Get a list of enabled AutonomousLaunchpad Plugins.  Enabled plugins will run when AutonomousLaunchpad is started",
-	    "parameters": [],
-	    "returnDescription": "A list of strings of enabled plugins."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getEnabledLaunchpadPlugins", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 152,
+	#     "returnSignature": "[s]",
+	#     "name": "getEnabledLaunchpadPlugins",
+	#     "parametersSignature": "()",
+	#     "description": "Get a list of enabled AutonomousLaunchpad Plugins.  Enabled plugins will run when AutonomousLaunchpad is started",
+	#     "parameters": [],
+	#     "returnDescription": "A list of strings of enabled plugins."
+	# }
+	return call_method("ALAutonomousLife", "getEnabledLaunchpadPlugins", [])
 
 def getLaunchpadPluginsForGroup(group:str) -> List[str]:
 	"""
@@ -1783,26 +1313,23 @@ def getLaunchpadPluginsForGroup(group:str) -> List[str]:
 	Returns
 	----------
 	A list of strings of the plugins belonging to the group.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 153,
-	    "returnSignature": "[s]",
-	    "name": "getLaunchpadPluginsForGroup",
-	    "parametersSignature": "(s)",
-	    "description": "Get a list of AutonomousLaunchpad Plugins that belong to specified group",
-	    "parameters": [
-	        {
-	            "name": "group",
-	            "description": "The group to search for the plugins"
-	        }
-	    ],
-	    "returnDescription": "A list of strings of the plugins belonging to the group."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getLaunchpadPluginsForGroup", [group])
+	# NAOqi metadata:
+	# {
+	#     "uid": 153,
+	#     "returnSignature": "[s]",
+	#     "name": "getLaunchpadPluginsForGroup",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get a list of AutonomousLaunchpad Plugins that belong to specified group",
+	#     "parameters": [
+	#         {
+	#             "name": "group",
+	#             "description": "The group to search for the plugins"
+	#         }
+	#     ],
+	#     "returnDescription": "A list of strings of the plugins belonging to the group."
+	# }
+	return call_method("ALAutonomousLife", "getLaunchpadPluginsForGroup", [group])
 
 def setRobotOffsetFromFloor(offset:float) -> None:
 	"""
@@ -1812,26 +1339,23 @@ def setRobotOffsetFromFloor(offset:float) -> None:
 	----------
 	offset:float
 		The new vertical offset (in meters)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 154,
-	    "returnSignature": "v",
-	    "name": "setRobotOffsetFromFloor",
-	    "parametersSignature": "(f)",
-	    "description": "Set the vertical offset (in meters) of the base of the robot with respect to the floor",
-	    "parameters": [
-	        {
-	            "name": "offset",
-	            "description": "The new vertical offset (in meters)"
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "setRobotOffsetFromFloor", [offset])
+	# NAOqi metadata:
+	# {
+	#     "uid": 154,
+	#     "returnSignature": "v",
+	#     "name": "setRobotOffsetFromFloor",
+	#     "parametersSignature": "(f)",
+	#     "description": "Set the vertical offset (in meters) of the base of the robot with respect to the floor",
+	#     "parameters": [
+	#         {
+	#             "name": "offset",
+	#             "description": "The new vertical offset (in meters)"
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "setRobotOffsetFromFloor", [offset])
 
 def getRobotOffsetFromFloor() -> float:
 	"""
@@ -1840,21 +1364,18 @@ def getRobotOffsetFromFloor() -> float:
 	Returns
 	----------
 	Current vertical offset (in meters)
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 155,
-	    "returnSignature": "f",
-	    "name": "getRobotOffsetFromFloor",
-	    "parametersSignature": "()",
-	    "description": "Get the vertical offset (in meters) of the base of the robot with respect to the floor",
-	    "parameters": [],
-	    "returnDescription": "Current vertical offset (in meters)"
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "getRobotOffsetFromFloor", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 155,
+	#     "returnSignature": "f",
+	#     "name": "getRobotOffsetFromFloor",
+	#     "parametersSignature": "()",
+	#     "description": "Get the vertical offset (in meters) of the base of the robot with respect to the floor",
+	#     "parameters": [],
+	#     "returnDescription": "Current vertical offset (in meters)"
+	# }
+	return call_method("ALAutonomousLife", "getRobotOffsetFromFloor", [])
 
 def _forbidAutonomousInteractiveStateChange(is_forbidden:bool) -> None:
 	"""
@@ -1864,26 +1385,23 @@ def _forbidAutonomousInteractiveStateChange(is_forbidden:bool) -> None:
 	----------
 	is_forbidden:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 156,
-	    "returnSignature": "v",
-	    "name": "_forbidAutonomousInteractiveStateChange",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "is_forbidden",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_forbidAutonomousInteractiveStateChange", [is_forbidden])
+	# NAOqi metadata:
+	# {
+	#     "uid": 156,
+	#     "returnSignature": "v",
+	#     "name": "_forbidAutonomousInteractiveStateChange",
+	#     "parametersSignature": "(b)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "is_forbidden",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_forbidAutonomousInteractiveStateChange", [is_forbidden])
 
 def _forbidAutonomousActivityFocusSwitch(is_forbidden:bool) -> None:
 	"""
@@ -1893,26 +1411,23 @@ def _forbidAutonomousActivityFocusSwitch(is_forbidden:bool) -> None:
 	----------
 	is_forbidden:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 157,
-	    "returnSignature": "v",
-	    "name": "_forbidAutonomousActivityFocusSwitch",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "is_forbidden",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_forbidAutonomousActivityFocusSwitch", [is_forbidden])
+	# NAOqi metadata:
+	# {
+	#     "uid": 157,
+	#     "returnSignature": "v",
+	#     "name": "_forbidAutonomousActivityFocusSwitch",
+	#     "parametersSignature": "(b)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "is_forbidden",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_forbidAutonomousActivityFocusSwitch", [is_forbidden])
 
 def setSafeguardEnabled(name:str, enabled:bool) -> None:
 	"""
@@ -1924,30 +1439,27 @@ def setSafeguardEnabled(name:str, enabled:bool) -> None:
 		Name of the safeguard to consider: RobotPushed, RobotFell,CriticalDiagnosis, CriticalTemperature
 	enabled:bool
 		True if life handles the safeguard.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 158,
-	    "returnSignature": "v",
-	    "name": "setSafeguardEnabled",
-	    "parametersSignature": "(sb)",
-	    "description": "Set if a given safeguard will be handled by Autonomous Life or not.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the safeguard to consider: RobotPushed, RobotFell,CriticalDiagnosis, CriticalTemperature"
-	        },
-	        {
-	            "name": "enabled",
-	            "description": "True if life handles the safeguard."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "setSafeguardEnabled", [name, enabled])
+	# NAOqi metadata:
+	# {
+	#     "uid": 158,
+	#     "returnSignature": "v",
+	#     "name": "setSafeguardEnabled",
+	#     "parametersSignature": "(sb)",
+	#     "description": "Set if a given safeguard will be handled by Autonomous Life or not.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the safeguard to consider: RobotPushed, RobotFell,CriticalDiagnosis, CriticalTemperature"
+	#         },
+	#         {
+	#             "name": "enabled",
+	#             "description": "True if life handles the safeguard."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "setSafeguardEnabled", [name, enabled])
 
 def isSafeguardEnabled(name:str) -> bool:
 	"""
@@ -1961,26 +1473,23 @@ def isSafeguardEnabled(name:str) -> bool:
 	Returns
 	----------
 	True if life handles the safeguard.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 159,
-	    "returnSignature": "b",
-	    "name": "isSafeguardEnabled",
-	    "parametersSignature": "(s)",
-	    "description": "Get if a given safeguard will be handled by Autonomous Life or not.",
-	    "parameters": [
-	        {
-	            "name": "name",
-	            "description": "Name of the safeguard to consider: RobotPushed, RobotFell,CriticalDiagnosis, CriticalTemperature"
-	        }
-	    ],
-	    "returnDescription": "True if life handles the safeguard."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "isSafeguardEnabled", [name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 159,
+	#     "returnSignature": "b",
+	#     "name": "isSafeguardEnabled",
+	#     "parametersSignature": "(s)",
+	#     "description": "Get if a given safeguard will be handled by Autonomous Life or not.",
+	#     "parameters": [
+	#         {
+	#             "name": "name",
+	#             "description": "Name of the safeguard to consider: RobotPushed, RobotFell,CriticalDiagnosis, CriticalTemperature"
+	#         }
+	#     ],
+	#     "returnDescription": "True if life handles the safeguard."
+	# }
+	return call_method("ALAutonomousLife", "isSafeguardEnabled", [name])
 
 def _isMovedSafeguardInstantaneous() -> bool:
 	"""
@@ -1989,21 +1498,18 @@ def _isMovedSafeguardInstantaneous() -> bool:
 	Returns
 	----------
 	True if safeguard is instantaneous, false if safeguard exited after move stopped.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 160,
-	    "returnSignature": "b",
-	    "name": "_isMovedSafeguardInstantaneous",
-	    "parametersSignature": "()",
-	    "description": "Get if the movedsafeguard will be instantaneous, or end when move is stopped",
-	    "parameters": [],
-	    "returnDescription": "True if safeguard is instantaneous, false if safeguard exited after move stopped."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_isMovedSafeguardInstantaneous", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 160,
+	#     "returnSignature": "b",
+	#     "name": "_isMovedSafeguardInstantaneous",
+	#     "parametersSignature": "()",
+	#     "description": "Get if the movedsafeguard will be instantaneous, or end when move is stopped",
+	#     "parameters": [],
+	#     "returnDescription": "True if safeguard is instantaneous, false if safeguard exited after move stopped."
+	# }
+	return call_method("ALAutonomousLife", "_isMovedSafeguardInstantaneous", [])
 
 def _setPushRecoverySafeguardDuration(duration_ms:int) -> None:
 	"""
@@ -2013,26 +1519,23 @@ def _setPushRecoverySafeguardDuration(duration_ms:int) -> None:
 	----------
 	duration_ms:int
 		Time in milliseconds to stay in safeguard state.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 161,
-	    "returnSignature": "v",
-	    "name": "_setPushRecoverySafeguardDuration",
-	    "parametersSignature": "(i)",
-	    "description": "Set how long to stay in safeguard state if robot pushed.",
-	    "parameters": [
-	        {
-	            "name": "duration_ms",
-	            "description": "Time in milliseconds to stay in safeguard state."
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_setPushRecoverySafeguardDuration", [duration_ms])
+	# NAOqi metadata:
+	# {
+	#     "uid": 161,
+	#     "returnSignature": "v",
+	#     "name": "_setPushRecoverySafeguardDuration",
+	#     "parametersSignature": "(i)",
+	#     "description": "Set how long to stay in safeguard state if robot pushed.",
+	#     "parameters": [
+	#         {
+	#             "name": "duration_ms",
+	#             "description": "Time in milliseconds to stay in safeguard state."
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_setPushRecoverySafeguardDuration", [duration_ms])
 
 def _getPushRecoverySafeguardDuration() -> int:
 	"""
@@ -2041,59 +1544,50 @@ def _getPushRecoverySafeguardDuration() -> int:
 	Returns
 	----------
 	Time in milliseconds to stay in safeguard state.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 162,
-	    "returnSignature": "i",
-	    "name": "_getPushRecoverySafeguardDuration",
-	    "parametersSignature": "()",
-	    "description": "Get how long to stay in safeguard state if robot pushed.",
-	    "parameters": [],
-	    "returnDescription": "Time in milliseconds to stay in safeguard state."
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_getPushRecoverySafeguardDuration", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 162,
+	#     "returnSignature": "i",
+	#     "name": "_getPushRecoverySafeguardDuration",
+	#     "parametersSignature": "()",
+	#     "description": "Get how long to stay in safeguard state if robot pushed.",
+	#     "parameters": [],
+	#     "returnDescription": "Time in milliseconds to stay in safeguard state."
+	# }
+	return call_method("ALAutonomousLife", "_getPushRecoverySafeguardDuration", [])
 
 def _sleep() -> None:
 	"""
 	Put the robot to sleep.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 163,
-	    "returnSignature": "v",
-	    "name": "_sleep",
-	    "parametersSignature": "()",
-	    "description": "Put the robot to sleep.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_sleep", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 163,
+	#     "returnSignature": "v",
+	#     "name": "_sleep",
+	#     "parametersSignature": "()",
+	#     "description": "Put the robot to sleep.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_sleep", [])
 
 def _wakeUp() -> None:
 	"""
 	Wake the robot up.
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 164,
-	    "returnSignature": "v",
-	    "name": "_wakeUp",
-	    "parametersSignature": "()",
-	    "description": "Wake the robot up.",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_wakeUp", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 164,
+	#     "returnSignature": "v",
+	#     "name": "_wakeUp",
+	#     "parametersSignature": "()",
+	#     "description": "Wake the robot up.",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_wakeUp", [])
 
 def _forbidStopCommands(is_forbidden:bool) -> None:
 	"""
@@ -2103,26 +1597,23 @@ def _forbidStopCommands(is_forbidden:bool) -> None:
 	----------
 	is_forbidden:bool
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 165,
-	    "returnSignature": "v",
-	    "name": "_forbidStopCommands",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "is_forbidden",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_forbidStopCommands", [is_forbidden])
+	# NAOqi metadata:
+	# {
+	#     "uid": 165,
+	#     "returnSignature": "v",
+	#     "name": "_forbidStopCommands",
+	#     "parametersSignature": "(b)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "is_forbidden",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_forbidStopCommands", [is_forbidden])
 
 def _loadModule(module_name:str) -> None:
 	"""
@@ -2132,24 +1623,51 @@ def _loadModule(module_name:str) -> None:
 	----------
 	module_name:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 166,
-	    "returnSignature": "v",
-	    "name": "_loadModule",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [
-	        {
-	            "name": "module name",
-	            "description": ""
-	        }
-	    ],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALAutonomousLife", "_loadModule", [module_name])
+	# NAOqi metadata:
+	# {
+	#     "uid": 166,
+	#     "returnSignature": "v",
+	#     "name": "_loadModule",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [
+	#         {
+	#             "name": "module name",
+	#             "description": ""
+	#         }
+	#     ],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALAutonomousLife", "_loadModule", [module_name])
+
+class _Signals:
+	activityTransition: Signal[[ActivityTransitionInfo]] = Signal("ALAutonomousLife", "activityTransition", (ActivityTransitionInfo,))
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALAutonomousLife on the robot.
+	
+	subscribe(callback) calls callback(ActivityTransitionInfo) each time the robot sends it.
+	"""
+	_actionTransition: Signal[[str, str, int]] = Signal("ALAutonomousLife", "_actionTransition")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALAutonomousLife on the robot.
+	
+	subscribe(callback) calls callback(str, str, int) each time the robot sends it.
+	"""
+signals = _Signals()
+
+class _Properties:
+	userRequestableActivitiesViolations: Property[Dict[str,List[str]]] = Property("ALAutonomousLife", "userRequestableActivitiesViolations")
+	"""
+	Bridge notes
+	------------
+	A property of ALAutonomousLife on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(Dict[str,List[str]]) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	"""
+properties = _Properties()
 

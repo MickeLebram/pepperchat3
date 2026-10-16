@@ -1,335 +1,10 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "registerEvent", [p0, p1, p2])
-
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "unregisterEvent", [p0, p1, p2])
-
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "metaObject", [p0])
-
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "terminate", [p0])
-
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "property", [p0])
-
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "setProperty", [p0, p1])
-
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "properties", [])
-
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "registerEventWithSignature", [p0, p1, p2, p3])
-
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "isStatsEnabled", [])
-
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "enableStats", [p0])
-
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "stats", [])
-
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "clearStats", [])
-
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "isTraceEnabled", [])
-
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "enableTrace", [p0])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
 def add(p0:str, p1:str, p2:str, p3:str) -> None:
 	"""
@@ -345,21 +20,18 @@ def add(p0:str, p1:str, p2:str, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 100,
-	    "returnSignature": "v",
-	    "name": "add",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "add", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 100,
+	#     "returnSignature": "v",
+	#     "name": "add",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "add", [p0, p1, p2, p3])
 
 def getSubject(p0:str, p1:str, p2:str) -> List[str]:
 	"""
@@ -373,21 +45,18 @@ def getSubject(p0:str, p1:str, p2:str) -> List[str]:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 101,
-	    "returnSignature": "[s]",
-	    "name": "getSubject",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "getSubject", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 101,
+	#     "returnSignature": "[s]",
+	#     "name": "getSubject",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "getSubject", [p0, p1, p2])
 
 def getPredicate(p0:str, p1:str, p2:str) -> List[str]:
 	"""
@@ -401,21 +70,18 @@ def getPredicate(p0:str, p1:str, p2:str) -> List[str]:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 102,
-	    "returnSignature": "[s]",
-	    "name": "getPredicate",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "getPredicate", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 102,
+	#     "returnSignature": "[s]",
+	#     "name": "getPredicate",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "getPredicate", [p0, p1, p2])
 
 def getObject(p0:str, p1:str, p2:str) -> List[str]:
 	"""
@@ -429,21 +95,18 @@ def getObject(p0:str, p1:str, p2:str) -> List[str]:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "[s]",
-	    "name": "getObject",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "getObject", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "[s]",
+	#     "name": "getObject",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "getObject", [p0, p1, p2])
 
 def update(p0:str, p1:str, p2:str, p3:str) -> None:
 	"""
@@ -459,21 +122,18 @@ def update(p0:str, p1:str, p2:str, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "v",
-	    "name": "update",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "update", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "v",
+	#     "name": "update",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "update", [p0, p1, p2, p3])
 
 def query(p0:str, p1:str, p2:str, p3:str) -> List[str]:
 	"""
@@ -489,21 +149,18 @@ def query(p0:str, p1:str, p2:str, p3:str) -> List[str]:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "[s]",
-	    "name": "query",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "query", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "[s]",
+	#     "name": "query",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "query", [p0, p1, p2, p3])
 
 def queryTriplet(p0:str, p1:str, p2:str, p3:str) -> List[List[str]]:
 	"""
@@ -519,21 +176,18 @@ def queryTriplet(p0:str, p1:str, p2:str, p3:str) -> List[List[str]]:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "[[s]]",
-	    "name": "queryTriplet",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "queryTriplet", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "[[s]]",
+	#     "name": "queryTriplet",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "queryTriplet", [p0, p1, p2, p3])
 
 def remove(p0:str, p1:str, p2:str, p3:str) -> None:
 	"""
@@ -549,21 +203,18 @@ def remove(p0:str, p1:str, p2:str, p3:str) -> None:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "v",
-	    "name": "remove",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "remove", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "v",
+	#     "name": "remove",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "remove", [p0, p1, p2, p3])
 
 def contains(p0:str, p1:str, p2:str, p3:str) -> bool:
 	"""
@@ -579,21 +230,18 @@ def contains(p0:str, p1:str, p2:str, p3:str) -> bool:
 		
 	p3:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "b",
-	    "name": "contains",
-	    "parametersSignature": "(ssss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "contains", [p0, p1, p2, p3])
+	# NAOqi metadata:
+	# {
+	#     "uid": 108,
+	#     "returnSignature": "b",
+	#     "name": "contains",
+	#     "parametersSignature": "(ssss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "contains", [p0, p1, p2, p3])
 
 def addRule(p0:str) -> bool:
 	"""
@@ -603,40 +251,34 @@ def addRule(p0:str) -> bool:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "b",
-	    "name": "addRule",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "addRule", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 109,
+	#     "returnSignature": "b",
+	#     "name": "addRule",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "addRule", [p0])
 
 def clearRules() -> None:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 110,
-	    "returnSignature": "v",
-	    "name": "clearRules",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "clearRules", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 110,
+	#     "returnSignature": "v",
+	#     "name": "clearRules",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "clearRules", [])
 
 def resetKnowledge(p0:str) -> None:
 	"""
@@ -646,21 +288,18 @@ def resetKnowledge(p0:str) -> None:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 111,
-	    "returnSignature": "v",
-	    "name": "resetKnowledge",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "resetKnowledge", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 111,
+	#     "returnSignature": "v",
+	#     "name": "resetKnowledge",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "resetKnowledge", [p0])
 
 def exportModel(p0:str, p1:str, p2:str) -> None:
 	"""
@@ -674,21 +313,18 @@ def exportModel(p0:str, p1:str, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 112,
-	    "returnSignature": "v",
-	    "name": "exportModel",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "exportModel", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 112,
+	#     "returnSignature": "v",
+	#     "name": "exportModel",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "exportModel", [p0, p1, p2])
 
 def importModel(p0:str, p1:str, p2:str) -> None:
 	"""
@@ -702,26 +338,22 @@ def importModel(p0:str, p1:str, p2:str) -> None:
 		
 	p2:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 113,
-	    "returnSignature": "v",
-	    "name": "importModel",
-	    "parametersSignature": "(sss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALKnowledge", "importModel", [p0, p1, p2])
+	# NAOqi metadata:
+	# {
+	#     "uid": 113,
+	#     "returnSignature": "v",
+	#     "name": "importModel",
+	#     "parametersSignature": "(sss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALKnowledge", "importModel", [p0, p1, p2])
 
-def sparqlQuery_1(p0:str) -> List[str]:
+@overload
+def sparqlQuery(p0:str, /) -> List[str]:
 	"""
-	Note: This is one of the overloads of the original method (sparqlQuery)
-	
 	
 	
 	Parameters
@@ -729,25 +361,27 @@ def sparqlQuery_1(p0:str) -> List[str]:
 	p0:str
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 114,
-	    "returnSignature": "[s]",
-	    "name": "sparqlQuery",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALKnowledge", "sparqlQuery", [p0])
-
-def sparqlQuery_2(p0:str, p1:bool) -> List[str]:
-	"""
-	Note: This is one of the overloads of the original method (sparqlQuery)
+	Bridge notes
+	------------
+	sparqlQuery has 2 variants on the robot, chosen by the number of arguments.
 	
+	Pass arguments by position, not by keyword.
+	"""
+	# NAOqi metadata:
+	# {
+	#     "uid": 114,
+	#     "returnSignature": "[s]",
+	#     "name": "sparqlQuery",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
+
+@overload
+def sparqlQuery(p0:str, p1:bool, /) -> List[str]:
+	"""
 	
 	
 	Parameters
@@ -757,66 +391,54 @@ def sparqlQuery_2(p0:str, p1:bool) -> List[str]:
 	p1:bool
 		
 	
-	*Reference struct*
-	'''
-	{
-	    "uid": 115,
-	    "returnSignature": "[s]",
-	    "name": "sparqlQuery",
-	    "parametersSignature": "(sb)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Bridge notes
+	------------
+	sparqlQuery has 2 variants on the robot, chosen by the number of arguments.
+	
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALKnowledge", "sparqlQuery", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 115,
+	#     "returnSignature": "[s]",
+	#     "name": "sparqlQuery",
+	#     "parametersSignature": "(sb)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	...
 
-def createBackupModel(p0:object) -> None:
+def sparqlQuery(*args, **kwargs):
 	"""
+	Bridge notes
+	------------
+	sparqlQuery has 2 variants on the robot:
+	- sparqlQuery(p0:str)
+	- sparqlQuery(p0:str, p1:bool)
 	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 116,
-	    "returnSignature": "v",
-	    "name": "createBackupModel",
-	    "parametersSignature": "(X)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	Pass arguments by position, not by keyword.
 	"""
-	return send_mfc("ALKnowledge", "createBackupModel", [p0])
+	if kwargs:
+		raise TypeError("ALKnowledge.sparqlQuery has several variants on the robot. Pass the arguments by position, without keywords.")
+	return call_method("ALKnowledge", "sparqlQuery", list(args))
 
-def recoverBackupModel(p0:object) -> None:
+class _Signals:
+	knowledgeAdded: Signal[[str, str, str, str]] = Signal("ALKnowledge", "knowledgeAdded")
 	"""
+	Bridge notes
+	------------
+	A signal sent by ALKnowledge on the robot.
 	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 117,
-	    "returnSignature": "v",
-	    "name": "recoverBackupModel",
-	    "parametersSignature": "(X)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
+	subscribe(callback) calls callback(str, str, str, str) each time the robot sends it.
 	"""
-	return send_mfc("ALKnowledge", "recoverBackupModel", [p0])
+	knowledgeRemoved: Signal[[str, str, str, str]] = Signal("ALKnowledge", "knowledgeRemoved")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALKnowledge on the robot.
+	
+	subscribe(callback) calls callback(str, str, str, str) each time the robot sends it.
+	"""
+signals = _Signals()
 

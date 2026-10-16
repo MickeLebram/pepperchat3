@@ -1,335 +1,74 @@
-from .gentypes import *
-from .robot_client import send_mfc
-import json
 """
 
 """
-def registerEvent(p0:int, p1:int, p2:int) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 0,
-	    "returnSignature": "L",
-	    "name": "registerEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "registerEvent", [p0, p1, p2])
+from __future__ import annotations
+from typing import Dict, List, Tuple, overload
+from dataclasses import dataclass, field
+from .robot_client import call_method
+from .robot_client import Signal, Property
 
-def unregisterEvent(p0:int, p1:int, p2:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 1,
-	    "returnSignature": "v",
-	    "name": "unregisterEvent",
-	    "parametersSignature": "(IIL)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "unregisterEvent", [p0, p1, p2])
+@dataclass
+class ValueConfidence:
+	"""NAOqi signature: (ff)<ValueConfidence,value,confidence>"""
+	value: float
+	confidence: float
 
-def metaObject(p0:int) -> MetaObject:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 2,
-	    "returnSignature": "({I(Issss[(ss)<MetaMethodParameter,name,description>]s)<MetaMethod,uid,returnSignature,name,parametersSignature,description,parameters,returnDescription>}{I(Iss)<MetaSignal,uid,name,signature>}{I(Iss)<MetaProperty,uid,name,signature>}s)<MetaObject,methods,signals,properties,description>",
-	    "name": "metaObject",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "metaObject", [p0])
 
-def terminate(p0:int) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 3,
-	    "returnSignature": "v",
-	    "name": "terminate",
-	    "parametersSignature": "(I)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "terminate", [p0])
+@dataclass
+class BodyLanguageEase:
+	"""NAOqi signature: (ff)<BodyLanguageEase,level,confidence>"""
+	level: float
+	confidence: float
 
-def property(p0:object) -> object:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 5,
-	    "returnSignature": "m",
-	    "name": "property",
-	    "parametersSignature": "(m)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "property", [p0])
 
-def setProperty(p0:object, p1:object) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:object
-		
-	p1:object
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 6,
-	    "returnSignature": "v",
-	    "name": "setProperty",
-	    "parametersSignature": "(mm)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "setProperty", [p0, p1])
+@dataclass
+class Smile:
+	"""NAOqi signature: (ff)<Smile,value,confidence>"""
+	value: float
+	confidence: float
 
-def properties() -> List[str]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 7,
-	    "returnSignature": "[s]",
-	    "name": "properties",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "properties", [])
 
-def registerEventWithSignature(p0:int, p1:int, p2:int, p3:str) -> int:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:int
-		
-	p1:int
-		
-	p2:int
-		
-	p3:str
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 8,
-	    "returnSignature": "L",
-	    "name": "registerEventWithSignature",
-	    "parametersSignature": "(IILs)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "registerEventWithSignature", [p0, p1, p2, p3])
+@dataclass
+class BodyLanguageState:
+	"""NAOqi signature: (BodyLanguageEase)<BodyLanguageState,ease>"""
+	ease: BodyLanguageEase
 
-def isStatsEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 80,
-	    "returnSignature": "b",
-	    "name": "isStatsEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "isStatsEnabled", [])
 
-def enableStats(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 81,
-	    "returnSignature": "v",
-	    "name": "enableStats",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "enableStats", [p0])
+@dataclass
+class Expressions:
+	"""NAOqi signature: (ValueConfidence ValueConfidence ValueConfidence ValueConfidence ValueConfidence ValueConfidence ValueConfidence)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>"""
+	calm: ValueConfidence
+	anger: ValueConfidence
+	joy: ValueConfidence
+	sorrow: ValueConfidence
+	laughter: ValueConfidence
+	excitement: ValueConfidence
+	surprise: ValueConfidence
 
-def stats() -> Dict[int,MethodStatistics]:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 82,
-	    "returnSignature": "{I(I(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>(fff)<MinMaxSum,minValue,maxValue,cumulatedValue>)<MethodStatistics,count,wall,user,system>}",
-	    "name": "stats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "stats", [])
 
-def clearStats() -> None:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 83,
-	    "returnSignature": "v",
-	    "name": "clearStats",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "clearStats", [])
+@dataclass
+class PersonState:
+	"""NAOqi signature: (ValueConfidence ValueConfidence BodyLanguageState Smile Expressions)<PersonState,valence,attention,bodyLanguageState,smile,expressions>"""
+	valence: ValueConfidence
+	attention: ValueConfidence
+	bodyLanguageState: BodyLanguageState
+	smile: Smile
+	expressions: Expressions
 
-def isTraceEnabled() -> bool:
-	"""
-	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 84,
-	    "returnSignature": "b",
-	    "name": "isTraceEnabled",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "isTraceEnabled", [])
 
-def enableTrace(p0:bool) -> None:
-	"""
-	
-	
-	Parameters
-	----------
-	p0:bool
-		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 85,
-	    "returnSignature": "v",
-	    "name": "enableTrace",
-	    "parametersSignature": "(b)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
-	"""
-	return send_mfc("ALMood", "enableTrace", [p0])
+@dataclass
+class Person:
+	"""NAOqi signature: (i PersonState)<Person,userSessionID,personState>"""
+	userSessionID: int
+	personState: PersonState
+
+
+@dataclass
+class AmbianceState:
+	"""NAOqi signature: (ff)<AmbianceState,agitationLevel,calmLevel>"""
+	agitationLevel: float
+	calmLevel: float
+
 
 def subscribe(p0:str, p1:str) -> bool:
 	"""
@@ -341,21 +80,18 @@ def subscribe(p0:str, p1:str) -> bool:
 		
 	p1:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 100,
-	    "returnSignature": "b",
-	    "name": "subscribe",
-	    "parametersSignature": "(ss)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "subscribe", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 100,
+	#     "returnSignature": "b",
+	#     "name": "subscribe",
+	#     "parametersSignature": "(ss)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "subscribe", [p0, p1])
 
 def unsubscribe(p0:str) -> bool:
 	"""
@@ -365,59 +101,50 @@ def unsubscribe(p0:str) -> bool:
 	----------
 	p0:str
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 101,
-	    "returnSignature": "b",
-	    "name": "unsubscribe",
-	    "parametersSignature": "(s)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "unsubscribe", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 101,
+	#     "returnSignature": "b",
+	#     "name": "unsubscribe",
+	#     "parametersSignature": "(s)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "unsubscribe", [p0])
 
 def getSubscribersInfo() -> Dict[str,str]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 102,
-	    "returnSignature": "{ss}",
-	    "name": "getSubscribersInfo",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "getSubscribersInfo", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 102,
+	#     "returnSignature": "{ss}",
+	#     "name": "getSubscribersInfo",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "getSubscribersInfo", [])
 
 def currentPersonState() -> PersonState:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 103,
-	    "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
-	    "name": "currentPersonState",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "currentPersonState", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 103,
+	#     "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
+	#     "name": "currentPersonState",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "currentPersonState", [], returns=PersonState)
 
 def personStateFromPeoplePerception(p0:int) -> PersonState:
 	"""
@@ -427,21 +154,18 @@ def personStateFromPeoplePerception(p0:int) -> PersonState:
 	----------
 	p0:int
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 104,
-	    "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
-	    "name": "personStateFromPeoplePerception",
-	    "parametersSignature": "(i)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "personStateFromPeoplePerception", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 104,
+	#     "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
+	#     "name": "personStateFromPeoplePerception",
+	#     "parametersSignature": "(i)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "personStateFromPeoplePerception", [p0], returns=PersonState)
 
 def personStateFromUserSession(p0:int) -> PersonState:
 	"""
@@ -451,40 +175,34 @@ def personStateFromUserSession(p0:int) -> PersonState:
 	----------
 	p0:int
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 105,
-	    "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
-	    "name": "personStateFromUserSession",
-	    "parametersSignature": "(i)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "personStateFromUserSession", [p0])
+	# NAOqi metadata:
+	# {
+	#     "uid": 105,
+	#     "returnSignature": "((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>",
+	#     "name": "personStateFromUserSession",
+	#     "parametersSignature": "(i)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "personStateFromUserSession", [p0], returns=PersonState)
 
 def persons() -> List[Person]:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 106,
-	    "returnSignature": "[(i((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>)<Person,userSessionID,personState>]",
-	    "name": "persons",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "persons", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 106,
+	#     "returnSignature": "[(i((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>((ff)<BodyLanguageEase,level,confidence>)<BodyLanguageState,ease>(ff)<Smile,value,confidence>((ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>(ff)<ValueConfidence<float>,value,confidence>)<Expressions,calm,anger,joy,sorrow,laughter,excitement,surprise>)<PersonState,valence,attention,bodyLanguageState,smile,expressions>)<Person,userSessionID,personState>]",
+	#     "name": "persons",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "persons", [], returns=List[Person])
 
 def _pushValence(p0:str, p1:float) -> bool:
 	"""
@@ -496,57 +214,146 @@ def _pushValence(p0:str, p1:float) -> bool:
 		
 	p1:float
 		
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 107,
-	    "returnSignature": "b",
-	    "name": "_pushValence",
-	    "parametersSignature": "(sf)",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "_pushValence", [p0, p1])
+	# NAOqi metadata:
+	# {
+	#     "uid": 107,
+	#     "returnSignature": "b",
+	#     "name": "_pushValence",
+	#     "parametersSignature": "(sf)",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "_pushValence", [p0, p1])
 
 def ambianceState() -> AmbianceState:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 108,
-	    "returnSignature": "(ff)<AmbianceState,agitationLevel,calmLevel>",
-	    "name": "ambianceState",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "ambianceState", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 108,
+	#     "returnSignature": "(ff)<AmbianceState,agitationLevel,calmLevel>",
+	#     "name": "ambianceState",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "ambianceState", [], returns=AmbianceState)
 
 def getEmotionalReaction() -> str:
 	"""
 	
-	
-	*Reference struct*
-	'''
-	{
-	    "uid": 109,
-	    "returnSignature": "s",
-	    "name": "getEmotionalReaction",
-	    "parametersSignature": "()",
-	    "description": "",
-	    "parameters": [],
-	    "returnDescription": ""
-	}
-	'''
 	"""
-	return send_mfc("ALMood", "getEmotionalReaction", [])
+	# NAOqi metadata:
+	# {
+	#     "uid": 109,
+	#     "returnSignature": "s",
+	#     "name": "getEmotionalReaction",
+	#     "parametersSignature": "()",
+	#     "description": "",
+	#     "parameters": [],
+	#     "returnDescription": ""
+	# }
+	return call_method("ALMood", "getEmotionalReaction", [])
+
+class _Signals:
+	currentFocusedUserMood: Signal[[str]] = Signal("ALMood", "currentFocusedUserMood")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALMood on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	"""
+	valenceChanged: Signal[[str]] = Signal("ALMood", "valenceChanged")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALMood on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	
+	Sent when properties.valence changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.valence and compare the values.
+	"""
+	attentionChanged: Signal[[str]] = Signal("ALMood", "attentionChanged")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALMood on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	
+	Sent when properties.attention changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.attention and compare the values.
+	"""
+	ambianceChanged: Signal[[str]] = Signal("ALMood", "ambianceChanged")
+	"""
+	Bridge notes
+	------------
+	A signal sent by ALMood on the robot.
+	
+	subscribe(callback) calls callback(str) each time the robot sends it.
+	
+	Sent when properties.ambiance changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.ambiance and compare the values.
+	"""
+signals = _Signals()
+
+class _Properties:
+	valence: Property[str] = Property("ALMood", "valence")
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(str) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	
+	There is also signals.valenceChanged.
+	"""
+	valenceLevel: Property[ValueConfidence] = Property("ALMood", "valenceLevel", ValueConfidence)
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(ValueConfidence) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	"""
+	attention: Property[str] = Property("ALMood", "attention")
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(str) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	
+	There is also signals.attentionChanged.
+	"""
+	attentionLevel: Property[ValueConfidence] = Property("ALMood", "attentionLevel", ValueConfidence)
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(ValueConfidence) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	"""
+	ambiance: Property[str] = Property("ALMood", "ambiance")
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(str) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	
+	There is also signals.ambianceChanged.
+	"""
+	ambianceLevel: Property[float] = Property("ALMood", "ambianceLevel")
+	"""
+	Bridge notes
+	------------
+	A property of ALMood on the robot.
+	
+	get() returns it, set(value) changes it, and subscribe(callback) calls callback(float) each time the robot sets it. Some properties are set regularly even when the value doesn't change.
+	"""
+properties = _Properties()
 

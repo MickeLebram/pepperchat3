@@ -64,7 +64,7 @@ class PepperTextSpeaker:
     
     def say(self, text:str):
         self._speaking.set()
-        api.ALAnimatedSpeech.say_1(text)
+        api.ALAnimatedSpeech.say(text)
         self._speaking.clear()
 
     def push_text(self, text:str):
