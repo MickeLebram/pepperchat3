@@ -2,7 +2,7 @@
 This module provides methods to take pictures and store them on disk.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALPhotoCapture", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALPhotoCapture", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -212,7 +212,7 @@ def halfPress() -> bool:
 	return call_method("ALPhotoCapture", "halfPress", [])
 
 @overload
-def takePicture(folderPath:str, fileName:str, /) -> object:
+def takePicture(folderPath:str, fileName:str, /) -> Any:
 	"""
 	Takes one picture.
 	
@@ -255,7 +255,7 @@ def takePicture(folderPath:str, fileName:str, /) -> object:
 	...
 
 @overload
-def takePicture(folderPath:str, fileName:str, overwrite:bool, /) -> object:
+def takePicture(folderPath:str, fileName:str, overwrite:bool, /) -> Any:
 	"""
 	Takes one picture.
 	
@@ -318,7 +318,7 @@ def takePicture(*args, **kwargs):
 	return call_method("ALPhotoCapture", "takePicture", list(args))
 
 @overload
-def takePictures(numberOfPictures:int, folderPath:str, fileName:str, /) -> object:
+def takePictures(numberOfPictures:int, folderPath:str, fileName:str, /) -> Any:
 	"""
 	Takes several pictures as quickly as possible
 	
@@ -367,7 +367,7 @@ def takePictures(numberOfPictures:int, folderPath:str, fileName:str, /) -> objec
 	...
 
 @overload
-def takePictures(numberOfPictures:int, folderPath:str, fileName:str, overwrite:bool, /) -> object:
+def takePictures(numberOfPictures:int, folderPath:str, fileName:str, overwrite:bool, /) -> Any:
 	"""
 	Takes several pictures as quickly as possible
 	

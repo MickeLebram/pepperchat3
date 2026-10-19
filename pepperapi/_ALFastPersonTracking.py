@@ -2,7 +2,7 @@
 This module raises an event about the position of tracked person. This event can then be used as input of the function trackEvent of ALTracker.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_ALFastPersonTracking", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_ALFastPersonTracking", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -355,7 +355,7 @@ def setTrackingPosition(x:float, y:float, z:float) -> None:
 	# }
 	return call_method("_ALFastPersonTracking", "setTrackingPosition", [x, y, z])
 
-def getTrackingPosition() -> object:
+def getTrackingPosition() -> Any:
 	"""
 	Gets the position (in world frame) for the tracking
 	

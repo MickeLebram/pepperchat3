@@ -2,7 +2,7 @@
 Generic Searcher.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_RoundSearcher", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_RoundSearcher", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -197,13 +197,13 @@ def stopSearcher() -> None:
 	# }
 	return call_method("_RoundSearcher", "stopSearcher", [])
 
-def search(p0:object) -> None:
+def search(p0:Any) -> None:
 	"""
 	Search.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -218,7 +218,7 @@ def search(p0:object) -> None:
 	# }
 	return call_method("_RoundSearcher", "search", [p0])
 
-def searchEvent(p0:str, p1:object) -> None:
+def searchEvent(p0:str, p1:Any) -> None:
 	"""
 	Search with event.
 	
@@ -226,7 +226,7 @@ def searchEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

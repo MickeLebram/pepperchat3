@@ -2,7 +2,7 @@
 ALModularityis a filter management system based on a filter graph.The users of this module can add, modify, delete or use filters that are stored in a library.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALModularity", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALModularity", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -212,7 +212,7 @@ def loadProgramFromFile(p0:str) -> bool:
 	# }
 	return call_method("ALModularity", "loadProgramFromFile", [p0])
 
-def getData(sink:str) -> object:
+def getData(sink:str) -> Any:
 	"""
 	
 	
@@ -238,7 +238,7 @@ def getData(sink:str) -> object:
 	# }
 	return call_method("ALModularity", "getData", [sink])
 
-def getLastData(sink:str) -> object:
+def getLastData(sink:str) -> Any:
 	"""
 	
 	
@@ -264,7 +264,7 @@ def getLastData(sink:str) -> object:
 	# }
 	return call_method("ALModularity", "getLastData", [sink])
 
-def getImageRemote(sink:str) -> object:
+def getImageRemote(sink:str) -> Any:
 	"""
 	
 	
@@ -290,7 +290,7 @@ def getImageRemote(sink:str) -> object:
 	# }
 	return call_method("ALModularity", "getImageRemote", [sink])
 
-def getFilters() -> object:
+def getFilters() -> Any:
 	"""
 	
 	"""
@@ -332,7 +332,7 @@ def getFilterDescription(name:str) -> str:
 	# }
 	return call_method("ALModularity", "getFilterDescription", [name])
 
-def getFilterInputs(name:str) -> object:
+def getFilterInputs(name:str) -> Any:
 	"""
 	
 	
@@ -358,7 +358,7 @@ def getFilterInputs(name:str) -> object:
 	# }
 	return call_method("ALModularity", "getFilterInputs", [name])
 
-def getFilterOutputs(name:str) -> object:
+def getFilterOutputs(name:str) -> Any:
 	"""
 	
 	
@@ -479,7 +479,7 @@ def getSourceFrequency(name:str) -> float:
 	return call_method("ALModularity", "getSourceFrequency", [name])
 
 @overload
-def getSourceData(source:str, /) -> object:
+def getSourceData(source:str, /) -> Any:
 	"""
 	
 	
@@ -512,7 +512,7 @@ def getSourceData(source:str, /) -> object:
 	...
 
 @overload
-def getSourceData(source:str, p1:int, /) -> object:
+def getSourceData(source:str, p1:int, /) -> Any:
 	"""
 	
 	
@@ -562,7 +562,7 @@ def getSourceData(*args, **kwargs):
 		raise TypeError("ALModularity.getSourceData has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALModularity", "getSourceData", list(args))
 
-def setData(name:str, value:object) -> None:
+def setData(name:str, value:Any) -> None:
 	"""
 	
 	
@@ -570,7 +570,7 @@ def setData(name:str, value:object) -> None:
 	----------
 	name:str
 		The name of the source.
-	value:object
+	value:Any
 		The new value to set.
 	"""
 	# NAOqi metadata:
@@ -1176,7 +1176,7 @@ def getInstrumentationResult() -> str:
 	# }
 	return call_method("ALModularity", "getInstrumentationResult", [])
 
-def getDotGraph(filter:str, level:int) -> object:
+def getDotGraph(filter:str, level:int) -> Any:
 	"""
 	
 	

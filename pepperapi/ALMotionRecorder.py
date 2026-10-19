@@ -2,7 +2,7 @@
 ALMotionRecorder is a very specific module for real-time motion recording in Choregraphe. Users can get a simpler interface for motion recording by using the Animation Mode. ALMotionRecorder also supports recording modes using bumpers or torso button, and selective motion replay.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALMotionRecorder", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALMotionRecorder", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -209,7 +209,7 @@ def startInteractiveRecording(jointsToRecord:List[str], nbPoses:int, extensionAl
 	# }
 	return call_method("ALMotionRecorder", "startInteractiveRecording", [jointsToRecord, nbPoses, extensionAllowed, mode])
 
-def startPeriodicRecording(jointsToRecord:List[str], nbPoses:int, extensionAllowed:bool, timeStep:float, jointsToReplay:List[str], replayData:object) -> None:
+def startPeriodicRecording(jointsToRecord:List[str], nbPoses:int, extensionAllowed:bool, timeStep:float, jointsToReplay:List[str], replayData:Any) -> None:
 	"""
 	Start recording the motion in a periodic mode
 	
@@ -225,7 +225,7 @@ def startPeriodicRecording(jointsToRecord:List[str], nbPoses:int, extensionAllow
 		Time in seconds to wait between two poses
 	jointsToReplay:List[str]
 		Names of joints that must be replayed
-	replayData:object
+	replayData:Any
 		An ALValue holding data for replayed joints. It holds two ALValues. The first one is an ALValue where each line corresponds to a joint, and column elements are times of control points The second one is also an ALValue where each line corresponds to a joint, but column elements are arrays containing [float angle, Handle1, Handle2] elements, where Handle is [int InterpolationType, float dAngle, float dTime] describing the handle offsets relative to the angle and time of the point. The first bezier param describes the handle that controls the curve preceding the point, the second describes the curve following the point.
 	"""
 	# NAOqi metadata:
@@ -265,7 +265,7 @@ def startPeriodicRecording(jointsToRecord:List[str], nbPoses:int, extensionAllow
 	# }
 	return call_method("ALMotionRecorder", "startPeriodicRecording", [jointsToRecord, nbPoses, extensionAllowed, timeStep, jointsToReplay, replayData])
 
-def stopAndGetRecording() -> object:
+def stopAndGetRecording() -> Any:
 	"""
 	Stop recording the motion and return data
 	
@@ -285,7 +285,7 @@ def stopAndGetRecording() -> object:
 	# }
 	return call_method("ALMotionRecorder", "stopAndGetRecording", [])
 
-def dataChanged(dataName:str, data:object, message:str) -> None:
+def dataChanged(dataName:str, data:Any, message:str) -> None:
 	"""
 	Called by ALMemory when subcription data is updated. INTERNAL
 	
@@ -293,7 +293,7 @@ def dataChanged(dataName:str, data:object, message:str) -> None:
 	----------
 	dataName:str
 		Name of the subscribed data.
-	data:object
+	data:Any
 		Value of the the subscribed data
 	message:str
 		The message give when subscribing.

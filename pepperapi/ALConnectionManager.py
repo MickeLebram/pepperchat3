@@ -2,10 +2,10 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
-def services() -> object:
+def services() -> Any:
 	"""
 	
 	"""
@@ -21,7 +21,7 @@ def services() -> object:
 	# }
 	return call_method("ALConnectionManager", "services", [])
 
-def service(p0:str) -> object:
+def service(p0:str) -> Any:
 	"""
 	
 	
@@ -107,13 +107,13 @@ def scan(*args, **kwargs):
 		raise TypeError("ALConnectionManager.scan has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALConnectionManager", "scan", list(args))
 
-def setServiceConfiguration(p0:object) -> None:
+def setServiceConfiguration(p0:Any) -> None:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -128,13 +128,13 @@ def setServiceConfiguration(p0:object) -> None:
 	# }
 	return call_method("ALConnectionManager", "setServiceConfiguration", [p0])
 
-def setServiceInput(p0:object) -> None:
+def setServiceInput(p0:Any) -> None:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -228,7 +228,7 @@ def disconnect(p0:str) -> None:
 	# }
 	return call_method("ALConnectionManager", "disconnect", [p0])
 
-def technologies() -> object:
+def technologies() -> Any:
 	"""
 	
 	"""
@@ -455,7 +455,7 @@ def country() -> str:
 	# }
 	return call_method("ALConnectionManager", "country", [])
 
-def interfaces() -> object:
+def interfaces() -> Any:
 	"""
 	
 	"""

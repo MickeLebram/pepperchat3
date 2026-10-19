@@ -2,7 +2,7 @@
 Use ALTracker module to make the robot track an object or a person with head and arms or not.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALTracker", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALTracker", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -255,13 +255,13 @@ def isNewTargetDetected() -> bool:
 	# }
 	return call_method("ALTracker", "isNewTargetDetected", [])
 
-def setRelativePosition(target:object) -> None:
+def setRelativePosition(target:Any) -> None:
 	"""
 	Set the robot position relative to target in Move mode.
 	
 	Parameters
 	----------
-	target:object
+	target:Any
 		Set the final goal of the tracking. Could be [distance, thresholdX, thresholdY] or with LandMarks target name [coordX, coordY, coordWz, thresholdX, thresholdY, thresholdWz].
 	"""
 	# NAOqi metadata:
@@ -281,7 +281,7 @@ def setRelativePosition(target:object) -> None:
 	# }
 	return call_method("ALTracker", "setRelativePosition", [target])
 
-def getRelativePosition() -> object:
+def getRelativePosition() -> Any:
 	"""
 	Get the robot position relative to target in Move mode.
 	
@@ -301,13 +301,13 @@ def getRelativePosition() -> object:
 	# }
 	return call_method("ALTracker", "getRelativePosition", [])
 
-def setTargetCoordinates(pCoord:object) -> None:
+def setTargetCoordinates(pCoord:Any) -> None:
 	"""
 	Only work with LandMarks target name. Set objects coordinates. Could be [[first object coordinate], [second object coordinate]] [[x1, y1, z1], [x2, y2, z2]]
 	
 	Parameters
 	----------
-	pCoord:object
+	pCoord:Any
 		objects coordinates.
 	"""
 	# NAOqi metadata:
@@ -327,7 +327,7 @@ def setTargetCoordinates(pCoord:object) -> None:
 	# }
 	return call_method("ALTracker", "setTargetCoordinates", [pCoord])
 
-def getTargetCoordinates() -> object:
+def getTargetCoordinates() -> Any:
 	"""
 	Only work with LandMarks target name. Get objects coordinates. Could be [[first object coordinate], [second object coordinate]] [[x1, y1, z1], [x2, y2, z2]]
 	
@@ -593,7 +593,7 @@ def trackEvent(pEventName:str) -> None:
 	# }
 	return call_method("ALTracker", "trackEvent", [pEventName])
 
-def registerTarget(pTarget:str, pParams:object) -> None:
+def registerTarget(pTarget:str, pParams:Any) -> None:
 	"""
 	Register a predefined target. Subscribe to corresponding extractor if Tracker is running..
 	
@@ -601,7 +601,7 @@ def registerTarget(pTarget:str, pParams:object) -> None:
 	----------
 	pTarget:str
 		a predefined target to track.Could be "RedBall", "Face", "LandMark", "LandMarks", "People" or "Sound".
-	pParams:object
+	pParams:Any
 		a target parameters. (RedBall : set diameter of ball.
 	"""
 	# NAOqi metadata:
@@ -905,7 +905,7 @@ def pointAt(pEffector:str, pPosition:List[float], pFrame:int, pFractionMaxSpeed:
 	# }
 	return call_method("ALTracker", "pointAt", [pEffector, pPosition, pFrame, pFractionMaxSpeed])
 
-def getMoveConfig() -> object:
+def getMoveConfig() -> Any:
 	"""
 	Get the config for move modes.
 	
@@ -925,13 +925,13 @@ def getMoveConfig() -> object:
 	# }
 	return call_method("ALTracker", "getMoveConfig", [])
 
-def setMoveConfig(config:object) -> None:
+def setMoveConfig(config:Any) -> None:
 	"""
 	set a config for move modes.
 	
 	Parameters
 	----------
-	config:object
+	config:Any
 		ALMotion GaitConfig
 	"""
 	# NAOqi metadata:
@@ -1229,13 +1229,13 @@ def _restart() -> None:
 	# }
 	return call_method("ALTracker", "_restart", [])
 
-def _setTrackerConfig(config:object) -> None:
+def _setTrackerConfig(config:Any) -> None:
 	"""
 	Internal Use.
 	
 	Parameters
 	----------
-	config:object
+	config:Any
 		Internal: An array of ALValues [i][0]: name, [i][1]: value
 	"""
 	# NAOqi metadata:
@@ -1311,7 +1311,7 @@ def _lostEvent() -> None:
 	# }
 	return call_method("ALTracker", "_lostEvent", [])
 
-def _detectedEvent(p0:str, p1:object) -> None:
+def _detectedEvent(p0:str, p1:Any) -> None:
 	"""
 	Detected event callback.
 	
@@ -1319,7 +1319,7 @@ def _detectedEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -1355,7 +1355,7 @@ def _setDebugInView3D(p0:bool) -> None:
 	# }
 	return call_method("ALTracker", "_setDebugInView3D", [p0])
 
-def _debugCallbackEvent(p0:str, p1:object) -> None:
+def _debugCallbackEvent(p0:str, p1:Any) -> None:
 	"""
 	debug event callback.
 	
@@ -1363,7 +1363,7 @@ def _debugCallbackEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

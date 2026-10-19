@@ -2,7 +2,7 @@
 ALMotion provides methods that help make Nao move. It contains commands for manipulating joint angles, joint stiffness, and a higher level API for controling walks.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALMotion", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALMotion", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -249,7 +249,7 @@ def _stopChain(chainName:str) -> None:
 	# }
 	return call_method("ALMotion", "_stopChain", [chainName])
 
-def _restReflex(whyString:str, stateList:object) -> None:
+def _restReflex(whyString:str, stateList:Any) -> None:
 	"""
 	The robot propose several adapted rest.
 	
@@ -257,7 +257,7 @@ def _restReflex(whyString:str, stateList:object) -> None:
 	----------
 	whyString:str
 		A string describing the root cause of the request.
-	stateList:object
+	stateList:Any
 		An ALValue [[[name list], a string or array of angles], ...].
 	"""
 	# NAOqi metadata:
@@ -419,17 +419,17 @@ def robotIsWakeUp() -> bool:
 	# }
 	return call_method("ALMotion", "robotIsWakeUp", [])
 
-def stiffnessInterpolation(names:object, stiffnessLists:object, timeLists:object) -> None:
+def stiffnessInterpolation(names:Any, stiffnessLists:Any, timeLists:Any) -> None:
 	"""
 	Interpolates one or multiple joints to a target stiffness or along timed trajectories of stiffness. This is a blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
-	stiffnessLists:object
+	stiffnessLists:Any
 		An stiffness, list of stiffnesses or list of list of stiffnesses
-	timeLists:object
+	timeLists:Any
 		A time, list of times or list of list of times.
 	"""
 	# NAOqi metadata:
@@ -457,15 +457,15 @@ def stiffnessInterpolation(names:object, stiffnessLists:object, timeLists:object
 	# }
 	return call_method("ALMotion", "stiffnessInterpolation", [names, stiffnessLists, timeLists])
 
-def setStiffnesses(names:object, stiffnesses:object) -> None:
+def setStiffnesses(names:Any, stiffnesses:Any) -> None:
 	"""
 	Sets the stiffness of one or more joints. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
-	stiffnesses:object
+	stiffnesses:Any
 		One or more stiffnesses between zero and one.
 	"""
 	# NAOqi metadata:
@@ -489,15 +489,15 @@ def setStiffnesses(names:object, stiffnesses:object) -> None:
 	# }
 	return call_method("ALMotion", "setStiffnesses", [names, stiffnesses])
 
-def _setStiffnesses(names:object, stiffnesses:object) -> None:
+def _setStiffnesses(names:Any, stiffnesses:Any) -> None:
 	"""
 	Sets the stiffness of one or more joints. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
-	stiffnesses:object
+	stiffnesses:Any
 		One or more stiffnesses between zero and one.
 	"""
 	# NAOqi metadata:
@@ -591,13 +591,13 @@ def _disableSafeStiffnesses(jointIndexes:List[int], actuatorIndexes:List[int]) -
 	# }
 	return call_method("ALMotion", "_disableSafeStiffnesses", [jointIndexes, actuatorIndexes])
 
-def getStiffnesses(jointName:object) -> List[float]:
+def getStiffnesses(jointName:Any) -> List[float]:
 	"""
 	Gets stiffness of a joint or group of joints
 	
 	Parameters
 	----------
-	jointName:object
+	jointName:Any
 		Name of the joints, chains, "Body", "Joints" or "Actuators".
 	
 	Returns
@@ -621,17 +621,17 @@ def getStiffnesses(jointName:object) -> List[float]:
 	# }
 	return call_method("ALMotion", "getStiffnesses", [jointName])
 
-def angleInterpolation(names:object, angleLists:object, timeLists:object, isAbsolute:bool) -> None:
+def angleInterpolation(names:Any, angleLists:Any, timeLists:Any, isAbsolute:bool) -> None:
 	"""
 	Interpolates one or multiple joints to a target angle or along timed trajectories. This is a blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	angleLists:object
+	angleLists:Any
 		An angle, list of angles or list of list of angles in radians
-	timeLists:object
+	timeLists:Any
 		A time, list of times or list of list of times in seconds
 	isAbsolute:bool
 		If true, the movement is described in absolute angles, else the angles are relative to the current angle.
@@ -665,15 +665,15 @@ def angleInterpolation(names:object, angleLists:object, timeLists:object, isAbso
 	# }
 	return call_method("ALMotion", "angleInterpolation", [names, angleLists, timeLists, isAbsolute])
 
-def angleInterpolationWithSpeed(names:object, targetAngles:object, maxSpeedFraction:float) -> None:
+def angleInterpolationWithSpeed(names:Any, targetAngles:Any, maxSpeedFraction:float) -> None:
 	"""
 	Interpolates one or multiple joints to a target angle, using a fraction of max speed. Only one target angle is allowed for each joint. This is a blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
-	targetAngles:object
+	targetAngles:Any
 		An angle, or list of angles in radians
 	maxSpeedFraction:float
 		A fraction.
@@ -703,7 +703,7 @@ def angleInterpolationWithSpeed(names:object, targetAngles:object, maxSpeedFract
 	# }
 	return call_method("ALMotion", "angleInterpolationWithSpeed", [names, targetAngles, maxSpeedFraction])
 
-def angleInterpolationBezier(jointNames:List[str], times:object, controlPoints:object) -> None:
+def angleInterpolationBezier(jointNames:List[str], times:Any, controlPoints:Any) -> None:
 	"""
 	Interpolates a sequence of timed angles for several motors using bezier control points. This is a blocking call.
 	
@@ -711,9 +711,9 @@ def angleInterpolationBezier(jointNames:List[str], times:object, controlPoints:o
 	----------
 	jointNames:List[str]
 		A vector of joint names
-	times:object
+	times:Any
 		An ragged ALValue matrix of floats. Each line corresponding to a motor, and column element to a control point.
-	controlPoints:object
+	controlPoints:Any
 		An ALValue array of arrays each containing [float angle, Handle1, Handle2], where Handle is [int InterpolationType, float dAngle, float dTime] descibing the handle offsets relative to the angle and time of the point. The first bezier param describes the handle that controls the curve preceeding the point, the second describes the curve following the point.
 	"""
 	# NAOqi metadata:
@@ -742,15 +742,15 @@ def angleInterpolationBezier(jointNames:List[str], times:object, controlPoints:o
 	return call_method("ALMotion", "angleInterpolationBezier", [jointNames, times, controlPoints])
 
 @overload
-def setAngles(names:object, angles:object, fractionMaxSpeed:float, /) -> None:
+def setAngles(names:Any, angles:Any, fractionMaxSpeed:float, /) -> None:
 	"""
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	angles:object
+	angles:Any
 		One or more angles in radians
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
@@ -760,8 +760,8 @@ def setAngles(names:object, angles:object, fractionMaxSpeed:float, /) -> None:
 	setAngles has 2 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- setAngles_list_float(object, object, List[float])
-	- setAngles_float(object, object, float)
+	- setAngles_list_float(Any, Any, List[float])
+	- setAngles_float(Any, Any, float)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -791,15 +791,15 @@ def setAngles(names:object, angles:object, fractionMaxSpeed:float, /) -> None:
 	...
 
 @overload
-def setAngles(names:object, angles:object, fractionMaxSpeeds:List[float], /) -> None:
+def setAngles(names:Any, angles:Any, fractionMaxSpeeds:List[float], /) -> None:
 	"""
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	angles:object
+	angles:Any
 		One or more angles in radians
 	fractionMaxSpeeds:List[float]
 		The vector of fraction of maximum speed to use
@@ -809,8 +809,8 @@ def setAngles(names:object, angles:object, fractionMaxSpeeds:List[float], /) -> 
 	setAngles has 2 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- setAngles_list_float(object, object, List[float])
-	- setAngles_float(object, object, float)
+	- setAngles_list_float(Any, Any, List[float])
+	- setAngles_float(Any, Any, float)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -844,8 +844,8 @@ def setAngles(*args, **kwargs):
 	Bridge notes
 	------------
 	setAngles has 2 variants on the robot:
-	- setAngles(names:object, angles:object, fractionMaxSpeed:float), explicitly setAngles_float
-	- setAngles(names:object, angles:object, fractionMaxSpeeds:List[float]), explicitly setAngles_list_float
+	- setAngles(names:Any, angles:Any, fractionMaxSpeed:float), explicitly setAngles_float
+	- setAngles(names:Any, angles:Any, fractionMaxSpeeds:List[float]), explicitly setAngles_list_float
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -853,22 +853,22 @@ def setAngles(*args, **kwargs):
 		raise TypeError("ALMotion.setAngles has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALMotion", "setAngles", list(args))
 
-def setAngles_list_float(names:object, angles:object, fractionMaxSpeeds:List[float]) -> None:
+def setAngles_list_float(names:Any, angles:Any, fractionMaxSpeeds:List[float]) -> None:
 	"""
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	angles:object
+	angles:Any
 		One or more angles in radians
 	fractionMaxSpeeds:List[float]
 		The vector of fraction of maximum speed to use
 	
 	Bridge notes
 	------------
-	Explicit variant of setAngles(object, object, List[float]). Calling setAngles instead lets the robot choose the variant from the argument types.
+	Explicit variant of setAngles(Any, Any, List[float]). Calling setAngles instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -895,22 +895,22 @@ def setAngles_list_float(names:object, angles:object, fractionMaxSpeeds:List[flo
 	# }
 	return call_method("ALMotion", "setAngles", [names, angles, fractionMaxSpeeds])
 
-def setAngles_float(names:object, angles:object, fractionMaxSpeed:float) -> None:
+def setAngles_float(names:Any, angles:Any, fractionMaxSpeed:float) -> None:
 	"""
 	Sets angles. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
-	angles:object
+	angles:Any
 		One or more angles in radians
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
 	
 	Bridge notes
 	------------
-	Explicit variant of setAngles(object, object, float). Calling setAngles instead lets the robot choose the variant from the argument types.
+	Explicit variant of setAngles(Any, Any, float). Calling setAngles instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -937,15 +937,15 @@ def setAngles_float(names:object, angles:object, fractionMaxSpeed:float) -> None
 	# }
 	return call_method("ALMotion", "setAngles", [names, angles, fractionMaxSpeed])
 
-def changeAngles(names:object, changes:object, fractionMaxSpeed:float) -> None:
+def changeAngles(names:Any, changes:Any, fractionMaxSpeed:float) -> None:
 	"""
 	Changes Angles. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
-	changes:object
+	changes:Any
 		One or more changes in radians
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
@@ -975,13 +975,13 @@ def changeAngles(names:object, changes:object, fractionMaxSpeed:float) -> None:
 	# }
 	return call_method("ALMotion", "changeAngles", [names, changes, fractionMaxSpeed])
 
-def getAngles(names:object, useSensors:bool) -> List[float]:
+def getAngles(names:Any, useSensors:bool) -> List[float]:
 	"""
 	Gets the angles of the joints
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Names the joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
 	useSensors:bool
 		If true, sensor angles will be returned
@@ -1109,7 +1109,7 @@ def move(x:float, y:float, theta:float, /) -> None:
 	...
 
 @overload
-def move(x:float, y:float, theta:float, moveConfig:object, /) -> None:
+def move(x:float, y:float, theta:float, moveConfig:Any, /) -> None:
 	"""
 	Makes the robot move at the given velocity. This is a non-blocking call.
 	
@@ -1121,7 +1121,7 @@ def move(x:float, y:float, theta:float, moveConfig:object, /) -> None:
 		The velocity along y axis [m.s-1].
 	theta:float
 		The velocity around z axis [rd.s-1].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Bridge notes
@@ -1165,7 +1165,7 @@ def move(*args, **kwargs):
 	------------
 	move has 2 variants on the robot:
 	- move(x:float, y:float, theta:float)
-	- move(x:float, y:float, theta:float, moveConfig:object)
+	- move(x:float, y:float, theta:float, moveConfig:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1219,7 +1219,7 @@ def moveToward(x:float, y:float, theta:float, /) -> None:
 	...
 
 @overload
-def moveToward(x:float, y:float, theta:float, moveConfig:object, /) -> None:
+def moveToward(x:float, y:float, theta:float, moveConfig:Any, /) -> None:
 	"""
 	Makes the robot move at the given normalized velocity. This is a non-blocking call.
 	
@@ -1231,7 +1231,7 @@ def moveToward(x:float, y:float, theta:float, moveConfig:object, /) -> None:
 		The normalized velocity along y axis (between -1 and 1).
 	theta:float
 		The normalized velocity around z axis (between -1 and 1).
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Bridge notes
@@ -1275,7 +1275,7 @@ def moveToward(*args, **kwargs):
 	------------
 	moveToward has 2 variants on the robot:
 	- moveToward(x:float, y:float, theta:float)
-	- moveToward(x:float, y:float, theta:float, moveConfig:object)
+	- moveToward(x:float, y:float, theta:float, moveConfig:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1284,13 +1284,13 @@ def moveToward(*args, **kwargs):
 	return call_method("ALMotion", "moveToward", list(args))
 
 @overload
-def moveTo(controlPoint:object, /) -> bool:
+def moveTo(controlPoint:Any, /) -> bool:
 	"""
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
 	----------
-	controlPoint:object
+	controlPoint:Any
 		An ALValue with the control points in FRAME_ROBOT.
 		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
 	
@@ -1303,12 +1303,12 @@ def moveTo(controlPoint:object, /) -> bool:
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1330,16 +1330,16 @@ def moveTo(controlPoint:object, /) -> bool:
 	...
 
 @overload
-def moveTo(controlPoint:object, moveConfig:object, /) -> bool:
+def moveTo(controlPoint:Any, moveConfig:Any, /) -> bool:
 	"""
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
 	----------
-	controlPoint:object
+	controlPoint:Any
 		An ALValue with all the control points in FRAME_ROBOT.
 		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1351,12 +1351,12 @@ def moveTo(controlPoint:object, moveConfig:object, /) -> bool:
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1404,12 +1404,12 @@ def moveTo(x:float, y:float, theta:float, /) -> bool:
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1463,12 +1463,12 @@ def moveTo(x:float, y:float, theta:float, time:float, /) -> bool:
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1502,7 +1502,7 @@ def moveTo(x:float, y:float, theta:float, time:float, /) -> bool:
 	...
 
 @overload
-def moveTo(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
+def moveTo(x:float, y:float, theta:float, moveConfig:Any, /) -> bool:
 	"""
 	Makes the robot move at the given position. This is a blocking call.
 	
@@ -1514,7 +1514,7 @@ def moveTo(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
 		The position along y axis [m].
 	theta:float
 		The position around z axis [rd].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1526,12 +1526,12 @@ def moveTo(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1565,7 +1565,7 @@ def moveTo(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
 	...
 
 @overload
-def moveTo(x:float, y:float, theta:float, time:float, moveConfig:object, /) -> bool:
+def moveTo(x:float, y:float, theta:float, time:float, moveConfig:Any, /) -> bool:
 	"""
 	Makes the robot move at the given position in fixed time. This is a blocking call.
 	
@@ -1579,7 +1579,7 @@ def moveTo(x:float, y:float, theta:float, time:float, moveConfig:object, /) -> b
 		The position around z axis [rd].
 	time:float
 		The time to reach the target position [s].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1591,12 +1591,12 @@ def moveTo(x:float, y:float, theta:float, time:float, moveConfig:object, /) -> b
 	moveTo has 6 variants, and some differ only by argument type. The robot picks one from the types you pass, so e.g. 5 and 5.0 can reach different variants.
 	
 	To choose explicitly, use:
-	- moveTo_1(object)
-	- moveTo_2(object, object)
+	- moveTo_1(Any)
+	- moveTo_2(Any, Any)
 	- moveTo_3(float, float, float)
 	- moveTo_4(float, float, float, float)
-	- moveTo_5(float, float, float, object)
-	- moveTo_6(float, float, float, float, object)
+	- moveTo_5(float, float, float, Any)
+	- moveTo_6(float, float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1638,12 +1638,12 @@ def moveTo(*args, **kwargs):
 	Bridge notes
 	------------
 	moveTo has 6 variants on the robot:
-	- moveTo(controlPoint:object), explicitly moveTo_1
-	- moveTo(controlPoint:object, moveConfig:object), explicitly moveTo_2
+	- moveTo(controlPoint:Any), explicitly moveTo_1
+	- moveTo(controlPoint:Any, moveConfig:Any), explicitly moveTo_2
 	- moveTo(x:float, y:float, theta:float), explicitly moveTo_3
 	- moveTo(x:float, y:float, theta:float, time:float), explicitly moveTo_4
-	- moveTo(x:float, y:float, theta:float, moveConfig:object), explicitly moveTo_5
-	- moveTo(x:float, y:float, theta:float, time:float, moveConfig:object), explicitly moveTo_6
+	- moveTo(x:float, y:float, theta:float, moveConfig:Any), explicitly moveTo_5
+	- moveTo(x:float, y:float, theta:float, time:float, moveConfig:Any), explicitly moveTo_6
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1651,13 +1651,13 @@ def moveTo(*args, **kwargs):
 		raise TypeError("ALMotion.moveTo has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALMotion", "moveTo", list(args))
 
-def moveTo_1(controlPoint:object) -> bool:
+def moveTo_1(controlPoint:Any) -> bool:
 	"""
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
 	----------
-	controlPoint:object
+	controlPoint:Any
 		An ALValue with the control points in FRAME_ROBOT.
 		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
 	
@@ -1667,7 +1667,7 @@ def moveTo_1(controlPoint:object) -> bool:
 	
 	Bridge notes
 	------------
-	Explicit variant of moveTo(object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of moveTo(Any). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -1686,16 +1686,16 @@ def moveTo_1(controlPoint:object) -> bool:
 	# }
 	return call_method("ALMotion", "moveTo", [controlPoint])
 
-def moveTo_2(controlPoint:object, moveConfig:object) -> bool:
+def moveTo_2(controlPoint:Any, moveConfig:Any) -> bool:
 	"""
 	Makes the robot move to the given relative positions. This is a blocking call.
 	
 	Parameters
 	----------
-	controlPoint:object
+	controlPoint:Any
 		An ALValue with all the control points in FRAME_ROBOT.
 		Each control point is relative to the previous one. [[x1, y1, theta1], ..., [xN, yN, thetaN]
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1704,7 +1704,7 @@ def moveTo_2(controlPoint:object, moveConfig:object) -> bool:
 	
 	Bridge notes
 	------------
-	Explicit variant of moveTo(object, object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of moveTo(Any, Any). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -1825,7 +1825,7 @@ def moveTo_4(x:float, y:float, theta:float, time:float) -> bool:
 	# }
 	return call_method("ALMotion", "moveTo", [x, y, theta, time])
 
-def moveTo_5(x:float, y:float, theta:float, moveConfig:object) -> bool:
+def moveTo_5(x:float, y:float, theta:float, moveConfig:Any) -> bool:
 	"""
 	Makes the robot move at the given position. This is a blocking call.
 	
@@ -1837,7 +1837,7 @@ def moveTo_5(x:float, y:float, theta:float, moveConfig:object) -> bool:
 		The position along y axis [m].
 	theta:float
 		The position around z axis [rd].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1846,7 +1846,7 @@ def moveTo_5(x:float, y:float, theta:float, moveConfig:object) -> bool:
 	
 	Bridge notes
 	------------
-	Explicit variant of moveTo(float, float, float, object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of moveTo(float, float, float, Any). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -1877,7 +1877,7 @@ def moveTo_5(x:float, y:float, theta:float, moveConfig:object) -> bool:
 	# }
 	return call_method("ALMotion", "moveTo", [x, y, theta, moveConfig])
 
-def moveTo_6(x:float, y:float, theta:float, time:float, moveConfig:object) -> bool:
+def moveTo_6(x:float, y:float, theta:float, time:float, moveConfig:Any) -> bool:
 	"""
 	Makes the robot move at the given position in fixed time. This is a blocking call.
 	
@@ -1891,7 +1891,7 @@ def moveTo_6(x:float, y:float, theta:float, time:float, moveConfig:object) -> bo
 		The position around z axis [rd].
 	time:float
 		The time to reach the target position [s].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -1900,7 +1900,7 @@ def moveTo_6(x:float, y:float, theta:float, time:float, moveConfig:object) -> bo
 	
 	Bridge notes
 	------------
-	Explicit variant of moveTo(float, float, float, float, object). Calling moveTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of moveTo(float, float, float, float, Any). Calling moveTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -1985,7 +1985,7 @@ def _moveToPod(x:float, y:float, theta:float, /) -> bool:
 	...
 
 @overload
-def _moveToPod(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
+def _moveToPod(x:float, y:float, theta:float, moveConfig:Any, /) -> bool:
 	"""
 	Makes the robot move at the given position, without taking into account ENABLE_MOVE_PROTECTION config
 	
@@ -1997,7 +1997,7 @@ def _moveToPod(x:float, y:float, theta:float, moveConfig:object, /) -> bool:
 		The position along y axis [m].
 	theta:float
 		The position around z axis [rd].
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Returns
@@ -2045,7 +2045,7 @@ def _moveToPod(*args, **kwargs):
 	------------
 	_moveToPod has 2 variants on the robot:
 	- _moveToPod(x:float, y:float, theta:float)
-	- _moveToPod(x:float, y:float, theta:float, moveConfig:object)
+	- _moveToPod(x:float, y:float, theta:float, moveConfig:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -2054,13 +2054,13 @@ def _moveToPod(*args, **kwargs):
 	return call_method("ALMotion", "_moveToPod", list(args))
 
 @overload
-def _followPath(path:object, /) -> None:
+def _followPath(path:Any, /) -> None:
 	"""
 	Makes the robot follow a given path. This is a non-blocking call.
 	
 	Parameters
 	----------
-	path:object
+	path:Any
 		An ALValue describing a 2D path.
 	
 	Bridge notes
@@ -2087,15 +2087,15 @@ def _followPath(path:object, /) -> None:
 	...
 
 @overload
-def _followPath(path:object, moveConfig:object, /) -> None:
+def _followPath(path:Any, moveConfig:Any, /) -> None:
 	"""
 	Makes the robot follow a given path. This is a non-blocking call.
 	
 	Parameters
 	----------
-	path:object
+	path:Any
 		An ALValue describing a 2D path.
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Bridge notes
@@ -2130,8 +2130,8 @@ def _followPath(*args, **kwargs):
 	Bridge notes
 	------------
 	_followPath has 2 variants on the robot:
-	- _followPath(path:object)
-	- _followPath(path:object, moveConfig:object)
+	- _followPath(path:Any)
+	- _followPath(path:Any, moveConfig:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -2140,15 +2140,15 @@ def _followPath(*args, **kwargs):
 	return call_method("ALMotion", "_followPath", list(args))
 
 @overload
-def _followPathInWorld(poseStart:object, path:object, /) -> None:
+def _followPathInWorld(poseStart:Any, path:Any, /) -> None:
 	"""
 	Makes the robot follow a given path, in world frame. This is a non-blocking call.
 	
 	Parameters
 	----------
-	poseStart:object
+	poseStart:Any
 		A Pose2D setting the start frame of the path, in World.
-	path:object
+	path:Any
 		An ALValue describing a 2D Path.
 	
 	Bridge notes
@@ -2179,17 +2179,17 @@ def _followPathInWorld(poseStart:object, path:object, /) -> None:
 	...
 
 @overload
-def _followPathInWorld(poseStart:object, path:object, moveConfig:object, /) -> None:
+def _followPathInWorld(poseStart:Any, path:Any, moveConfig:Any, /) -> None:
 	"""
 	Makes the robot follow a given path, in world frame. This is a non-blocking call.
 	
 	Parameters
 	----------
-	poseStart:object
+	poseStart:Any
 		A Pose2D setting the start frame of the path, in World.
-	path:object
+	path:Any
 		An ALValue describing a 2D Path.
-	moveConfig:object
+	moveConfig:Any
 		An ALValue with custom move configuration.
 	
 	Bridge notes
@@ -2228,8 +2228,8 @@ def _followPathInWorld(*args, **kwargs):
 	Bridge notes
 	------------
 	_followPathInWorld has 2 variants on the robot:
-	- _followPathInWorld(poseStart:object, path:object)
-	- _followPathInWorld(poseStart:object, path:object, moveConfig:object)
+	- _followPathInWorld(poseStart:Any, path:Any)
+	- _followPathInWorld(poseStart:Any, path:Any, moveConfig:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -2264,13 +2264,13 @@ def _setFollowPathSpeedFactor(speedFactor:float) -> None:
 	return call_method("ALMotion", "_setFollowPathSpeedFactor", [speedFactor])
 
 @overload
-def _moveAlong(trajectory:object, /) -> bool:
+def _moveAlong(trajectory:Any, /) -> bool:
 	"""
 	Move along a trajectory
 	
 	Parameters
 	----------
-	trajectory:object
+	trajectory:Any
 		An ALValue describing a trajectory.
 	
 	Returns
@@ -2301,13 +2301,13 @@ def _moveAlong(trajectory:object, /) -> bool:
 	...
 
 @overload
-def _moveAlong(trajectory:object, scaleFactor:float, /) -> bool:
+def _moveAlong(trajectory:Any, scaleFactor:float, /) -> bool:
 	"""
 	Move along a trajectory
 	
 	Parameters
 	----------
-	trajectory:object
+	trajectory:Any
 		An ALValue describing a trajectory.
 	scaleFactor:float
 		A float between 0 and 1 scaling the trajectory.
@@ -2348,8 +2348,8 @@ def _moveAlong(*args, **kwargs):
 	Bridge notes
 	------------
 	_moveAlong has 2 variants on the robot:
-	- _moveAlong(trajectory:object)
-	- _moveAlong(trajectory:object, scaleFactor:float)
+	- _moveAlong(trajectory:Any)
+	- _moveAlong(trajectory:Any, scaleFactor:float)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -2373,7 +2373,7 @@ def _stopAndStitchMoveAlong() -> None:
 	# }
 	return call_method("ALMotion", "_stopAndStitchMoveAlong", [])
 
-def _getRemainingPath(sampleStep:float) -> object:
+def _getRemainingPath(sampleStep:float) -> Any:
 	"""
 	Get a vector of samples along the current path
 	
@@ -2403,7 +2403,7 @@ def _getRemainingPath(sampleStep:float) -> object:
 	# }
 	return call_method("ALMotion", "_getRemainingPath", [sampleStep])
 
-def _getRemainingTrajectory(timeStep:float, preview:float) -> object:
+def _getRemainingTrajectory(timeStep:float, preview:float) -> Any:
 	"""
 	Get a vector of samples along the current trajectory
 	
@@ -2459,7 +2459,7 @@ def _getTrajectoryCompletion() -> float:
 	# }
 	return call_method("ALMotion", "_getTrajectoryCompletion", [])
 
-def setFootSteps(legName:List[str], footSteps:object, timeList:List[float], clearExisting:bool) -> None:
+def setFootSteps(legName:List[str], footSteps:Any, timeList:List[float], clearExisting:bool) -> None:
 	"""
 	Makes Nao do foot step planner. This is a non-blocking call.
 	
@@ -2467,7 +2467,7 @@ def setFootSteps(legName:List[str], footSteps:object, timeList:List[float], clea
 	----------
 	legName:List[str]
 		name of the leg to move('LLeg'or 'RLeg')
-	footSteps:object
+	footSteps:Any
 		[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]
 	timeList:List[float]
 		time list of each foot step
@@ -2503,7 +2503,7 @@ def setFootSteps(legName:List[str], footSteps:object, timeList:List[float], clea
 	# }
 	return call_method("ALMotion", "setFootSteps", [legName, footSteps, timeList, clearExisting])
 
-def setFootStepsWithSpeed(legName:List[str], footSteps:object, fractionMaxSpeed:List[float], clearExisting:bool) -> None:
+def setFootStepsWithSpeed(legName:List[str], footSteps:Any, fractionMaxSpeed:List[float], clearExisting:bool) -> None:
 	"""
 	Makes Nao do foot step planner with speed. This is a blocking call.
 	
@@ -2511,7 +2511,7 @@ def setFootStepsWithSpeed(legName:List[str], footSteps:object, fractionMaxSpeed:
 	----------
 	legName:List[str]
 		name of the leg to move('LLeg'or 'RLeg')
-	footSteps:object
+	footSteps:Any
 		[x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]
 	fractionMaxSpeed:List[float]
 		speed of each foot step. Must be between 0 and 1.
@@ -2547,7 +2547,7 @@ def setFootStepsWithSpeed(legName:List[str], footSteps:object, fractionMaxSpeed:
 	# }
 	return call_method("ALMotion", "setFootStepsWithSpeed", [legName, footSteps, fractionMaxSpeed, clearExisting])
 
-def getFootSteps() -> object:
+def getFootSteps() -> Any:
 	"""
 	Get the foot steps. This is a non-blocking call.
 	
@@ -2636,7 +2636,7 @@ def stopMove() -> bool:
 	# }
 	return call_method("ALMotion", "stopMove", [])
 
-def getMoveConfig(config:str) -> object:
+def getMoveConfig(config:str) -> Any:
 	"""
 	Gets the move config.
 	
@@ -2821,21 +2821,21 @@ def setMoveArmsEnabled(leftArmEnabled:bool, rightArmEnabled:bool) -> None:
 	# }
 	return call_method("ALMotion", "setMoveArmsEnabled", [leftArmEnabled, rightArmEnabled])
 
-def positionInterpolations(effectorNames:object, taskSpaceForAllPaths:object, paths:object, axisMasks:object, relativeTimes:object) -> None:
+def positionInterpolations(effectorNames:Any, taskSpaceForAllPaths:Any, paths:Any, axisMasks:Any, relativeTimes:Any) -> None:
 	"""
 	Moves end-effectors to the given positions and orientations over time. This is a blocking call.
 	
 	Parameters
 	----------
-	effectorNames:object
+	effectorNames:Any
 		Vector of chain names. Could be: "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso" 
-	taskSpaceForAllPaths:object
+	taskSpaceForAllPaths:Any
 		Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
-	paths:object
+	paths:Any
 		Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians
-	axisMasks:object
+	axisMasks:Any
 		Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
-	relativeTimes:object
+	relativeTimes:Any
 		Vector of times in seconds corresponding to the path points
 	"""
 	# NAOqi metadata:
@@ -2871,21 +2871,21 @@ def positionInterpolations(effectorNames:object, taskSpaceForAllPaths:object, pa
 	# }
 	return call_method("ALMotion", "positionInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
 
-def setPositions(names:object, spaces:object, positions:object, fractionMaxSpeed:float, axisMask:object) -> None:
+def setPositions(names:Any, spaces:Any, positions:Any, fractionMaxSpeed:float, axisMask:Any) -> None:
 	"""
 	Moves multiple end-effectors to the given position and orientation position6d. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of effector.
-	spaces:object
+	spaces:Any
 		The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
-	positions:object
+	positions:Any
 		Position6D arrays
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
-	axisMask:object
+	axisMask:Any
 		Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
 	"""
 	# NAOqi metadata:
@@ -2963,21 +2963,21 @@ def getPosition(name:str, space:int, useSensorValues:bool) -> List[float]:
 	# }
 	return call_method("ALMotion", "getPosition", [name, space, useSensorValues])
 
-def transformInterpolations(effectorNames:object, taskSpaceForAllPaths:object, paths:object, axisMasks:object, relativeTimes:object) -> None:
+def transformInterpolations(effectorNames:Any, taskSpaceForAllPaths:Any, paths:Any, axisMasks:Any, relativeTimes:Any) -> None:
 	"""
 	Moves end-effectors to the given positions and orientations over time. This is a blocking call.
 	
 	Parameters
 	----------
-	effectorNames:object
+	effectorNames:Any
 		Vector of chain names. Could be: "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso" 
-	taskSpaceForAllPaths:object
+	taskSpaceForAllPaths:Any
 		Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
-	paths:object
+	paths:Any
 		Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians
-	axisMasks:object
+	axisMasks:Any
 		Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
-	relativeTimes:object
+	relativeTimes:Any
 		Vector of times in seconds corresponding to the path points
 	"""
 	# NAOqi metadata:
@@ -3013,21 +3013,21 @@ def transformInterpolations(effectorNames:object, taskSpaceForAllPaths:object, p
 	# }
 	return call_method("ALMotion", "transformInterpolations", [effectorNames, taskSpaceForAllPaths, paths, axisMasks, relativeTimes])
 
-def setTransforms(names:object, spaces:object, transforms:object, fractionMaxSpeed:float, axisMask:object) -> None:
+def setTransforms(names:Any, spaces:Any, transforms:Any, fractionMaxSpeed:float, axisMask:Any) -> None:
 	"""
 	Moves multiple end-effectors to the given position and orientation transforms. This is a non-blocking call.
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		The name or names of effector.
-	spaces:object
+	spaces:Any
 		The task frame or task frames {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
-	transforms:object
+	transforms:Any
 		Transform arrays
 	fractionMaxSpeed:float
 		The fraction of maximum speed to use
-	axisMask:object
+	axisMask:Any
 		Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both 
 	"""
 	# NAOqi metadata:
@@ -3401,7 +3401,7 @@ def wbEnableEffectorControl(effectorName:str, isEnabled:bool) -> None:
 	# }
 	return call_method("ALMotion", "wbEnableEffectorControl", [effectorName, isEnabled])
 
-def wbSetEffectorControl(effectorName:str, targetCoordinate:object) -> None:
+def wbSetEffectorControl(effectorName:str, targetCoordinate:Any) -> None:
 	"""
 	UserFriendly Whole Body API: set new target for controlled effector. This is a non-blocking call.
 	
@@ -3409,7 +3409,7 @@ def wbSetEffectorControl(effectorName:str, targetCoordinate:object) -> None:
 	----------
 	effectorName:str
 		Name of the effector : "Head", "LArm" or "RArm". Nao goes to posture init. He manages his balance and keep foot fix. "Head" is controlled in rotation. "LArm" and "RArm" are controlled in position.
-	targetCoordinate:object
+	targetCoordinate:Any
 		"Head" is controlled in rotation (WX, WY, WZ). "LArm" and "RArm" are controlled in position (X, Y, Z). TargetCoordinate must be absolute and expressed in FRAME_ROBOT. If the desired position/orientation is unfeasible, target is resize to the nearest feasible motion.
 	"""
 	# NAOqi metadata:
@@ -3685,7 +3685,7 @@ def _wbEnableEffectorConstraint(effectorName:str, isActive:bool, axisMask:int) -
 	# }
 	return call_method("ALMotion", "_wbEnableEffectorConstraint", [effectorName, isActive, axisMask])
 
-def _wbGetEffectorConstraint(effectorName:str) -> object:
+def _wbGetEffectorConstraint(effectorName:str) -> Any:
 	"""
 	Advanced Whole Body API: get effector constraint state.
 	
@@ -3785,7 +3785,7 @@ def _wbEnableJointOptimization(jointName:str, isActive:bool) -> None:
 	# }
 	return call_method("ALMotion", "_wbEnableJointOptimization", [jointName, isActive])
 
-def _wbGetEffectorOptimization(effectorName:str) -> object:
+def _wbGetEffectorOptimization(effectorName:str) -> Any:
 	"""
 	Advanced Whole Body API: get effector constraint state.
 	
@@ -3815,7 +3815,7 @@ def _wbGetEffectorOptimization(effectorName:str) -> object:
 	# }
 	return call_method("ALMotion", "_wbGetEffectorOptimization", [effectorName])
 
-def _wbSetEffectorWeight(effectorName:str, weightingList:object) -> None:
+def _wbSetEffectorWeight(effectorName:str, weightingList:Any) -> None:
 	"""
 	Advanced Whole Body API: set Effector Weighting in the Whole Body Optimization. It is the priority of Effector motion in front of all the other motion task in the quadratic programming optimization.
 	
@@ -3823,7 +3823,7 @@ def _wbSetEffectorWeight(effectorName:str, weightingList:object) -> None:
 	----------
 	effectorName:str
 		"All", "Arms", "Legs", "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso", "Com".
-	weightingList:object
+	weightingList:Any
 		Weighting used in the Whole Body Cartesian Optimization. Limits : 0 &lt; weighting &lt;= 1000.0. Default value is 1000.0. We can give the 6 weights corresponding to the 6 degree of freedom of cartesian motion. (WeightX, WeightY, WeightZ, WeightWX, WeightWY, WeightWZ). We can give 2 weights corresponding to translation and rotation axis (WeightTranslation, WeightTranslation, WeightTranslation, WeightRotation, WeightRotation, WeightRotation). We can give 1 weight, it is the same weight for all the axis (Weight, Weight, Weight, Weight, Weight, Weight).
 	"""
 	# NAOqi metadata:
@@ -3847,7 +3847,7 @@ def _wbSetEffectorWeight(effectorName:str, weightingList:object) -> None:
 	# }
 	return call_method("ALMotion", "_wbSetEffectorWeight", [effectorName, weightingList])
 
-def _wbSetEffectorStiffness(effectorName:str, stiffnessList:object) -> None:
+def _wbSetEffectorStiffness(effectorName:str, stiffnessList:Any) -> None:
 	"""
 	Advanced Whole Body API: set Effector Stiffness in Cartesian Control.
 	
@@ -3855,7 +3855,7 @@ def _wbSetEffectorStiffness(effectorName:str, stiffnessList:object) -> None:
 	----------
 	effectorName:str
 		"All", "Arms", "Legs", "Head", "LArm", "RArm", "LLeg", "RLeg", "Torso", "Com".
-	stiffnessList:object
+	stiffnessList:Any
 		Stiffness used in the Whole Body Cartesian Optimization. Limits : 0 &lt; stiffness &lt;= 100.0. Default value is 10.0. We can give the 6 stiffnesses corresponding to the 6 degree of freedom of cartesian motion. (StiffnessX, StiffnessY, StiffnessZ, StiffnessWX, StiffnessWY, StiffnessWZ). We can give 2 weights corresponding to translation and rotation axis (StiffnessTranslation, StiffnessTranslation, StiffnessTranslation, StiffnessRotation, StiffnessRotation, StiffnessRotation). We can give 1 stiffness, it is the same stiffness for all the axis (Stiffness, Stiffness, Stiffness, Stiffness, Stiffness, Stiffness).
 	"""
 	# NAOqi metadata:
@@ -4228,7 +4228,7 @@ def _getCollisionStateForObstacleSummary(pChainName:str) -> bool:
 	# }
 	return call_method("ALMotion", "_getCollisionStateForObstacleSummary", [pChainName])
 
-def _getCollisionShapes(pName:str) -> object:
+def _getCollisionShapes(pName:str) -> Any:
 	"""
 	Gets the list of dynamic collisions in torso frame.
 	
@@ -4258,7 +4258,7 @@ def _getCollisionShapes(pName:str) -> object:
 	# }
 	return call_method("ALMotion", "_getCollisionShapes", [pName])
 
-def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List[str], pTypeList:List[str], pShapeList:object, pPositionList:object) -> None:
+def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List[str], pTypeList:List[str], pShapeList:Any, pPositionList:Any) -> None:
 	"""
 	Set dynamic collision shape for people collision avoidance
 	
@@ -4272,9 +4272,9 @@ def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List
 		A vector of body names. Dynamic collision is attached to this body.
 	pTypeList:List[str]
 		A vector of names. "Sphere", "Plan", "Pill" or "Tab".
-	pShapeList:object
+	pShapeList:Any
 		A vector of shape data.
-	pPositionList:object
+	pPositionList:Any
 		An ALValue containing a list of position of the shape.
 	"""
 	# NAOqi metadata:
@@ -4314,7 +4314,7 @@ def _setCollisionShapes(pNameList:List[str], pPairList:List[str], pBodyList:List
 	# }
 	return call_method("ALMotion", "_setCollisionShapes", [pNameList, pPairList, pBodyList, pTypeList, pShapeList, pPositionList])
 
-def _getDetectedCollisions(pMinimumDistance:float) -> object:
+def _getDetectedCollisions(pMinimumDistance:float) -> Any:
 	"""
 	Gets the list of detected collisions supported on your robot.
 	
@@ -4344,7 +4344,7 @@ def _getDetectedCollisions(pMinimumDistance:float) -> object:
 	# }
 	return call_method("ALMotion", "_getDetectedCollisions", [pMinimumDistance])
 
-def _getDetectedCollisionsFull() -> object:
+def _getDetectedCollisionsFull() -> Any:
 	"""
 	Gets the list of detected collisions supported on your robot.
 	
@@ -4364,7 +4364,7 @@ def _getDetectedCollisionsFull() -> object:
 	# }
 	return call_method("ALMotion", "_getDetectedCollisionsFull", [])
 
-def _getDangerousRegion() -> object:
+def _getDangerousRegion() -> Any:
 	"""
 	Gets the polygon checked for safety during move.
 	
@@ -4649,7 +4649,7 @@ def getSensorNames() -> List[str]:
 	# }
 	return call_method("ALMotion", "getSensorNames", [])
 
-def getLimits(name:str) -> object:
+def getLimits(name:str) -> Any:
 	"""
 	Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.
 	
@@ -4679,7 +4679,7 @@ def getLimits(name:str) -> object:
 	# }
 	return call_method("ALMotion", "getLimits", [name])
 
-def _getFullLimits(name:str) -> object:
+def _getFullLimits(name:str) -> Any:
 	"""
 	Get the minAngle (rad), maxAngle (rad), and maxVelocity (rad.s-1) for a given joint or actuator in the body.
 	
@@ -4927,13 +4927,13 @@ def _getSupportPolygonBipedDebug(pName:str) -> List[List[float]]:
 	# }
 	return call_method("ALMotion", "_getSupportPolygonBipedDebug", [pName])
 
-def _getTorque(names:object, useSensor:bool) -> List[float]:
+def _getTorque(names:Any, useSensor:bool) -> List[float]:
 	"""
 	Gets the torque of the joints
 	
 	Parameters
 	----------
-	names:object
+	names:Any
 		Names the joints, chains, "Body", "Joints". 
 	useSensor:bool
 		If true, return the sensor torque.
@@ -4993,13 +4993,13 @@ def _getInertia(pName:str) -> List[float]:
 	# }
 	return call_method("ALMotion", "_getInertia", [pName])
 
-def setMotionConfig(config:object) -> None:
+def setMotionConfig(config:Any) -> None:
 	"""
 	Internal Use.
 	
 	Parameters
 	----------
-	config:object
+	config:Any
 		Internal: An array of ALValues [i][0]: name, [i][1]: value
 	"""
 	# NAOqi metadata:
@@ -5035,7 +5035,7 @@ def _naoqiIsReadyCallback() -> None:
 	# }
 	return call_method("ALMotion", "_naoqiIsReadyCallback", [])
 
-def _preferenceUpdatedCallback(p0:str, p1:object, p2:str) -> None:
+def _preferenceUpdatedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	Callback preferences changed.
 	
@@ -5043,7 +5043,7 @@ def _preferenceUpdatedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -5561,7 +5561,7 @@ def _resetIdleDefaultAnimation() -> None:
 	# }
 	return call_method("ALMotion", "_resetIdleDefaultAnimation", [])
 
-def getTaskList() -> object:
+def getTaskList() -> Any:
 	"""
 	Gets an ALValue structure describing the tasks in the Task List
 	
@@ -5745,7 +5745,7 @@ def areNotificationsEnabled() -> bool:
 	# }
 	return call_method("ALMotion", "areNotificationsEnabled", [])
 
-def _getGroundCollision() -> object:
+def _getGroundCollision() -> Any:
 	"""
 	Gets the list of collision with the ground.
 	
@@ -5765,7 +5765,7 @@ def _getGroundCollision() -> object:
 	# }
 	return call_method("ALMotion", "_getGroundCollision", [])
 
-def _getGroundCollisionForForceContact() -> object:
+def _getGroundCollisionForForceContact() -> Any:
 	"""
 	Gets the list of collision with the ground.
 	
@@ -5785,7 +5785,7 @@ def _getGroundCollisionForForceContact() -> object:
 	# }
 	return call_method("ALMotion", "_getGroundCollisionForForceContact", [])
 
-def _getGroundCollisionForFallManager() -> object:
+def _getGroundCollisionForFallManager() -> Any:
 	"""
 	Gets the list of collision with the ground.
 	
@@ -5865,7 +5865,7 @@ def _getRealTorsoInWorld() -> List[float]:
 	# }
 	return call_method("ALMotion", "_getRealTorsoInWorld", [])
 
-def _getRobotGroundConvexHullDebug() -> object:
+def _getRobotGroundConvexHullDebug() -> Any:
 	"""
 	
 	
@@ -5885,7 +5885,7 @@ def _getRobotGroundConvexHullDebug() -> object:
 	# }
 	return call_method("ALMotion", "_getRobotGroundConvexHullDebug", [])
 
-def _getRobotGroundConvexHull() -> object:
+def _getRobotGroundConvexHull() -> Any:
 	"""
 	Get the robot convex hull projected on the ground in the ROBOT_FRAME.
 	
@@ -6123,13 +6123,13 @@ def _relaxMotorsWhenSitting() -> None:
 	# }
 	return call_method("ALMotion", "_relaxMotorsWhenSitting", [])
 
-def _relax(chainName:object, delayInSeconds:float) -> None:
+def _relax(chainName:Any, delayInSeconds:float) -> None:
 	"""
 	Relax a chain.
 	
 	Parameters
 	----------
-	chainName:object
+	chainName:Any
 		The name of the chain to relax.
 	delayInSeconds:float
 		The duration the low stiffness time.
@@ -6259,14 +6259,14 @@ def _getNumJointCommandDiscontinuities() -> int:
 	# }
 	return call_method("ALMotion", "_getNumJointCommandDiscontinuities", [])
 
-def _resetMotionCommandModelToSensors(pName:object) -> None:
+def _resetMotionCommandModelToSensors(pName:Any) -> None:
 	"""
 	Usefull function to resynchronize ALMotion and DCM 
 	In fact we set motion command model with sensors information
 	
 	Parameters
 	----------
-	pName:object
+	pName:Any
 		Names the joints, chains, "Body", "JointActuators", "Joints" or "Actuators". 
 	"""
 	# NAOqi metadata:
@@ -6286,7 +6286,7 @@ def _resetMotionCommandModelToSensors(pName:object) -> None:
 	# }
 	return call_method("ALMotion", "_resetMotionCommandModelToSensors", [pName])
 
-def _getBlindZones() -> object:
+def _getBlindZones() -> Any:
 	"""
 	Get the blind zones convex polygon.
 	

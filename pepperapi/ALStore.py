@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -42,7 +42,7 @@ def updatePackages() -> None:
 	# }
 	return call_method("ALStore", "updatePackages", [])
 
-def downloadPackagesInfo() -> List[Dict[str,object]]:
+def downloadPackagesInfo() -> List[Dict[str,Any]]:
 	"""
 	
 	        Check Packages Updates from the Application Delivery Engine (ADE) and return the list.
@@ -60,7 +60,7 @@ def downloadPackagesInfo() -> List[Dict[str,object]]:
 	# }
 	return call_method("ALStore", "downloadPackagesInfo", [])
 
-def getPackagesInfo() -> List[Dict[str,object]]:
+def getPackagesInfo() -> List[Dict[str,Any]]:
 	"""
 	
 	        Check Packages Updates from the Application Delivery Engine (ADE) if not done and return the list.
@@ -78,7 +78,7 @@ def getPackagesInfo() -> List[Dict[str,object]]:
 	# }
 	return call_method("ALStore", "getPackagesInfo", [])
 
-def getPackagesToAdd() -> List[Dict[str,object]]:
+def getPackagesToAdd() -> List[Dict[str,Any]]:
 	"""
 	
 	        Return the List of Packages to Install on the Robot.
@@ -96,7 +96,7 @@ def getPackagesToAdd() -> List[Dict[str,object]]:
 	# }
 	return call_method("ALStore", "getPackagesToAdd", [])
 
-def getPackagesToUpdate() -> List[Dict[str,object]]:
+def getPackagesToUpdate() -> List[Dict[str,Any]]:
 	"""
 	
 	        Return the List of Packages to Update in the Robot.
@@ -114,7 +114,7 @@ def getPackagesToUpdate() -> List[Dict[str,object]]:
 	# }
 	return call_method("ALStore", "getPackagesToUpdate", [])
 
-def getPackagesToRemove() -> List[Dict[str,object]]:
+def getPackagesToRemove() -> List[Dict[str,Any]]:
 	"""
 	
 	        Return the List of Packages to Delete from the Robot.
@@ -132,7 +132,7 @@ def getPackagesToRemove() -> List[Dict[str,object]]:
 	# }
 	return call_method("ALStore", "getPackagesToRemove", [])
 
-def getPackageInfo(uuid:str) -> object:
+def getPackageInfo(uuid:str) -> Any:
 	"""
 	
 	        Return the Information of a Package the Robot should have installed.
@@ -194,7 +194,7 @@ def updateSystem() -> bool:
 	# }
 	return call_method("ALStore", "updateSystem", [])
 
-def downloadNextSystemImageInfo() -> Dict[str,object]:
+def downloadNextSystemImageInfo() -> Dict[str,Any]:
 	"""
 	
 	        Check System Updates and return the System Update Info Map or {} if None.
@@ -212,7 +212,7 @@ def downloadNextSystemImageInfo() -> Dict[str,object]:
 	# }
 	return call_method("ALStore", "downloadNextSystemImageInfo", [])
 
-def getNextSystemImageInfo() -> Dict[str,object]:
+def getNextSystemImageInfo() -> Dict[str,Any]:
 	"""
 	
 	        Check System Updates if needed and return the System Update Info Map or {} if None.
@@ -271,7 +271,7 @@ def installNextSystemImage(freset:bool) -> bool:
 	return call_method("ALStore", "installNextSystemImage", [freset])
 
 @overload
-def downloadCurrentSystemImageInfo(token:str, /) -> Dict[str,object]:
+def downloadCurrentSystemImageInfo(token:str, /) -> Dict[str,Any]:
 	"""
 	
 	        Get the Current System Image Info to allow a Factory Reset with an OAuth Token.
@@ -302,7 +302,7 @@ def downloadCurrentSystemImageInfo(token:str, /) -> Dict[str,object]:
 	...
 
 @overload
-def downloadCurrentSystemImageInfo(login:str, password:str, /) -> Dict[str,object]:
+def downloadCurrentSystemImageInfo(login:str, password:str, /) -> Dict[str,Any]:
 	"""
 	
 	        Get the Current System Image Info to allow a Factory Reset.
@@ -407,7 +407,7 @@ def abortSystemImageInstall() -> None:
 	# }
 	return call_method("ALStore", "abortSystemImageInstall", [])
 
-def downloadNextOTAImageInfo(fingerprint:str, product_model:str) -> Dict[str,object]:
+def downloadNextOTAImageInfo(fingerprint:str, product_model:str) -> Dict[str,Any]:
 	"""
 	
 	        Check the Android Tablet Update Info if available and Return it.
@@ -432,7 +432,7 @@ def downloadNextOTAImageInfo(fingerprint:str, product_model:str) -> Dict[str,obj
 	# }
 	return call_method("ALStore", "downloadNextOTAImageInfo", [fingerprint, product_model])
 
-def getNextOTAImageInfo() -> Dict[str,object]:
+def getNextOTAImageInfo() -> Dict[str,Any]:
 	"""
 	
 	        Return info about the newest available Android Tablet Image if available.
@@ -589,7 +589,7 @@ def checkUpdate(p0:bool, p1:bool) -> bool:
 	# }
 	return call_method("ALStore", "checkUpdate", [p0, p1])
 
-def status() -> List[Dict[str,object]]:
+def status() -> List[Dict[str,Any]]:
 	"""
 	
 	        Return the Packages Information retrueved from the Application Delivery Engine.

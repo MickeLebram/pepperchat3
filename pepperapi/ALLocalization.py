@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALLocalization", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALLocalization", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -250,7 +250,7 @@ def isInCurrentHome() -> bool:
 	# }
 	return call_method("ALLocalization", "isInCurrentHome", [])
 
-def getCurrentPanoramaDescriptor() -> object:
+def getCurrentPanoramaDescriptor() -> Any:
 	"""
 	Get some information about the current panorama.
 	"""
@@ -266,7 +266,7 @@ def getCurrentPanoramaDescriptor() -> object:
 	# }
 	return call_method("ALLocalization", "getCurrentPanoramaDescriptor", [])
 
-def getFrame(p0:int, p1:str) -> object:
+def getFrame(p0:int, p1:str) -> Any:
 	"""
 	Get a frame buffer.
 	
@@ -481,7 +481,7 @@ def getRobotPosition(*args, **kwargs):
 	return call_method("ALLocalization", "getRobotPosition", list(args))
 
 @overload
-def getRobotOrientation() -> object:
+def getRobotOrientation() -> Any:
 	"""
 	Get the robot orientation.
 	
@@ -504,7 +504,7 @@ def getRobotOrientation() -> object:
 	...
 
 @overload
-def getRobotOrientation(p0:bool, /) -> object:
+def getRobotOrientation(p0:bool, /) -> Any:
 	"""
 	Get the robot orientation.
 	
@@ -545,7 +545,7 @@ def getRobotOrientation(*args, **kwargs):
 		raise TypeError("ALLocalization.getRobotOrientation has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALLocalization", "getRobotOrientation", list(args))
 
-def isInGivenZone(p0:float, p1:float, p2:float, p3:float) -> object:
+def isInGivenZone(p0:float, p1:float, p2:float, p3:float) -> Any:
 	"""
 	
 	

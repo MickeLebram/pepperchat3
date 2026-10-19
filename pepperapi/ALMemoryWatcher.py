@@ -2,7 +2,7 @@
 This is a module design to buffer and log values from ALMemory
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALMemoryWatcher", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALMemoryWatcher", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -425,7 +425,7 @@ def removeListeners(listNames:List[str]) -> None:
 	# }
 	return call_method("ALMemoryWatcher", "removeListeners", [listNames])
 
-def getData() -> object:
+def getData() -> Any:
 	"""
 	return an ALValue containing all buffered data                                       since the last call of getData().
 	
@@ -565,7 +565,7 @@ def setPeriodMs(period:int) -> None:
 	# }
 	return call_method("ALMemoryWatcher", "setPeriodMs", [period])
 
-def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
+def _onEventNotify(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when an event we have subscribe to has changed in ALMemory
 	
@@ -573,9 +573,9 @@ def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -603,7 +603,7 @@ def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALMemoryWatcher", "_onEventNotify", [dataName, dataValue, message])
 
-def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyAdded(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when a key is removed in ALMemory
 	
@@ -611,9 +611,9 @@ def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -641,7 +641,7 @@ def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALMemoryWatcher", "_onKeyAdded", [dataName, dataValue, message])
 
-def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyRemoved(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when a key is removed in ALMemory
 	
@@ -649,9 +649,9 @@ def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -679,7 +679,7 @@ def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALMemoryWatcher", "_onKeyRemoved", [dataName, dataValue, message])
 
-def _onKeyTypeChanged(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyTypeChanged(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when the type of a key is changed in ALMemory
 	
@@ -687,9 +687,9 @@ def _onKeyTypeChanged(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:

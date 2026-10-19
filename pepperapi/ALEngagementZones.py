@@ -2,7 +2,7 @@
 This module enables to compue the engagement zones of detected people or detected movements
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALEngagementZones", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALEngagementZones", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -448,7 +448,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALEngagementZones", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -782,7 +782,7 @@ def computeEngagementZone(x:float, y:float, z:float, /) -> int:
 	...
 
 @overload
-def computeEngagementZone(xAngle:float, yAngle:float, distance:float, cameraPositionRobot:object, /) -> int:
+def computeEngagementZone(xAngle:float, yAngle:float, distance:float, cameraPositionRobot:Any, /) -> int:
 	"""
 	Computes the engagement zone in which an object is from its anglular position in the camera image, its distance from the robot, and the position of the camera in FRAME_ROBOT
 	
@@ -794,7 +794,7 @@ def computeEngagementZone(xAngle:float, yAngle:float, distance:float, cameraPosi
 		Y angular coordinate of the object in the image
 	distance:float
 		distance of the object from the robot
-	cameraPositionRobot:object
+	cameraPositionRobot:Any
 		camera position in FRAME_ROBOT
 	
 	Returns
@@ -842,7 +842,7 @@ def computeEngagementZone(*args, **kwargs):
 	------------
 	computeEngagementZone has 2 variants on the robot:
 	- computeEngagementZone(x:float, y:float, z:float)
-	- computeEngagementZone(xAngle:float, yAngle:float, distance:float, cameraPositionRobot:object)
+	- computeEngagementZone(xAngle:float, yAngle:float, distance:float, cameraPositionRobot:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""

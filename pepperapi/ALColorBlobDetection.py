@@ -4,7 +4,7 @@ ALColorBlobDetection is a module which can detect blobs of a certain color.
  
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -67,7 +67,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALColorBlobDetection", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -97,7 +97,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALColorBlobDetection", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -449,7 +449,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALColorBlobDetection", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -967,7 +967,7 @@ def setObjectProperties(*args, **kwargs):
 		raise TypeError("ALColorBlobDetection.setObjectProperties has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALColorBlobDetection", "setObjectProperties", list(args))
 
-def getCircle() -> object:
+def getCircle() -> Any:
 	"""
 	Send back the x,y,radius of the circle if any
 	

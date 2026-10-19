@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALVisualCompass", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALVisualCompass", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -447,7 +447,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALVisualCompass", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -823,7 +823,7 @@ def _run() -> None:
 	# }
 	return call_method("ALVisualCompass", "_run", [])
 
-def getReferenceImage() -> object:
+def getReferenceImage() -> Any:
 	"""
 	Returns an ALValue containing the image used as a reference.
 	
@@ -869,7 +869,7 @@ def enableReferenceRefresh(refresh:bool) -> None:
 	# }
 	return call_method("ALVisualCompass", "enableReferenceRefresh", [refresh])
 
-def getMatchingQuality() -> object:
+def getMatchingQuality() -> Any:
 	"""
 	Returns the reliability of the matching and the compass deviation computations.
 	
@@ -990,7 +990,7 @@ def _xOnMoveFailed() -> None:
 	# }
 	return call_method("ALVisualCompass", "_xOnMoveFailed", [])
 
-def _xOnFootContactChanged(p0:str, p1:object, p2:str) -> None:
+def _xOnFootContactChanged(p0:str, p1:Any, p2:str) -> None:
 	"""
 	
 	
@@ -998,7 +998,7 @@ def _xOnFootContactChanged(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1113,13 +1113,13 @@ def _setTranslationParameters(pCoefficient:float, thetaThreshold:float, p2:float
 	# }
 	return call_method("ALVisualCompass", "_setTranslationParameters", [pCoefficient, thetaThreshold, p2, p3])
 
-def _setRotationParameters(pCoefficient:object, maxRotationSpeed:float, thetaThreshold:float, p3:float, p4:float, p5:int) -> None:
+def _setRotationParameters(pCoefficient:Any, maxRotationSpeed:float, thetaThreshold:float, p3:float, p4:float, p5:int) -> None:
 	"""
 	Set the rotation controller parameters.
 	
 	Parameters
 	----------
-	pCoefficient:object
+	pCoefficient:Any
 		Proportional gain of the controller.
 	maxRotationSpeed:float
 		Max robot rotation speed.

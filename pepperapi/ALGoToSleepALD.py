@@ -2,10 +2,10 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
-def check_if_can_sleep() -> object:
+def check_if_can_sleep() -> Any:
 	"""
 	
 	"""
@@ -21,17 +21,17 @@ def check_if_can_sleep() -> object:
 	# }
 	return call_method("ALGoToSleepALD", "check_if_can_sleep", [])
 
-def check_start_sleep(p0:object, p1:object, p2:object) -> object:
+def check_start_sleep(p0:Any, p1:Any, p2:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -46,7 +46,7 @@ def check_start_sleep(p0:object, p1:object, p2:object) -> object:
 	# }
 	return call_method("ALGoToSleepALD", "check_start_sleep", [p0, p1, p2])
 
-def sleep_mode() -> object:
+def sleep_mode() -> Any:
 	"""
 	
 	"""

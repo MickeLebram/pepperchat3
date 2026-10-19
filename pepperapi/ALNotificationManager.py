@@ -2,7 +2,7 @@
 Notification manager: Handle all notifications on the robot.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALNotificationManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALNotificationManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,13 +165,13 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALNotificationManager", "getUsage", [name])
 
-def add(notification:object) -> int:
+def add(notification:Any) -> int:
 	"""
 	Add a notification.
 	
 	Parameters
 	----------
-	notification:object
+	notification:Any
 		Contain information for the notification
 	
 	Returns
@@ -221,7 +221,7 @@ def remove(notificationId:int) -> None:
 	# }
 	return call_method("ALNotificationManager", "remove", [notificationId])
 
-def notifications() -> object:
+def notifications() -> Any:
 	"""
 	Get the all array of pending notifications.
 	
@@ -241,7 +241,7 @@ def notifications() -> object:
 	# }
 	return call_method("ALNotificationManager", "notifications", [])
 
-def notification(notificationId:int) -> object:
+def notification(notificationId:int) -> Any:
 	"""
 	Get one notification.
 	
@@ -271,7 +271,7 @@ def notification(notificationId:int) -> object:
 	# }
 	return call_method("ALNotificationManager", "notification", [notificationId])
 
-def _internalNotifications() -> object:
+def _internalNotifications() -> Any:
 	"""
 	
 	
@@ -291,7 +291,7 @@ def _internalNotifications() -> object:
 	# }
 	return call_method("ALNotificationManager", "_internalNotifications", [])
 
-def _internalNotification(notificationId:int) -> object:
+def _internalNotification(notificationId:int) -> Any:
 	"""
 	
 	

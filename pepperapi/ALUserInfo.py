@@ -2,12 +2,12 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
 @overload
-def get(p0:str, /) -> object:
+def get(p0:str, /) -> Any:
 	"""
 	
 	
@@ -41,7 +41,7 @@ def get(p0:str, /) -> object:
 	...
 
 @overload
-def get(p0:int, p1:str, /) -> object:
+def get(p0:int, p1:str, /) -> Any:
 	"""
 	
 	
@@ -77,7 +77,7 @@ def get(p0:int, p1:str, /) -> object:
 	...
 
 @overload
-def get(p0:str, p1:str, /) -> object:
+def get(p0:str, p1:str, /) -> Any:
 	"""
 	
 	
@@ -113,7 +113,7 @@ def get(p0:str, p1:str, /) -> object:
 	...
 
 @overload
-def get(p0:str, p1:int, p2:str, /) -> object:
+def get(p0:str, p1:int, p2:str, /) -> Any:
 	"""
 	
 	
@@ -166,7 +166,7 @@ def get(*args, **kwargs):
 		raise TypeError("ALUserInfo.get has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALUserInfo", "get", list(args))
 
-def get_1(p0:str) -> object:
+def get_1(p0:str) -> Any:
 	"""
 	
 	
@@ -191,7 +191,7 @@ def get_1(p0:str) -> object:
 	# }
 	return call_method("ALUserInfo", "get", [p0])
 
-def get_2(p0:int, p1:str) -> object:
+def get_2(p0:int, p1:str) -> Any:
 	"""
 	
 	
@@ -218,7 +218,7 @@ def get_2(p0:int, p1:str) -> object:
 	# }
 	return call_method("ALUserInfo", "get", [p0, p1])
 
-def get_3(p0:str, p1:str) -> object:
+def get_3(p0:str, p1:str) -> Any:
 	"""
 	
 	
@@ -245,7 +245,7 @@ def get_3(p0:str, p1:str) -> object:
 	# }
 	return call_method("ALUserInfo", "get", [p0, p1])
 
-def get_4(p0:str, p1:int, p2:str) -> object:
+def get_4(p0:str, p1:int, p2:str) -> Any:
 	"""
 	
 	
@@ -275,7 +275,7 @@ def get_4(p0:str, p1:int, p2:str) -> object:
 	return call_method("ALUserInfo", "get", [p0, p1, p2])
 
 @overload
-def _set(p0:str, p1:object, /) -> bool:
+def _set(p0:str, p1:Any, /) -> bool:
 	"""
 	
 	
@@ -283,7 +283,7 @@ def _set(p0:str, p1:object, /) -> bool:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	
 	Bridge notes
@@ -305,7 +305,7 @@ def _set(p0:str, p1:object, /) -> bool:
 	...
 
 @overload
-def _set(p0:int, p1:str, p2:object, /) -> bool:
+def _set(p0:int, p1:str, p2:Any, /) -> bool:
 	"""
 	
 	
@@ -315,7 +315,7 @@ def _set(p0:int, p1:str, p2:object, /) -> bool:
 		
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	
 	Bridge notes
@@ -341,8 +341,8 @@ def _set(*args, **kwargs):
 	Bridge notes
 	------------
 	_set has 2 variants on the robot:
-	- _set(p0:str, p1:object)
-	- _set(p0:int, p1:str, p2:object)
+	- _set(p0:str, p1:Any)
+	- _set(p0:int, p1:str, p2:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -351,7 +351,7 @@ def _set(*args, **kwargs):
 	return call_method("ALUserInfo", "_set", list(args))
 
 @overload
-def set(p0:str, p1:str, p2:object, /) -> bool:
+def set(p0:str, p1:str, p2:Any, /) -> bool:
 	"""
 	
 	
@@ -361,7 +361,7 @@ def set(p0:str, p1:str, p2:object, /) -> bool:
 		
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	
 	Bridge notes
@@ -383,7 +383,7 @@ def set(p0:str, p1:str, p2:object, /) -> bool:
 	...
 
 @overload
-def set(p0:str, p1:int, p2:str, p3:object, /) -> bool:
+def set(p0:str, p1:int, p2:str, p3:Any, /) -> bool:
 	"""
 	
 	
@@ -395,7 +395,7 @@ def set(p0:str, p1:int, p2:str, p3:object, /) -> bool:
 		
 	p2:str
 		
-	p3:object
+	p3:Any
 		
 	
 	Bridge notes
@@ -421,8 +421,8 @@ def set(*args, **kwargs):
 	Bridge notes
 	------------
 	set has 2 variants on the robot:
-	- set(p0:str, p1:str, p2:object)
-	- set(p0:str, p1:int, p2:str, p3:object)
+	- set(p0:str, p1:str, p2:Any)
+	- set(p0:str, p1:int, p2:str, p3:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -1007,13 +1007,13 @@ def getType(p0:str, p1:str) -> str:
 	return call_method("ALUserInfo", "getType", [p0, p1])
 
 class _Signals:
-	userInfoEdited: Signal[[int, str, object]] = Signal("ALUserInfo", "userInfoEdited")
+	userInfoEdited: Signal[[int, str, Any]] = Signal("ALUserInfo", "userInfoEdited")
 	"""
 	Bridge notes
 	------------
 	A signal sent by ALUserInfo on the robot.
 	
-	subscribe(callback) calls callback(int, str, object) each time the robot sends it.
+	subscribe(callback) calls callback(int, str, Any) each time the robot sends it.
 	"""
 	userInfoRemoved: Signal[[int, str]] = Signal("ALUserInfo", "userInfoRemoved")
 	"""

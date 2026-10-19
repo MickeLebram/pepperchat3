@@ -2,7 +2,7 @@
 ALTargetManager.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_ALTargetManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_ALTargetManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -197,7 +197,7 @@ def stopManager() -> None:
 	# }
 	return call_method("_ALTargetManager", "stopManager", [])
 
-def addTarget(pTarget_name:str, pParam:object) -> None:
+def addTarget(pTarget_name:str, pParam:Any) -> None:
 	"""
 	Add a predefined target. Subscribe to corresponding extractor if TargetManager is running.
 	
@@ -205,7 +205,7 @@ def addTarget(pTarget_name:str, pParam:object) -> None:
 	----------
 	pTarget_name:str
 		a predefined target name
-	pParam:object
+	pParam:Any
 		a target parameters. (RedBall: set diameter of ball.
 	"""
 	# NAOqi metadata:
@@ -591,7 +591,7 @@ def getExtractorPeriod(pTarget:str) -> int:
 	# }
 	return call_method("_ALTargetManager", "getExtractorPeriod", [pTarget])
 
-def _raiseEvent(key:str, value:object) -> None:
+def _raiseEvent(key:str, value:Any) -> None:
 	"""
 	callback method.
 	
@@ -599,7 +599,7 @@ def _raiseEvent(key:str, value:object) -> None:
 	----------
 	key:str
 		ALMemory key.
-	value:object
+	value:Any
 		ALValue of key.
 	"""
 	# NAOqi metadata:
@@ -623,7 +623,7 @@ def _raiseEvent(key:str, value:object) -> None:
 	# }
 	return call_method("_ALTargetManager", "_raiseEvent", [key, value])
 
-def _genericEvent(p0:str, p1:object) -> None:
+def _genericEvent(p0:str, p1:Any) -> None:
 	"""
 	generic event callback.
 	
@@ -631,7 +631,7 @@ def _genericEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

@@ -2,7 +2,7 @@
 The ALAudioDevice module allows other modules to access to the sound data of the nao's microphones, and to send sound toward its loudspeakers  The way to receive or send the audio data depends whether the modules are local (dynamic library) or remote (executable).
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALAudioDevice", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALAudioDevice", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -259,7 +259,7 @@ def sendLocalBufferToOutput(nbOfFrames:int, pBuffer:int) -> bool:
 	# }
 	return call_method("ALAudioDevice", "sendLocalBufferToOutput", [nbOfFrames, pBuffer])
 
-def sendRemoteBufferToOutput(nbOfFrames:int, pBuffer:object) -> bool:
+def sendRemoteBufferToOutput(nbOfFrames:int, pBuffer:Any) -> bool:
 	"""
 	This function allows a remote module to send sound onto the nao's loudpseakers
 	You must pass to this function the stereo buffer you want to send as an ALValue converted to binary, and the number of frames per channel. The number of frames does not exceed 16384. For more information please see the red documentation
@@ -268,7 +268,7 @@ def sendRemoteBufferToOutput(nbOfFrames:int, pBuffer:object) -> bool:
 	----------
 	nbOfFrames:int
 		Number of 16 bits samples per channel to send.
-	pBuffer:object
+	pBuffer:Any
 		Buffer to send
 	
 	Returns
@@ -594,7 +594,7 @@ def isInputClosed() -> bool:
 	# }
 	return call_method("ALAudioDevice", "isInputClosed", [])
 
-def _listOutputs() -> object:
+def _listOutputs() -> Any:
 	"""
 	return the list of available outputs
 	
@@ -614,7 +614,7 @@ def _listOutputs() -> object:
 	# }
 	return call_method("ALAudioDevice", "_listOutputs", [])
 
-def _output(index:int) -> object:
+def _output(index:int) -> Any:
 	"""
 	return the output matching the index
 	
@@ -690,7 +690,7 @@ def _setDefaultOutput(index:int) -> None:
 	# }
 	return call_method("ALAudioDevice", "_setDefaultOutput", [index])
 
-def _listInputs() -> object:
+def _listInputs() -> Any:
 	"""
 	return the list of available inputs
 	
@@ -710,7 +710,7 @@ def _listInputs() -> object:
 	# }
 	return call_method("ALAudioDevice", "_listInputs", [])
 
-def _input(index:int) -> object:
+def _input(index:int) -> Any:
 	"""
 	return the input matching the index
 	

@@ -2,7 +2,7 @@
 Frame manager is used to play choregraphe projects in naoqi. It needs Choregraphe projects in input and will return an ID for each project. It can also only read a given box/timeline in a complex behavior.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALFrameManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALFrameManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -438,7 +438,7 @@ def behaviors() -> List[str]:
 	# }
 	return call_method("ALFrameManager", "behaviors", [])
 
-def _dataChanged(dataName:str, data:object, message:str) -> None:
+def _dataChanged(dataName:str, data:Any, message:str) -> None:
 	"""
 	Called by ALMemory when subcription data is updated. INTERNAL
 	
@@ -446,7 +446,7 @@ def _dataChanged(dataName:str, data:object, message:str) -> None:
 	----------
 	dataName:str
 		Name of the subscribed data.
-	data:object
+	data:Any
 		Value of the the subscribed data
 	message:str
 		The message give when subscribing.
@@ -564,7 +564,7 @@ def _unsubscribeBoxToEvent(eventName:str, boxName:str, micro:bool) -> None:
 	# }
 	return call_method("ALFrameManager", "_unsubscribeBoxToEvent", [eventName, boxName, micro])
 
-def _boxDataChanged(eventName:str, value:object, message:str) -> None:
+def _boxDataChanged(eventName:str, value:Any, message:str) -> None:
 	"""
 	
 	
@@ -572,7 +572,7 @@ def _boxDataChanged(eventName:str, value:object, message:str) -> None:
 	----------
 	eventName:str
 		
-	value:object
+	value:Any
 		
 	message:str
 		
@@ -700,7 +700,7 @@ def _waitForStopped(fmid:str) -> None:
 	# }
 	return call_method("ALFrameManager", "_waitForStopped", [fmid])
 
-def _onPreferenceUpdated(key:str, value:object, message:str) -> None:
+def _onPreferenceUpdated(key:str, value:Any, message:str) -> None:
 	"""
 	callback for changes in the preference manager
 	
@@ -708,7 +708,7 @@ def _onPreferenceUpdated(key:str, value:object, message:str) -> None:
 	----------
 	key:str
 		ignored, used by ALMemory
-	value:object
+	value:Any
 		the domain and the key of the preference that changed
 	message:str
 		ignored, used by ALMemory
@@ -738,7 +738,7 @@ def _onPreferenceUpdated(key:str, value:object, message:str) -> None:
 	# }
 	return call_method("ALFrameManager", "_onPreferenceUpdated", [key, value, message])
 
-def _onPreferencesSynchronized(key:str, value:object, message:str) -> None:
+def _onPreferencesSynchronized(key:str, value:Any, message:str) -> None:
 	"""
 	callback for changes in the preference manager
 	
@@ -746,7 +746,7 @@ def _onPreferencesSynchronized(key:str, value:object, message:str) -> None:
 	----------
 	key:str
 		ignored, used by ALMemory
-	value:object
+	value:Any
 		the domain and the key of the preference that changed
 	message:str
 		ignored, used by ALMemory
@@ -815,7 +815,7 @@ def _reportError(fmid:str, boxid:str, error:str) -> None:
 	return call_method("ALFrameManager", "_reportError", [fmid, boxid, error])
 
 @overload
-def callBoxInput(box:str, method:str, arg:object, /) -> object:
+def callBoxInput(box:str, method:str, arg:Any, /) -> Any:
 	"""
 	call an input on a box
 	
@@ -825,7 +825,7 @@ def callBoxInput(box:str, method:str, arg:object, /) -> object:
 		name of the box (the URI of the box).
 	method:str
 		name of the method
-	arg:object
+	arg:Any
 		input argument
 	
 	Bridge notes
@@ -860,7 +860,7 @@ def callBoxInput(box:str, method:str, arg:object, /) -> object:
 	...
 
 @overload
-def callBoxInput(box:str, method:str, arg1:object, arg2:object, /) -> object:
+def callBoxInput(box:str, method:str, arg1:Any, arg2:Any, /) -> Any:
 	"""
 	call an input on a box
 	
@@ -870,9 +870,9 @@ def callBoxInput(box:str, method:str, arg1:object, arg2:object, /) -> object:
 		name of the box (the URI of the box). A box URI is of the format 'behavior_name:/diagram_1/box_2'
 	method:str
 		name of the method
-	arg1:object
+	arg1:Any
 		input argument
-	arg2:object
+	arg2:Any
 		input argument
 	
 	Bridge notes
@@ -915,8 +915,8 @@ def callBoxInput(*args, **kwargs):
 	Bridge notes
 	------------
 	callBoxInput has 2 variants on the robot:
-	- callBoxInput(box:str, method:str, arg:object)
-	- callBoxInput(box:str, method:str, arg1:object, arg2:object)
+	- callBoxInput(box:str, method:str, arg:Any)
+	- callBoxInput(box:str, method:str, arg1:Any, arg2:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""

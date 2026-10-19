@@ -5,7 +5,7 @@ There are three primary colors of LEDs available - red, green and blue, so it is
 It is possible to control the LED's intensity (between 0 and 100%).
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -68,7 +68,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALLeds", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -98,7 +98,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALLeds", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -276,7 +276,7 @@ def fade(name:str, intensity:float, duration:float) -> None:
 	# }
 	return call_method("ALLeds", "fade", [name, intensity, duration])
 
-def fadeListRGB(name:str, rgbList:object, timeList:object) -> None:
+def fadeListRGB(name:str, rgbList:Any, timeList:Any) -> None:
 	"""
 	Chain a list of color for a device, as the motion.doMove command.
 	
@@ -284,9 +284,9 @@ def fadeListRGB(name:str, rgbList:object, timeList:object) -> None:
 	----------
 	name:str
 		The name of the LED or Group.
-	rgbList:object
+	rgbList:Any
 		List of RGB led value, RGB as seen in hexa-decimal: 0x00RRGGBB.
-	timeList:object
+	timeList:Any
 		List of time to go to given intensity.
 	"""
 	# NAOqi metadata:
@@ -737,7 +737,7 @@ def _setIntensityRatio(name:str, intensity:float) -> None:
 	# }
 	return call_method("ALLeds", "_setIntensityRatio", [name, intensity])
 
-def getIntensity(name:str) -> object:
+def getIntensity(name:str) -> Any:
 	"""
 	Gets the intensity of a LED or device
 	

@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 @overload
@@ -78,7 +78,7 @@ def _add(*args, **kwargs):
 	return call_method("_ALNotificationAdder", "_add", list(args))
 
 @overload
-def _get(p0:int, /) -> object:
+def _get(p0:int, /) -> Any:
 	"""
 	
 	
@@ -106,7 +106,7 @@ def _get(p0:int, /) -> object:
 	...
 
 @overload
-def _get(p0:int, p1:List[str], /) -> object:
+def _get(p0:int, p1:List[str], /) -> Any:
 	"""
 	
 	

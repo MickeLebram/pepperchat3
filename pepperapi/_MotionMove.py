@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_MotionMove", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_MotionMove", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,13 +165,13 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("_MotionMove", "getUsage", [name])
 
-def setParam(p0:object) -> None:
+def setParam(p0:Any) -> None:
 	"""
 	Set the parameters.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -234,13 +234,13 @@ def stopWithoutStopMove() -> None:
 	# }
 	return call_method("_MotionMove", "stopWithoutStopMove", [])
 
-def move(p0:object) -> None:
+def move(p0:Any) -> None:
 	"""
 	Run the moving process.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -255,7 +255,7 @@ def move(p0:object) -> None:
 	# }
 	return call_method("_MotionMove", "move", [p0])
 
-def moveEvent(p0:str, p1:object) -> None:
+def moveEvent(p0:str, p1:Any) -> None:
 	"""
 	Run the moving process.
 	
@@ -263,7 +263,7 @@ def moveEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

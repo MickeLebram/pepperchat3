@@ -2,7 +2,7 @@
 This module provides methods to record videos and store them on disk.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALVideoRecorder", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALVideoRecorder", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -263,7 +263,7 @@ def startRecording(*args, **kwargs):
 		raise TypeError("ALVideoRecorder.startRecording has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALVideoRecorder", "startRecording", list(args))
 
-def stopRecording() -> object:
+def stopRecording() -> Any:
 	"""
 	Stops a video record that was launched with startRecording(). The function returns the number of frames that were recorded, as well as the video absolute file name.
 	

@@ -2,7 +2,7 @@
 Manage robot resources: Synchronize movement, led, sound. Run specific actions when another behavior wants your resources
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALResourceManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALResourceManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -716,7 +716,7 @@ def createResourcesList(resourceGroupName:List[str], resourceName:str) -> None:
 	# }
 	return call_method("ALResourceManager", "createResourcesList", [resourceGroupName, resourceName])
 
-def getResources() -> object:
+def getResources() -> Any:
 	"""
 	Get tree of resources
 	"""
@@ -732,7 +732,7 @@ def getResources() -> object:
 	# }
 	return call_method("ALResourceManager", "getResources", [])
 
-def ownersGet() -> object:
+def ownersGet() -> Any:
 	"""
 	The tree of the resources owners.
 	"""

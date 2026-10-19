@@ -6,7 +6,7 @@ This module computes the position (azimuth, elevation) of a sound source detecte
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -69,7 +69,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALAudioSourceLocalization", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -99,7 +99,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALAudioSourceLocalization", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -451,7 +451,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALAudioSourceLocalization", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -597,7 +597,7 @@ def isProcessing() -> bool:
 	# }
 	return call_method("ALAudioSourceLocalization", "isProcessing", [])
 
-def setParameter(parameter:str, value:object) -> None:
+def setParameter(parameter:str, value:Any) -> None:
 	"""
 	Set the specified parameter.
 	
@@ -605,7 +605,7 @@ def setParameter(parameter:str, value:object) -> None:
 	----------
 	parameter:str
 		Name of the parameter. "Sensibility" between 0 and 1 to adjust the capacity of NAO to locate quiet sounds. "EnergyComputation" (1 or 0) that activates the computation of the located source signal energy. This energy is added in the "ALSoundLocalization/SoundLocated" ALMemory key.
-	value:object
+	value:Any
 		"Sensibility" : a float in [0,1]. "EnergyComputation" : (1 or 0).
 	"""
 	# NAOqi metadata:

@@ -2,7 +2,7 @@
 ALDialog is the dialog module. It allows loading a dialog file (.top), starts/stops/loads/unloads the dialog
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALDialog", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALDialog", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -448,7 +448,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALDialog", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -528,7 +528,7 @@ def getMemoryKeyList() -> List[str]:
 	# }
 	return call_method("ALDialog", "getMemoryKeyList", [])
 
-def _wordRecognized(unsuned:str, value:object, message:str) -> None:
+def _wordRecognized(unsuned:str, value:Any, message:str) -> None:
 	"""
 	Callback when speech recognition recognized a word
 	
@@ -536,7 +536,7 @@ def _wordRecognized(unsuned:str, value:object, message:str) -> None:
 	----------
 	unsuned:str
 		callback unused parameter
-	value:object
+	value:Any
 		word recognized value
 	message:str
 		unused message
@@ -869,13 +869,13 @@ def removeBlockingEvent(eventName:str) -> None:
 	# }
 	return call_method("ALDialog", "removeBlockingEvent", [eventName])
 
-def wordsRecognizedCallback(grammar:object, utterance_Size:int) -> None:
+def wordsRecognizedCallback(grammar:Any, utterance_Size:int) -> None:
 	"""
 	Asr callback for recognized words
 	
 	Parameters
 	----------
-	grammar:object
+	grammar:Any
 		recognized grammar
 	utterance_Size:int
 		Utterance size
@@ -993,7 +993,7 @@ def _hasPreference() -> bool:
 	# }
 	return call_method("ALDialog", "_hasPreference", [])
 
-def _eventReceived(eventName:str, eventValue:object, message:str) -> None:
+def _eventReceived(eventName:str, eventValue:Any, message:str) -> None:
 	"""
 	Callback when dialog received a event
 	
@@ -1001,7 +1001,7 @@ def _eventReceived(eventName:str, eventValue:object, message:str) -> None:
 	----------
 	eventName:str
 		event name received
-	eventValue:object
+	eventValue:Any
 		event value
 	message:str
 		unused event message
@@ -1031,7 +1031,7 @@ def _eventReceived(eventName:str, eventValue:object, message:str) -> None:
 	# }
 	return call_method("ALDialog", "_eventReceived", [eventName, eventValue, message])
 
-def _statusChanged(internalCallBackEvent:str, internalCallbackValue:object, message:str) -> None:
+def _statusChanged(internalCallBackEvent:str, internalCallbackValue:Any, message:str) -> None:
 	"""
 	Callback when ASR status changes
 	
@@ -1039,7 +1039,7 @@ def _statusChanged(internalCallBackEvent:str, internalCallbackValue:object, mess
 	----------
 	internalCallBackEvent:str
 		unused
-	internalCallbackValue:object
+	internalCallbackValue:Any
 		unused
 	message:str
 		unused
@@ -1127,7 +1127,7 @@ def noPick(topicName:str) -> None:
 	# }
 	return call_method("ALDialog", "noPick", [topicName])
 
-def _connectionChanged(internalCallBackEvent:str, internalCallbackValue:object, message:str) -> None:
+def _connectionChanged(internalCallBackEvent:str, internalCallbackValue:Any, message:str) -> None:
 	"""
 	Callback when remote connection changes
 	
@@ -1135,7 +1135,7 @@ def _connectionChanged(internalCallBackEvent:str, internalCallbackValue:object, 
 	----------
 	internalCallBackEvent:str
 		unused
-	internalCallbackValue:object
+	internalCallbackValue:Any
 		unused
 	message:str
 		unused
@@ -2399,13 +2399,13 @@ def stopPush() -> None:
 	# }
 	return call_method("ALDialog", "stopPush", [])
 
-def setAnimatedSpeechConfiguration(animatedSpeechConfiguration:object) -> None:
+def setAnimatedSpeechConfiguration(animatedSpeechConfiguration:Any) -> None:
 	"""
 	Set the configuration of animated speech for the current dialog.
 	
 	Parameters
 	----------
-	animatedSpeechConfiguration:object
+	animatedSpeechConfiguration:Any
 		See animated speech documentation
 	"""
 	# NAOqi metadata:
@@ -2425,7 +2425,7 @@ def setAnimatedSpeechConfiguration(animatedSpeechConfiguration:object) -> None:
 	# }
 	return call_method("ALDialog", "setAnimatedSpeechConfiguration", [animatedSpeechConfiguration])
 
-def getAnimatedSpeechConfiguration() -> object:
+def getAnimatedSpeechConfiguration() -> Any:
 	"""
 	Get the configuration of animated speech for the current dialog.
 	
@@ -3102,7 +3102,7 @@ def _unregisterIO(boxName:str, topicName:str) -> None:
 	# }
 	return call_method("ALDialog", "_unregisterIO", [boxName, topicName])
 
-def _messageIn(boxName:str, topicName:str, variableName:str, value:object) -> None:
+def _messageIn(boxName:str, topicName:str, variableName:str, value:Any) -> None:
 	"""
 	Send a message input
 	
@@ -3114,7 +3114,7 @@ def _messageIn(boxName:str, topicName:str, variableName:str, value:object) -> No
 		Topic name
 	variableName:str
 		Variable name
-	value:object
+	value:Any
 		Value
 	"""
 	# NAOqi metadata:
@@ -3192,7 +3192,7 @@ def getLanguage() -> str:
 	# }
 	return call_method("ALDialog", "getLanguage", [])
 
-def _startUpdate(variableName:str, variableValue:object, message:str) -> None:
+def _startUpdate(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	startUpdate
 	
@@ -3200,7 +3200,7 @@ def _startUpdate(variableName:str, variableValue:object, message:str) -> None:
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -3230,7 +3230,7 @@ def _startUpdate(variableName:str, variableValue:object, message:str) -> None:
 	# }
 	return call_method("ALDialog", "_startUpdate", [variableName, variableValue, message])
 
-def _startApp(variableName:str, variableValue:object, message:str) -> None:
+def _startApp(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	startUpdate
 	
@@ -3238,7 +3238,7 @@ def _startApp(variableName:str, variableValue:object, message:str) -> None:
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -3268,7 +3268,7 @@ def _startApp(variableName:str, variableValue:object, message:str) -> None:
 	# }
 	return call_method("ALDialog", "_startApp", [variableName, variableValue, message])
 
-def _packageInstalled(variableName:str, variableValue:object, message:str) -> None:
+def _packageInstalled(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	packageInstalled
 	
@@ -3276,7 +3276,7 @@ def _packageInstalled(variableName:str, variableValue:object, message:str) -> No
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -3306,7 +3306,7 @@ def _packageInstalled(variableName:str, variableValue:object, message:str) -> No
 	# }
 	return call_method("ALDialog", "_packageInstalled", [variableName, variableValue, message])
 
-def _packageRemoved(variableName:str, variableValue:object, message:str) -> None:
+def _packageRemoved(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	_packageRemoved
 	
@@ -3314,7 +3314,7 @@ def _packageRemoved(variableName:str, variableValue:object, message:str) -> None
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -3344,7 +3344,7 @@ def _packageRemoved(variableName:str, variableValue:object, message:str) -> None
 	# }
 	return call_method("ALDialog", "_packageRemoved", [variableName, variableValue, message])
 
-def dialogAnswered(variableName:str, variableValue:object, message:str) -> None:
+def dialogAnswered(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	dialogAnswered
 	
@@ -3352,7 +3352,7 @@ def dialogAnswered(variableName:str, variableValue:object, message:str) -> None:
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -3382,7 +3382,7 @@ def dialogAnswered(variableName:str, variableValue:object, message:str) -> None:
 	# }
 	return call_method("ALDialog", "dialogAnswered", [variableName, variableValue, message])
 
-def _compilationFinished(variableName:str, variableValue:object, message:str) -> None:
+def _compilationFinished(variableName:str, variableValue:Any, message:str) -> None:
 	"""
 	compilationFinished
 	
@@ -3390,7 +3390,7 @@ def _compilationFinished(variableName:str, variableValue:object, message:str) ->
 	----------
 	variableName:str
 		variable name
-	variableValue:object
+	variableValue:Any
 		variable value
 	message:str
 		message
@@ -4806,7 +4806,7 @@ def _setLengthForBeforeStarOptimization(length:int) -> None:
 	# }
 	return call_method("ALDialog", "_setLengthForBeforeStarOptimization", [length])
 
-def _onUserSessionFocused(p1:str, p2:object, p3:str) -> None:
+def _onUserSessionFocused(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -4814,7 +4814,7 @@ def _onUserSessionFocused(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -4844,7 +4844,7 @@ def _onUserSessionFocused(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALDialog", "_onUserSessionFocused", [p1, p2, p3])
 
-def _onUserDeleted(p1:str, p2:object, p3:str) -> None:
+def _onUserDeleted(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -4852,7 +4852,7 @@ def _onUserDeleted(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -4882,7 +4882,7 @@ def _onUserDeleted(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALDialog", "_onUserDeleted", [p1, p2, p3])
 
-def _us_getUserData(p1:str, p2:str, p3:str) -> object:
+def _us_getUserData(p1:str, p2:str, p3:str) -> Any:
 	"""
 	
 	

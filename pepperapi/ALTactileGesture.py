@@ -2,11 +2,11 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
-def _bit_distance(p0:object) -> object:
+def _bit_distance(p0:Any) -> Any:
 	"""
 	
 	        Computes 'Hamming distance' between the binary representations of
@@ -15,7 +15,7 @@ def _bit_distance(p0:object) -> object:
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -30,7 +30,7 @@ def _bit_distance(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_bit_distance", [p0])
 
-def _cancel_futures() -> object:
+def _cancel_futures() -> Any:
 	"""
 	Cancel all futures
 	"""
@@ -46,7 +46,7 @@ def _cancel_futures() -> object:
 	# }
 	return call_method("ALTactileGesture", "_cancel_futures", [])
 
-def _check_sequence(p0:object, p1:object, p2:object, p3:object) -> object:
+def _check_sequence(p0:Any, p1:Any, p2:Any, p3:Any) -> Any:
 	"""
 	
 	        Given a gesture, check if the active sequence matches it.
@@ -70,13 +70,13 @@ def _check_sequence(p0:object, p1:object, p2:object, p3:object) -> object:
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
-	p3:object
+	p3:Any
 		
 	"""
 	# NAOqi metadata:
@@ -91,7 +91,7 @@ def _check_sequence(p0:object, p1:object, p2:object, p3:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_check_sequence", [p0, p1, p2, p3])
 
-def _clean_up() -> object:
+def _clean_up() -> Any:
 	"""
 	Clean up/reset after a sequence has been completed
 	"""
@@ -107,7 +107,7 @@ def _clean_up() -> object:
 	# }
 	return call_method("ALTactileGesture", "_clean_up", [])
 
-def _clean_up_hold() -> object:
+def _clean_up_hold() -> Any:
 	"""
 	Clean up/reset after a hold sequence has been completed
 	"""
@@ -123,7 +123,7 @@ def _clean_up_hold() -> object:
 	# }
 	return call_method("ALTactileGesture", "_clean_up_hold", [])
 
-def _connect_services() -> object:
+def _connect_services() -> Any:
 	"""
 	Connect to all services required by ALTactileGesture
 	"""
@@ -139,7 +139,7 @@ def _connect_services() -> object:
 	# }
 	return call_method("ALTactileGesture", "_connect_services", [])
 
-def _connect_signals() -> object:
+def _connect_signals() -> Any:
 	"""
 	Init qi.Signals and memory events (for compatibility)
 	"""
@@ -155,13 +155,13 @@ def _connect_signals() -> object:
 	# }
 	return call_method("ALTactileGesture", "_connect_signals", [])
 
-def _create_gesture_name(p0:object) -> object:
+def _create_gesture_name(p0:Any) -> Any:
 	"""
 	Create gesture name from sequence
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -176,7 +176,7 @@ def _create_gesture_name(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_create_gesture_name", [p0])
 
-def _eval_hold() -> object:
+def _eval_hold() -> Any:
 	"""
 	
 	        Once the hold time has expired:
@@ -197,7 +197,7 @@ def _eval_hold() -> object:
 	# }
 	return call_method("ALTactileGesture", "_eval_hold", [])
 
-def _eval_sequence() -> object:
+def _eval_sequence() -> Any:
 	"""
 	
 	        Once the sequence time has expired:
@@ -218,13 +218,13 @@ def _eval_sequence() -> object:
 	# }
 	return call_method("ALTactileGesture", "_eval_sequence", [])
 
-def _fire_gesture_signal(p0:object) -> object:
+def _fire_gesture_signal(p0:Any) -> Any:
 	"""
 	Fire signal linked to gesture
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -239,7 +239,7 @@ def _fire_gesture_signal(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_fire_gesture_signal", [p0])
 
-def _fire_release_signal() -> object:
+def _fire_release_signal() -> Any:
 	"""
 	Fire signal linked to release of sensors
 	"""
@@ -255,7 +255,7 @@ def _fire_release_signal() -> object:
 	# }
 	return call_method("ALTactileGesture", "_fire_release_signal", [])
 
-def _on_sensor_change(p0:object) -> object:
+def _on_sensor_change(p0:Any) -> Any:
 	"""
 	
 	        On any head sensor change, acquire lock and starts e_sim (settling)
@@ -266,7 +266,7 @@ def _on_sensor_change(p0:object) -> object:
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -281,7 +281,7 @@ def _on_sensor_change(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_on_sensor_change", [p0])
 
-def _read_sensors() -> object:
+def _read_sensors() -> Any:
 	"""
 	
 	        Once the settling time (e_sim) is over:
@@ -302,7 +302,7 @@ def _read_sensors() -> object:
 	# }
 	return call_method("ALTactileGesture", "_read_sensors", [])
 
-def _search_gestures() -> object:
+def _search_gestures() -> Any:
 	"""
 	
 	        Compare inputted sequence to all gestures to find match
@@ -328,13 +328,13 @@ def _search_gestures() -> object:
 	# }
 	return call_method("ALTactileGesture", "_search_gestures", [])
 
-def _set_hold_time(p0:object) -> object:
+def _set_hold_time(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -349,13 +349,13 @@ def _set_hold_time(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_set_hold_time", [p0])
 
-def _set_sequence_time(p0:object) -> object:
+def _set_sequence_time(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -370,13 +370,13 @@ def _set_sequence_time(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_set_sequence_time", [p0])
 
-def _set_settle_time(p0:object) -> object:
+def _set_settle_time(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -391,7 +391,7 @@ def _set_settle_time(p0:object) -> object:
 	# }
 	return call_method("ALTactileGesture", "_set_settle_time", [p0])
 
-def _start() -> object:
+def _start() -> Any:
 	"""
 	Start subscriptions to head sensors
 	"""
@@ -407,7 +407,7 @@ def _start() -> object:
 	# }
 	return call_method("ALTactileGesture", "_start", [])
 
-def _start_d_hold_timer() -> object:
+def _start_d_hold_timer() -> Any:
 	"""
 	Starts a timer that waits for the hold period to evaluate if there is a
 	        valid hold sequence
@@ -424,7 +424,7 @@ def _start_d_hold_timer() -> object:
 	# }
 	return call_method("ALTactileGesture", "_start_d_hold_timer", [])
 
-def _start_e_seq_timer() -> object:
+def _start_e_seq_timer() -> Any:
 	"""
 	Starts a timer that determines if events in a sequence happen soon
 	        enough for them to be considered in teh current sequence.
@@ -441,7 +441,7 @@ def _start_e_seq_timer() -> object:
 	# }
 	return call_method("ALTactileGesture", "_start_e_seq_timer", [])
 
-def _start_e_sim_timer() -> object:
+def _start_e_sim_timer() -> Any:
 	"""
 	Starts timer that waits for a setteling time before reading the sensors
 	"""
@@ -457,7 +457,7 @@ def _start_e_sim_timer() -> object:
 	# }
 	return call_method("ALTactileGesture", "_start_e_sim_timer", [])
 
-def _stop() -> object:
+def _stop() -> Any:
 	"""
 	Unsubscribe from head sensors
 	"""
@@ -473,7 +473,7 @@ def _stop() -> object:
 	# }
 	return call_method("ALTactileGesture", "_stop", [])
 
-def _sync_preferences() -> object:
+def _sync_preferences() -> Any:
 	"""
 	Sync with preferences. This includes: Settle Time, Hold Time and Sequence Time
 	"""
@@ -489,13 +489,13 @@ def _sync_preferences() -> object:
 	# }
 	return call_method("ALTactileGesture", "_sync_preferences", [])
 
-def _validate_sequence(p0:object) -> object:
+def _validate_sequence(p0:Any) -> Any:
 	"""
 	Validate a requested gesture sequence
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -655,7 +655,7 @@ def createGesture_str(sensor_sequence:str) -> str:
 	return call_method("ALTactileGesture", "createGesture", [sensor_sequence])
 
 @overload
-def getGesture(sequence:str, /) -> object:
+def getGesture(sequence:str, /) -> Any:
 	"""
 	Get the sequence associated with a gesture name
 	
@@ -691,7 +691,7 @@ def getGesture(sequence:str, /) -> object:
 	...
 
 @overload
-def getGesture(sequence:List[str], /) -> object:
+def getGesture(sequence:List[str], /) -> Any:
 	"""
 	Get the sequence associated with a gesture name
 	
@@ -740,7 +740,7 @@ def getGesture(*args, **kwargs):
 		raise TypeError("ALTactileGesture.getGesture has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALTactileGesture", "getGesture", list(args))
 
-def getGesture_list_str(sequence:List[str]) -> object:
+def getGesture_list_str(sequence:List[str]) -> Any:
 	"""
 	Get the sequence associated with a gesture name
 	
@@ -769,7 +769,7 @@ def getGesture_list_str(sequence:List[str]) -> object:
 	# }
 	return call_method("ALTactileGesture", "getGesture", [sequence])
 
-def getGesture_str(sequence:str) -> object:
+def getGesture_str(sequence:str) -> Any:
 	"""
 	Get the sequence associated with a gesture name
 	
@@ -1276,21 +1276,21 @@ def setSettleTime_str(settle_time:str) -> bool:
 	return call_method("ALTactileGesture", "setSettleTime", [settle_time])
 
 class _Signals:
-	onGesture: Signal[[object]] = Signal("ALTactileGesture", "onGesture")
+	onGesture: Signal[[Any]] = Signal("ALTactileGesture", "onGesture")
 	"""
 	Bridge notes
 	------------
 	A signal sent by ALTactileGesture on the robot.
 	
-	subscribe(callback) calls callback(object) each time the robot sends it.
+	subscribe(callback) calls callback(Any) each time the robot sends it.
 	"""
-	onRelease: Signal[[object]] = Signal("ALTactileGesture", "onRelease")
+	onRelease: Signal[[Any]] = Signal("ALTactileGesture", "onRelease")
 	"""
 	Bridge notes
 	------------
 	A signal sent by ALTactileGesture on the robot.
 	
-	subscribe(callback) calls callback(object) each time the robot sends it.
+	subscribe(callback) calls callback(Any) each time the robot sends it.
 	"""
 signals = _Signals()
 

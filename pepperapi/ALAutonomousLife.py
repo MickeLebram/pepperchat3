@@ -2,7 +2,7 @@
 Manages the focused Activity and Autonomous Life state
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from dataclasses import dataclass, field
 from .robot_client import call_method
 from .robot_client import Signal, Property
@@ -85,7 +85,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALAutonomousLife", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -115,7 +115,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALAutonomousLife", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -185,7 +185,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALAutonomousLife", "getUsage", [name])
 
-def _onPreferenceChanged(p1:str, p2:object, p3:str) -> None:
+def _onPreferenceChanged(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -193,7 +193,7 @@ def _onPreferenceChanged(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -223,7 +223,7 @@ def _onPreferenceChanged(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "_onPreferenceChanged", [p1, p2, p3])
 
-def onReady(p1:str, p2:object, p3:str) -> None:
+def onReady(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -231,7 +231,7 @@ def onReady(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -261,7 +261,7 @@ def onReady(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "onReady", [p1, p2, p3])
 
-def _onRobotHealthChanged(p1:str, p2:object, p3:str) -> None:
+def _onRobotHealthChanged(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -269,7 +269,7 @@ def _onRobotHealthChanged(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -299,7 +299,7 @@ def _onRobotHealthChanged(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "_onRobotHealthChanged", [p1, p2, p3])
 
-def _onPushRecovery(p1:str, p2:object, p3:str) -> None:
+def _onPushRecovery(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -307,7 +307,7 @@ def _onPushRecovery(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -337,7 +337,7 @@ def _onPushRecovery(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "_onPushRecovery", [p1, p2, p3])
 
-def _onFallRecovery(p1:str, p2:object, p3:str) -> None:
+def _onFallRecovery(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -345,7 +345,7 @@ def _onFallRecovery(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -375,7 +375,7 @@ def _onFallRecovery(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "_onFallRecovery", [p1, p2, p3])
 
-def _onRobotMoved(p1:str, p2:object, p3:str) -> None:
+def _onRobotMoved(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -383,7 +383,7 @@ def _onRobotMoved(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -604,7 +604,7 @@ def switchFocus(activity_name:str, flags:int, /) -> None:
 	...
 
 @overload
-def switchFocus(activity_name:str, flags:int, parameters:object, /) -> None:
+def switchFocus(activity_name:str, flags:int, parameters:Any, /) -> None:
 	"""
 	Set an activity as running with user focus
 	
@@ -614,7 +614,7 @@ def switchFocus(activity_name:str, flags:int, parameters:object, /) -> None:
 		The package_name/activity_name to run
 	flags:int
 		Int flags for focus changing. STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1)
-	parameters:object
+	parameters:Any
 		AnyValue to be passed to activity
 	
 	Bridge notes
@@ -655,7 +655,7 @@ def switchFocus(*args, **kwargs):
 	switchFocus has 3 variants on the robot:
 	- switchFocus(activity_name:str)
 	- switchFocus(activity_name:str, flags:int)
-	- switchFocus(activity_name:str, flags:int, parameters:object)
+	- switchFocus(activity_name:str, flags:int, parameters:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -726,7 +726,7 @@ def _switchFocus(p0:str, p1:int, p2:str, /) -> None:
 	...
 
 @overload
-def _switchFocus(p0:str, p1:int, p2:object, p3:str, /) -> None:
+def _switchFocus(p0:str, p1:int, p2:Any, p3:str, /) -> None:
 	"""
 	
 	
@@ -736,7 +736,7 @@ def _switchFocus(p0:str, p1:int, p2:object, p3:str, /) -> None:
 		
 	p1:int
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -766,7 +766,7 @@ def _switchFocus(*args, **kwargs):
 	_switchFocus has 3 variants on the robot:
 	- _switchFocus(p0:str, p1:str)
 	- _switchFocus(p0:str, p1:int, p2:str)
-	- _switchFocus(p0:str, p1:int, p2:object, p3:str)
+	- _switchFocus(p0:str, p1:int, p2:Any, p3:str)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -848,7 +848,7 @@ def _stopAll(p0:str) -> None:
 	# }
 	return call_method("ALAutonomousLife", "_stopAll", [p0])
 
-def getFocusContext(name:str) -> object:
+def getFocusContext(name:str) -> Any:
 	"""
 	Get a value of an ALMemory key that is used in a condition, which is the value at the previous autonomous activity focus.
 	

@@ -2,7 +2,7 @@
 Use ALNavigation module to make the robot go safely to the asked pose2D.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALNavigation", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALNavigation", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -184,8 +184,8 @@ def navigateTo(x:float, y:float, /) -> bool:
 	To choose explicitly, use:
 	- navigateTo_1(float, float)
 	- navigateTo_2(float, float, float)
-	- navigateTo_3(float, float, object)
-	- navigateTo_4(float, float, float, object)
+	- navigateTo_3(float, float, Any)
+	- navigateTo_4(float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -231,8 +231,8 @@ def navigateTo(x:float, y:float, theta:float, /) -> bool:
 	To choose explicitly, use:
 	- navigateTo_1(float, float)
 	- navigateTo_2(float, float, float)
-	- navigateTo_3(float, float, object)
-	- navigateTo_4(float, float, float, object)
+	- navigateTo_3(float, float, Any)
+	- navigateTo_4(float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -262,7 +262,7 @@ def navigateTo(x:float, y:float, theta:float, /) -> bool:
 	...
 
 @overload
-def navigateTo(x:float, y:float, config:object, /) -> bool:
+def navigateTo(x:float, y:float, config:Any, /) -> bool:
 	"""
 	Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT. The robot computes a path to avoid obstacles.
 	
@@ -272,7 +272,7 @@ def navigateTo(x:float, y:float, config:object, /) -> bool:
 		The position along x axis [m].
 	y:float
 		The position along y axis [m].
-	config:object
+	config:Any
 		Configuration ALValue. For example, [["SpeedFactor", 0.5]] sets speedFactor to 0.5
 	
 	Bridge notes
@@ -282,8 +282,8 @@ def navigateTo(x:float, y:float, config:object, /) -> bool:
 	To choose explicitly, use:
 	- navigateTo_1(float, float)
 	- navigateTo_2(float, float, float)
-	- navigateTo_3(float, float, object)
-	- navigateTo_4(float, float, float, object)
+	- navigateTo_3(float, float, Any)
+	- navigateTo_4(float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -313,7 +313,7 @@ def navigateTo(x:float, y:float, config:object, /) -> bool:
 	...
 
 @overload
-def navigateTo(x:float, y:float, theta:float, config:object, /) -> bool:
+def navigateTo(x:float, y:float, theta:float, config:Any, /) -> bool:
 	"""
 	Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT. The robot computes a path to avoid obstacles.
 	
@@ -325,7 +325,7 @@ def navigateTo(x:float, y:float, theta:float, config:object, /) -> bool:
 		The position along y axis [m].
 	theta:float
 		Orientation of the robot (rad).
-	config:object
+	config:Any
 		Configuration ALValue. For example, [["SpeedFactor", 0.5]] sets speedFactor to 0.5
 	
 	Bridge notes
@@ -335,8 +335,8 @@ def navigateTo(x:float, y:float, theta:float, config:object, /) -> bool:
 	To choose explicitly, use:
 	- navigateTo_1(float, float)
 	- navigateTo_2(float, float, float)
-	- navigateTo_3(float, float, object)
-	- navigateTo_4(float, float, float, object)
+	- navigateTo_3(float, float, Any)
+	- navigateTo_4(float, float, float, Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -376,8 +376,8 @@ def navigateTo(*args, **kwargs):
 	navigateTo has 4 variants on the robot:
 	- navigateTo(x:float, y:float), explicitly navigateTo_1
 	- navigateTo(x:float, y:float, theta:float), explicitly navigateTo_2
-	- navigateTo(x:float, y:float, config:object), explicitly navigateTo_3
-	- navigateTo(x:float, y:float, theta:float, config:object), explicitly navigateTo_4
+	- navigateTo(x:float, y:float, config:Any), explicitly navigateTo_3
+	- navigateTo(x:float, y:float, theta:float, config:Any), explicitly navigateTo_4
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -463,7 +463,7 @@ def navigateTo_2(x:float, y:float, theta:float) -> bool:
 	# }
 	return call_method("ALNavigation", "navigateTo", [x, y, theta])
 
-def navigateTo_3(x:float, y:float, config:object) -> bool:
+def navigateTo_3(x:float, y:float, config:Any) -> bool:
 	"""
 	Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT. The robot computes a path to avoid obstacles.
 	
@@ -473,12 +473,12 @@ def navigateTo_3(x:float, y:float, config:object) -> bool:
 		The position along x axis [m].
 	y:float
 		The position along y axis [m].
-	config:object
+	config:Any
 		Configuration ALValue. For example, [["SpeedFactor", 0.5]] sets speedFactor to 0.5
 	
 	Bridge notes
 	------------
-	Explicit variant of navigateTo(float, float, object). Calling navigateTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of navigateTo(float, float, Any). Calling navigateTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -505,7 +505,7 @@ def navigateTo_3(x:float, y:float, config:object) -> bool:
 	# }
 	return call_method("ALNavigation", "navigateTo", [x, y, config])
 
-def navigateTo_4(x:float, y:float, theta:float, config:object) -> bool:
+def navigateTo_4(x:float, y:float, theta:float, config:Any) -> bool:
 	"""
 	Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT. The robot computes a path to avoid obstacles.
 	
@@ -517,12 +517,12 @@ def navigateTo_4(x:float, y:float, theta:float, config:object) -> bool:
 		The position along y axis [m].
 	theta:float
 		Orientation of the robot (rad).
-	config:object
+	config:Any
 		Configuration ALValue. For example, [["SpeedFactor", 0.5]] sets speedFactor to 0.5
 	
 	Bridge notes
 	------------
-	Explicit variant of navigateTo(float, float, float, object). Calling navigateTo instead lets the robot choose the variant from the argument types.
+	Explicit variant of navigateTo(float, float, float, Any). Calling navigateTo instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -553,13 +553,13 @@ def navigateTo_4(x:float, y:float, theta:float, config:object) -> bool:
 	# }
 	return call_method("ALNavigation", "navigateTo", [x, y, theta, config])
 
-def _setNavigationConfig(config:object) -> None:
+def _setNavigationConfig(config:Any) -> None:
 	"""
 	Internal Use.
 	
 	Parameters
 	----------
-	config:object
+	config:Any
 		Internal: An array of ALValues [i][0]: name, [i][1]: value
 	"""
 	# NAOqi metadata:
@@ -627,7 +627,7 @@ def _isNavigateToRunning() -> bool:
 	# }
 	return call_method("ALNavigation", "_isNavigateToRunning", [])
 
-def _getObstacleData() -> object:
+def _getObstacleData() -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are the one used by the secure navigator
 	"""
@@ -643,7 +643,7 @@ def _getObstacleData() -> object:
 	# }
 	return call_method("ALNavigation", "_getObstacleData", [])
 
-def _getOccupancyGrid(client:str) -> object:
+def _getOccupancyGrid(client:str) -> Any:
 	"""
 	Get the requested occupancy grid formatted as a ROS navigation stack message.
 	
@@ -670,7 +670,7 @@ def _getOccupancyGrid(client:str) -> object:
 	return call_method("ALNavigation", "_getOccupancyGrid", [client])
 
 @overload
-def _getSensorData() -> object:
+def _getSensorData() -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -698,7 +698,7 @@ def _getSensorData() -> object:
 	...
 
 @overload
-def _getSensorData(p0:str, /) -> object:
+def _getSensorData(p0:str, /) -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -731,7 +731,7 @@ def _getSensorData(p0:str, /) -> object:
 	...
 
 @overload
-def _getSensorData(p0:List[str], /) -> object:
+def _getSensorData(p0:List[str], /) -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -778,7 +778,7 @@ def _getSensorData(*args, **kwargs):
 		raise TypeError("ALNavigation._getSensorData has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALNavigation", "_getSensorData", list(args))
 
-def _getSensorData_1() -> object:
+def _getSensorData_1() -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -798,7 +798,7 @@ def _getSensorData_1() -> object:
 	# }
 	return call_method("ALNavigation", "_getSensorData", [])
 
-def _getSensorData_2(p0:List[str]) -> object:
+def _getSensorData_2(p0:List[str]) -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -823,7 +823,7 @@ def _getSensorData_2(p0:List[str]) -> object:
 	# }
 	return call_method("ALNavigation", "_getSensorData", [p0])
 
-def _getSensorData_3(p0:str) -> object:
+def _getSensorData_3(p0:str) -> Any:
 	"""
 	Obstacles data.ALArray formatted as follow for each ALValue : [0]:familyName[1]:name[2]:Array containing [x, y] arrays of points in robot frame.Those obstacles are taken from sensors
 	
@@ -1006,7 +1006,7 @@ def _removeSensor(sensor:str) -> bool:
 	# }
 	return call_method("ALNavigation", "_removeSensor", [sensor])
 
-def _getTrajectory() -> object:
+def _getTrajectory() -> Any:
 	"""
 	Get trajectory from local navigator.ALArray containing successively x, y and theta coordinates.
 	"""
@@ -1043,7 +1043,7 @@ def _setSpeedFactor(p0:float) -> None:
 	# }
 	return call_method("ALNavigation", "_setSpeedFactor", [p0])
 
-def _getObstacleMap(p0:str) -> object:
+def _getObstacleMap(p0:str) -> Any:
 	"""
 	Get obstacle Map from localnavigator. ALValue formatted as follow for each sensor :[[SensorName1 [[x1 y1] [x2 y2] [x3 y3] ...]] [SensorName2 [[x1 y1] [x2 y2] [x3 y3] ...]] ... ]
 	
@@ -1243,7 +1243,7 @@ def _clearNavigationMap() -> None:
 	# }
 	return call_method("ALNavigation", "_clearNavigationMap", [])
 
-def _getSensorSubscribers() -> object:
+def _getSensorSubscribers() -> Any:
 	"""
 	.
 	"""
@@ -1259,7 +1259,7 @@ def _getSensorSubscribers() -> object:
 	# }
 	return call_method("ALNavigation", "_getSensorSubscribers", [])
 
-def _getSensorList() -> object:
+def _getSensorList() -> Any:
 	"""
 	.
 	"""
@@ -1275,7 +1275,7 @@ def _getSensorList() -> object:
 	# }
 	return call_method("ALNavigation", "_getSensorList", [])
 
-def _getSensorListBySubscriber(p0:str) -> object:
+def _getSensorListBySubscriber(p0:str) -> Any:
 	"""
 	.
 	
@@ -1296,7 +1296,7 @@ def _getSensorListBySubscriber(p0:str) -> object:
 	# }
 	return call_method("ALNavigation", "_getSensorListBySubscriber", [p0])
 
-def _getActiveSensorList() -> object:
+def _getActiveSensorList() -> Any:
 	"""
 	.
 	"""
@@ -1372,13 +1372,13 @@ def _writeTree() -> None:
 	# }
 	return call_method("ALNavigation", "_writeTree", [])
 
-def moveAlong(trajectory:object) -> bool:
+def moveAlong(trajectory:Any) -> bool:
 	"""
 	.
 	
 	Parameters
 	----------
-	trajectory:object
+	trajectory:Any
 		An ALValue describing a trajectory.
 	"""
 	# NAOqi metadata:
@@ -1398,7 +1398,7 @@ def moveAlong(trajectory:object) -> bool:
 	# }
 	return call_method("ALNavigation", "moveAlong", [trajectory])
 
-def _moveAlong(moveAlongScale:float, allowMove:bool, trajectory:object) -> bool:
+def _moveAlong(moveAlongScale:float, allowMove:bool, trajectory:Any) -> bool:
 	"""
 	.
 	
@@ -1408,7 +1408,7 @@ def _moveAlong(moveAlongScale:float, allowMove:bool, trajectory:object) -> bool:
 		a scale factor
 	allowMove:bool
 		true if the robot should do any move at all
-	trajectory:object
+	trajectory:Any
 		An ALValue describing a trajectory.
 	"""
 	# NAOqi metadata:
@@ -1505,7 +1505,7 @@ def _wakeUpCallBack() -> None:
 	# }
 	return call_method("ALNavigation", "_wakeUpCallBack", [])
 
-def _restCallBack(p0:str, p1:object, p2:str) -> None:
+def _restCallBack(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1513,7 +1513,7 @@ def _restCallBack(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1530,7 +1530,7 @@ def _restCallBack(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALNavigation", "_restCallBack", [p0, p1, p2])
 
-def getFreeZone(desiredRadius:float, maximumDisplacement:float) -> object:
+def getFreeZone(desiredRadius:float, maximumDisplacement:float) -> Any:
 	"""
 	Returns [errorCode, result radius[centerWorldMotionX, centerWorldMotionY]]
 	
@@ -1566,7 +1566,7 @@ def getFreeZone(desiredRadius:float, maximumDisplacement:float) -> object:
 	# }
 	return call_method("ALNavigation", "getFreeZone", [desiredRadius, maximumDisplacement])
 
-def findFreeZone(desiredRadius:float, maximumDisplacement:float) -> object:
+def findFreeZone(desiredRadius:float, maximumDisplacement:float) -> Any:
 	"""
 	Returns [errorCode, result radius[centerWorldMotionX, centerWorldMotionY]]
 	
@@ -1639,7 +1639,7 @@ def stopExploration() -> None:
 	# }
 	return call_method("ALNavigation", "stopExploration", [])
 
-def getRobotPositionInMap() -> object:
+def getRobotPositionInMap() -> Any:
 	"""
 	.
 	"""
@@ -1655,7 +1655,7 @@ def getRobotPositionInMap() -> object:
 	# }
 	return call_method("ALNavigation", "getRobotPositionInMap", [])
 
-def getExplorationPath() -> object:
+def getExplorationPath() -> Any:
 	"""
 	.
 	"""
@@ -1671,7 +1671,7 @@ def getExplorationPath() -> object:
 	# }
 	return call_method("ALNavigation", "getExplorationPath", [])
 
-def _getTopoMap() -> object:
+def _getTopoMap() -> Any:
 	"""
 	.
 	"""
@@ -1687,7 +1687,7 @@ def _getTopoMap() -> object:
 	# }
 	return call_method("ALNavigation", "_getTopoMap", [])
 
-def _getExplorationParams() -> object:
+def _getExplorationParams() -> Any:
 	"""
 	.
 	"""
@@ -1766,7 +1766,7 @@ def navigateToInMap(p0:List[float]) -> int:
 	# }
 	return call_method("ALNavigation", "navigateToInMap", [p0])
 
-def _getScanHoles() -> object:
+def _getScanHoles() -> Any:
 	"""
 	.
 	"""
@@ -1798,7 +1798,7 @@ def _getTargetScanHoleId() -> int:
 	# }
 	return call_method("ALNavigation", "_getTargetScanHoleId", [])
 
-def _getTopoNodeOccupancyMap(p0:int) -> object:
+def _getTopoNodeOccupancyMap(p0:int) -> Any:
 	"""
 	.
 	
@@ -1851,7 +1851,7 @@ def saveExploration() -> str:
 	# }
 	return call_method("ALNavigation", "saveExploration", [])
 
-def getMetricalMap() -> object:
+def getMetricalMap() -> Any:
 	"""
 	.
 	"""
@@ -1867,7 +1867,7 @@ def getMetricalMap() -> object:
 	# }
 	return call_method("ALNavigation", "getMetricalMap", [])
 
-def _getLocalizationDebug() -> object:
+def _getLocalizationDebug() -> Any:
 	"""
 	.
 	"""
@@ -1883,7 +1883,7 @@ def _getLocalizationDebug() -> object:
 	# }
 	return call_method("ALNavigation", "_getLocalizationDebug", [])
 
-def relocalizeInMap(p0:List[float]) -> object:
+def relocalizeInMap(p0:List[float]) -> Any:
 	"""
 	.
 	
@@ -1984,7 +1984,7 @@ def _resetTopoMap() -> None:
 	# }
 	return call_method("ALNavigation", "_resetTopoMap", [])
 
-def _getFreeZoneCenter(p0:float) -> object:
+def _getFreeZoneCenter(p0:float) -> Any:
 	"""
 	.
 	
@@ -2005,7 +2005,7 @@ def _getFreeZoneCenter(p0:float) -> object:
 	# }
 	return call_method("ALNavigation", "_getFreeZoneCenter", [p0])
 
-def _getFreeZoneWithConstraints(p0:float) -> object:
+def _getFreeZoneWithConstraints(p0:float) -> Any:
 	"""
 	.
 	
@@ -2063,7 +2063,7 @@ def _startFreeZoneUpdateWithTimeout(p0:int) -> None:
 	# }
 	return call_method("ALNavigation", "_startFreeZoneUpdateWithTimeout", [p0])
 
-def stopAndComputeFreeZone(desiredRadius:float, maximumDisplacement:float) -> object:
+def stopAndComputeFreeZone(desiredRadius:float, maximumDisplacement:float) -> Any:
 	"""
 	Stops and returns free zone.
 	
@@ -2163,7 +2163,7 @@ def _clearFreeZone() -> None:
 	# }
 	return call_method("ALNavigation", "_clearFreeZone", [])
 
-def _getFreeZoneMap() -> object:
+def _getFreeZoneMap() -> Any:
 	"""
 	.
 	"""
@@ -2216,7 +2216,7 @@ def _startDiagnosis(p0:List[str]) -> None:
 	# }
 	return call_method("ALNavigation", "_startDiagnosis", [p0])
 
-def _stopDiagnosis() -> object:
+def _stopDiagnosis() -> Any:
 	"""
 	.
 	"""
@@ -2232,7 +2232,7 @@ def _stopDiagnosis() -> object:
 	# }
 	return call_method("ALNavigation", "_stopDiagnosis", [])
 
-def _passiveDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
+def _passiveDiagnosisCallBack(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -2240,7 +2240,7 @@ def _passiveDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -2257,7 +2257,7 @@ def _passiveDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALNavigation", "_passiveDiagnosisCallBack", [p0, p1, p2])
 
-def _activeDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
+def _activeDiagnosisCallBack(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -2265,7 +2265,7 @@ def _activeDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -2483,7 +2483,7 @@ def _getEnabledTouchTypes() -> List[int]:
 	# }
 	return call_method("ALNavigation", "_getEnabledTouchTypes", [])
 
-def _onTouchChanged(p0:str, p1:object, p2:str) -> None:
+def _onTouchChanged(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -2491,7 +2491,7 @@ def _onTouchChanged(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -2508,7 +2508,7 @@ def _onTouchChanged(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALNavigation", "_onTouchChanged", [p0, p1, p2])
 
-def _onPeopleDetected(p0:str, p1:object, p2:str) -> None:
+def _onPeopleDetected(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -2516,7 +2516,7 @@ def _onPeopleDetected(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		

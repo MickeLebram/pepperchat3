@@ -2,10 +2,10 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
-def user_mood() -> object:
+def user_mood() -> Any:
 	"""
 	
 	"""

@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -283,29 +283,29 @@ def _version() -> str:
 	return call_method("_ALCloud", "_version", [])
 
 class _Signals:
-	onMessage: Signal[[str, str, object]] = Signal("_ALCloud", "onMessage")
+	onMessage: Signal[[str, str, Any]] = Signal("_ALCloud", "onMessage")
 	"""
 	Bridge notes
 	------------
 	A signal sent by _ALCloud on the robot.
 	
-	subscribe(callback) calls callback(str, str, object) each time the robot sends it.
+	subscribe(callback) calls callback(str, str, Any) each time the robot sends it.
 	"""
-	onPreferenceMessage: Signal[[str, object]] = Signal("_ALCloud", "onPreferenceMessage")
-	"""
-	Bridge notes
-	------------
-	A signal sent by _ALCloud on the robot.
-	
-	subscribe(callback) calls callback(str, object) each time the robot sends it.
-	"""
-	onStoreMessage: Signal[[str, object]] = Signal("_ALCloud", "onStoreMessage")
+	onPreferenceMessage: Signal[[str, Any]] = Signal("_ALCloud", "onPreferenceMessage")
 	"""
 	Bridge notes
 	------------
 	A signal sent by _ALCloud on the robot.
 	
-	subscribe(callback) calls callback(str, object) each time the robot sends it.
+	subscribe(callback) calls callback(str, Any) each time the robot sends it.
+	"""
+	onStoreMessage: Signal[[str, Any]] = Signal("_ALCloud", "onStoreMessage")
+	"""
+	Bridge notes
+	------------
+	A signal sent by _ALCloud on the robot.
+	
+	subscribe(callback) calls callback(str, Any) each time the robot sends it.
 	"""
 signals = _Signals()
 

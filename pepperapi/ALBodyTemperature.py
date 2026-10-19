@@ -3,7 +3,7 @@ Deals with motor temperature.
 A event name HotJointDetected is raised when at least one motor has higher temperature.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALBodyTemperature", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALBodyTemperature", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -166,7 +166,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALBodyTemperature", "getUsage", [name])
 
-def getTemperatureDiagnosis() -> object:
+def getTemperatureDiagnosis() -> Any:
 	"""
 	The actual state of the temperature diagnosis.
 	
@@ -292,7 +292,7 @@ def _getDeviceStatus(deviceName:str) -> int:
 	# }
 	return call_method("ALBodyTemperature", "_getDeviceStatus", [deviceName])
 
-def _getTemperatureStatus() -> object:
+def _getTemperatureStatus() -> Any:
 	"""
 	The actual state of the temperature status.
 	

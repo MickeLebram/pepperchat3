@@ -2,7 +2,7 @@
 This module evaluates python commands on the fly.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALPythonBridge", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALPythonBridge", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -195,7 +195,7 @@ def eval(stringToEvaluate:str) -> str:
 	# }
 	return call_method("ALPythonBridge", "eval", [stringToEvaluate])
 
-def evalReturn(stringToEvaluate:str) -> object:
+def evalReturn(stringToEvaluate:str) -> Any:
 	"""
 	eval script and return result. evalReturn(2+2) will return 4
 	
@@ -225,7 +225,7 @@ def evalReturn(stringToEvaluate:str) -> object:
 	# }
 	return call_method("ALPythonBridge", "evalReturn", [stringToEvaluate])
 
-def evalFull(stringToEvaluate:str) -> object:
+def evalFull(stringToEvaluate:str) -> Any:
 	"""
 	evaluates script and returns an informative array.
 	

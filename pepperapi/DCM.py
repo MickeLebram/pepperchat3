@@ -2,7 +2,7 @@
 Manage link with devices (sensors and actuators). See specific documentation.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("DCM", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("DCM", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,13 +165,13 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("DCM", "getUsage", [name])
 
-def set(commands:object) -> None:
+def set(commands:Any) -> None:
 	"""
 	Call this function to send a timed-command list to an actuator
 	
 	Parameters
 	----------
-	commands:object
+	commands:Any
 		AL::ALValue with all data
 	"""
 	# NAOqi metadata:
@@ -192,13 +192,13 @@ def set(commands:object) -> None:
 	return call_method("DCM", "set", [commands])
 
 @overload
-def setAlias(commands:object, /) -> None:
+def setAlias(commands:Any, /) -> None:
 	"""
 	Call this function to send timed-command list to an alias (list of actuators)
 	
 	Parameters
 	----------
-	commands:object
+	commands:Any
 		AL::ALValue with all data
 	
 	Bridge notes
@@ -274,7 +274,7 @@ def setAlias(*args, **kwargs):
 	Bridge notes
 	------------
 	setAlias has 2 variants on the robot:
-	- setAlias(commands:object)
+	- setAlias(commands:Any)
 	- setAlias(name:str, time:int, commands:List[float])
 	
 	Pass arguments by position, not by keyword.
@@ -313,13 +313,13 @@ def getTime(offset:int) -> int:
 	# }
 	return call_method("DCM", "getTime", [offset])
 
-def createAlias(alias:object) -> object:
+def createAlias(alias:Any) -> Any:
 	"""
 	Create or change an alias (list of actuators)
 	
 	Parameters
 	----------
-	alias:object
+	alias:Any
 		Alias name and description
 	
 	Returns
@@ -343,7 +343,7 @@ def createAlias(alias:object) -> object:
 	# }
 	return call_method("DCM", "createAlias", [alias])
 
-def getPrefix() -> object:
+def getPrefix() -> Any:
 	"""
 	Return the STM base name
 	
@@ -389,13 +389,13 @@ def special(result:str) -> None:
 	# }
 	return call_method("DCM", "special", [result])
 
-def calibration(calibrationInput:object) -> None:
+def calibration(calibrationInput:Any) -> None:
 	"""
 	Calibration of a joint
 	
 	Parameters
 	----------
-	calibrationInput:object
+	calibrationInput:Any
 		A complex ALValue. See red documentation
 	"""
 	# NAOqi metadata:
@@ -415,7 +415,7 @@ def calibration(calibrationInput:object) -> None:
 	# }
 	return call_method("DCM", "calibration", [calibrationInput])
 
-def preferences(action:str, target:str, keyName:str, keyValue:object) -> int:
+def preferences(action:str, target:str, keyName:str, keyValue:Any) -> int:
 	"""
 	Save updated value from DCM in XML pref file
 	
@@ -427,7 +427,7 @@ def preferences(action:str, target:str, keyName:str, keyValue:object) -> int:
 		string : 'Chest' 'Head' 'Main' 'All' 
 	keyName:str
 		The name of the key if action = 'Add'.
-	keyValue:object
+	keyValue:Any
 		The ALVAlue of the key to add
 	
 	Returns

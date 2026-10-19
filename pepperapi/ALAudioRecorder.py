@@ -2,7 +2,7 @@
 This module records NAO's microphones signals into sound files.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALAudioRecorder", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALAudioRecorder", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,7 +165,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALAudioRecorder", "getUsage", [name])
 
-def startMicrophonesRecording(filename:str, type:str, samplerate:int, channels:object) -> None:
+def startMicrophonesRecording(filename:str, type:str, samplerate:int, channels:Any) -> None:
 	"""
 	This method allows to record the signal collected on the nao's microphones. You can choose to record only the front microphone in a ogg file, or the 4 microphones in a wav file.
 	
@@ -177,7 +177,7 @@ def startMicrophonesRecording(filename:str, type:str, samplerate:int, channels:o
 		wav or ogg.
 	samplerate:int
 		Required sample rate.
-	channels:object
+	channels:Any
 		vector of booleans.
 	"""
 	# NAOqi metadata:

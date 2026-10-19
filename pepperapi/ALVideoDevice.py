@@ -3,7 +3,7 @@ ALVideoDevice, formerly called Video Input systemis architectured in order to pr
   Extension name of the methods providing images depends on wether clients are local (dynamic library) or remote (executable).
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALVideoDevice", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -220,7 +220,7 @@ def subscribeCamera(name:str, cameraIndex:int, resolution:int, colorSpace:int, f
 	# }
 	return call_method("ALVideoDevice", "subscribeCamera", [name, cameraIndex, resolution, colorSpace, fps])
 
-def subscribeCameras(name:str, cameraIndexes:object, resolutions:object, colorSpaces:object, fps:int) -> str:
+def subscribeCameras(name:str, cameraIndexes:Any, resolutions:Any, colorSpaces:Any, fps:int) -> str:
 	"""
 	
 	
@@ -228,11 +228,11 @@ def subscribeCameras(name:str, cameraIndexes:object, resolutions:object, colorSp
 	----------
 	name:str
 		Name of the subscribing vision module
-	cameraIndexes:object
+	cameraIndexes:Any
 		Cameras requested.
-	resolutions:object
+	resolutions:Any
 		Resolutions requested.{0=kQQVGA, 1=kQVGA, 2=kVGA, 3=k4VGA}
-	colorSpaces:object
+	colorSpaces:Any
 		Colorspaces requested.{0=kYuv, 9=kYUV422, 10=kYUV, 11=kRGB, 12=kHSY, 13=kBGR}
 	fps:int
 		Fps (frames per second) requested.{5, 10, 15, 30}
@@ -304,7 +304,7 @@ def unsubscribe(nameId:str) -> bool:
 	# }
 	return call_method("ALVideoDevice", "unsubscribe", [nameId])
 
-def getSubscribers() -> object:
+def getSubscribers() -> Any:
 	"""
 	
 	"""
@@ -320,7 +320,7 @@ def getSubscribers() -> object:
 	# }
 	return call_method("ALVideoDevice", "getSubscribers", [])
 
-def getCameraIndexes() -> object:
+def getCameraIndexes() -> Any:
 	"""
 	
 	"""
@@ -1140,7 +1140,7 @@ def getParameter(cameraIndex:int, parameterId:int) -> int:
 	# }
 	return call_method("ALVideoDevice", "getParameter", [cameraIndex, parameterId])
 
-def getParameterRange(cameraIndex:int, parameterId:int) -> object:
+def getParameterRange(cameraIndex:int, parameterId:int) -> Any:
 	"""
 	
 	
@@ -1172,7 +1172,7 @@ def getParameterRange(cameraIndex:int, parameterId:int) -> object:
 	# }
 	return call_method("ALVideoDevice", "getParameterRange", [cameraIndex, parameterId])
 
-def getParameterInfo(cameraIndex:int, parameterId:int) -> object:
+def getParameterInfo(cameraIndex:int, parameterId:int) -> Any:
 	"""
 	
 	
@@ -1877,7 +1877,7 @@ def getCameraParameter(name:str, parameterId:int) -> int:
 	# }
 	return call_method("ALVideoDevice", "getCameraParameter", [name, parameterId])
 
-def getCameraParameterRange(name:str, parameterId:int) -> object:
+def getCameraParameterRange(name:str, parameterId:int) -> Any:
 	"""
 	
 	
@@ -1909,7 +1909,7 @@ def getCameraParameterRange(name:str, parameterId:int) -> object:
 	# }
 	return call_method("ALVideoDevice", "getCameraParameterRange", [name, parameterId])
 
-def getCameraParameterInfo(name:str, parameterId:int) -> object:
+def getCameraParameterInfo(name:str, parameterId:int) -> Any:
 	"""
 	
 	
@@ -2037,7 +2037,7 @@ def setAllCameraParametersToDefault(name:str) -> bool:
 	# }
 	return call_method("ALVideoDevice", "setAllCameraParametersToDefault", [name])
 
-def getDirectRawImageRemote(name:str) -> object:
+def getDirectRawImageRemote(name:str) -> Any:
 	"""
 	Fills an ALValue with data coming directly from raw buffer (no format conversion).
 	
@@ -2112,7 +2112,7 @@ def releaseDirectRawImage(name:str) -> bool:
 	# }
 	return call_method("ALVideoDevice", "releaseDirectRawImage", [name])
 
-def getImageRemote(name:str) -> object:
+def getImageRemote(name:str) -> Any:
 	"""
 	Applies transformations to the last image from video source and fills pFrameOut.
 	
@@ -2187,7 +2187,7 @@ def releaseImage(name:str) -> bool:
 	# }
 	return call_method("ALVideoDevice", "releaseImage", [name])
 
-def getActiveCameras(name:str) -> object:
+def getActiveCameras(name:str) -> Any:
 	"""
 	
 	
@@ -2213,7 +2213,7 @@ def getActiveCameras(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getActiveCameras", [name])
 
-def setActiveCameras(name:str, cameraIndexes:object) -> object:
+def setActiveCameras(name:str, cameraIndexes:Any) -> Any:
 	"""
 	
 	
@@ -2221,7 +2221,7 @@ def setActiveCameras(name:str, cameraIndexes:object) -> object:
 	----------
 	name:str
 		Name of the subscribing vision module
-	cameraIndexes:object
+	cameraIndexes:Any
 		Cameras requested.
 	"""
 	# NAOqi metadata:
@@ -2245,7 +2245,7 @@ def setActiveCameras(name:str, cameraIndexes:object) -> object:
 	# }
 	return call_method("ALVideoDevice", "setActiveCameras", [name, cameraIndexes])
 
-def getResolutions(name:str) -> object:
+def getResolutions(name:str) -> Any:
 	"""
 	
 	
@@ -2271,7 +2271,7 @@ def getResolutions(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getResolutions", [name])
 
-def setResolutions(name:str, resolutions:object) -> object:
+def setResolutions(name:str, resolutions:Any) -> Any:
 	"""
 	
 	
@@ -2279,7 +2279,7 @@ def setResolutions(name:str, resolutions:object) -> object:
 	----------
 	name:str
 		Name of the subscribing vision module
-	resolutions:object
+	resolutions:Any
 		Resolutions requested.
 	"""
 	# NAOqi metadata:
@@ -2303,7 +2303,7 @@ def setResolutions(name:str, resolutions:object) -> object:
 	# }
 	return call_method("ALVideoDevice", "setResolutions", [name, resolutions])
 
-def getColorSpaces(name:str) -> object:
+def getColorSpaces(name:str) -> Any:
 	"""
 	
 	
@@ -2329,7 +2329,7 @@ def getColorSpaces(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getColorSpaces", [name])
 
-def setColorSpaces(name:str, colorSpaces:object) -> object:
+def setColorSpaces(name:str, colorSpaces:Any) -> Any:
 	"""
 	
 	
@@ -2337,7 +2337,7 @@ def setColorSpaces(name:str, colorSpaces:object) -> object:
 	----------
 	name:str
 		Name of the subscribing vision module
-	colorSpaces:object
+	colorSpaces:Any
 		Color Spaces requested.
 	"""
 	# NAOqi metadata:
@@ -2361,7 +2361,7 @@ def setColorSpaces(name:str, colorSpaces:object) -> object:
 	# }
 	return call_method("ALVideoDevice", "setColorSpaces", [name, colorSpaces])
 
-def getCamerasParameter(name:str, parameterId:int) -> object:
+def getCamerasParameter(name:str, parameterId:int) -> Any:
 	"""
 	
 	
@@ -2393,7 +2393,7 @@ def getCamerasParameter(name:str, parameterId:int) -> object:
 	# }
 	return call_method("ALVideoDevice", "getCamerasParameter", [name, parameterId])
 
-def setCamerasParameter(name:str, parameterId:int, values:object) -> object:
+def setCamerasParameter(name:str, parameterId:int, values:Any) -> Any:
 	"""
 	
 	
@@ -2403,7 +2403,7 @@ def setCamerasParameter(name:str, parameterId:int, values:object) -> object:
 		Name of the subscribing vision module
 	parameterId:int
 		Camera parameter requested.
-	values:object
+	values:Any
 		values requested.
 	"""
 	# NAOqi metadata:
@@ -2431,7 +2431,7 @@ def setCamerasParameter(name:str, parameterId:int, values:object) -> object:
 	# }
 	return call_method("ALVideoDevice", "setCamerasParameter", [name, parameterId, values])
 
-def setCamerasParameterToDefault(name:str, parameterId:int) -> object:
+def setCamerasParameterToDefault(name:str, parameterId:int) -> Any:
 	"""
 	
 	
@@ -2463,7 +2463,7 @@ def setCamerasParameterToDefault(name:str, parameterId:int) -> object:
 	# }
 	return call_method("ALVideoDevice", "setCamerasParameterToDefault", [name, parameterId])
 
-def getDirectRawImagesLocal(name:str) -> object:
+def getDirectRawImagesLocal(name:str) -> Any:
 	"""
 	Retrieves the latest image from the video source and returns a pointer to the locked ALImage, with data array pointing directly to raw data. There is no format conversion and no copy of the raw buffer.
 	Warning: When image is not necessary anymore, a call to releaseDirectRawImage() is requested.
@@ -2497,7 +2497,7 @@ def getDirectRawImagesLocal(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getDirectRawImagesLocal", [name])
 
-def getDirectRawImagesRemote(name:str) -> object:
+def getDirectRawImagesRemote(name:str) -> Any:
 	"""
 	Fills an ALValue with data coming directly from raw buffer (no format conversion).
 	
@@ -2541,7 +2541,7 @@ def getDirectRawImagesRemote(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getDirectRawImagesRemote", [name])
 
-def releaseDirectRawImages(name:str) -> object:
+def releaseDirectRawImages(name:str) -> Any:
 	"""
 	Release image buffer locked by getDirectRawImagesLocal().
 	
@@ -2572,7 +2572,7 @@ def releaseDirectRawImages(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "releaseDirectRawImages", [name])
 
-def getImagesLocal(name:str) -> object:
+def getImagesLocal(name:str) -> Any:
 	"""
 	Applies transformations to the last image from video source and returns a pointer to a locked ALImage.
 	When image is not necessary anymore, a call to releaseImage() is requested.
@@ -2604,7 +2604,7 @@ def getImagesLocal(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getImagesLocal", [name])
 
-def getImagesRemote(name:str) -> object:
+def getImagesRemote(name:str) -> Any:
 	"""
 	Applies transformations to the last image from video source and fills pFrameOut.
 	
@@ -2648,7 +2648,7 @@ def getImagesRemote(name:str) -> object:
 	# }
 	return call_method("ALVideoDevice", "getImagesRemote", [name])
 
-def releaseImages(name:str) -> object:
+def releaseImages(name:str) -> Any:
 	"""
 	Release image buffer locked by getImageLocal().
 	If G.V.M. had no locked image buffer, does nothing.
@@ -2899,13 +2899,13 @@ def getImageInfoFromAngularInfoWithResolution(p0:int, p1:List[float], p2:int) ->
 	return call_method("ALVideoDevice", "getImageInfoFromAngularInfoWithResolution", [p0, p1, p2])
 
 @overload
-def putImage(imageBuffer:object, /) -> bool:
+def putImage(imageBuffer:Any, /) -> bool:
 	"""
 	Allow image buffer pushing
 	
 	Parameters
 	----------
-	imageBuffer:object
+	imageBuffer:Any
 		Image buffer in bitmap form
 	
 	Returns
@@ -2936,7 +2936,7 @@ def putImage(imageBuffer:object, /) -> bool:
 	...
 
 @overload
-def putImage(cameraIndex:int, width:int, height:int, imageBuffer:object, /) -> bool:
+def putImage(cameraIndex:int, width:int, height:int, imageBuffer:Any, /) -> bool:
 	"""
 	Allow image buffer pushing
 	
@@ -2948,7 +2948,7 @@ def putImage(cameraIndex:int, width:int, height:int, imageBuffer:object, /) -> b
 		int width of image among 1280*960, 640*480, 320*240, 240*160
 	height:int
 		int height of image
-	imageBuffer:object
+	imageBuffer:Any
 		Image buffer in bitmap form
 	
 	Returns
@@ -2991,7 +2991,7 @@ def putImage(cameraIndex:int, width:int, height:int, imageBuffer:object, /) -> b
 	...
 
 @overload
-def putImage(cameraIndex:int, timeStamp:object, width:int, height:int, colorSpace:int, imageBuffer:object, /) -> bool:
+def putImage(cameraIndex:int, timeStamp:Any, width:int, height:int, colorSpace:int, imageBuffer:Any, /) -> bool:
 	"""
 	Allow image buffer pushing
 	
@@ -2999,7 +2999,7 @@ def putImage(cameraIndex:int, timeStamp:object, width:int, height:int, colorSpac
 	----------
 	cameraIndex:int
 		Camera requested.
-	timeStamp:object
+	timeStamp:Any
 		time stamp of the image. If empty, use current time.
 	width:int
 		int width of image among 1280*960, 640*480, 320*240, 240*160
@@ -3007,7 +3007,7 @@ def putImage(cameraIndex:int, timeStamp:object, width:int, height:int, colorSpac
 		int height of image
 	colorSpace:int
 		colorSpace of image.
-	imageBuffer:object
+	imageBuffer:Any
 		Image buffer in bitmap form
 	
 	Returns
@@ -3062,9 +3062,9 @@ def putImage(*args, **kwargs):
 	Bridge notes
 	------------
 	putImage has 3 variants on the robot:
-	- putImage(imageBuffer:object)
-	- putImage(cameraIndex:int, width:int, height:int, imageBuffer:object)
-	- putImage(cameraIndex:int, timeStamp:object, width:int, height:int, colorSpace:int, imageBuffer:object)
+	- putImage(imageBuffer:Any)
+	- putImage(cameraIndex:int, width:int, height:int, imageBuffer:Any)
+	- putImage(cameraIndex:int, timeStamp:Any, width:int, height:int, colorSpace:int, imageBuffer:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -3073,7 +3073,7 @@ def putImage(*args, **kwargs):
 	return call_method("ALVideoDevice", "putImage", list(args))
 
 @overload
-def getExpectedImageParameters() -> object:
+def getExpectedImageParameters() -> Any:
 	"""
 	called by the simulator to know expected image parameters
 	
@@ -3100,7 +3100,7 @@ def getExpectedImageParameters() -> object:
 	...
 
 @overload
-def getExpectedImageParameters(cameraIndex:int, /) -> object:
+def getExpectedImageParameters(cameraIndex:int, /) -> Any:
 	"""
 	called by the simulator to know expected image parameters
 	
@@ -3180,7 +3180,7 @@ def _getExternalBrightness(cameraIndex:int) -> int:
 	# }
 	return call_method("ALVideoDevice", "_getExternalBrightness", [cameraIndex])
 
-def onClientDisconnected(eventName:str, eventContents:object, message:str) -> None:
+def onClientDisconnected(eventName:str, eventContents:Any, message:str) -> None:
 	"""
 	Callback when client is disconnected
 	
@@ -3188,7 +3188,7 @@ def onClientDisconnected(eventName:str, eventContents:object, message:str) -> No
 	----------
 	eventName:str
 		The echoed event name
-	eventContents:object
+	eventContents:Any
 		The name of the client that has disconnected
 	message:str
 		The message give when subscribing.

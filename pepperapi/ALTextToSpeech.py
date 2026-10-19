@@ -2,7 +2,7 @@
 This module embeds a speech synthetizer whose role is to convert text commands into sound waves that are then either sent to Nao's loudspeakers or written into a file. This service supports several languages and some parameters of the synthetizer can be tuned to change each language's synthetic voice.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALTextToSpeech", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALTextToSpeech", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -732,7 +732,7 @@ def _setDefaultVoice() -> None:
 	# }
 	return call_method("ALTextToSpeech", "_setDefaultVoice", [])
 
-def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
+def _naoStoreApplicationInstalled(p0:str, p1:Any, p2:str) -> None:
 	"""
 	reload the engine if new application installed is a language
 	
@@ -740,7 +740,7 @@ def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -757,7 +757,7 @@ def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALTextToSpeech", "_naoStoreApplicationInstalled", [p0, p1, p2])
 
-def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
+def _naoStoreApplicationUninstalled(p0:str, p1:Any, p2:str) -> None:
 	"""
 	reload the engine if application uninstalled is a language
 	
@@ -765,7 +765,7 @@ def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		

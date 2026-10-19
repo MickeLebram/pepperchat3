@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALBasicAwareness", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALBasicAwareness", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -166,7 +166,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALBasicAwareness", "getUsage", [name])
 
-def _onPeopleDetected(name:str, populationUpdated:object, message:str) -> None:
+def _onPeopleDetected(name:str, populationUpdated:Any, message:str) -> None:
 	"""
 	Population Updated (event: PeoplePerception/PopulationUpdated)
 	
@@ -174,7 +174,7 @@ def _onPeopleDetected(name:str, populationUpdated:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	populationUpdated:object
+	populationUpdated:Any
 		Boolean value for people detection event
 	message:str
 		Event message
@@ -204,7 +204,7 @@ def _onPeopleDetected(name:str, populationUpdated:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onPeopleDetected", [name, populationUpdated, message])
 
-def _onMovementDetected(name:str, movementDetected:object, message:str) -> None:
+def _onMovementDetected(name:str, movementDetected:Any, message:str) -> None:
 	"""
 	Movement Detected (event: MovementDetection3D/MovementDetected)
 	
@@ -212,7 +212,7 @@ def _onMovementDetected(name:str, movementDetected:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	movementDetected:object
+	movementDetected:Any
 		Boolean value for movement event
 	message:str
 		Event message
@@ -242,7 +242,7 @@ def _onMovementDetected(name:str, movementDetected:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onMovementDetected", [name, movementDetected, message])
 
-def _onNavigationMotionDetected(name:str, movementDetected:object, message:str) -> None:
+def _onNavigationMotionDetected(name:str, movementDetected:Any, message:str) -> None:
 	"""
 	Navigation Motion Detected (event: Navigation/MotionDetected)
 	
@@ -250,7 +250,7 @@ def _onNavigationMotionDetected(name:str, movementDetected:object, message:str) 
 	----------
 	name:str
 		Name of the event
-	movementDetected:object
+	movementDetected:Any
 		Boolean value for movement event
 	message:str
 		Event message
@@ -280,7 +280,7 @@ def _onNavigationMotionDetected(name:str, movementDetected:object, message:str) 
 	# }
 	return call_method("ALBasicAwareness", "_onNavigationMotionDetected", [name, movementDetected, message])
 
-def _onCloseMovementDetected(name:str, closeMovementDetected:object, message:str) -> None:
+def _onCloseMovementDetected(name:str, closeMovementDetected:Any, message:str) -> None:
 	"""
 	Close Movement Detected (event: WavingDetection/Waving)
 	
@@ -288,7 +288,7 @@ def _onCloseMovementDetected(name:str, closeMovementDetected:object, message:str
 	----------
 	name:str
 		Name of the event
-	closeMovementDetected:object
+	closeMovementDetected:Any
 		Boolean value for close movement event
 	message:str
 		Event message
@@ -318,7 +318,7 @@ def _onCloseMovementDetected(name:str, closeMovementDetected:object, message:str
 	# }
 	return call_method("ALBasicAwareness", "_onCloseMovementDetected", [name, closeMovementDetected, message])
 
-def _onSoundDetected(name:str, SoundLocated:object, message:str) -> None:
+def _onSoundDetected(name:str, SoundLocated:Any, message:str) -> None:
 	"""
 	Sound Detected (event: SoundLocated)
 	
@@ -326,7 +326,7 @@ def _onSoundDetected(name:str, SoundLocated:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	SoundLocated:object
+	SoundLocated:Any
 		Boolean value for movement event
 	message:str
 		Event message
@@ -356,7 +356,7 @@ def _onSoundDetected(name:str, SoundLocated:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onSoundDetected", [name, SoundLocated, message])
 
-def _onTouchDetected(name:str, touchDetected:object, message:str) -> None:
+def _onTouchDetected(name:str, touchDetected:Any, message:str) -> None:
 	"""
 	Touch Detected (event: TouchDetection3D/TouchDetected)
 	
@@ -364,7 +364,7 @@ def _onTouchDetected(name:str, touchDetected:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	touchDetected:object
+	touchDetected:Any
 		Boolean value for touch event
 	message:str
 		Event message
@@ -394,7 +394,7 @@ def _onTouchDetected(name:str, touchDetected:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onTouchDetected", [name, touchDetected, message])
 
-def _onFastPersonTracking(name:str, tackerValue:object, message:str) -> None:
+def _onFastPersonTracking(name:str, tackerValue:Any, message:str) -> None:
 	"""
 	Servoing event callback (event:ALTracker/FastPersonTracking)
 	
@@ -402,7 +402,7 @@ def _onFastPersonTracking(name:str, tackerValue:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	tackerValue:object
+	tackerValue:Any
 		Position to track.
 	message:str
 		Event message
@@ -432,7 +432,7 @@ def _onFastPersonTracking(name:str, tackerValue:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onFastPersonTracking", [name, tackerValue, message])
 
-def _onNoFastPersonFound(name:str, val:object, message:str) -> None:
+def _onNoFastPersonFound(name:str, val:Any, message:str) -> None:
 	"""
 	No person found by fast tracking callback (event:ALFastPersonTracking/TrackedPersonNotFound)
 	
@@ -440,7 +440,7 @@ def _onNoFastPersonFound(name:str, val:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	val:object
+	val:Any
 		Content of the event.
 	message:str
 		Event message
@@ -470,7 +470,7 @@ def _onNoFastPersonFound(name:str, val:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onNoFastPersonFound", [name, val, message])
 
-def _onHeadTracking(name:str, tackerValue:object, message:str) -> None:
+def _onHeadTracking(name:str, tackerValue:Any, message:str) -> None:
 	"""
 	Servoing event callback (event:ALTracker/FindPersonHead)
 	
@@ -478,7 +478,7 @@ def _onHeadTracking(name:str, tackerValue:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	tackerValue:object
+	tackerValue:Any
 		Position to track.
 	message:str
 		Event message
@@ -508,7 +508,7 @@ def _onHeadTracking(name:str, tackerValue:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onHeadTracking", [name, tackerValue, message])
 
-def _onHeadNotFound(name:str, val:object, message:str) -> None:
+def _onHeadNotFound(name:str, val:Any, message:str) -> None:
 	"""
 	HeadNotFound event callback (event:ALFindPersonHead/HeadNotFound)
 	
@@ -516,7 +516,7 @@ def _onHeadNotFound(name:str, val:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	val:object
+	val:Any
 		Content of the event.
 	message:str
 		Event message
@@ -546,7 +546,7 @@ def _onHeadNotFound(name:str, val:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onHeadNotFound", [name, val, message])
 
-def _onHeadReached(name:str, val:object, message:str) -> None:
+def _onHeadReached(name:str, val:Any, message:str) -> None:
 	"""
 	HeadReached event callback (event:ALFindPersonHead/HeadReached)
 	
@@ -554,7 +554,7 @@ def _onHeadReached(name:str, val:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	val:object
+	val:Any
 		Content of the event.
 	message:str
 		Event message
@@ -584,7 +584,7 @@ def _onHeadReached(name:str, val:object, message:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onHeadReached", [name, val, message])
 
-def _onHeadTrackingStopped(name:str, val:object, message:str) -> None:
+def _onHeadTrackingStopped(name:str, val:Any, message:str) -> None:
 	"""
 	tracking interruption
 	
@@ -592,7 +592,7 @@ def _onHeadTrackingStopped(name:str, val:object, message:str) -> None:
 	----------
 	name:str
 		Name of the event
-	val:object
+	val:Any
 		Content of the event.
 	message:str
 		Event message
@@ -798,7 +798,7 @@ def isStimulusDetectionEnabled(stimulusName:str) -> bool:
 	# }
 	return call_method("ALBasicAwareness", "isStimulusDetectionEnabled", [stimulusName])
 
-def setParameter(paramName:str, newVal:object) -> None:
+def setParameter(paramName:str, newVal:Any) -> None:
 	"""
 	Set the specified parameter 
 	
@@ -838,7 +838,7 @@ def setParameter(paramName:str, newVal:object) -> None:
 		 "MC_Interactive_DistanceHumanRobot" : Distance between the human and the robot
 		 "MC_Interactive_MaxDistanceHumanRobot" : Maximum distance human robot to allow the robot to move (in MoveContextually mode)
 		 
-	newVal:object
+	newVal:Any
 		"LookStimulusSpeed" : Float in range [0.01;1]
 		 "LookBackSpeed" : Float in range [0.01;1]
 		 "NobodyFoundTimeOut" : Float > 0
@@ -910,7 +910,7 @@ def resetAllParameters() -> None:
 	# }
 	return call_method("ALBasicAwareness", "resetAllParameters", [])
 
-def getParameter(paramName:str) -> object:
+def getParameter(paramName:str) -> Any:
 	"""
 	Get the specified parameter.
 	
@@ -1398,7 +1398,7 @@ def _getHomeReferencePosition() -> List[float]:
 	# }
 	return call_method("ALBasicAwareness", "_getHomeReferencePosition", [])
 
-def _onPreferenceUpdated(p1:str, p2:object, p3:str) -> None:
+def _onPreferenceUpdated(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -1406,7 +1406,7 @@ def _onPreferenceUpdated(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		
@@ -1436,7 +1436,7 @@ def _onPreferenceUpdated(p1:str, p2:object, p3:str) -> None:
 	# }
 	return call_method("ALBasicAwareness", "_onPreferenceUpdated", [p1, p2, p3])
 
-def _onPreferenceSynchronized(p1:str, p2:object, p3:str) -> None:
+def _onPreferenceSynchronized(p1:str, p2:Any, p3:str) -> None:
 	"""
 	
 	
@@ -1444,7 +1444,7 @@ def _onPreferenceSynchronized(p1:str, p2:object, p3:str) -> None:
 	----------
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	p3:str
 		

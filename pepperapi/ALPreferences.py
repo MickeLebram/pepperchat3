@@ -7,7 +7,7 @@ pParams[2] The value of the preference (can contain other preferences);
 pParams[3] (optional) The name of the data when inserted into memory.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -70,7 +70,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALPreferences", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -100,7 +100,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALPreferences", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -170,7 +170,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALPreferences", "getUsage", [name])
 
-def readPrefFile(fileName:str, autoGenerateMemoryNames:bool) -> object:
+def readPrefFile(fileName:str, autoGenerateMemoryNames:bool) -> Any:
 	"""
 	Reads all preferences from an xml files and stores them in an ALValue.
 	
@@ -206,7 +206,7 @@ def readPrefFile(fileName:str, autoGenerateMemoryNames:bool) -> object:
 	# }
 	return call_method("ALPreferences", "readPrefFile", [fileName, autoGenerateMemoryNames])
 
-def writePrefFile(fileName:str, prefs:object, ignoreMemoryNames:bool) -> None:
+def writePrefFile(fileName:str, prefs:Any, ignoreMemoryNames:bool) -> None:
 	"""
 	Writes all preferences from ALValue to an xml file.
 	
@@ -214,7 +214,7 @@ def writePrefFile(fileName:str, prefs:object, ignoreMemoryNames:bool) -> None:
 	----------
 	fileName:str
 		Name of the module associated to the preference.
-	prefs:object
+	prefs:Any
 		array reprenting the whole file.
 	ignoreMemoryNames:bool
 		If true all memory names will be removed before saving.
@@ -270,13 +270,13 @@ def removePrefFile(fileName:str) -> None:
 	# }
 	return call_method("ALPreferences", "removePrefFile", [fileName])
 
-def saveToMemory(prefs:object) -> bool:
+def saveToMemory(prefs:Any) -> bool:
 	"""
 	Writes all preferences from ALValue to an xml file.
 	
 	Parameters
 	----------
-	prefs:object
+	prefs:Any
 		array representing the whole file.
 	
 	Returns

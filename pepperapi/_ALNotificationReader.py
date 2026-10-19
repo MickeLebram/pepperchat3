@@ -2,7 +2,7 @@
 Notification reader: Read the notifications pending on the robot.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_ALNotificationReader", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_ALNotificationReader", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -259,7 +259,7 @@ def _stopReading() -> None:
 	# }
 	return call_method("_ALNotificationReader", "_stopReading", [])
 
-def _onPreferenceChanged(p0:str, p1:object, p2:object) -> None:
+def _onPreferenceChanged(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Update the value of preferences.
 	
@@ -267,9 +267,9 @@ def _onPreferenceChanged(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:

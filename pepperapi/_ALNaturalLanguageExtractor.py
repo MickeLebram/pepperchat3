@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from dataclasses import dataclass, field
 from .robot_client import call_method
 from .robot_client import Signal, Property
@@ -40,13 +40,13 @@ def _getLemma(p0:str, p1:str) -> str:
 	# }
 	return call_method("_ALNaturalLanguageExtractor", "_getLemma", [p0, p1])
 
-def _analyze(p0:object, p1:str, p2:str) -> object:
+def _analyze(p0:Any, p1:str, p2:str) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	p1:str
 		

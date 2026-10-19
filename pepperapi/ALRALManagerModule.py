@@ -2,11 +2,11 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
-def _finishApk() -> object:
+def _finishApk() -> Any:
 	"""
 	Finish activity.
 	"""
@@ -22,15 +22,15 @@ def _finishApk() -> object:
 	# }
 	return call_method("ALRALManagerModule", "_finishApk", [])
 
-def _getAbsoluteUrl(p0:object, p1:object) -> object:
+def _getAbsoluteUrl(p0:Any, p1:Any) -> Any:
 	"""
 	Returns the url of a file in the html directory.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -45,13 +45,13 @@ def _getAbsoluteUrl(p0:object, p1:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_getAbsoluteUrl", [p0, p1])
 
-def _onPreferenceAdded(p0:object) -> object:
+def _onPreferenceAdded(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -66,13 +66,13 @@ def _onPreferenceAdded(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_onPreferenceAdded", [p0])
 
-def _onPreferenceChanged(p0:object) -> object:
+def _onPreferenceChanged(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -87,13 +87,13 @@ def _onPreferenceChanged(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_onPreferenceChanged", [p0])
 
-def _onPreferenceDomainRemoved(p0:object) -> object:
+def _onPreferenceDomainRemoved(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -108,13 +108,13 @@ def _onPreferenceDomainRemoved(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_onPreferenceDomainRemoved", [p0])
 
-def _onPreferenceRemoved(p0:object) -> object:
+def _onPreferenceRemoved(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -129,7 +129,7 @@ def _onPreferenceRemoved(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_onPreferenceRemoved", [p0])
 
-def _onPreferenceSynchronized() -> object:
+def _onPreferenceSynchronized() -> Any:
 	"""
 	
 	"""
@@ -145,13 +145,13 @@ def _onPreferenceSynchronized() -> object:
 	# }
 	return call_method("ALRALManagerModule", "_onPreferenceSynchronized", [])
 
-def _parseXML(p0:object) -> object:
+def _parseXML(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -166,7 +166,7 @@ def _parseXML(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_parseXML", [p0])
 
-def _setSubscribers() -> object:
+def _setSubscribers() -> Any:
 	"""
 	
 	"""
@@ -182,13 +182,13 @@ def _setSubscribers() -> object:
 	# }
 	return call_method("ALRALManagerModule", "_setSubscribers", [])
 
-def _showError(p0:object) -> object:
+def _showError(p0:Any) -> Any:
 	"""
 	Show error activity
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -224,13 +224,13 @@ def _startFade(p0:int) -> None:
 	# }
 	return call_method("ALRALManagerModule", "_startFade", [p0])
 
-def _strip_aldebaran_mail(p0:object) -> object:
+def _strip_aldebaran_mail(p0:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -245,7 +245,7 @@ def _strip_aldebaran_mail(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "_strip_aldebaran_mail", [p0])
 
-def appLauncherClosed() -> object:
+def appLauncherClosed() -> Any:
 	"""
 	Raise signal when application launcher has been closed
 	"""
@@ -261,7 +261,7 @@ def appLauncherClosed() -> object:
 	# }
 	return call_method("ALRALManagerModule", "appLauncherClosed", [])
 
-def defaultScreen() -> object:
+def defaultScreen() -> Any:
 	"""
 	Show default application screen (i.e. when apps have no
 	        tablet content of their own)
@@ -279,7 +279,7 @@ def defaultScreen() -> object:
 	# }
 	return call_method("ALRALManagerModule", "defaultScreen", [])
 
-def display() -> object:
+def display() -> Any:
 	"""
 	Display tablet app launcher.
 	"""
@@ -295,7 +295,7 @@ def display() -> object:
 	# }
 	return call_method("ALRALManagerModule", "display", [])
 
-def emotion() -> object:
+def emotion() -> Any:
 	"""
 	Display emotional bubble.
 	"""
@@ -311,15 +311,15 @@ def emotion() -> object:
 	# }
 	return call_method("ALRALManagerModule", "emotion", [])
 
-def getAppNameByLocale(p0:object, p1:object) -> object:
+def getAppNameByLocale(p0:Any, p1:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -334,7 +334,7 @@ def getAppNameByLocale(p0:object, p1:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "getAppNameByLocale", [p0, p1])
 
-def getIgnoredApps() -> object:
+def getIgnoredApps() -> Any:
 	"""
 	
 	"""
@@ -350,15 +350,15 @@ def getIgnoredApps() -> object:
 	# }
 	return call_method("ALRALManagerModule", "getIgnoredApps", [])
 
-def getUserOauthToken(p0:object, p1:object) -> object:
+def getUserOauthToken(p0:Any, p1:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -373,7 +373,7 @@ def getUserOauthToken(p0:object, p1:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "getUserOauthToken", [p0, p1])
 
-def getUserRequestableViolations() -> object:
+def getUserRequestableViolations() -> Any:
 	"""
 	Placeholder function until the permissions is updated.
 	"""
@@ -389,7 +389,7 @@ def getUserRequestableViolations() -> object:
 	# }
 	return call_method("ALRALManagerModule", "getUserRequestableViolations", [])
 
-def install() -> object:
+def install() -> Any:
 	"""
 	Install tablet apk.
 	"""
@@ -405,7 +405,7 @@ def install() -> object:
 	# }
 	return call_method("ALRALManagerModule", "install", [])
 
-def isConnectedToChargingStation() -> object:
+def isConnectedToChargingStation() -> Any:
 	"""
 	
 	"""
@@ -421,13 +421,13 @@ def isConnectedToChargingStation() -> object:
 	# }
 	return call_method("ALRALManagerModule", "isConnectedToChargingStation", [])
 
-def onApkInstalled(p0:object) -> object:
+def onApkInstalled(p0:Any) -> Any:
 	"""
 	On apk installed on tablet.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -442,7 +442,7 @@ def onApkInstalled(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "onApkInstalled", [p0])
 
-def onTabletTouched(p0:object, p1:object) -> object:
+def onTabletTouched(p0:Any, p1:Any) -> Any:
 	"""
 	Translate the ALTabletService.onTouchDown signal into an ALMemory
 	        event.
@@ -450,9 +450,9 @@ def onTabletTouched(p0:object, p1:object) -> object:
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -467,13 +467,13 @@ def onTabletTouched(p0:object, p1:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "onTabletTouched", [p0, p1])
 
-def removeApp(p0:object) -> object:
+def removeApp(p0:Any) -> Any:
 	"""
 	Remove app by voice
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -488,7 +488,7 @@ def removeApp(p0:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "removeApp", [p0])
 
-def restartTablet() -> object:
+def restartTablet() -> Any:
 	"""
 	"Sometimes the tablet stops working and needs a restart.
 	"""
@@ -504,15 +504,15 @@ def restartTablet() -> object:
 	# }
 	return call_method("ALRALManagerModule", "restartTablet", [])
 
-def selectApp(p0:object, p1:object) -> object:
+def selectApp(p0:Any, p1:Any) -> Any:
 	"""
 	Show application selection screen
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -527,17 +527,17 @@ def selectApp(p0:object, p1:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "selectApp", [p0, p1])
 
-def startRobotApp(p0:object, p1:object, p2:object) -> object:
+def startRobotApp(p0:Any, p1:Any, p2:Any) -> Any:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -552,7 +552,7 @@ def startRobotApp(p0:object, p1:object, p2:object) -> object:
 	# }
 	return call_method("ALRALManagerModule", "startRobotApp", [p0, p1, p2])
 
-def startService() -> object:
+def startService() -> Any:
 	"""
 	Start service
 	"""
@@ -569,7 +569,7 @@ def startService() -> object:
 	return call_method("ALRALManagerModule", "startService", [])
 
 @overload
-def updateApplications() -> object:
+def updateApplications() -> Any:
 	"""
 	Update tablet application list.
 	
@@ -592,13 +592,13 @@ def updateApplications() -> object:
 	...
 
 @overload
-def updateApplications(p0:object, /) -> object:
+def updateApplications(p0:Any, /) -> Any:
 	"""
 	Update tablet application list, with specific intent.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	
 	Bridge notes
@@ -625,7 +625,7 @@ def updateApplications(*args, **kwargs):
 	------------
 	updateApplications has 2 variants on the robot:
 	- updateApplications()
-	- updateApplications(p0:object)
+	- updateApplications(p0:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -633,7 +633,7 @@ def updateApplications(*args, **kwargs):
 		raise TypeError("ALRALManagerModule.updateApplications has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALRALManagerModule", "updateApplications", list(args))
 
-def webview() -> object:
+def webview() -> Any:
 	"""
 	Tbd.
 	"""

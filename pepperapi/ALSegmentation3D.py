@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALSegmentation3D", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALSegmentation3D", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -447,7 +447,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALSegmentation3D", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -743,7 +743,7 @@ def getActiveCamera() -> int:
 	# }
 	return call_method("ALSegmentation3D", "getActiveCamera", [])
 
-def getTopOfBlob(distance:float, frame:int, applyVerticalOffset:bool) -> object:
+def getTopOfBlob(distance:float, frame:int, applyVerticalOffset:bool) -> Any:
 	"""
 	Returns the position of the top of the blob most in the center of the depth image, at the given distance, in the given frame.
 	

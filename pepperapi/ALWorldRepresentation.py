@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALWorldRepresentation", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALWorldRepresentation", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,7 +165,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALWorldRepresentation", "getUsage", [name])
 
-def addAttributeToCategory(p0:str, p1:str, p2:object) -> int:
+def addAttributeToCategory(p0:str, p1:str, p2:Any) -> int:
 	"""
 	Add an attribute to a category.
 	
@@ -175,7 +175,7 @@ def addAttributeToCategory(p0:str, p1:str, p2:object) -> int:
 		
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -361,7 +361,7 @@ def load() -> int:
 	# }
 	return call_method("ALWorldRepresentation", "load", [])
 
-def getAttributesFromCategory(p0:str) -> object:
+def getAttributesFromCategory(p0:str) -> Any:
 	"""
 	Get all attributes from a category if it exists.
 	
@@ -419,7 +419,7 @@ def getObjectNames() -> List[str]:
 	# }
 	return call_method("ALWorldRepresentation", "getObjectNames", [])
 
-def getObjectAttributes(p0:str) -> object:
+def getObjectAttributes(p0:str) -> Any:
 	"""
 	
 	
@@ -440,7 +440,7 @@ def getObjectAttributes(p0:str) -> object:
 	# }
 	return call_method("ALWorldRepresentation", "getObjectAttributes", [p0])
 
-def getObjectAttributeValues(p0:str, p1:str, p2:int) -> object:
+def getObjectAttributeValues(p0:str, p1:str, p2:int) -> Any:
 	"""
 	
 	
@@ -465,7 +465,7 @@ def getObjectAttributeValues(p0:str, p1:str, p2:int) -> object:
 	# }
 	return call_method("ALWorldRepresentation", "getObjectAttributeValues", [p0, p1, p2])
 
-def getObjectLatestAttributes(p0:str, p1:int) -> object:
+def getObjectLatestAttributes(p0:str, p1:int) -> Any:
 	"""
 	
 	
@@ -551,7 +551,7 @@ def getObjectCategory(p0:str) -> str:
 	# }
 	return call_method("ALWorldRepresentation", "getObjectCategory", [p0])
 
-def getPosition(p0:str, p1:str) -> object:
+def getPosition(p0:str, p1:str) -> Any:
 	"""
 	Get the position of an object with quaternion / translation.
 	
@@ -656,7 +656,7 @@ def save() -> int:
 	# }
 	return call_method("ALWorldRepresentation", "save", [])
 
-def select(p0:str, p1:str, p2:str, p3:str) -> object:
+def select(p0:str, p1:str, p2:str, p3:str) -> Any:
 	"""
 	Select information from a database.
 	
@@ -683,7 +683,7 @@ def select(p0:str, p1:str, p2:str, p3:str) -> object:
 	# }
 	return call_method("ALWorldRepresentation", "select", [p0, p1, p2, p3])
 
-def selectWithOrder(p0:str, p1:str, p2:str, p3:str, p4:str) -> object:
+def selectWithOrder(p0:str, p1:str, p2:str, p3:str, p4:str) -> Any:
 	"""
 	Select ordered information from a database.
 	
@@ -712,7 +712,7 @@ def selectWithOrder(p0:str, p1:str, p2:str, p3:str, p4:str) -> object:
 	# }
 	return call_method("ALWorldRepresentation", "selectWithOrder", [p0, p1, p2, p3, p4])
 
-def storeObject(p0:str, p1:str, p2:List[float], p3:str, p4:object) -> int:
+def storeObject(p0:str, p1:str, p2:List[float], p3:str, p4:Any) -> int:
 	"""
 	
 	
@@ -726,7 +726,7 @@ def storeObject(p0:str, p1:str, p2:List[float], p3:str, p4:object) -> int:
 		
 	p3:str
 		
-	p4:object
+	p4:Any
 		
 	"""
 	# NAOqi metadata:
@@ -741,7 +741,7 @@ def storeObject(p0:str, p1:str, p2:List[float], p3:str, p4:object) -> int:
 	# }
 	return call_method("ALWorldRepresentation", "storeObject", [p0, p1, p2, p3, p4])
 
-def storeObjectWithReference(p0:str, p1:str, p2:str, p3:List[float], p4:str, p5:object) -> int:
+def storeObjectWithReference(p0:str, p1:str, p2:str, p3:List[float], p4:str, p5:Any) -> int:
 	"""
 	
 	
@@ -757,7 +757,7 @@ def storeObjectWithReference(p0:str, p1:str, p2:str, p3:List[float], p4:str, p5:
 		
 	p4:str
 		
-	p5:object
+	p5:Any
 		
 	"""
 	# NAOqi metadata:
@@ -772,7 +772,7 @@ def storeObjectWithReference(p0:str, p1:str, p2:str, p3:List[float], p4:str, p5:
 	# }
 	return call_method("ALWorldRepresentation", "storeObjectWithReference", [p0, p1, p2, p3, p4, p5])
 
-def storeObjectAttribute(p0:str, p1:str, p2:object) -> int:
+def storeObjectAttribute(p0:str, p1:str, p2:Any) -> int:
 	"""
 	
 	
@@ -782,7 +782,7 @@ def storeObjectAttribute(p0:str, p1:str, p2:object) -> int:
 		
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -849,7 +849,7 @@ def updatePositionWithReference(p0:str, p1:str, p2:List[float], p3:bool) -> int:
 	# }
 	return call_method("ALWorldRepresentation", "updatePositionWithReference", [p0, p1, p2, p3])
 
-def updateAttribute(p0:str, p1:str, p2:str, p3:object) -> int:
+def updateAttribute(p0:str, p1:str, p2:str, p3:Any) -> int:
 	"""
 	
 	
@@ -861,7 +861,7 @@ def updateAttribute(p0:str, p1:str, p2:str, p3:object) -> int:
 		
 	p2:str
 		
-	p3:object
+	p3:Any
 		
 	"""
 	# NAOqi metadata:

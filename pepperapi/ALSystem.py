@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from dataclasses import dataclass, field
 from .robot_client import call_method
 from .robot_client import Signal, Property
@@ -95,7 +95,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALSystem", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -125,7 +125,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALSystem", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -295,7 +295,7 @@ def setRobotName(name:str) -> bool:
 	# }
 	return call_method("ALSystem", "setRobotName", [name])
 
-def robotIcon() -> object:
+def robotIcon() -> Any:
 	"""
 	
 	"""

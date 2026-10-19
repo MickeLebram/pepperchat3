@@ -2,7 +2,7 @@
 ALMemory provides a centralized memory that can be used to store and retrieve named values. It also acts as a hub for the distribution of event notifications.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALMemory", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALMemory", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -251,7 +251,7 @@ def declareEvent(*args, **kwargs):
 		raise TypeError("ALMemory.declareEvent has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALMemory", "declareEvent", list(args))
 
-def getData(key:str) -> object:
+def getData(key:str) -> Any:
 	"""
 	Gets the value of a key-value pair stored in memory
 	
@@ -281,7 +281,7 @@ def getData(key:str) -> object:
 	# }
 	return call_method("ALMemory", "getData", [key])
 
-def getTimestamp(key:str) -> object:
+def getTimestamp(key:str) -> Any:
 	"""
 	Get data value and timestamp
 	
@@ -311,7 +311,7 @@ def getTimestamp(key:str) -> object:
 	# }
 	return call_method("ALMemory", "getTimestamp", [key])
 
-def getEventHistory(key:str) -> object:
+def getEventHistory(key:str) -> Any:
 	"""
 	Get data value and timestamp
 	
@@ -441,13 +441,13 @@ def getExtractorEvent(extractorName:str) -> List[str]:
 	# }
 	return call_method("ALMemory", "getExtractorEvent", [extractorName])
 
-def getListData(keyList:object) -> object:
+def getListData(keyList:Any) -> Any:
 	"""
 	Gets the values associated with the given list of keys. This is more efficient than calling getData many times, especially over the network.
 	
 	Parameters
 	----------
-	keyList:object
+	keyList:Any
 		An array containing the key names.
 	
 	Returns
@@ -570,7 +570,7 @@ def insertData(key:str, value:int, /) -> None:
 	To choose explicitly, use:
 	- insertData_float(str, float)
 	- insertData_int(str, int)
-	- insertData_object(str, object)
+	- insertData_any(str, Any)
 	- insertData_str(str, str)
 	
 	Pass arguments by position, not by keyword.
@@ -615,7 +615,7 @@ def insertData(key:str, value:float, /) -> None:
 	To choose explicitly, use:
 	- insertData_float(str, float)
 	- insertData_int(str, int)
-	- insertData_object(str, object)
+	- insertData_any(str, Any)
 	- insertData_str(str, str)
 	
 	Pass arguments by position, not by keyword.
@@ -660,7 +660,7 @@ def insertData(key:str, value:str, /) -> None:
 	To choose explicitly, use:
 	- insertData_float(str, float)
 	- insertData_int(str, int)
-	- insertData_object(str, object)
+	- insertData_any(str, Any)
 	- insertData_str(str, str)
 	
 	Pass arguments by position, not by keyword.
@@ -687,7 +687,7 @@ def insertData(key:str, value:str, /) -> None:
 	...
 
 @overload
-def insertData(key:str, data:object, /) -> None:
+def insertData(key:str, data:Any, /) -> None:
 	"""
 	Inserts a key-value pair into memory, where value is an ALValue
 	
@@ -695,7 +695,7 @@ def insertData(key:str, data:object, /) -> None:
 	----------
 	key:str
 		Name of the value to be inserted.
-	data:object
+	data:Any
 		The ALValue to be inserted. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
 	
 	Bridge notes
@@ -705,7 +705,7 @@ def insertData(key:str, data:object, /) -> None:
 	To choose explicitly, use:
 	- insertData_float(str, float)
 	- insertData_int(str, int)
-	- insertData_object(str, object)
+	- insertData_any(str, Any)
 	- insertData_str(str, str)
 	
 	Pass arguments by position, not by keyword.
@@ -739,7 +739,7 @@ def insertData(*args, **kwargs):
 	- insertData(key:str, value:int), explicitly insertData_int
 	- insertData(key:str, value:float), explicitly insertData_float
 	- insertData(key:str, value:str), explicitly insertData_str
-	- insertData(key:str, data:object), explicitly insertData_object
+	- insertData(key:str, data:Any), explicitly insertData_any
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -819,7 +819,7 @@ def insertData_int(key:str, value:int) -> None:
 	# }
 	return call_method("ALMemory", "insertData", [key, value])
 
-def insertData_object(key:str, data:object) -> None:
+def insertData_any(key:str, data:Any) -> None:
 	"""
 	Inserts a key-value pair into memory, where value is an ALValue
 	
@@ -827,12 +827,12 @@ def insertData_object(key:str, data:object) -> None:
 	----------
 	key:str
 		Name of the value to be inserted.
-	data:object
+	data:Any
 		The ALValue to be inserted. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
 	
 	Bridge notes
 	------------
-	Explicit variant of insertData(str, object). Calling insertData instead lets the robot choose the variant from the argument types.
+	Explicit variant of insertData(str, Any). Calling insertData instead lets the robot choose the variant from the argument types.
 	"""
 	# NAOqi metadata:
 	# {
@@ -891,13 +891,13 @@ def insertData_str(key:str, value:str) -> None:
 	# }
 	return call_method("ALMemory", "insertData", [key, value])
 
-def insertListData(list:object) -> None:
+def insertListData(list:Any) -> None:
 	"""
 	Inserts a list of key-value pairs into memory.
 	
 	Parameters
 	----------
-	list:object
+	list:Any
 		An ALValue list of the form [[Key, Value],...]. Each item will be inserted.
 	"""
 	# NAOqi metadata:
@@ -917,7 +917,7 @@ def insertListData(list:object) -> None:
 	# }
 	return call_method("ALMemory", "insertListData", [list])
 
-def raiseEvent(name:str, value:object) -> None:
+def raiseEvent(name:str, value:Any) -> None:
 	"""
 	Publishes the given data to all subscribers.
 	
@@ -925,7 +925,7 @@ def raiseEvent(name:str, value:object) -> None:
 	----------
 	name:str
 		Name of the event to raise.
-	value:object
+	value:Any
 		The data associated with the event. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
 	"""
 	# NAOqi metadata:
@@ -949,7 +949,7 @@ def raiseEvent(name:str, value:object) -> None:
 	# }
 	return call_method("ALMemory", "raiseEvent", [name, value])
 
-def raiseMicroEvent(name:str, value:object) -> None:
+def raiseMicroEvent(name:str, value:Any) -> None:
 	"""
 	Publishes the given data to all subscribers.
 	
@@ -957,7 +957,7 @@ def raiseMicroEvent(name:str, value:object) -> None:
 	----------
 	name:str
 		Name of the event to raise.
-	value:object
+	value:Any
 		The data associated with the event. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
 	"""
 	# NAOqi metadata:
@@ -1255,7 +1255,7 @@ def unsubscribeToMicroEvent(name:str, callbackModule:str) -> None:
 	# }
 	return call_method("ALMemory", "unsubscribeToMicroEvent", [name, callbackModule])
 
-def _insertObject(name:str, buffer:object, bufferSize:int) -> None:
+def _insertObject(name:str, buffer:Any, bufferSize:int) -> None:
 	"""
 	Insert object in ALMemory. Please use ALMemoryFastAccess
 	
@@ -1263,7 +1263,7 @@ def _insertObject(name:str, buffer:object, bufferSize:int) -> None:
 	----------
 	name:str
 		ALMemory data name
-	buffer:object
+	buffer:Any
 		buffer in ALValue
 	bufferSize:int
 		buffer size
@@ -1409,7 +1409,7 @@ def setDescription(name:str, description:str) -> None:
 	# }
 	return call_method("ALMemory", "setDescription", [name, description])
 
-def getDescriptionList(keylist:List[str]) -> object:
+def getDescriptionList(keylist:List[str]) -> Any:
 	"""
 	Descriptions of all given keys
 	

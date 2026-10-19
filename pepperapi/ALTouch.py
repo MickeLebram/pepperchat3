@@ -2,7 +2,7 @@
 This module is dedicated to inform if the robot is touched [joints or button]
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALTouch", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALTouch", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,13 +165,13 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALTouch", "getUsage", [name])
 
-def _setTouchConfig(config:object) -> None:
+def _setTouchConfig(config:Any) -> None:
 	"""
 	Internal Use.
 	
 	Parameters
 	----------
-	config:object
+	config:Any
 		Internal: An array of ALValues [i][0]: name, [i][1]: value
 	"""
 	# NAOqi metadata:
@@ -211,7 +211,7 @@ def getSensorList() -> List[str]:
 	# }
 	return call_method("ALTouch", "getSensorList", [])
 
-def getStatus() -> object:
+def getStatus() -> Any:
 	"""
 	Return the current status of all Touch groups.
 	
@@ -399,7 +399,7 @@ def _notifyTouchStopped(groupName:str) -> None:
 	# }
 	return call_method("ALTouch", "_notifyTouchStopped", [groupName])
 
-def _robotFallingCallback(p0:str, p1:object, p2:object) -> None:
+def _robotFallingCallback(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when robot is falling
 	
@@ -407,9 +407,9 @@ def _robotFallingCallback(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -424,7 +424,7 @@ def _robotFallingCallback(p0:str, p1:object, p2:object) -> None:
 	# }
 	return call_method("ALTouch", "_robotFallingCallback", [p0, p1, p2])
 
-def _robotFallenCallback(p0:str, p1:object, p2:object) -> None:
+def _robotFallenCallback(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when robot has fallen
 	
@@ -432,9 +432,9 @@ def _robotFallenCallback(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -449,7 +449,7 @@ def _robotFallenCallback(p0:str, p1:object, p2:object) -> None:
 	# }
 	return call_method("ALTouch", "_robotFallenCallback", [p0, p1, p2])
 
-def _diagnosisCallback(p0:str, p1:object, p2:object) -> None:
+def _diagnosisCallback(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when diagnosis change.
 	
@@ -457,9 +457,9 @@ def _diagnosisCallback(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -474,7 +474,7 @@ def _diagnosisCallback(p0:str, p1:object, p2:object) -> None:
 	# }
 	return call_method("ALTouch", "_diagnosisCallback", [p0, p1, p2])
 
-def _temperatureCallback(p0:str, p1:object, p2:object) -> None:
+def _temperatureCallback(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when temperature diagnosis change.
 	
@@ -482,9 +482,9 @@ def _temperatureCallback(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:

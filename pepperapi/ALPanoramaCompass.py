@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALPanoramaCompass", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALPanoramaCompass", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -197,7 +197,7 @@ def isDataAvailable() -> bool:
 	# }
 	return call_method("ALPanoramaCompass", "isDataAvailable", [])
 
-def getCurrentPosition() -> object:
+def getCurrentPosition() -> Any:
 	"""
 	Return the current orientation of the robot in the current panorama.
 	"""
@@ -642,7 +642,7 @@ def loadPanorama(id:int) -> int:
 	# }
 	return call_method("ALPanoramaCompass", "loadPanorama", [id])
 
-def getCurrentPanoramaDescriptor() -> object:
+def getCurrentPanoramaDescriptor() -> Any:
 	"""
 	
 	
@@ -662,7 +662,7 @@ def getCurrentPanoramaDescriptor() -> object:
 	# }
 	return call_method("ALPanoramaCompass", "getCurrentPanoramaDescriptor", [])
 
-def getFrame(id:int, p1:str) -> object:
+def getFrame(id:int, p1:str) -> Any:
 	"""
 	Return the Frame corresponding to the input identity. It have to be in the current Panorama
 	

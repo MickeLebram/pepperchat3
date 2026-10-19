@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALRecharge", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALRecharge", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -277,7 +277,7 @@ def getStatus() -> int:
 	# }
 	return call_method("ALRecharge", "getStatus", [])
 
-def lookForStation() -> object:
+def lookForStation() -> Any:
 	"""
 	.
 	"""
@@ -935,7 +935,7 @@ def _setLookMaxRetries(p0:int) -> None:
 	# }
 	return call_method("ALRecharge", "_setLookMaxRetries", [p0])
 
-def _updateStationDetection(p0:str, p1:object, p2:str) -> None:
+def _updateStationDetection(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -943,7 +943,7 @@ def _updateStationDetection(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -992,7 +992,7 @@ def _eventTrackerTargetReachedCallback() -> None:
 	# }
 	return call_method("ALRecharge", "_eventTrackerTargetReachedCallback", [])
 
-def _eventTrackerTargetLostCallback(p0:str, p1:object, p2:str) -> None:
+def _eventTrackerTargetLostCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1000,7 +1000,7 @@ def _eventTrackerTargetLostCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1017,7 +1017,7 @@ def _eventTrackerTargetLostCallback(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALRecharge", "_eventTrackerTargetLostCallback", [p0, p1, p2])
 
-def _eventTrackerActiveTargetChangedCallback(p0:str, p1:object, p2:str) -> None:
+def _eventTrackerActiveTargetChangedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1025,7 +1025,7 @@ def _eventTrackerActiveTargetChangedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1042,7 +1042,7 @@ def _eventTrackerActiveTargetChangedCallback(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALRecharge", "_eventTrackerActiveTargetChangedCallback", [p0, p1, p2])
 
-def _eventTrackerSearcherScanStartedCallback(p0:str, p1:object, p2:str) -> None:
+def _eventTrackerSearcherScanStartedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1050,7 +1050,7 @@ def _eventTrackerSearcherScanStartedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1067,7 +1067,7 @@ def _eventTrackerSearcherScanStartedCallback(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALRecharge", "_eventTrackerSearcherScanStartedCallback", [p0, p1, p2])
 
-def _eventMoveFailedCallback(p0:str, p1:object, p2:str) -> None:
+def _eventMoveFailedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1075,7 +1075,7 @@ def _eventMoveFailedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1092,7 +1092,7 @@ def _eventMoveFailedCallback(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALRecharge", "_eventMoveFailedCallback", [p0, p1, p2])
 
-def _eventBatteryConnectedToChargingStationCallback(p0:str, p1:object, p2:str) -> None:
+def _eventBatteryConnectedToChargingStationCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1100,7 +1100,7 @@ def _eventBatteryConnectedToChargingStationCallback(p0:str, p1:object, p2:str) -
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1117,7 +1117,7 @@ def _eventBatteryConnectedToChargingStationCallback(p0:str, p1:object, p2:str) -
 	# }
 	return call_method("ALRecharge", "_eventBatteryConnectedToChargingStationCallback", [p0, p1, p2])
 
-def _eventNavigationStatusChangedCallback(p0:str, p1:object, p2:str) -> None:
+def _eventNavigationStatusChangedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1125,7 +1125,7 @@ def _eventNavigationStatusChangedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -1142,7 +1142,7 @@ def _eventNavigationStatusChangedCallback(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALRecharge", "_eventNavigationStatusChangedCallback", [p0, p1, p2])
 
-def _eventSlopeDetectedChangedCallback(p0:str, p1:object, p2:str) -> None:
+def _eventSlopeDetectedChangedCallback(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1150,7 +1150,7 @@ def _eventSlopeDetectedChangedCallback(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		

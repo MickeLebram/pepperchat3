@@ -8,7 +8,7 @@ A event name BatteryChargeChanged is raised when the battery level percentage (i
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -71,7 +71,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALBattery", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -101,7 +101,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALBattery", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	

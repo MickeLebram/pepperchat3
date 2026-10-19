@@ -3,7 +3,7 @@ This module is intended to manage behaviors. With this module, you can load, sta
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -67,7 +67,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALBehaviorManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -97,7 +97,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALBehaviorManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -789,7 +789,7 @@ def playDefaultProject() -> None:
 	# }
 	return call_method("ALBehaviorManager", "playDefaultProject", [])
 
-def _onDataChanged(dataName:str, dataValue:object, message:str) -> None:
+def _onDataChanged(dataName:str, dataValue:Any, message:str) -> None:
 	"""
 	Be notified when something we have subscribe to has changed in ALMemory
 	
@@ -797,7 +797,7 @@ def _onDataChanged(dataName:str, dataValue:object, message:str) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
 	message:str
 		callback message

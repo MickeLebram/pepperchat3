@@ -4,7 +4,7 @@ ALRobotHealthMonitor provides a simple API to robot health monitoring.
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -67,7 +67,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALRobotHealthMonitor", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -97,7 +97,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALRobotHealthMonitor", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -350,7 +350,7 @@ def _getReportingEnabled() -> bool:
 	# }
 	return call_method("ALRobotHealthMonitor", "_getReportingEnabled", [])
 
-def _onConnectivityChanged(string1:str, string2:object, string3:str) -> None:
+def _onConnectivityChanged(string1:str, string2:Any, string3:str) -> None:
 	"""
 	Internal callback
 	
@@ -358,7 +358,7 @@ def _onConnectivityChanged(string1:str, string2:object, string3:str) -> None:
 	----------
 	string1:str
 		variable
-	string2:object
+	string2:Any
 		value
 	string3:str
 		message
@@ -388,7 +388,7 @@ def _onConnectivityChanged(string1:str, string2:object, string3:str) -> None:
 	# }
 	return call_method("ALRobotHealthMonitor", "_onConnectivityChanged", [string1, string2, string3])
 
-def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
+def _onEventNotify(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when an event we have subscribed to has changed in ALMemory
 	
@@ -396,9 +396,9 @@ def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -426,7 +426,7 @@ def _onEventNotify(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALRobotHealthMonitor", "_onEventNotify", [dataName, dataValue, message])
 
-def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyAdded(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when an event we have subscribed to has changed in ALMemory
 	
@@ -434,9 +434,9 @@ def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -464,7 +464,7 @@ def _onKeyAdded(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALRobotHealthMonitor", "_onKeyAdded", [dataName, dataValue, message])
 
-def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyRemoved(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when a key is removed in ALMemory
 	
@@ -472,9 +472,9 @@ def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -502,7 +502,7 @@ def _onKeyRemoved(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALRobotHealthMonitor", "_onKeyRemoved", [dataName, dataValue, message])
 
-def _onKeyTypeChanged(dataName:str, dataValue:object, message:object) -> None:
+def _onKeyTypeChanged(dataName:str, dataValue:Any, message:Any) -> None:
 	"""
 	Be notified when an event we have subscribe to has changed in ALMemory
 	
@@ -510,9 +510,9 @@ def _onKeyTypeChanged(dataName:str, dataValue:object, message:object) -> None:
 	----------
 	dataName:str
 		name of the data
-	dataValue:object
+	dataValue:Any
 		value of the data
-	message:object
+	message:Any
 		callback message
 	"""
 	# NAOqi metadata:
@@ -540,7 +540,7 @@ def _onKeyTypeChanged(dataName:str, dataValue:object, message:object) -> None:
 	# }
 	return call_method("ALRobotHealthMonitor", "_onKeyTypeChanged", [dataName, dataValue, message])
 
-def _onNetworkServiceAdded(eventName:str, serviceId:object, subscriberIdentifier:str) -> None:
+def _onNetworkServiceAdded(eventName:str, serviceId:Any, subscriberIdentifier:str) -> None:
 	"""
 	Called when a service is added to the service list.
 	
@@ -548,7 +548,7 @@ def _onNetworkServiceAdded(eventName:str, serviceId:object, subscriberIdentifier
 	----------
 	eventName:str
 		NetworkServiceAdded
-	serviceId:object
+	serviceId:Any
 		The service identifier of the added service.
 	subscriberIdentifier:str
 		-
@@ -578,7 +578,7 @@ def _onNetworkServiceAdded(eventName:str, serviceId:object, subscriberIdentifier
 	# }
 	return call_method("ALRobotHealthMonitor", "_onNetworkServiceAdded", [eventName, serviceId, subscriberIdentifier])
 
-def _onNetworkServiceRemoved(eventName:str, serviceId:object, subscriberIdentifier:str) -> None:
+def _onNetworkServiceRemoved(eventName:str, serviceId:Any, subscriberIdentifier:str) -> None:
 	"""
 	Called when a service is removed from the service list.
 	
@@ -586,7 +586,7 @@ def _onNetworkServiceRemoved(eventName:str, serviceId:object, subscriberIdentifi
 	----------
 	eventName:str
 		NetworkServiceRemoved
-	serviceId:object
+	serviceId:Any
 		The service identifier of the removed service.
 	subscriberIdentifier:str
 		-
@@ -616,7 +616,7 @@ def _onNetworkServiceRemoved(eventName:str, serviceId:object, subscriberIdentifi
 	# }
 	return call_method("ALRobotHealthMonitor", "_onNetworkServiceRemoved", [eventName, serviceId, subscriberIdentifier])
 
-def _onNetworkServiceStateChanged(eventName:str, serviceState:object, subscriberIdentifier:str) -> None:
+def _onNetworkServiceStateChanged(eventName:str, serviceState:Any, subscriberIdentifier:str) -> None:
 	"""
 	Called when a service is removed from the service list.
 	
@@ -624,7 +624,7 @@ def _onNetworkServiceStateChanged(eventName:str, serviceState:object, subscriber
 	----------
 	eventName:str
 		NetworkServiceStateChanged
-	serviceState:object
+	serviceState:Any
 		A pair which contains the serviceId and the state of the service.
 	subscriberIdentifier:str
 		-

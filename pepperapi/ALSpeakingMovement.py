@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from dataclasses import dataclass, field
 from .robot_client import call_method
 
@@ -105,13 +105,13 @@ def getMode() -> str:
 	# }
 	return call_method("ALSpeakingMovement", "getMode", [])
 
-def addTagsToWords(p0:object) -> None:
+def addTagsToWords(p0:Any) -> None:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:

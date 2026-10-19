@@ -2,7 +2,7 @@
 Generic Converter.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_RedBallConverter", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_RedBallConverter", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,13 +165,13 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("_RedBallConverter", "getUsage", [name])
 
-def setImplParam(p0:object) -> None:
+def setImplParam(p0:Any) -> None:
 	"""
 	Set the parameters to the converter.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -223,13 +223,13 @@ def stopConverter() -> None:
 	# }
 	return call_method("_RedBallConverter", "stopConverter", [])
 
-def convert(p0:object) -> object:
+def convert(p0:Any) -> Any:
 	"""
 	Convert.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -244,7 +244,7 @@ def convert(p0:object) -> object:
 	# }
 	return call_method("_RedBallConverter", "convert", [p0])
 
-def convertEvent(p0:str, p1:object) -> None:
+def convertEvent(p0:str, p1:Any) -> None:
 	"""
 	Convert with event.
 	
@@ -252,7 +252,7 @@ def convertEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

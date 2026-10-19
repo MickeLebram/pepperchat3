@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from dataclasses import dataclass, field
 from .robot_client import call_method
 from .robot_client import Signal, Property
@@ -19,7 +19,7 @@ class PackageInfo2:
 	typeVersion: str
 	installer: str
 	path: str
-	elems: Dict[str,object]
+	elems: Dict[str,Any]
 
 
 @dataclass
@@ -445,7 +445,7 @@ def removePkg(p0:str) -> None:
 	# }
 	return call_method("PackageManager", "removePkg", [p0])
 
-def getPackages() -> object:
+def getPackages() -> Any:
 	"""
 	
 	"""
@@ -498,7 +498,7 @@ def package(p0:str) -> PackageInfo:
 	# }
 	return call_method("PackageManager", "package", [p0], returns=PackageInfo)
 
-def getPackage(p0:str) -> object:
+def getPackage(p0:str) -> Any:
 	"""
 	
 	
@@ -519,7 +519,7 @@ def getPackage(p0:str) -> object:
 	# }
 	return call_method("PackageManager", "getPackage", [p0])
 
-def getPackageIcon(p0:str) -> object:
+def getPackageIcon(p0:str) -> Any:
 	"""
 	
 	
@@ -578,21 +578,21 @@ class _Signals:
 	
 	subscribe(callback) calls callback(PackageInfo2) each time the robot sends it.
 	"""
-	_onPackageInstalled: Signal[[object]] = Signal("PackageManager", "_onPackageInstalled")
+	_onPackageInstalled: Signal[[Any]] = Signal("PackageManager", "_onPackageInstalled")
 	"""
 	Bridge notes
 	------------
 	A signal sent by PackageManager on the robot.
 	
-	subscribe(callback) calls callback(object) each time the robot sends it.
+	subscribe(callback) calls callback(Any) each time the robot sends it.
 	"""
-	_onPackageRemoved: Signal[[object]] = Signal("PackageManager", "_onPackageRemoved")
+	_onPackageRemoved: Signal[[Any]] = Signal("PackageManager", "_onPackageRemoved")
 	"""
 	Bridge notes
 	------------
 	A signal sent by PackageManager on the robot.
 	
-	subscribe(callback) calls callback(object) each time the robot sends it.
+	subscribe(callback) calls callback(Any) each time the robot sends it.
 	"""
 	packageInstalled: Signal[[PackageInfo]] = Signal("PackageManager", "packageInstalled", (PackageInfo,))
 	"""

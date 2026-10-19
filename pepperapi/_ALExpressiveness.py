@@ -2,7 +2,7 @@
 ALExpressiveness: Give some life to the robot.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_ALExpressiveness", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_ALExpressiveness", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,7 +165,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("_ALExpressiveness", "getUsage", [name])
 
-def _naoqiIsReady(p0:str, p1:object, p2:object) -> None:
+def _naoqiIsReady(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when NAOqi is ready to enable display of notifications.
 	
@@ -173,9 +173,9 @@ def _naoqiIsReady(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -190,7 +190,7 @@ def _naoqiIsReady(p0:str, p1:object, p2:object) -> None:
 	# }
 	return call_method("_ALExpressiveness", "_naoqiIsReady", [p0, p1, p2])
 
-def _updateNotification(p0:str, p1:object, p2:object) -> None:
+def _updateNotification(p0:str, p1:Any, p2:Any) -> None:
 	"""
 	Callback when new notification just comming.
 	
@@ -198,9 +198,9 @@ def _updateNotification(p0:str, p1:object, p2:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:

@@ -3,7 +3,7 @@ This module tries to detect emotions in the voice of the speaker.
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALVoiceEmotionAnalysis", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALVoiceEmotionAnalysis", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -448,7 +448,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALVoiceEmotionAnalysis", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -528,7 +528,7 @@ def getMemoryKeyList() -> List[str]:
 	# }
 	return call_method("ALVoiceEmotionAnalysis", "getMemoryKeyList", [])
 
-def _onSpeechDetected(key:str, value:object) -> None:
+def _onSpeechDetected(key:str, value:Any) -> None:
 	"""
 	sound detected callback
 	
@@ -536,7 +536,7 @@ def _onSpeechDetected(key:str, value:object) -> None:
 	----------
 	key:str
 		ALMemory key.
-	value:object
+	value:Any
 		ALValue of key.
 	"""
 	# NAOqi metadata:
@@ -560,7 +560,7 @@ def _onSpeechDetected(key:str, value:object) -> None:
 	# }
 	return call_method("ALVoiceEmotionAnalysis", "_onSpeechDetected", [key, value])
 
-def setParameter(parameter:str, value:object) -> None:
+def setParameter(parameter:str, value:Any) -> None:
 	"""
 	Set the specified parameter.
 	
@@ -568,7 +568,7 @@ def setParameter(parameter:str, value:object) -> None:
 	----------
 	parameter:str
 		Name of the parameter. "MinSignalLength" Minimum length (in seconds, positive) required for the analysis of a voice signal
-	value:object
+	value:Any
 		"MinSignalLength" : int > 0.
 	"""
 	# NAOqi metadata:

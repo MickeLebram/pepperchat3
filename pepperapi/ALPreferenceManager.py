@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -24,7 +24,7 @@ def getDomainList() -> List[str]:
 	# }
 	return call_method("ALPreferenceManager", "getDomainList", [])
 
-def getValues() -> List[List[object]]:
+def getValues() -> List[List[Any]]:
 	"""
 	
 	        Return all Preferences for all Domains with their values.
@@ -42,7 +42,7 @@ def getValues() -> List[List[object]]:
 	# }
 	return call_method("ALPreferenceManager", "getValues", [])
 
-def getValueList(domain:str) -> List[List[object]]:
+def getValueList(domain:str) -> List[List[Any]]:
 	"""
 	
 	        Return all Preferences for a Domain with its values.
@@ -64,7 +64,7 @@ def getValueList(domain:str) -> List[List[object]]:
 	# }
 	return call_method("ALPreferenceManager", "getValueList", [domain])
 
-def getValue(domain:str, setting:str) -> object:
+def getValue(domain:str, setting:str) -> Any:
 	"""
 	
 	        Return the Preference Value for a Domain and Setting.
@@ -89,7 +89,7 @@ def getValue(domain:str, setting:str) -> object:
 	# }
 	return call_method("ALPreferenceManager", "getValue", [domain, setting])
 
-def setValue(domain:str, setting:str, value:object) -> None:
+def setValue(domain:str, setting:str, value:Any) -> None:
 	"""
 	
 	        Set a Preference Value for a Domain and Setting.
@@ -102,7 +102,7 @@ def setValue(domain:str, setting:str, value:object) -> None:
 		Preference Domain
 	setting:str
 		Preference Setting
-	value:object
+	value:Any
 		New Preference Value
 	"""
 	# NAOqi metadata:
@@ -117,7 +117,7 @@ def setValue(domain:str, setting:str, value:object) -> None:
 	# }
 	return call_method("ALPreferenceManager", "setValue", [domain, setting, value])
 
-def setValues(values:Dict[str,Dict[str,object]]) -> None:
+def setValues(values:Dict[str,Dict[str,Any]]) -> None:
 	"""
 	
 	        Save a list of Preference Domain, Setting and Values.
@@ -126,7 +126,7 @@ def setValues(values:Dict[str,Dict[str,object]]) -> None:
 	
 	Parameters
 	----------
-	values:Dict[str,Dict[str,object]]
+	values:Dict[str,Dict[str,Any]]
 		New Preference Values (ex: {'PrefDomain': {'PrefSetting': 'StringValue'}})
 	"""
 	# NAOqi metadata:
@@ -255,7 +255,7 @@ def _factoryReset() -> None:
 	# }
 	return call_method("ALPreferenceManager", "_factoryReset", [])
 
-def _setFromCloud(p0:str, p1:str, p2:object) -> None:
+def _setFromCloud(p0:str, p1:str, p2:Any) -> None:
 	"""
 	
 	        Set a Preference in Database without Cloud Synchronization.
@@ -267,7 +267,7 @@ def _setFromCloud(p0:str, p1:str, p2:object) -> None:
 		
 	p1:str
 		
-	p2:object
+	p2:Any
 		
 	"""
 	# NAOqi metadata:
@@ -380,13 +380,13 @@ def _version() -> str:
 	return call_method("ALPreferenceManager", "_version", [])
 
 class _Signals:
-	preferenceAdded: Signal[[str, str, object]] = Signal("ALPreferenceManager", "preferenceAdded")
+	preferenceAdded: Signal[[str, str, Any]] = Signal("ALPreferenceManager", "preferenceAdded")
 	"""
 	Bridge notes
 	------------
 	A signal sent by ALPreferenceManager on the robot.
 	
-	subscribe(callback) calls callback(str, str, object) each time the robot sends it.
+	subscribe(callback) calls callback(str, str, Any) each time the robot sends it.
 	"""
 	preferenceDomainRemoved: Signal[[str]] = Signal("ALPreferenceManager", "preferenceDomainRemoved")
 	"""
@@ -404,13 +404,13 @@ class _Signals:
 	
 	subscribe(callback) calls callback(str, str) each time the robot sends it.
 	"""
-	preferenceUpdated: Signal[[str, str, object]] = Signal("ALPreferenceManager", "preferenceUpdated")
+	preferenceUpdated: Signal[[str, str, Any]] = Signal("ALPreferenceManager", "preferenceUpdated")
 	"""
 	Bridge notes
 	------------
 	A signal sent by ALPreferenceManager on the robot.
 	
-	subscribe(callback) calls callback(str, str, object) each time the robot sends it.
+	subscribe(callback) calls callback(str, str, Any) each time the robot sends it.
 	"""
 	preferencesSynchronized: Signal[[]] = Signal("ALPreferenceManager", "preferencesSynchronized")
 	"""

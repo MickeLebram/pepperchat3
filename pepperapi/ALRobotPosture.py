@@ -2,7 +2,7 @@
 Use ALRobotPosture module to make the robot go tothe asked posture.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALRobotPosture", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALRobotPosture", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -347,7 +347,7 @@ def getPosture() -> str:
 	# }
 	return call_method("ALRobotPosture", "getPosture", [])
 
-def _isRobotInPosture(p0:str, p1:float, p2:float) -> object:
+def _isRobotInPosture(p0:str, p1:float, p2:float) -> Any:
 	"""
 	Articular distance
 	
@@ -397,7 +397,7 @@ def _isRobotInPostureId(p0:int, p1:float, p2:float) -> bool:
 	# }
 	return call_method("ALRobotPosture", "_isRobotInPostureId", [p0, p1, p2])
 
-def _getPosture() -> object:
+def _getPosture() -> Any:
 	"""
 	Determine posture id.
 	"""
@@ -908,7 +908,7 @@ def _getCurrentPath() -> List[float]:
 	# }
 	return call_method("ALRobotPosture", "_getCurrentPath", [])
 
-def _isStandCallBack(p0:str, p1:object, p2:str) -> None:
+def _isStandCallBack(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -916,7 +916,7 @@ def _isStandCallBack(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -975,7 +975,7 @@ def _getArticularDistanceToPosture(p0:int) -> float:
 	# }
 	return call_method("ALRobotPosture", "_getArticularDistanceToPosture", [p0])
 
-def _getCartesianDistanceToPosture(p0:int) -> object:
+def _getCartesianDistanceToPosture(p0:int) -> Any:
 	"""
 	.
 	
@@ -1070,7 +1070,7 @@ def _generateCartesianMap() -> None:
 	# }
 	return call_method("ALRobotPosture", "_generateCartesianMap", [])
 
-def _getPostureZ(p0:float) -> object:
+def _getPostureZ(p0:float) -> Any:
 	"""
 	.
 	
@@ -1091,7 +1091,7 @@ def _getPostureZ(p0:float) -> object:
 	# }
 	return call_method("ALRobotPosture", "_getPostureZ", [p0])
 
-def _getPostureNoZ() -> object:
+def _getPostureNoZ() -> Any:
 	"""
 	.
 	"""
@@ -1128,7 +1128,7 @@ def _getIdFromName(p0:str) -> int:
 	# }
 	return call_method("ALRobotPosture", "_getIdFromName", [p0])
 
-def _activeDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
+def _activeDiagnosisCallBack(p0:str, p1:Any, p2:str) -> None:
 	"""
 	.
 	
@@ -1136,7 +1136,7 @@ def _activeDiagnosisCallBack(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		

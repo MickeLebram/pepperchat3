@@ -3,7 +3,7 @@ This module gives access to configuration of the robot defined in xml format
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -66,7 +66,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALRobotModel", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -96,7 +96,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALRobotModel", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -186,7 +186,7 @@ def getConfig() -> str:
 	# }
 	return call_method("ALRobotModel", "getConfig", [])
 
-def _getConfigMap() -> Dict[str,object]:
+def _getConfigMap() -> Dict[str,Any]:
 	"""
 	Return the RobotConfig key/value pairs
 	

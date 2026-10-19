@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 from .robot_client import Signal, Property
 
@@ -790,7 +790,7 @@ def _unregisterUserDataSource(p0:str) -> None:
 	return call_method("ALUserSession", "_unregisterUserDataSource", [p0])
 
 @overload
-def getUserData(p0:int, p1:str, /) -> Dict[str,object]:
+def getUserData(p0:int, p1:str, /) -> Dict[str,Any]:
 	"""
 	
 	
@@ -820,7 +820,7 @@ def getUserData(p0:int, p1:str, /) -> Dict[str,object]:
 	...
 
 @overload
-def getUserData(p0:int, p1:str, p2:str, /) -> object:
+def getUserData(p0:int, p1:str, p2:str, /) -> Any:
 	"""
 	
 	
@@ -865,7 +865,7 @@ def getUserData(*args, **kwargs):
 		raise TypeError("ALUserSession.getUserData has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("ALUserSession", "getUserData", list(args))
 
-def setUserData(p0:int, p1:str, p2:str, p3:object) -> None:
+def setUserData(p0:int, p1:str, p2:str, p3:Any) -> None:
 	"""
 	
 	
@@ -877,7 +877,7 @@ def setUserData(p0:int, p1:str, p2:str, p3:object) -> None:
 		
 	p2:str
 		
-	p3:object
+	p3:Any
 		
 	"""
 	# NAOqi metadata:

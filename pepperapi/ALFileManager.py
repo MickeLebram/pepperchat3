@@ -6,7 +6,7 @@ Shared folder can be changed on the fly, and module will then be able to say whi
 files are available in this folder, as well as return their complete path.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -69,7 +69,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALFileManager", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -99,7 +99,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALFileManager", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -325,7 +325,7 @@ def getFileCompletePath(prefs:str) -> str:
 	# }
 	return call_method("ALFileManager", "getFileCompletePath", [prefs])
 
-def getFileContents(prefs:str) -> object:
+def getFileContents(prefs:str) -> Any:
 	"""
 	Returns the complete path of the file if it does exist. Starts by looking in user's shared folder, then in system folder.
 	

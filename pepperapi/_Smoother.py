@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("_Smoother", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("_Smoother", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -337,13 +337,13 @@ def restart(*args, **kwargs):
 		raise TypeError("_Smoother.restart has several variants on the robot. Pass the arguments by position, without keywords.")
 	return call_method("_Smoother", "restart", list(args))
 
-def setMap(p0:object) -> None:
+def setMap(p0:Any) -> None:
 	"""
 	Set the Map of the world.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -358,13 +358,13 @@ def setMap(p0:object) -> None:
 	# }
 	return call_method("_Smoother", "setMap", [p0])
 
-def setTarget(p0:object) -> None:
+def setTarget(p0:Any) -> None:
 	"""
 	Set the target.
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -402,7 +402,7 @@ def setTargetIds(p0:int, p1:int) -> None:
 	# }
 	return call_method("_Smoother", "setTargetIds", [p0, p1])
 
-def getPosition() -> object:
+def getPosition() -> Any:
 	"""
 	Allow to get the position of robot in the map Space.
 	"""
@@ -434,7 +434,7 @@ def stopSmoother() -> None:
 	# }
 	return call_method("_Smoother", "stopSmoother", [])
 
-def _smoothEvent(p0:str, p1:object) -> None:
+def _smoothEvent(p0:str, p1:Any) -> None:
 	"""
 	Is the callback.
 	
@@ -442,7 +442,7 @@ def _smoothEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -457,7 +457,7 @@ def _smoothEvent(p0:str, p1:object) -> None:
 	# }
 	return call_method("_Smoother", "_smoothEvent", [p0, p1])
 
-def _smoothFirstEvent(p0:str, p1:object) -> None:
+def _smoothFirstEvent(p0:str, p1:Any) -> None:
 	"""
 	Is the callback for the first object.
 	
@@ -465,7 +465,7 @@ def _smoothFirstEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -480,7 +480,7 @@ def _smoothFirstEvent(p0:str, p1:object) -> None:
 	# }
 	return call_method("_Smoother", "_smoothFirstEvent", [p0, p1])
 
-def _smoothSecondEvent(p0:str, p1:object) -> None:
+def _smoothSecondEvent(p0:str, p1:Any) -> None:
 	"""
 	Is the callback for the second object.
 	
@@ -488,7 +488,7 @@ def _smoothSecondEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -632,7 +632,7 @@ def _setMoveEvent(p0:str) -> None:
 	# }
 	return call_method("_Smoother", "_setMoveEvent", [p0])
 
-def _smoothMoveEvent(p0:str, p1:object) -> None:
+def _smoothMoveEvent(p0:str, p1:Any) -> None:
 	"""
 	Callback for move event.
 	
@@ -640,7 +640,7 @@ def _smoothMoveEvent(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:
@@ -655,7 +655,7 @@ def _smoothMoveEvent(p0:str, p1:object) -> None:
 	# }
 	return call_method("_Smoother", "_smoothMoveEvent", [p0, p1])
 
-def _disableFeaturesChanged(p0:str, p1:object) -> None:
+def _disableFeaturesChanged(p0:str, p1:Any) -> None:
 	"""
 	Is the callback for motion disabled features event.
 	
@@ -663,7 +663,7 @@ def _disableFeaturesChanged(p0:str, p1:object) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	"""
 	# NAOqi metadata:

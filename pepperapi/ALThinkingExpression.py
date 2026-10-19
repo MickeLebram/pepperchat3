@@ -2,7 +2,7 @@
 
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def _startActivity(p0:str) -> None:
@@ -95,13 +95,13 @@ def _getLoadingResponseToSay(p0:str) -> str:
 	# }
 	return call_method("ALThinkingExpression", "_getLoadingResponseToSay", [p0])
 
-def _onPreferenceUpdated(p0:object) -> None:
+def _onPreferenceUpdated(p0:Any) -> None:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:
@@ -116,13 +116,13 @@ def _onPreferenceUpdated(p0:object) -> None:
 	# }
 	return call_method("ALThinkingExpression", "_onPreferenceUpdated", [p0])
 
-def _onPreferenceSynchronized(p0:object) -> None:
+def _onPreferenceSynchronized(p0:Any) -> None:
 	"""
 	
 	
 	Parameters
 	----------
-	p0:object
+	p0:Any
 		
 	"""
 	# NAOqi metadata:

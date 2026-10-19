@@ -2,7 +2,7 @@
 This module is dedicated to Aldebaran Robots Diagnosis.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALDiagnosis", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALDiagnosis", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -165,7 +165,7 @@ def getUsage(name:str) -> str:
 	# }
 	return call_method("ALDiagnosis", "getUsage", [name])
 
-def getPassiveDiagnosis() -> object:
+def getPassiveDiagnosis() -> Any:
 	"""
 	The actual state of the passive diagnosis.
 	
@@ -185,7 +185,7 @@ def getPassiveDiagnosis() -> object:
 	# }
 	return call_method("ALDiagnosis", "getPassiveDiagnosis", [])
 
-def getActiveDiagnosis() -> object:
+def getActiveDiagnosis() -> Any:
 	"""
 	The actual state of the active diagnosis.
 	
@@ -205,7 +205,7 @@ def getActiveDiagnosis() -> object:
 	# }
 	return call_method("ALDiagnosis", "getActiveDiagnosis", [])
 
-def getDiagnosisStatus() -> object:
+def getDiagnosisStatus() -> Any:
 	"""
 	The actual state of the active and passive diagnosis.
 	
@@ -357,7 +357,7 @@ def _getFamilyNames() -> List[str]:
 	# }
 	return call_method("ALDiagnosis", "_getFamilyNames", [])
 
-def _getActiveDiagnosisSummary() -> object:
+def _getActiveDiagnosisSummary() -> Any:
 	"""
 	The summary of the active diagnosis.This Hide API is dedicated for RhM.
 	"""
@@ -373,7 +373,7 @@ def _getActiveDiagnosisSummary() -> object:
 	# }
 	return call_method("ALDiagnosis", "_getActiveDiagnosisSummary", [])
 
-def _getPassiveDiagnosisSummary(clearBuffers:bool) -> object:
+def _getPassiveDiagnosisSummary(clearBuffers:bool) -> Any:
 	"""
 	The summary of the passive diagnosis.This Hide API is dedicated for RhM.
 	

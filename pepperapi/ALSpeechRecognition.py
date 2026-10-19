@@ -2,7 +2,7 @@
 ALSpeechRecognition gives access to the embedded voice recognition system. It can be dynamically modified. This class allows user to load the current words list that should be recognized. The result of the recognition engine is located in the ALMemory's key: "WordRecognized". The structure of the result is an array :  [ (string) word , (float) confidence ]
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALSpeechRecognition", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALSpeechRecognition", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -447,7 +447,7 @@ def getMyPrecision(name:str) -> float:
 	# }
 	return call_method("ALSpeechRecognition", "getMyPrecision", [name])
 
-def getSubscribersInfo() -> object:
+def getSubscribersInfo() -> Any:
 	"""
 	Gets the parameters given by the module.
 	
@@ -2171,7 +2171,7 @@ def loadVocabulary(vocabularyFile:str) -> None:
 	# }
 	return call_method("ALSpeechRecognition", "loadVocabulary", [vocabularyFile])
 
-def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
+def _naoStoreApplicationInstalled(p0:str, p1:Any, p2:str) -> None:
 	"""
 	Reload the engine if new application installed is a language
 	
@@ -2179,7 +2179,7 @@ def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		
@@ -2196,7 +2196,7 @@ def _naoStoreApplicationInstalled(p0:str, p1:object, p2:str) -> None:
 	# }
 	return call_method("ALSpeechRecognition", "_naoStoreApplicationInstalled", [p0, p1, p2])
 
-def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
+def _naoStoreApplicationUninstalled(p0:str, p1:Any, p2:str) -> None:
 	"""
 	Reload the engine if application uninstalled is a language
 	
@@ -2204,7 +2204,7 @@ def _naoStoreApplicationUninstalled(p0:str, p1:object, p2:str) -> None:
 	----------
 	p0:str
 		
-	p1:object
+	p1:Any
 		
 	p2:str
 		

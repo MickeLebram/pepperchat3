@@ -2,7 +2,7 @@
 The Animated Speech module makes NAO interpret a text annotated with behaviors.
 """
 from __future__ import annotations
-from typing import Dict, List, Tuple, overload
+from typing import Any, Dict, List, Tuple, overload
 from .robot_client import call_method
 
 def version() -> str:
@@ -65,7 +65,7 @@ def getMethodList() -> List[str]:
 	# }
 	return call_method("ALAnimatedSpeech", "getMethodList", [])
 
-def getMethodHelp(methodName:str) -> object:
+def getMethodHelp(methodName:str) -> Any:
 	"""
 	Retrieves a method's description.
 	
@@ -95,7 +95,7 @@ def getMethodHelp(methodName:str) -> object:
 	# }
 	return call_method("ALAnimatedSpeech", "getMethodHelp", [methodName])
 
-def getModuleHelp() -> object:
+def getModuleHelp() -> Any:
 	"""
 	Retrieves the module's description.
 	
@@ -199,7 +199,7 @@ def say(text:str, /) -> None:
 	...
 
 @overload
-def say(text:str, configuration:object, /) -> None:
+def say(text:str, configuration:Any, /) -> None:
 	"""
 	Say the annotated text given in parameter and animate it with animations inserted in the text.
 	
@@ -207,7 +207,7 @@ def say(text:str, configuration:object, /) -> None:
 	----------
 	text:str
 		An annotated text (for example: "Hello. ^start(Hey_1) My name is NAO").
-	configuration:object
+	configuration:Any
 		The animated speech configuration.
 	
 	Bridge notes
@@ -243,7 +243,7 @@ def say(*args, **kwargs):
 	------------
 	say has 2 variants on the robot:
 	- say(text:str)
-	- say(text:str, configuration:object)
+	- say(text:str, configuration:Any)
 	
 	Pass arguments by position, not by keyword.
 	"""
@@ -505,13 +505,13 @@ def _setCheckExecutionTimes(pause:bool) -> None:
 	# }
 	return call_method("ALAnimatedSpeech", "_setCheckExecutionTimes", [pause])
 
-def addTagsToWords(tagsToWords:object) -> None:
+def addTagsToWords(tagsToWords:Any) -> None:
 	"""
 	Add some new links between tags and words.
 	
 	Parameters
 	----------
-	tagsToWords:object
+	tagsToWords:Any
 		Map of tags to words.
 	"""
 	# NAOqi metadata:
@@ -547,7 +547,7 @@ def _diagnosis() -> None:
 	# }
 	return call_method("ALAnimatedSpeech", "_diagnosis", [])
 
-def _speechBookMarkCallback(memoryKey:str, value:object, message:str) -> None:
+def _speechBookMarkCallback(memoryKey:str, value:Any, message:str) -> None:
 	"""
 	Callback for ALMemory subscription for speech bookmark tracking.
 	
@@ -555,7 +555,7 @@ def _speechBookMarkCallback(memoryKey:str, value:object, message:str) -> None:
 	----------
 	memoryKey:str
 		The subscribed memory key which changed.
-	value:object
+	value:Any
 		The new value of the memory key.
 	message:str
 		The message that comes with the callback.
@@ -611,7 +611,7 @@ def _mrkpauseCallback(pBookmark:int) -> None:
 	# }
 	return call_method("ALAnimatedSpeech", "_mrkpauseCallback", [pBookmark])
 
-def _speechStatusCallback(memoryKey:str, value:object, message:str) -> None:
+def _speechStatusCallback(memoryKey:str, value:Any, message:str) -> None:
 	"""
 	Callback for ALMemory subscription for speech status tracking.
 	
@@ -619,7 +619,7 @@ def _speechStatusCallback(memoryKey:str, value:object, message:str) -> None:
 	----------
 	memoryKey:str
 		The subscribed memory key which changed.
-	value:object
+	value:Any
 		The new value of the memory key.
 	message:str
 		The message that comes with the callback.
@@ -649,7 +649,7 @@ def _speechStatusCallback(memoryKey:str, value:object, message:str) -> None:
 	# }
 	return call_method("ALAnimatedSpeech", "_speechStatusCallback", [memoryKey, value, message])
 
-def _postureFamilyChangedCallback(memoryKey:str, value:object, message:str) -> None:
+def _postureFamilyChangedCallback(memoryKey:str, value:Any, message:str) -> None:
 	"""
 	Callback for ALMemory subscription to postureFamilyChanged.
 	
@@ -657,7 +657,7 @@ def _postureFamilyChangedCallback(memoryKey:str, value:object, message:str) -> N
 	----------
 	memoryKey:str
 		The subscribed memory key which changed.
-	value:object
+	value:Any
 		The new value of the memory key.
 	message:str
 		The message that comes with the callback.
