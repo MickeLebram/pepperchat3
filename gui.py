@@ -98,8 +98,7 @@ class ChatDisplay(QTextEdit):
 
         def append(q:Query):
             if q.done:
-                self.append(f"<i>{q.query_text}</i>")
-                self.append(f"{q.response_text}\n")
+                self.append(f"<i>{q.query_text}</i><br>{q.response_text}<br>")
         self.worker.signal_query.connect(append)
         oai.query_update_callbacks.append(lambda q:self.worker.signal_query.emit(q))
 
@@ -140,6 +139,26 @@ class LogViewer(QDialog):
         syslogger.addHandler(handler)
         handler.emitter.log_message.connect(self.log_view.appendPlainText)
 
+class AnimationRunner:
+    current_anim: api.robot_client.RemoteFuture = None
+    
+    @classmethod
+    def run(cls, path:str):
+        cls.stop_current()
+        def anim_done(fut):
+            print("done", path)
+        print("anim", path)
+        cls.current_anim = api.robot_client.call_async(api.ALAnimationPlayer.run, path).on_done(anim_done)
+
+    @classmethod
+    def stop_current(cls):
+        if cls.current_anim and cls.current_anim.is_running():
+            cls.current_anim.cancel()
+            print("canceling current")
+            while cls.current_anim.is_running():
+                print("waiting for current to stop running")
+                time.sleep(.1)
+
 class AnimationBrowser(QDialog):
     def __init__(self, parent):
         super().__init__(parent=parent)
@@ -157,7 +176,11 @@ class AnimationBrowser(QDialog):
         self.btn_play = QPushButton("Play")
         self.btn_play.clicked.connect(self.play_selected)
         layout.addWidget(self.btn_play)
+        self.btn_stop = QPushButton("Stop")
+        self.btn_stop.clicked.connect(AnimationRunner.stop_current)
+        layout.addWidget(self.btn_stop)
         self.resize(600,400)
+
         def populate():
             root = self.model.invisibleRootItem()
             nodes = {}
@@ -165,7 +188,8 @@ class AnimationBrowser(QDialog):
             def allowed(anim_path:str):
                 name = anim_path.split("/")[-1]
                 if "loop" in name.lower():
-                    return False
+                    print(anim_path)
+                    # return False
                 return True
 
             for anim_path in api.ALAnimationPlayer._getAnimations():
@@ -186,7 +210,7 @@ class AnimationBrowser(QDialog):
                         parent = nodes[current_path]
         populate()
         self.tree.expandToDepth(1)
-    
+
     def play_selected(self):
         if not self.tree.selectedIndexes():
             return
@@ -194,15 +218,10 @@ class AnimationBrowser(QDialog):
         if item.rowCount() != 0:
             return
         path = item.data(Qt.UserRole)
-        def doit(a):
-            try:
-                api.ALAnimationPlayer.run(a)
-                config.last_browsed_anim = path
-                config.save()
-            except Exception as e:
-                show_msg(self,str(e))
-        self.setEnabled(False)
-        run_async_task(doit, [path], lambda: self.setEnabled(True))  
+
+        AnimationRunner.run(path)
+        config.last_browsed_anim = path
+        config.save()
     
     def on_item_clicked(self, index):
         self.btn_play.setEnabled(self.model.itemFromIndex(index).rowCount() == 0)

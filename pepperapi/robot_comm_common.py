@@ -6,6 +6,12 @@ import struct
 
 ROBOT_SERVER_PORT = 5556
 
+# The date of the last change to the protocol: the message classes and their fields, and the system commands.
+# A second change on the same day gets a suffix: "2026-10-19.2". Change it by hand with every protocol change,
+# and only then. The client compares the robot server's with its own at init() (MsgSystemCommand.GET_VERSION).
+# Servers from before 2026-10-19 can't report theirs
+PROTOCOL_VERSION = "2026-10-19"
+
 # Binary data (camera images, raw buffers) can't go into JSON as it is. It travels as base64 text in a dict
 # with this single key, at any depth of a value. NAOqi's Python 2 binding gives raw data as bytearray
 BYTES_MARKER = "__naoqibridge_bytes__"
@@ -87,6 +93,8 @@ class MsgSystemCommand(MsgBase):
     GET_TIME = "GET_TIME" # The robot's time.time(), to estimate the offset between the robot's and the PC's clocks
     SET_LOG_LEVEL = "SET_LOG_LEVEL" # args: ["DEBUG"] or ["INFO"]. For the whole server, until it restarts
     GET_LOG = "GET_LOG" # args: [number of lines]. The end of the server's log
+    CANCEL_ALL_FUTURES = "CANCEL_ALL_FUTURES" # Cancels the running calls started with call_async, of every client
+    GET_VERSION = "GET_VERSION" # The server's PROTOCOL_VERSION
     def __init__(self, command="", args=[]):
         MsgBase.__init__(self)
         self.command = command

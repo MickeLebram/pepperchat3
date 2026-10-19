@@ -276,7 +276,7 @@ class _Signals:
 	
 	subscribe(callback) calls callback(str) each time the robot sends it.
 	
-	Sent when properties.valence changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.valence and compare the values.
+	Sent when properties.valence changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5 and 2.8, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.valence and compare the values.
 	"""
 	attentionChanged: Signal[[str]] = Signal("ALMood", "attentionChanged")
 	"""
@@ -286,7 +286,7 @@ class _Signals:
 	
 	subscribe(callback) calls callback(str) each time the robot sends it.
 	
-	Sent when properties.attention changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.attention and compare the values.
+	Sent when properties.attention changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5 and 2.8, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.attention and compare the values.
 	"""
 	ambianceChanged: Signal[[str]] = Signal("ALMood", "ambianceChanged")
 	"""
@@ -296,7 +296,7 @@ class _Signals:
 	
 	subscribe(callback) calls callback(str) each time the robot sends it.
 	
-	Sent when properties.ambiance changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.ambiance and compare the values.
+	Sent when properties.ambiance changes, not each time the robot sets it. Not necessarily for every change, though: on NAOqi 2.5 and 2.8, ALMood.valenceChanged and attentionChanged were seen to skip changes to 'unknown'. To catch every change, subscribe to properties.ambiance and compare the values.
 	"""
 signals = _Signals()
 

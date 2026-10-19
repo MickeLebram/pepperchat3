@@ -1,4 +1,5 @@
 import contextlib
+import itertools
 import socket
 import threading
 import time
@@ -59,7 +60,47 @@ def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logg
             raise ConnectionError(reason)
         _logger.warning(f"{reason}. Continuing without a robot, since ignore_disconnected is set.")
         return
+    _check_protocol_version()
     _check_naoqi_version()
+
+def server_protocol_version() -> Optional[str]:
+    """
+    The robot server's protocol version (PROTOCOL_VERSION in its robot_comm_common.py), e.g. "2026-10-19".
+    None if the server can't report it (it's from before 2026-10-19), or when not connected
+    """
+    if not robot_connected():
+        return None
+    try:
+        return _server_command(MsgSystemCommand.GET_VERSION, [], "protocol_version")
+    except RobotError:
+        return None
+
+def _version_key(version:str) -> Tuple[str, int]:
+    """Makes protocol versions comparable: "2026-10-19" before "2026-10-19.2" before "2026-10-19.10\""""
+    date, _, number = version.partition(".")
+    return date, int(number) if number.isdigit() else 1
+
+def _check_protocol_version():
+    """
+    Warns if the robot server speaks another protocol version than this client. Using it anyway is allowed:
+    what both know works, and newer features fail with an error
+    """
+    try:
+        with timeout(INTERNAL_REQUEST_TIMEOUT_SECONDS):
+            server = server_protocol_version()
+    except Exception:
+        return # Not worth failing init() for
+    if server == PROTOCOL_VERSION:
+        return
+    update_server = "Update robot_server.py and robot_comm_common.py on the robot; until then, newer features fail with an error."
+    if server is None:
+        _logger.warning(f"The robot server can't report its protocol version, so it's older than this client "
+                        f"(protocol {PROTOCOL_VERSION}). {update_server}")
+    elif _version_key(server) < _version_key(PROTOCOL_VERSION):
+        _logger.warning(f"The robot server speaks protocol {server}, older than this client's {PROTOCOL_VERSION}. {update_server}")
+    else:
+        _logger.warning(f"The robot server speaks protocol {server}, newer than this client's {PROTOCOL_VERSION}. "
+                        "Rebuild the API (api_builder.py) to get the current robot_client.py and robot_comm_common.py.")
 
 def _check_naoqi_version():
     """
@@ -155,7 +196,9 @@ def _require_init(action:str):
     if not _client:
         raise RobotClientNotInitializedError(f"robot_client.init() must be called before {action}")
 
-  
+
+_connection_numbers = itertools.count(1) # For _MessageClient.id
+
 class _MessageClient:
     def __init__(self, server_ip, server_port):
         self.sock:socket.socket = None
@@ -184,7 +227,9 @@ class _MessageClient:
             # The script's name, for the robot server's log. There's none with python -c, or interactively
             script_file = getattr(__main__, "__file__", None)
             program = os.path.splitext(os.path.basename(script_file))[0] if script_file else "unknown"
-            self.id = f"{int(time.time()*1000) % 100000}[{program}@{self.sock.getsockname()[0]}]"
+            # Unique per connection: no two running programs on a PC share a process id, and the counter tells a
+            # program's connections apart (init() again after close()). The server pairs the event connection by it
+            self.id = f"{os.getpid()}.{next(_connection_numbers)}[{program}@{self.sock.getsockname()[0]}]"
             self.running.set()
             self.recv_thread.start()
             self.heartbeat_thread.start()
@@ -389,15 +434,18 @@ class _MessageClient:
         # Otherwise it was sent before an unsubscribe reached the robot, and nobody wants it
 
     def close(self):
+        self.closing.set() # First, so whatever notices the connection ending knows it was closed on purpose
         self.running.clear()
-        self.closing.set()
+        # The sockets first: that ends the receive thread, which is blocked reading. The other way round, close()
+        # always waited the join's full timeout, and the robot server only noticed (and canceled the running
+        # calls) a second later
+        _close_sock(self.sock)
+        if self.event_sock is not None:
+            _close_sock(self.event_sock)
         try:
             self.recv_thread.join(timeout=1)
         except:
             pass
-        _close_sock(self.sock)
-        if self.event_sock is not None:
-            _close_sock(self.event_sock)
 
 
 _client:_MessageClient = None
@@ -413,6 +461,8 @@ class RemoteFuture(Generic[T]):
     The state is what NAOqi reports. Some services report a canceled call as finished
     (e.g. ALAnimationPlayer.run), so cancel_requested tells whether cancel() was called here.
     If the method fails and no on_error handler is attached, a warning is logged, so errors never vanish silently.
+    close() cancels the calls still running: the robot server cancels them, and they end here as canceled,
+    with cancel_requested set. If the connection is lost instead, they end with a ConnectionError
     """
     def __init__(self, future_id:str, description:str = "", value_type = None):
         self.id = future_id
@@ -431,6 +481,7 @@ class RemoteFuture(Generic[T]):
         self._callbacks_lock = threading.Lock()
         self._waiter:threading.Thread = None
         self._has_error_handler = False # Set by on_error. Without it, a failure is logged as a warning
+        self._client = _client # The connection it runs on, to tell close() from a lost connection
 
     # The state of a call skipped by ignore_disconnected: finished, with None as value like a skipped normal call
     _SKIPPED_STATE = {"state": "finished", "value": None}
@@ -518,7 +569,13 @@ class RemoteFuture(Generic[T]):
                 state = dict(state, value=_dicts_to_structs(self._value_type, state.get("value")))
             self._state = state if state is not None else self._SKIPPED_STATE
         except Exception as e:
-            self._waiter_error = e
+            if self._client is not None and self._client.closing.is_set():
+                # close() while the call was running: the robot server cancels a program's running calls when it
+                # disconnects, so it ends as canceled here too, not as a lost connection
+                self.cancel_requested = True
+                self._state = {"state": "canceled"}
+            else:
+                self._waiter_error = e
         with self._callbacks_lock:
             # The state is complete before _done is set, so every thread waiting for _done sees it
             self._done.set()
@@ -619,6 +676,19 @@ def get_server_log(lines:int = 200) -> Optional[str]:
     log_lines = _server_command(MsgSystemCommand.GET_LOG, [lines], "lines")
     return None if log_lines is None else "\n".join(log_lines)
 
+def cancel_all_futures() -> Optional[List[str]]:
+    """
+    Emergency stop for calls started with call_async: asks the robot server to cancel every such call that is
+    still running, of every connected program, this one included. Returns what was canceled, e.g.
+    ["ALMotion.moveTo (client 1234[myapp@192.168.1.16])"].
+    Meant e.g. for when a program has lost its connection: the server cancels its calls itself once it notices,
+    which for a PC that dropped off the network takes several minutes.
+    Blocking calls (without call_async) can't be canceled. A cancel is a request: how and whether a call stops
+    is up to its service (on NAOqi 2.5, a canceled ALTextToSpeech.say keeps speaking). NAOqi's own stop methods
+    complement it, e.g. ALMotion.stopMove(), ALBehaviorManager.stopAllBehaviors(), ALTextToSpeech.stopAll()
+    """
+    return _server_command(MsgSystemCommand.CANCEL_ALL_FUTURES, [], "canceled")
+
 # Structs: the generated API has a dataclass per struct, while the robot sends and accepts dicts
 # with the field names as keys (tested on Nao and Pepper). These two convert between them
 
@@ -700,6 +770,10 @@ def call_async(func:Callable[P, T], *args:P.args, **kwargs:P.kwargs) -> RemoteFu
     return future
 
 def close():
+    """
+    Ends the connection to the robot server, and the subscriptions. Calls started with call_async that are still
+    running are canceled (they end as canceled, see RemoteFuture). Blocking calls run on the robot until done
+    """
     for listener in list(EventListener.instances_by_key.values()): # A copy, since stop() removes the listener
         #listener.listener_thread.join(timeout=1)
         listener.stop()
