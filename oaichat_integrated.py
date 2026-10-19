@@ -110,7 +110,6 @@ tools = [{
                 "enum": [
                     "wave",
                     "dance",
-                    "nod",
                     "shake_head"
                 ]
             }

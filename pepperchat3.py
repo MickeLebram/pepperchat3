@@ -10,6 +10,7 @@ from  oaichat_integrated import OaiChatIntegrated, Query
 import gui
 from syslogger import syslogger
 from config import config
+from utils import AnimationRunner
 
 def main():
     syslogger.debug("main")
@@ -60,6 +61,12 @@ def main():
             api.ALLeds.earLedsSetAngle(90, .01, False)
 
     def perform_robot_action(action:str):
+        if action == "wave":
+            AnimationRunner.run("animations/Stand/Gestures/Hey_1")
+        elif action == "shake_head":
+            AnimationRunner.run("animations/Stand/Reactions/ShakeBody_1")
+        elif action == "dance":
+            AnimationRunner.run("animations/Stand/Waiting/KungFu_1")
         print("PERFORM:",action)
         
     oai = OaiChatIntegrated(

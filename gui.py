@@ -21,6 +21,7 @@ from config import config
 from config import show_config_dlg
 from oaichat_integrated import OaiChatIntegrated, Query
 from syslogger import syslogger
+from utils import AnimationRunner
 _active_tasks = []
 
 
@@ -139,25 +140,6 @@ class LogViewer(QDialog):
         syslogger.addHandler(handler)
         handler.emitter.log_message.connect(self.log_view.appendPlainText)
 
-class AnimationRunner:
-    current_anim: api.robot_client.RemoteFuture = None
-    
-    @classmethod
-    def run(cls, path:str):
-        cls.stop_current()
-        def anim_done(fut):
-            print("done", path)
-        print("anim", path)
-        cls.current_anim = api.robot_client.call_async(api.ALAnimationPlayer.run, path).on_done(anim_done)
-
-    @classmethod
-    def stop_current(cls):
-        if cls.current_anim and cls.current_anim.is_running():
-            cls.current_anim.cancel()
-            print("canceling current")
-            while cls.current_anim.is_running():
-                print("waiting for current to stop running")
-                time.sleep(.1)
 
 class AnimationBrowser(QDialog):
     def __init__(self, parent):
@@ -184,30 +166,24 @@ class AnimationBrowser(QDialog):
         def populate():
             root = self.model.invisibleRootItem()
             nodes = {}
-            # Skip loops until we know how to terminate them without robot reboot
-            def allowed(anim_path:str):
-                name = anim_path.split("/")[-1]
-                if "loop" in name.lower():
+            for anim_path in AnimationRunner.get_animations():
+                if "dance" in anim_path.lower():
                     print(anim_path)
-                    # return False
-                return True
+                parent = root
+                current_path = ""
+                for part in anim_path.split("/"):
+                    current_path = f"{current_path}/{part}" if current_path else part
 
-            for anim_path in api.ALAnimationPlayer._getAnimations():
-                if allowed(anim_path):
-                    parent = root
-                    current_path = ""
-                    for part in anim_path.split("/"):
-                        current_path = f"{current_path}/{part}" if current_path else part
+                    if current_path not in nodes:
+                        item = QStandardItem(part)
+                        item.setEditable(False)
+                        item.setData(current_path, Qt.UserRole)
 
-                        if current_path not in nodes:
-                            item = QStandardItem(part)
-                            item.setEditable(False)
-                            item.setData(current_path, Qt.UserRole)
+                        parent.appendRow(item)
+                        nodes[current_path] = item
 
-                            parent.appendRow(item)
-                            nodes[current_path] = item
-
-                        parent = nodes[current_path]
+                    parent = nodes[current_path]
+            print("anims loaded")
         populate()
         self.tree.expandToDepth(1)
 
