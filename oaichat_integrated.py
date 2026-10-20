@@ -7,6 +7,7 @@ import defs
 import silerovad
 from pcm_processor import PcmProcessor
 import json, base64, threading, time
+from concurrent.futures import Future, ThreadPoolExecutor
 import textwrap
 import numpy as np
 from websocket import WebSocketApp
@@ -94,7 +95,7 @@ def _format_session_instructions(conversation_prompt):
         + "</conversation_instructions>\n"
     )
 
-tools = [{
+ROBOT_ACTION_TOOL = {
     "type": "function",
     "name": "robot_action",
     "description": (
@@ -116,7 +117,22 @@ tools = [{
         },
         "required": ["action"]
     }
-}]
+}
+
+LOOK_TOOL = {
+    "type": "function",
+    "name": "look",
+    "description": (
+        "Take a picture with the robot's camera to see what is in front of you. "
+        "Use this when the user asks what you see, asks you to look at something, "
+        "or when seeing would help you answer. "
+        "Never claim to see something unless you used this tool."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {},
+    }
+}
 
 
 class OaiChatIntegrated:
@@ -131,6 +147,7 @@ class OaiChatIntegrated:
                  voice="", #ex. sage
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
                  robot_action_callback: Callable[[str], None] = None,
+                 image_capture_callback: Callable[[], bytes] = None, # returns a JPEG image, ex. 640x480
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             if self.state != self.STATE_SENDING_SPEECH:
@@ -172,7 +189,10 @@ class OaiChatIntegrated:
         self.intermediate_response_text_callbacks:List[Callable[[str], None]] = []
         self.response_audio_callback = response_audio_callback
         self.robot_action_callback = robot_action_callback
-        self._pending_tool_outputs:List[dict] = []
+        self.image_capture_callback = image_capture_callback
+        # Each future resolves to (items to send, whether the model must respond to them)
+        self._pending_tool_calls:List[Future] = []
+        self._tool_executor = ThreadPoolExecutor(max_workers=2)
         self.language = language
         self.voice = voice
         self.conversation_prompt = conversation_prompt
@@ -220,7 +240,7 @@ class OaiChatIntegrated:
 
                     },
                 },
-                "tools": tools
+                "tools": [ROBOT_ACTION_TOOL] + ([LOOK_TOOL] if self.image_capture_callback else []),
 
             }
             if self.voice:
@@ -292,28 +312,40 @@ class OaiChatIntegrated:
                                 cbk(text_delta)
                 elif t == "response.function_call_arguments.done":
                     # Execute the tool as soon as its arguments are complete, while text may still be streaming
-                    output = self._handle_tool_call(evt.get("name"), evt.get("arguments") or "{}")
-                    self._pending_tool_outputs.append({
-                        "type": "conversation.item.create",
-                        "item": {
-                            "type": "function_call_output",
-                            "call_id": evt.get("call_id"),
-                            "output": json.dumps(output),
-                        },
-                    })
+                    self._pending_tool_calls.append(
+                        self._start_tool_call(evt.get("call_id"), evt.get("name"), evt.get("arguments") or "{}"))
                 elif t == "response.done":
                     # Tool results can only be followed by a new response once the current one is done
-                    tool_outputs, self._pending_tool_outputs = self._pending_tool_outputs, []
-                    for item in tool_outputs:
-                        self._send_data(item)
-                    output_items = evt.get("response", {}).get("output", [])
-                    has_message = any(item.get("type") == "message" for item in output_items)
-                    if tool_outputs and not has_message and not self._cur_query.canceled:
-                        # The response was only tool calls; let the model say something about it
-                        self._send_data({"type": "response.create"})
-                    else:
+                    pending, self._pending_tool_calls = self._pending_tool_calls, []
+                    if not pending:
                         self._cur_query.response_done = True
                         try_set_query_done()
+                        return
+                    output_items = evt.get("response", {}).get("output", [])
+                    has_message = any(item.get("type") == "message" for item in output_items)
+                    query = self._cur_query
+
+                    def finish_tool_calls():
+                        # If the response was only tool calls, let the model say something about them
+                        needs_response = not has_message
+                        for future in pending:
+                            items, needs = future.result()
+                            needs_response = needs_response or needs
+                            for item in items:
+                                if query.canceled and item["item"]["type"] == "message":
+                                    continue
+                                self._send_data(item)
+                        if needs_response and not query.canceled:
+                            self._send_data({"type": "response.create"})
+                        elif query is self._cur_query:
+                            query.response_done = True
+                            try_set_query_done()
+
+                    if all(future.done() for future in pending):
+                        finish_tool_calls()
+                    else:
+                        # Wait for slow tools (e.g. image capture) without blocking the websocket thread
+                        threading.Thread(target=finish_tool_calls, daemon=True).start()
                 else:
                     pass
                 # print("cur:",self._cur_query)
@@ -355,21 +387,63 @@ class OaiChatIntegrated:
             data["audio"] = "..."
         syslogger.debug(f"SEND DATA:{json.dumps(data)}")
 
-    def _handle_tool_call(self, name:str, arguments:str) -> dict:
+    def _start_tool_call(self, call_id:str, name:str, arguments:str) -> Future:
+        """Starts executing a tool call. The returned future resolves to
+        (conversation items to send, whether the model must respond to them)."""
+        def output_item(output:dict) -> dict:
+            return {
+                "type": "conversation.item.create",
+                "item": {
+                    "type": "function_call_output",
+                    "call_id": call_id,
+                    "output": json.dumps(output),
+                },
+            }
+
+        def completed(output:dict) -> Future:
+            future = Future()
+            future.set_result(([output_item(output)], False))
+            return future
+
         try:
             args = json.loads(arguments)
             if name == "robot_action":
                 action = args["action"]
                 if self._cur_query.canceled:
-                    return {"status": "canceled", "action": action}
+                    return completed({"status": "canceled", "action": action})
                 if self.robot_action_callback:
                     # Run in a thread so a long gesture doesn't block the websocket thread
                     threading.Thread(target=self.robot_action_callback, args=(action,), daemon=True).start()
-                return {"status": "ok", "action": action}
-            return {"status": "error", "message": f"Unknown tool: {name}"}
+                return completed({"status": "ok", "action": action})
+            if name == "look" and self.image_capture_callback:
+                if self._cur_query.canceled:
+                    return completed({"status": "canceled"})
+
+                def capture() -> Tuple[List[dict], bool]:
+                    # The model always needs a new response to react to the image (or the failure)
+                    try:
+                        jpeg = self.image_capture_callback()
+                    except Exception as e:
+                        syslogger.exception("Image capture failed")
+                        return [output_item({"status": "error", "message": str(e)})], True
+                    image_item = {
+                        "type": "conversation.item.create",
+                        "item": {
+                            "type": "message",
+                            "role": "user",
+                            "content": [{
+                                "type": "input_image",
+                                "image_url": "data:image/jpeg;base64," + base64.b64encode(jpeg).decode("ascii"),
+                            }],
+                        },
+                    }
+                    return [output_item({"status": "ok", "message": "The captured image follows in the next message."}), image_item], True
+
+                return self._tool_executor.submit(capture)
+            return completed({"status": "error", "message": f"Unknown tool: {name}"})
         except Exception as e:
             syslogger.exception(f"Tool call {name} failed")
-            return {"status": "error", "message": str(e)}
+            return completed({"status": "error", "message": str(e)})
 
     def push_pcm16_frames(self, sample_rate:int, channel_cnt:int, frames:np.ndarray):
         if self._listening:

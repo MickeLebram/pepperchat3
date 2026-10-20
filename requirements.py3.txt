@@ -9,3 +9,4 @@ silero-vad
 websocket-client
 platformdirs
 pyside6
+pillow
