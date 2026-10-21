@@ -95,37 +95,37 @@ def _format_session_instructions(conversation_prompt):
         + "</conversation_instructions>\n"
     )
 
-ROBOT_ACTION_TOOL = {
-    "type": "function",
-    "name": "robot_action",
-    "description": (
-        "Perform a physical action using the robot. "
-        "Use this when the user requests an action or when a gesture "
-        "would naturally complement the conversation."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "action": {
-                "type": "string",
-                "enum": [
-                    "wave",
-                    "dance",
-                    "shake_head"
-                ]
-            }
-        },
-        "required": ["action"]
-    }
+def _format_action_tool(actions:List[str]):
+    return {
+        "type": "function",
+        "name": "robot_action",
+        "description": (
+            "Perform a physical action using the robot. "
+            "Use this when the user requests an action or when a gesture "
+            "would naturally complement the conversation."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": actions
+                }
+            },
+            "required": ["action"]
+        }
 }
 
 LOOK_TOOL = {
     "type": "function",
     "name": "look",
     "description": (
-        "Take a picture with the robot's camera to see what is in front of you. "
+        "Look with your eyes and see what is in front of you right now. "
         "Use this when the user asks what you see, asks you to look at something, "
         "or when seeing would help you answer. "
+        "Looking takes a moment, so before calling this tool, first say a short "
+        "phrase in the language of the conversation, e.g. \"Let me have a look\". "
+        "Talk about what you see as something you see yourself, not as a picture or photo. "
         "Never claim to see something unless you used this tool."
     ),
     "parameters": {
@@ -146,8 +146,10 @@ class OaiChatIntegrated:
                  language = "sv", 
                  voice="", #ex. sage
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
+                 robot_action_names: List[str] = [], # Names of actions handled by robot_action_callback
                  robot_action_callback: Callable[[str], None] = None,
                  image_capture_callback: Callable[[], bytes] = None, # returns a JPEG image, ex. 640x480
+                 look_confirmation_phrase: str = "Vänta, jag ska titta.", # Said if the model calls look without saying anything first. None disables
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             if self.state != self.STATE_SENDING_SPEECH:
@@ -188,8 +190,11 @@ class OaiChatIntegrated:
         self.listening_state_change_callbacks:List[Callable[[bool], None]] = []
         self.intermediate_response_text_callbacks:List[Callable[[str], None]] = []
         self.response_audio_callback = response_audio_callback
+        self.robot_action_names = robot_action_names
         self.robot_action_callback = robot_action_callback
         self.image_capture_callback = image_capture_callback
+        self.look_confirmation_phrase = look_confirmation_phrase
+        self._response_has_text = False
         # Each future resolves to (items to send, whether the model must respond to them)
         self._pending_tool_calls:List[Future] = []
         self._tool_executor = ThreadPoolExecutor(max_workers=2)
@@ -201,6 +206,11 @@ class OaiChatIntegrated:
         self._state = self.STATE_IDLE
         self.ws:WebSocketApp = None
         self.api_key = api_key
+        self.tools = []
+        if robot_action_names:
+            self.tools.append(_format_action_tool(robot_action_names))
+        if image_capture_callback:
+            self.tools.append(LOOK_TOOL)
         self.start()
     @property
     def state(self):
@@ -240,7 +250,7 @@ class OaiChatIntegrated:
 
                     },
                 },
-                "tools": [ROBOT_ACTION_TOOL] + ([LOOK_TOOL] if self.image_capture_callback else []),
+                "tools": self.tools,
 
             }
             if self.voice:
@@ -280,7 +290,7 @@ class OaiChatIntegrated:
                     self._set_state(self.STATE_IDLE)
 
                 evt = json.loads(message)
-                syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {json.dumps(evt)}")
+                # syslogger.debug(f"EVENT:{(time.time() - self._cur_query.start_time):.1f} {json.dumps(evt)}")
 
                 t = evt.get("type", "")
                 if t == "error":
@@ -301,15 +311,16 @@ class OaiChatIntegrated:
                     transcript = evt.get("transcript")
                     self._cur_query.query_transcript = transcript if transcript else "EMPTY"
                     try_set_query_done()
+                elif t == "response.created":
+                    self._response_has_text = False
                 elif t == "response.output_text.delta":
-                    text_delta = evt.get("delta")
-                    self._cur_query.response_text += text_delta
-                    if not self._cur_query.canceled:
-                        for cbk in  self.query_update_callbacks:
-                            cbk(self._cur_query)
-                        if text_delta:
-                            for cbk in self.intermediate_response_text_callbacks:
-                                cbk(text_delta)
+                    self._add_response_text(evt.get("delta"))
+                elif t == "response.output_item.added":
+                    # Arrives before the tool's arguments are streamed, so the phrase is said as early as possible
+                    item = evt.get("item", {})
+                    if (item.get("type") == "function_call" and item.get("name") == "look"
+                            and self.look_confirmation_phrase and not self._response_has_text):
+                        self._add_response_text(self.look_confirmation_phrase)
                 elif t == "response.function_call_arguments.done":
                     # Execute the tool as soon as its arguments are complete, while text may still be streaming
                     self._pending_tool_calls.append(
@@ -387,6 +398,21 @@ class OaiChatIntegrated:
             data["audio"] = "..."
         syslogger.debug(f"SEND DATA:{json.dumps(data)}")
 
+    def _add_response_text(self, text_delta:str):
+        if not text_delta:
+            return
+        q = self._cur_query
+        if not self._response_has_text and q.response_text and not q.response_text[-1].isspace():
+            # Separate the text of a follow-up response (e.g. after a tool call) from the previous one
+            text_delta = " " + text_delta
+        self._response_has_text = True
+        q.response_text += text_delta
+        if not q.canceled:
+            for cbk in self.query_update_callbacks:
+                cbk(q)
+            for cbk in self.intermediate_response_text_callbacks:
+                cbk(text_delta)
+
     def _start_tool_call(self, call_id:str, name:str, arguments:str) -> Future:
         """Starts executing a tool call. The returned future resolves to
         (conversation items to send, whether the model must respond to them)."""
@@ -437,7 +463,7 @@ class OaiChatIntegrated:
                             }],
                         },
                     }
-                    return [output_item({"status": "ok", "message": "The captured image follows in the next message."}), image_item], True
+                    return [output_item({"status": "ok", "message": "What you see right now follows in the next message."}), image_item], True
 
                 return self._tool_executor.submit(capture)
             return completed({"status": "error", "message": f"Unknown tool: {name}"})

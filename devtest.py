@@ -2,7 +2,8 @@ from pepperapi import ALVideoDevice
 import pepperapi.robot_client as rc
 from PIL import Image
 import io
-rc.init("192.168.0.147")
+#rc.init("192.168.0.147")
+rc.init("192.168.1.12")
 def get_head_cam_image() -> bytes:
     """Get jpeg bytes from an image captured with the head cam"""
     cam = ALVideoDevice.subscribeCamera("testcam", 0, 1, 11, 5)

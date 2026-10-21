@@ -25,18 +25,14 @@ def _close_sock(sock):
         pass
 
 _logger:logging.Logger = None
-# When set (debugging without a robot), robot calls without a connection are skipped and return None
-# instead of raising ConnectionError. Each skipped call is logged once, see _MessageClient._not_connected
-_ignore_disconnected = False
+# Set by run_without_robot(), cleared by init(): robot calls are skipped and return None instead of raising
+# ConnectionError. Each kind of skipped call is logged once, see _MessageClient._not_connected
+_without_robot = False
 _skip_warned:set = set()
+_connection_lost_callback:Optional[Callable[[str], None]] = None # See on_connection_lost
 
-def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logging.Logger = None, ignore_disconnected = False):
-    """
-    Connects to the robot server. Raises ConnectionError if it can't be reached, unless ignore_disconnected is set.
-    ignore_disconnected is meant for testing without a robot: robot calls are then skipped and return None,
-    with one log warning per skipped function.
-    """
-    global _logger, _client, _ignore_disconnected
+def _set_logger(logger:Optional[logging.Logger]):
+    global _logger
     if logger:
         _logger = logger
     if not _logger:
@@ -49,19 +45,69 @@ def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logg
                 datefmt="%Y-%m-%d %H:%M:%S"
             ))
             _logger.addHandler(handler)
+
+def init(robot_server_ip:str, robot_server_port = ROBOT_SERVER_PORT, logger:logging.Logger = None, connect_timeout:float = 10):
+    """
+    Connects to the robot server. Raises ConnectionError if it can't be reached within connect_timeout seconds,
+    or if run_without_robot() is called meanwhile (e.g. from the UI, while init() runs in a thread of its own).
+    To carry on without a robot, call run_without_robot(), e.g. after catching the ConnectionError.
+    Calling init() again closes the current connection first, and ends running without a robot
+    """
+    global _client, _without_robot
+    _set_logger(logger)
     if _client:
         close()
-    _ignore_disconnected = ignore_disconnected
+    _without_robot = False
     _skip_warned.clear()
-    _client = _MessageClient(robot_server_ip, robot_server_port)
-    if not _client.running.is_set():
-        reason = f"Could not connect to robot server on {robot_server_ip}:{robot_server_port} ({_client.connect_error})"
-        if not ignore_disconnected:
-            raise ConnectionError(reason)
-        _logger.warning(f"{reason}. Continuing without a robot, since ignore_disconnected is set.")
-        return
+    client = _MessageClient(robot_server_ip, robot_server_port)
+    _client = client # Before connecting, so run_without_robot() can abort the attempt
+    client.connect(connect_timeout)
+    if not client.running.is_set():
+        if client.closing.is_set():
+            raise ConnectionError(f"Connecting to the robot server on {robot_server_ip}:{robot_server_port} was aborted by run_without_robot()")
+        raise ConnectionError(f"Could not connect to robot server on {robot_server_ip}:{robot_server_port} ({client.connect_error})")
     _check_protocol_version()
     _check_naoqi_version()
+
+def run_without_robot():
+    """
+    From now on, robot calls are skipped instead of raising ConnectionError: they return None, call_async gives a
+    future that has finished with None, and subscriptions never fire. Each kind of call is logged once as skipped.
+    E.g. for testing an application without a robot, or after catching the ConnectionError from init().
+    Aborts init() if it's still connecting in another thread (it then raises ConnectionError), and closes the
+    connection if there is one (see close()). Also works without init(). init() connects again
+    """
+    global _client, _without_robot
+    _set_logger(None)
+    _without_robot = True # First, so calls woken by closing the connection are skipped too
+    _skip_warned.clear()
+    if _client:
+        close()
+    _client = _MessageClient(None, None) # Never connected, so every call is skipped
+    _logger.info("Running without a robot: robot calls are skipped and return None")
+
+def on_connection_lost(callback:Optional[Callable[[str], None]]):
+    """
+    Calls callback(reason) once when the connection to the robot server is lost while the program runs, e.g. the
+    network dropped or the server stopped. Not on close(), run_without_robot(), or a failed init() (which raises).
+    The callback runs on a thread of its own, and may e.g. call run_without_robot(), or init() to reconnect.
+    Calls under way when the connection is lost raise ConnectionError; so do later ones, until the callback has
+    switched to running without a robot. One callback at a time: a new one replaces it, None removes it
+    """
+    global _connection_lost_callback
+    _connection_lost_callback = callback
+
+def _report_connection_lost(client:"_MessageClient", reason:str):
+    """Runs the on_connection_lost callback on a thread of its own, if client is still the current connection"""
+    callback = _connection_lost_callback
+    if callback is None or client is not _client:
+        return
+    def run():
+        try:
+            callback(reason)
+        except Exception:
+            _logger.exception("The on_connection_lost callback failed")
+    threading.Thread(target=run, daemon=True).start()
 
 def server_protocol_version() -> Optional[str]:
     """
@@ -220,9 +266,14 @@ class _MessageClient:
         self.dead_reason = "" # Set by the heartbeat when it closes the connection
         self.heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True)
         self.event_sock:socket.socket = None # The second connection, for events only, see _open_event_connection
+
+    def connect(self, timeout:float):
+        """Connects to the robot server. Sets running if it worked, otherwise connect_error. close() aborts it"""
         try:
             _logger.info("Connecting")
+            self.sock.settimeout(timeout)
             self.sock.connect((self.server_ip, self.server_port))
+            self.sock.settimeout(None)
             _logger.info("Connected")
             # The script's name, for the robot server's log. There's none with python -c, or interactively
             script_file = getattr(__main__, "__file__", None)
@@ -309,13 +360,13 @@ class _MessageClient:
         return INTERNAL_REQUEST_TIMEOUT_SECONDS
 
     def _not_connected(self, msg:MsgBase, reason:str):
-        """Raises ConnectionError, or with ignore_disconnected skips the call (returns None) and logs it once"""
+        """Raises ConnectionError, or after run_without_robot() skips the call (returns None) and logs it once"""
         action = self._describe(msg)
-        if not _ignore_disconnected:
+        if not _without_robot:
             raise ConnectionError(f"{reason} ({action})")
         if action not in _skip_warned:
             _skip_warned.add(action)
-            _logger.warning(f"{reason}, so {action} is skipped. ignore_disconnected is set, so further skips of it aren't logged.")
+            _logger.warning(f"Running without a robot, so {action} is skipped. Further skips of it aren't logged.")
         return None
 
     def send_message(self, msg:MsgBase):
@@ -391,6 +442,7 @@ class _MessageClient:
                 pass # _recv_loop notices the broken connection
 
     def _recv_loop(self):
+        lost_reason = None # Set when the connection is lost, rather than closed on purpose
         try:
             while self.running.is_set():
                 response = json_to_binary(read_dict(self.sock)) # Binary data (e.g. camera images) becomes bytes
@@ -409,7 +461,8 @@ class _MessageClient:
                     _logger.warning(f"Unmatched reply: {response}")
         except Exception as e:
             if not self.closing.is_set():
-                _logger.error(f"Lost connection to robot server: {self.dead_reason or e}")
+                lost_reason = f"{self.dead_reason or e}"
+                _logger.error(f"Lost connection to robot server: {lost_reason}")
         finally:
             self.running.clear()
             if self.event_sock is not None:
@@ -418,6 +471,8 @@ class _MessageClient:
             while self.pending_requests:
                 _, req = self.pending_requests.popitem()
                 req.lock.release()
+            if lost_reason is not None:
+                _report_connection_lost(self, lost_reason)
 
     def _pass_on_event(self, event:dict):
         """
@@ -483,7 +538,7 @@ class RemoteFuture(Generic[T]):
         self._has_error_handler = False # Set by on_error. Without it, a failure is logged as a warning
         self._client = _client # The connection it runs on, to tell close() from a lost connection
 
-    # The state of a call skipped by ignore_disconnected: finished, with None as value like a skipped normal call
+    # The state of a call skipped without a robot: finished, with None as value like a skipped normal call
     _SKIPPED_STATE = {"state": "finished", "value": None}
 
     @classmethod
@@ -504,7 +559,7 @@ class RemoteFuture(Generic[T]):
         if self._done.is_set():
             return
         try:
-            # Raises ConnectionError when disconnected, or does nothing if ignore_disconnected is set
+            # Raises ConnectionError when disconnected, or does nothing when running without a robot
             _client.send_message(MsgFutureCommand(self.id, MsgFutureCommand.CANCEL))
         except RobotError:
             # The method may have stopped just before the cancel arrived, so the robot no longer knew the
@@ -563,7 +618,7 @@ class RemoteFuture(Generic[T]):
         """The waiter thread: the only place that asks the robot about this future"""
         try:
             # Blocks until the method has stopped on the robot. Raises ConnectionError when the
-            # connection is lost, or returns None if ignore_disconnected is set
+            # connection is lost, or returns None when running without a robot
             state = _client.send_message(MsgFutureCommand(self.id, MsgFutureCommand.WAIT))
             if state is not None and state.get("state") == "finished" and self._value_type is not None:
                 state = dict(state, value=_dicts_to_structs(self._value_type, state.get("value")))
@@ -650,9 +705,9 @@ def robot_connected() -> bool:
 def _server_command(command:str, args:list, result_key:str):
     """A system command that the robot server answers with a dict holding result_key"""
     _require_init(f"the system command {command}")
-    # Raises ConnectionError when disconnected, or returns None if ignore_disconnected is set
+    # Raises ConnectionError when disconnected, or returns None after run_without_robot()
     result = _client.send_message(MsgSystemCommand(command, args))
-    if result is None and _ignore_disconnected:
+    if result is None and _without_robot:
         return None
     if not isinstance(result, dict) or result_key not in result:
         # An old server answers commands it doesn't know with an empty result
@@ -743,10 +798,10 @@ def call_method(service_name, method_name, args = [], returns = None):
         args=[_structs_to_dicts(arg) for arg in args],
         run_async=run_async
     )
-    result = _client.send_message(msg) # Raises ConnectionError when disconnected, unless ignore_disconnected is set
+    result = _client.send_message(msg) # Raises ConnectionError when disconnected, unless running without a robot
     if run_async:
         if result is None and not robot_connected():
-            return RemoteFuture._skipped() # ignore_disconnected is set
+            return RemoteFuture._skipped() # Running without a robot
         if not isinstance(result, dict) or "future_id" not in result:
             raise RobotError("The robot server does not support async calls. Please update robot_server.py and robot_comm_common.py on the robot.")
         future = RemoteFuture(result["future_id"], f"{service_name}.{method_name}", returns)
@@ -844,7 +899,7 @@ class EventListener:
         self.instances_by_key[self.key] = self
         self.alive.set()
         try:
-            # Raises ConnectionError when disconnected, or returns None if ignore_disconnected is set
+            # Raises ConnectionError when disconnected, or returns None when running without a robot
             response = _client.send_message(MsgEventSubscription(event_name, True, service_name))
         except Exception:
             self._forget()

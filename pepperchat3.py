@@ -1,4 +1,4 @@
-from apidefs import api
+from apidefs import api, rc
 import traceback
 import defs
 import threading, time, json, os
@@ -11,10 +11,14 @@ import gui
 from syslogger import syslogger
 from config import config
 from utils import AnimationRunner
+from PIL import Image
+import io
 
 def main():
     syslogger.debug("main")
     gui.show_init_dialog()
+    robot = api.ALSystem.robotName()
+    print("robot", robot)
 
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
@@ -61,18 +65,38 @@ def main():
             api.ALLeds.earLedsSetAngle(90, .01, False)
 
     def perform_robot_action(action:str):
+        print("PERFORM:",action)
         if action == "wave":
             AnimationRunner.run("animations/Stand/Gestures/Hey_1")
-        elif action == "shake_head":
+        elif action == "shake your head":
             AnimationRunner.run("animations/Stand/Reactions/ShakeBody_1")
         elif action == "dance":
-            AnimationRunner.run("animations/Stand/Waiting/KungFu_1")
-        print("PERFORM:",action)
-        
+            if robot == "pepper": # Nao ramlar när den kör funny dancer
+                AnimationRunner.run("animations/Stand/Waiting/FunnyDancer_1")
+            else:
+                AnimationRunner.run("animations/Stand/Waiting/KungFu_1")
+        elif action == "play air guitar":
+            AnimationRunner.run("animations/Stand/Waiting/AirGuitar_1")
+    
+    def get_head_cam_image() -> bytes:
+        """Get jpeg bytes from an image captured with the head cam"""
+        cam = api.ALVideoDevice.subscribeCamera("testcam", 0, 1, 11, 5)
+        image_data = api.ALVideoDevice.getImageRemote(cam)
+        width, height, pixels = image_data[0], image_data[1], image_data[6]
+        api.ALVideoDevice.unsubscribe(cam)
+        image = Image.frombytes("RGB", (width, height), pixels)
+        save_buf = io.BytesIO()
+        image.save(save_buf, format="JPEG")
+        jpeg_bytes = save_buf.getvalue()
+        open("tmp/imagetest.jpg", "bw").write(jpeg_bytes)
+        return jpeg_bytes
+
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
         conversation_prompt=config.get_prompt(),
-        robot_action_callback=perform_robot_action
+        robot_action_names=["wave", "shake your head", "dance", "play air guitar"],
+        robot_action_callback=perform_robot_action,
+        image_capture_callback=get_head_cam_image
     )
     oai.query_update_callbacks.append(on_query_update)
     oai.intermediate_response_text_callbacks.append(pts.push_text)
@@ -89,7 +113,6 @@ def main():
     pcm_utils.listen_on_local_mic(24000,[oai.push_pcm16_frames])
 
     gui.run(oai)
-
 
 if __name__ == "__main__":
     main()

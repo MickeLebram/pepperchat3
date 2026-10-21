@@ -144,7 +144,11 @@ class LogViewer(QDialog):
 class AnimationBrowser(QDialog):
     def __init__(self, parent):
         super().__init__(parent=parent)
-
+        show_msg(parent, 
+                 "Warning!\n" +
+                 "Some animations may cause the robot to fall.\n" +
+                 "Always be prepared to catch it."
+        )
         self.setWindowTitle("Animation Browser")
         layout = QVBoxLayout(self)
         self.tree = QTreeView()
@@ -265,7 +269,7 @@ class MainWindow(QWidget):
             btn_prompt.setText(caption)
         def browse_prompts():
             start_path = config.cur_prompt_file if os.path.exists(config.cur_prompt_file) else str(defs.APP_DIR.absolute())
-            fname = QFileDialog.getOpenFileName(self, "Play Animation", start_path, "Text files (*.*)")[0]
+            fname = QFileDialog.getOpenFileName(self, "Select propmt file", start_path, "Text files (*.*)")[0]
             if not fname:
                 return
             if Path(fname) == Path(config.file):
@@ -300,7 +304,7 @@ class MainWindow(QWidget):
         )
         self.logview = LogViewer()
         add_button(layout, "System config", show_config_dlg, self)
-        add_button(layout, "Log viewer", self.logview.show)
+        # add_button(layout, "Log viewer", self.logview.show)
         add_button(layout, "Restart subtitles", subtitles.try_show_on_tablet)
         group_posture = QGroupBox("Postures")
         group_posture.setLayout(QVBoxLayout())
@@ -378,19 +382,17 @@ def show_init_dialog():
         nonlocal connect_thread
         status.setText(f"Trying to connect to robot on {config.robot_server_ip}...")
         def doit():
-            api.robot_client.init(config.robot_server_ip, logger=syslogger)
-            api.ALMotion.ping()
-            if api.robot_client.robot_connected():
+            try:
+                api.robot_client.init(config.robot_server_ip, logger=syslogger)
                 on_done()
-            else:
-                try:
-                    status.setText(f"Could not connect to robot on {config.robot_server_ip}")
-                except:
-                    pass
+            except:
+                status.setText(f"Could not connect to robot on {config.robot_server_ip}")
         connect_thread = run_async_task(doit, ())
-    
+    def continue_without_robot():
+        api.robot_client.run_without_robot()
+        on_done()
     btn_no_robot = QPushButton("Continue without robot")
-    btn_no_robot.clicked.connect(on_done)
+    btn_no_robot.clicked.connect(continue_without_robot)
     layout.addWidget(btn_no_robot)
     def on_cfg():
         if show_config_dlg(dlg):
