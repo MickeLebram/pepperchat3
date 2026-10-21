@@ -71,7 +71,7 @@ def main():
         elif action == "shake your head":
             AnimationRunner.run("animations/Stand/Reactions/ShakeBody_1")
         elif action == "dance":
-            if robot == "pepper": # Nao ramlar när den kör funny dancer
+            if robot == "pepper": # OBS! Nao ramlar när den kör funny dancer
                 AnimationRunner.run("animations/Stand/Waiting/FunnyDancer_1")
             else:
                 AnimationRunner.run("animations/Stand/Waiting/KungFu_1")

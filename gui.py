@@ -327,7 +327,7 @@ class MainWindow(QWidget):
             group_motion = QGroupBox("Motion")
             group_motion.setLayout(QVBoxLayout())
             layout.addWidget(group_motion)
-            add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles_1(['HeadYaw', 'HeadPitch'],[0,0],.25))
+            add_button(group_motion.layout(), "Look straight", lambda: api.ALMotion.setAngles(['HeadYaw', 'HeadPitch'],[0,0],.2))
             def browse_animations():
                 AnimationBrowser(self).show()
 
@@ -346,7 +346,6 @@ class MainWindow(QWidget):
             if self.cur_tts_speed != slide_tts_speed.value():
                 self.cur_tts_speed = slide_tts_speed.value()
                 api.ALTextToSpeech.setParameter("speed", self.cur_tts_speed)
-                print(api.ALTextToSpeech.getParameter("speed"))
 
         self.sparse_updater = QTimer(self)
         self.sparse_updater.timeout.connect(sparse_update)
