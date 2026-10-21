@@ -9,3 +9,4 @@ APP_DIR = _add_dir(Path(QStandardPaths.writableLocation(QStandardPaths.StandardL
 LOG_DIR = _add_dir(APP_DIR / "logs")
 WAV_DIR = _add_dir(APP_DIR / "wavs")
 SYSLOG_DIR = _add_dir(APP_DIR / "syslogs")
+TMP_DIR = _add_dir(APP_DIR / "tmp")

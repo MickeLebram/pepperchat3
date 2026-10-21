@@ -85,11 +85,9 @@ def main():
         width, height, pixels = image_data[0], image_data[1], image_data[6]
         api.ALVideoDevice.unsubscribe(cam)
         image = Image.frombytes("RGB", (width, height), pixels)
-        save_buf = io.BytesIO()
-        image.save(save_buf, format="JPEG")
-        jpeg_bytes = save_buf.getvalue()
-        open("tmp/imagetest.jpg", "bw").write(jpeg_bytes)
-        return jpeg_bytes
+        file = defs.TMP_DIR / "head_cam_image.jpg"
+        image.save(file)
+        return open(file, "br").read()
 
     oai = OaiChatIntegrated(
         api_key=config.openai_api_key,
