@@ -15,6 +15,13 @@ ALRedBallDetection is a module which can detect red ball based on color saturati
   Tag camera_info_robotFrame = [x, y, z, wx, wy, wz] in FRAME_ROBOT (see motion documentation)
   Tag camera_id = id of the active camera (see videodevice documentation)
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- redBallDetected: event.redBallDetected
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

@@ -4,6 +4,15 @@ This module computes the position (azimuth, elevation) of a sound source detecte
  One event is created when nao locates a sound source : ALSoundDetection/SoundLocated.
  ALSoundDetection/SoundLocated : [ [time(sec), time(usec)], [azimuth, elevation, confidence, (optional: energy)] , [Head Position[6D]] ] 
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- SoundDetected: event.SoundDetected
+
+NAOqi's text for this service mentions ALSoundDetection/SoundLocated, which wasn't a declared ALMemory event, nor in any service's getOutputNames() answer, when the sources were fetched.
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

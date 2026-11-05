@@ -1,5 +1,14 @@
 """
 This module computes the direction of the look of a person from the orientation of his/her face. It is then possible to know if the person looks at the robot or not.
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- GazeAnalysis/PeopleLookingAtRobot: event.GazeAnalysis_PeopleLookingAtRobot
+- GazeAnalysis/PersonStartsLookingAtRobot: event.GazeAnalysis_PersonStartsLookingAtRobot
+- GazeAnalysis/PersonStopsLookingAtRobot: event.GazeAnalysis_PersonStopsLookingAtRobot
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

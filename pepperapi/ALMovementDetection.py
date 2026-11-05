@@ -1,5 +1,16 @@
 """
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- MovementDetection/MovementDetected: event.MovementDetection_MovementDetected
+- MovementDetection/NoMovement: event.MovementDetection_NoMovement
+
+Data keys, not events (read them with ALMemory.getData):
+- MovementDetection/MovementInfo
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

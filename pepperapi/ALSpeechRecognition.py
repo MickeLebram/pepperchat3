@@ -1,5 +1,23 @@
 """
 ALSpeechRecognition gives access to the embedded voice recognition system. It can be dynamically modified. This class allows user to load the current words list that should be recognized. The result of the recognition engine is located in the ALMemory's key: "WordRecognized". The structure of the result is an array :  [ (string) word , (float) confidence ]
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- ALSpeechRecognition/ActiveListening: event.ALSpeechRecognition_ActiveListening
+- ALSpeechRecognition/IsConnected: event.ALSpeechRecognition_IsConnected
+- ALSpeechRecognition/IsRunning: event.ALSpeechRecognition_IsRunning
+- ALSpeechRecognition/QueryError: event.ALSpeechRecognition_QueryError
+- ALSpeechRecognition/SignalTooLow: event.ALSpeechRecognition_SignalTooLow
+- ALSpeechRecognition/Status: event.ALSpeechRecognition_Status
+- LastWordRecognized: event.LastWordRecognized
+- NoiseRecognized: event.NoiseRecognized
+- RecoLatency: event.RecoLatency
+- SpeechDetected: event.SpeechDetected
+- WordRecognized: event.WordRecognized
+- WordRecognizedAndGrammar: event.WordRecognizedAndGrammar
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

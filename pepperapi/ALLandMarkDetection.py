@@ -11,6 +11,13 @@ mark_info_x = [ [shape, alpha, beta, sizeX, sizeY, heading], [markID] ].
 - the heading angle describes how the Naomark is oriented about the vertical axis with regards to Nao's head. 
 - Mark ID is the number written on the naomark and which corresponds to its pattern. 
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- LandmarkDetected: event.LandmarkDetected
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

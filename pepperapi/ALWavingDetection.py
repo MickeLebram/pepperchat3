@@ -1,5 +1,16 @@
 """
 This module enables to detect if a person is waving at the robot. To be detected as waving, a person must be looking at the robot.
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- WavingDetection/PersonWaving: event.WavingDetection_PersonWaving
+- WavingDetection/PersonWavingCenter: event.WavingDetection_PersonWavingCenter
+- WavingDetection/PersonWavingLeft: event.WavingDetection_PersonWavingLeft
+- WavingDetection/PersonWavingRight: event.WavingDetection_PersonWavingRight
+- WavingDetection/Waving: event.WavingDetection_Waving
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

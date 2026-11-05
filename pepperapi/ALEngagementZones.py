@@ -1,5 +1,29 @@
 """
 This module enables to compue the engagement zones of detected people or detected movements
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- EngagementZones/FirstLimitDistanceUpdated: event.EngagementZones_FirstLimitDistanceUpdated
+- EngagementZones/LimitAngleUpdated: event.EngagementZones_LimitAngleUpdated
+- EngagementZones/MovementsInZonesUpdated: event.EngagementZones_MovementsInZonesUpdated
+- EngagementZones/PeopleInZonesUpdated: event.EngagementZones_PeopleInZonesUpdated
+- EngagementZones/PersonApproached: event.EngagementZones_PersonApproached
+- EngagementZones/PersonEnteredZone1: event.EngagementZones_PersonEnteredZone1
+- EngagementZones/PersonEnteredZone2: event.EngagementZones_PersonEnteredZone2
+- EngagementZones/PersonEnteredZone3: event.EngagementZones_PersonEnteredZone3
+- EngagementZones/PersonMovedAway: event.EngagementZones_PersonMovedAway
+- EngagementZones/SecondLimitDistanceUpdated: event.EngagementZones_SecondLimitDistanceUpdated
+
+Data keys, not events (read them with ALMemory.getData):
+- EngagementZones/LastMovementsInZone1
+- EngagementZones/LastMovementsInZone2
+- EngagementZones/LastMovementsInZone3
+- EngagementZones/PeopleInZone1
+- EngagementZones/PeopleInZone2
+- EngagementZones/PeopleInZone3
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

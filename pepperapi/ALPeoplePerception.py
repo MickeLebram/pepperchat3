@@ -1,5 +1,21 @@
 """
 This module controls the People Perception flow and pushes information about detected people in ALMemory.
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- PeoplePerception/JustArrived: event.PeoplePerception_JustArrived
+- PeoplePerception/JustLeft: event.PeoplePerception_JustLeft
+- PeoplePerception/MaximumDetectionRangeUpdated: event.PeoplePerception_MaximumDetectionRangeUpdated
+- PeoplePerception/NonVisiblePeopleList: event.PeoplePerception_NonVisiblePeopleList
+- PeoplePerception/PeopleDetected: event.PeoplePerception_PeopleDetected
+- PeoplePerception/PeopleList: event.PeoplePerception_PeopleList
+- PeoplePerception/PopulationReset: event.PeoplePerception_PopulationReset
+- PeoplePerception/PopulationUpdated: event.PeoplePerception_PopulationUpdated
+- PeoplePerception/RemovedPersonFromMemory: event.PeoplePerception_RemovedPersonFromMemory
+- PeoplePerception/VisiblePeopleList: event.PeoplePerception_VisiblePeopleList
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

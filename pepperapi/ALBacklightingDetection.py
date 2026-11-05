@@ -1,5 +1,15 @@
 """
 This module enables to check if the image of the camera is backlit
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- BacklightingDetection/BacklightingDetected: event.BacklightingDetection_BacklightingDetected
+
+Data keys, not events (read them with ALMemory.getData):
+- BacklightingDetection/BacklightingValue
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

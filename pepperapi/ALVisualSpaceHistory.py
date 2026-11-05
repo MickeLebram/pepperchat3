@@ -1,5 +1,12 @@
 """
 VisualSpaceHistory module
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Data keys, not events (read them with ALMemory.getData):
+- VisualSpaceHistory/VisualGrid/Data
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

@@ -1,5 +1,13 @@
 """
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- FaceDetected: event.FaceDetected
+- FaceDetection/FaceDetected: event.FaceDetection_FaceDetected
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload

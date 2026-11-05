@@ -9,10 +9,12 @@ class ALAudioPlayer_currentSystemSoundSet:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALAudioPlayer/currentSystemSoundSet', callback)
 class ALAudioSourceLocalization_SoundLocated:
+	"""Bridge note: written by ALAudioSourceLocalization, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALAudioSourceLocalization/SoundLocated', callback)
 class ALAudioSourceLocalization_SoundsLocated:
+	"""Bridge note: written by ALAudioSourceLocalization, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALAudioSourceLocalization/SoundsLocated', callback)
@@ -477,34 +479,42 @@ class ALSignsAndFeedback_Switched:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSignsAndFeedback/Switched', callback)
 class ALSoundLocalization_SoundLocated:
+	"""Bridge note: written by ALSoundLocalization, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSoundLocalization/SoundLocated', callback)
 class ALSoundLocalization_SoundsLocated:
+	"""Bridge note: written by ALSoundLocalization, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSoundLocalization/SoundsLocated', callback)
 class ALSpeechRecognition_ActiveListening:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/ActiveListening', callback)
 class ALSpeechRecognition_IsConnected:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/IsConnected', callback)
 class ALSpeechRecognition_IsRunning:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/IsRunning', callback)
 class ALSpeechRecognition_QueryError:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/QueryError', callback)
 class ALSpeechRecognition_SignalTooLow:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/SignalTooLow', callback)
 class ALSpeechRecognition_Status:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALSpeechRecognition/Status', callback)
@@ -573,14 +583,17 @@ class ALTracker_BaseTracking:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/BaseTracking', callback)
 class ALTracker_BlobDetected:
+	"""Bridge note: written by ALSegmentation3D, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/BlobDetected', callback)
 class ALTracker_CloseObjectDetected:
+	"""Bridge note: written by ALCloseObjectDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/CloseObjectDetected', callback)
 class ALTracker_ColorBlobDetected:
+	"""Bridge note: written by ALColorBlobDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/ColorBlobDetected', callback)
@@ -609,6 +622,7 @@ class ALTracker_ObjectMoveTo:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/ObjectMoveTo', callback)
 class ALTracker_PodDetected:
+	"""Bridge note: written by ALPodDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/PodDetected', callback)
@@ -645,6 +659,7 @@ class ALTracker_TargetReached:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALTracker/TargetReached', callback)
 class ALVoiceEmotionAnalysis_EmotionRecognized:
+	"""Bridge note: written by ALVoiceEmotionAnalysis, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ALVoiceEmotionAnalysis/EmotionRecognized', callback)
@@ -729,10 +744,12 @@ class BackBumperPressed:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('BackBumperPressed', callback)
 class BacklightingDetection_BacklightingDetected:
+	"""Bridge note: written by ALBacklightingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('BacklightingDetection/BacklightingDetected', callback)
 class BarcodeReader_BarcodeDetected:
+	"""Bridge note: written by ALBarcodeReader, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('BarcodeReader/BarcodeDetected', callback)
@@ -793,14 +810,17 @@ class ChestButtonPressed:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('ChestButtonPressed', callback)
 class CloseObjectDetection_ObjectDetected:
+	"""Bridge note: written by ALCloseObjectDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('CloseObjectDetection/ObjectDetected', callback)
 class CloseObjectDetection_ObjectNotDetected:
+	"""Bridge note: written by ALCloseObjectDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('CloseObjectDetection/ObjectNotDetected', callback)
 class DarknessDetection_DarknessDetected:
+	"""Bridge note: written by ALDarknessDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('DarknessDetection/DarknessDetected', callback)
@@ -1053,54 +1073,67 @@ class EnablePowerMonitoring:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EnablePowerMonitoring', callback)
 class EngagementZones_FirstLimitDistanceUpdated:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/FirstLimitDistanceUpdated', callback)
 class EngagementZones_LimitAngleUpdated:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/LimitAngleUpdated', callback)
 class EngagementZones_MovementsInZonesUpdated:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/MovementsInZonesUpdated', callback)
 class EngagementZones_PeopleInZonesUpdated:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PeopleInZonesUpdated', callback)
 class EngagementZones_PersonApproached:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PersonApproached', callback)
 class EngagementZones_PersonEnteredZone1:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PersonEnteredZone1', callback)
 class EngagementZones_PersonEnteredZone2:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PersonEnteredZone2', callback)
 class EngagementZones_PersonEnteredZone3:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PersonEnteredZone3', callback)
 class EngagementZones_PersonMovedAway:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/PersonMovedAway', callback)
 class EngagementZones_SecondLimitDistanceUpdated:
+	"""Bridge note: written by ALEngagementZones, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('EngagementZones/SecondLimitDistanceUpdated', callback)
 class FaceCharacteristics_PersonSmiling:
+	"""Bridge note: written by ALFaceCharacteristics, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('FaceCharacteristics/PersonSmiling', callback)
 class FaceDetected:
+	"""Bridge note: written by ALFaceDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('FaceDetected', callback)
 class FaceDetection_FaceDetected:
+	"""Bridge note: written by ALFaceDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('FaceDetection/FaceDetected', callback)
@@ -1109,14 +1142,17 @@ class FrontTactilTouched:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('FrontTactilTouched', callback)
 class GazeAnalysis_PeopleLookingAtRobot:
+	"""Bridge note: written by ALGazeAnalysis, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('GazeAnalysis/PeopleLookingAtRobot', callback)
 class GazeAnalysis_PersonStartsLookingAtRobot:
+	"""Bridge note: written by ALGazeAnalysis, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('GazeAnalysis/PersonStartsLookingAtRobot', callback)
 class GazeAnalysis_PersonStopsLookingAtRobot:
+	"""Bridge note: written by ALGazeAnalysis, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('GazeAnalysis/PersonStopsLookingAtRobot', callback)
@@ -1165,10 +1201,12 @@ class HumanLostAfterTracking:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('HumanLostAfterTracking', callback)
 class LandmarkDetected:
+	"""Bridge note: written by ALLandMarkDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('LandmarkDetected', callback)
 class LastWordRecognized:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('LastWordRecognized', callback)
@@ -1357,10 +1395,12 @@ class MoodEvent_Mood:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('MoodEvent/Mood', callback)
 class MovementDetection_MovementDetected:
+	"""Bridge note: written by ALMovementDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('MovementDetection/MovementDetected', callback)
 class MovementDetection_NoMovement:
+	"""Bridge note: written by ALMovementDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('MovementDetection/NoMovement', callback)
@@ -1445,6 +1485,7 @@ class NoHumanFoundAfterStimulus:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('NoHumanFoundAfterStimulus', callback)
 class NoiseRecognized:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('NoiseRecognized', callback)
@@ -1453,50 +1494,62 @@ class PassiveDiagnosisErrorChanged:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PassiveDiagnosisErrorChanged', callback)
 class PeoplePerception_JustArrived:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/JustArrived', callback)
 class PeoplePerception_JustLeft:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/JustLeft', callback)
 class PeoplePerception_MaximumDetectionRangeUpdated:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/MaximumDetectionRangeUpdated', callback)
 class PeoplePerception_NonVisiblePeopleList:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/NonVisiblePeopleList', callback)
 class PeoplePerception_PeopleDetected:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/PeopleDetected', callback)
 class PeoplePerception_PeopleList:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/PeopleList', callback)
 class PeoplePerception_PopulationReset:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/PopulationReset', callback)
 class PeoplePerception_PopulationUpdated:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/PopulationUpdated', callback)
 class PeoplePerception_RemovedPersonFromMemory:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/RemovedPersonFromMemory', callback)
 class PeoplePerception_VisiblePeopleList:
+	"""Bridge note: written by ALPeoplePerception, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PeoplePerception/VisiblePeopleList', callback)
 class PictureDetected:
+	"""Bridge note: written by ALVisionRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PictureDetected', callback)
 class PodDetection_Detection:
+	"""Bridge note: written by ALPodDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('PodDetection/Detection', callback)
@@ -1517,6 +1570,7 @@ class RearTactilTouched:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('RearTactilTouched', callback)
 class RecoLatency:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('RecoLatency', callback)
@@ -1525,26 +1579,32 @@ class RightBumperPressed:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('RightBumperPressed', callback)
 class Segmentation3D_BlobTrackerUpdated:
+	"""Bridge note: written by ALSegmentation3D, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('Segmentation3D/BlobTrackerUpdated', callback)
 class Segmentation3D_SegmentationUpdated:
+	"""Bridge note: written by ALSegmentation3D, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('Segmentation3D/SegmentationUpdated', callback)
 class Segmentation3D_TopOfTrackedBlob:
+	"""Bridge note: written by ALSegmentation3D, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('Segmentation3D/TopOfTrackedBlob', callback)
 class Segmentation3D_TrackedBlobNotFound:
+	"""Bridge note: written by ALSegmentation3D, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('Segmentation3D/TrackedBlobNotFound', callback)
 class SittingPeopleDetection_PersonSittingDown:
+	"""Bridge note: written by ALSittingPeopleDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('SittingPeopleDetection/PersonSittingDown', callback)
 class SittingPeopleDetection_PersonStandingUp:
+	"""Bridge note: written by ALSittingPeopleDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('SittingPeopleDetection/PersonStandingUp', callback)
@@ -1581,10 +1641,12 @@ class SonarRightNothingDetected:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('SonarRightNothingDetected', callback)
 class SoundDetected:
+	"""Bridge note: written by ALSoundDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('SoundDetected', callback)
 class SpeechDetected:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('SpeechDetected', callback)
@@ -1657,30 +1719,37 @@ class VisualCompass_NewReferenceImageSet:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('VisualCompass/NewReferenceImageSet', callback)
 class WavingDetection_PersonWaving:
+	"""Bridge note: written by ALWavingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WavingDetection/PersonWaving', callback)
 class WavingDetection_PersonWavingCenter:
+	"""Bridge note: written by ALWavingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WavingDetection/PersonWavingCenter', callback)
 class WavingDetection_PersonWavingLeft:
+	"""Bridge note: written by ALWavingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WavingDetection/PersonWavingLeft', callback)
 class WavingDetection_PersonWavingRight:
+	"""Bridge note: written by ALWavingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WavingDetection/PersonWavingRight', callback)
 class WavingDetection_Waving:
+	"""Bridge note: written by ALWavingDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WavingDetection/Waving', callback)
 class WordRecognized:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WordRecognized', callback)
 class WordRecognizedAndGrammar:
+	"""Bridge note: written by ALSpeechRecognition, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('WordRecognizedAndGrammar', callback)
@@ -1785,6 +1854,7 @@ class preferenceSynchronized:
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('preferenceSynchronized', callback)
 class redBallDetected:
+	"""Bridge note: written by ALRedBallDetection, as the robot's getOutputNames() returned it on 2026-11-05"""
 	@staticmethod
 	def subscribe(callback:Callable[[Any], None]):
 		return EventSubscription('redBallDetected', callback)

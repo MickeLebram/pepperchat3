@@ -16,6 +16,13 @@ and boundary_points = [[x0,y0], [x1,y1], ..., [xN,yN]]
 - ratio represents the number of keypoints found for the object in the current frame divided by the number of keypoints found during the learning stage. 
 - boundary_points is a list of points coordinates in angle values representing the reprojection in the current image of the boundaries selected during the learning stage. 
 
+
+Bridge notes
+------------
+The ALMemory keys this service writes, as the robot's getOutputNames() returned them on 2026-11-05.
+
+Events, with their class in event.py:
+- PictureDetected: event.PictureDetected
 """
 from __future__ import annotations
 from typing import Any, Dict, List, Tuple, overload
