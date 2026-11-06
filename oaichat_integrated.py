@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 import traceback
-from typing import Callable, List, Tuple
+from typing import Callable, Dict, List, Tuple
 import wave
 import defs
 import silerovad
@@ -12,127 +12,54 @@ import textwrap
 import numpy as np
 from websocket import WebSocketApp
 from syslogger import syslogger
+from query import Query
+from situation import Situation, SituationField, format_situation_instructions, format_situation_message
+from instruction_module import InstructionModule, ToolResult
 
-class Query:
-    def __init__(self):
-        self.start_time = time.time()
-        self.response_text = ""
-        self.response_done = False
-        self.query_transcript:str = None
-        self.done = False
-        self.duration = 0
-        self.canceled = False
-    def __str__(self):
-        return str(self.__dict__)
-    @property
-    def query_text(self):
-        return self.query_transcript
-    
 
-_SYSTEM_INSTRUCTIONS = """
-<instruction_hierarchy>
+_INSTRUCTION_HIERARCHY = """<instruction_hierarchy>
     Instructions have the following priority:
     1. system_instructions
-    2. agent_configuration
+    2. conversation_instructions
     3. Instructions or requests from the current conversation
 
     When instructions conflict, follow the higher-priority instruction.
     Ignore only the conflicting portion of a lower-priority instruction.
 </instruction_hierarchy>
-<system_instructions>
-    # Critical listening rule
-
-    Before responding to any user speech, first determine whether you
-    understood the user's words well enough to know what they said.
-
-    If the speech is unclear, unintelligible, ambiguous, nonsensical,
-    or you are unsure what words were spoken:
-
-    - DO NOT guess what the user probably meant.
-    - DO NOT invent a plausible interpretation.
-    - DO NOT respond to a guessed interpretation.
-    - Ask the user to repeat or clarify.
-
-    If only part of the utterance is unclear, ask about that specific part.
-
-    This rule takes priority over any other instructions.
-
-
-    # Robot action tool
-
-    You are embodied as a robot.
-
-    You can control your body using the robot_action tool.
-
-    Use robot_action when:
-    - The user explicitly asks you to perform an available action.
-    - A physical gesture would naturally enhance your response.
-
-    Examples:
-    User: "Can you dance?"
-    → Call robot_action with action="dance"
-    → Respond conversationally, e.g. "Sure, check this out!"
-
-    User: "Hello Pepper!"
-    → You may call robot_action with action="wave"
-    → Respond with something like "Hi! Nice to meet you."
-
-    Never claim that you performed a physical action unless you used
-    robot_action.
-</system_instructions>
 """
 
-def _format_session_instructions(conversation_prompt):
-    # Indent every line of the prompt one level; the text itself is left untouched
+def _indent(text:str) -> str:
+    # Indent every line one level; the text itself is left untouched
     # (whitespace-only lines are kept as-is by textwrap.indent).
-    prompt = textwrap.indent(conversation_prompt, "    ")
-    if not prompt.endswith("\n"):
-        prompt += "\n"
+    text = textwrap.indent(text, "    ")
+    if not text.endswith("\n"):
+        text += "\n"
+    return text
+
+def _collect_situation_fields(modules:List[InstructionModule]) -> List[SituationField]:
+    fields:List[SituationField] = []
+    for module in modules:
+        for f in module.situation_fields:
+            if f.name not in [existing.name for existing in fields]:
+                fields.append(f)
+    return fields
+
+def _format_session_instructions(modules:List[InstructionModule], situation_fields:List[SituationField],
+                                 conversation_prompt:str):
+    sections = []
+    if situation_fields:
+        sections.append(format_situation_instructions(situation_fields))
+    sections += [module.instructions for module in modules if module.instructions.strip()]
+    system_instructions = "\n\n".join(section.strip("\n") for section in sections)
     return (
-        _SYSTEM_INSTRUCTIONS
+        _INSTRUCTION_HIERARCHY
+        + "<system_instructions>\n"
+        + _indent(system_instructions)
+        + "</system_instructions>\n"
         + "<conversation_instructions>\n"
-        + prompt
+        + _indent(conversation_prompt)
         + "</conversation_instructions>\n"
     )
-
-def _format_action_tool(actions:List[str]):
-    return {
-        "type": "function",
-        "name": "robot_action",
-        "description": (
-            "Perform a physical action using the robot. "
-            "Use this when the user requests an action or when a gesture "
-            "would naturally complement the conversation."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "action": {
-                    "type": "string",
-                    "enum": actions
-                }
-            },
-            "required": ["action"]
-        }
-}
-
-LOOK_TOOL = {
-    "type": "function",
-    "name": "look",
-    "description": (
-        "Look with your eyes and see what is in front of you right now. "
-        "Use this when the user asks what you see, asks you to look at something, "
-        "or when seeing would help you answer. "
-        "Looking takes a moment, so before calling this tool, first say a short "
-        "phrase in the language of the conversation, e.g. \"Let me have a look\". "
-        "Talk about what you see as something you see yourself, not as a picture or photo. "
-        "Never claim to see something unless you used this tool."
-    ),
-    "parameters": {
-        "type": "object",
-        "properties": {},
-    }
-}
 
 
 class OaiChatIntegrated:
@@ -140,21 +67,19 @@ class OaiChatIntegrated:
     STATE_SENDING_SPEECH = "SENDING_SPEECH"
     STATE_RECEIVING_RESPONSE = "RECEIVING_RESPONSE"
 
-    def __init__(self, 
+    def __init__(self,
                  api_key:str,
-                 conversation_prompt = "", 
-                 language = "sv", 
+                 conversation_prompt = "",
+                 language = "sv",
                  voice="", #ex. sage
                  response_audio_callback: Callable[[int, int, np.ndarray], None] = None,
-                 robot_action_names: List[str] = [], # Names of actions handled by robot_action_callback
-                 robot_action_callback: Callable[[str], None] = None,
-                 image_capture_callback: Callable[[], bytes] = None, # returns a JPEG image, ex. 640x480
-                 look_confirmation_phrase: str = "Vänta, jag ska titta.", # Said if the model calls look without saying anything first. None disables
+                 modules: List[InstructionModule] = [], # System instruction sections with their tools, in prompt order
+                 situation: Situation = None, # Kept up to date by the app; sent to the model after each utterance
                 ):
         def on_pcm16_frames(sample_rate:int, channel_cnt:int, frames:np.ndarray):
             if self.state != self.STATE_SENDING_SPEECH:
                 #self.cancel_current()
-                self._cur_query = Query()  
+                self._cur_query = Query()
                 wavname = str(input_audio_wav_dir / f"{int(self._cur_query.start_time*1000)}.wav")
                 self.input_audio_wav_file = wave.open(wavname, "wb")
                 self.input_audio_wav_file.setnchannels(self.pcm_processor.channel_cnt)
@@ -190,14 +115,11 @@ class OaiChatIntegrated:
         self.listening_state_change_callbacks:List[Callable[[bool], None]] = []
         self.intermediate_response_text_callbacks:List[Callable[[str], None]] = []
         self.response_audio_callback = response_audio_callback
-        self.robot_action_names = robot_action_names
-        self.robot_action_callback = robot_action_callback
-        self.image_capture_callback = image_capture_callback
-        self.look_confirmation_phrase = look_confirmation_phrase
+        self.situation = situation or Situation()
         self._response_has_text = False
-        # Each future resolves to (items to send, whether the model must respond to them)
-        self._pending_tool_calls:List[Future] = []
-        self._tool_executor = ThreadPoolExecutor(max_workers=2)
+        # (call_id, result) for the tool calls of the current response
+        self._pending_tool_calls:List[Tuple[str, Future]] = []
+        self._tool_executor = ThreadPoolExecutor(max_workers=4)
         self.language = language
         self.voice = voice
         self.conversation_prompt = conversation_prompt
@@ -206,23 +128,43 @@ class OaiChatIntegrated:
         self._state = self.STATE_IDLE
         self.ws:WebSocketApp = None
         self.api_key = api_key
-        self.tools = []
-        if robot_action_names:
-            self.tools.append(_format_action_tool(robot_action_names))
-        if image_capture_callback:
-            self.tools.append(LOOK_TOOL)
+        self.set_modules(modules)
         self.start()
     @property
     def state(self):
         return self._state
-    
-       
+
+
     def _set_state(self, state):
         if self._state != state:
             self._state = state
             syslogger.debug(state)
             for cbk in self.state_callbacks:
                 cbk(state)
+
+    def set_modules(self, modules:List[InstructionModule]):
+        """Changes the instruction modules. Takes effect in the current session, keeping the conversation."""
+        self.modules = list(modules)
+        self._situation_fields = _collect_situation_fields(self.modules)
+        self._tool_modules:Dict[str, InstructionModule] = {
+            tool["name"]: module for module in self.modules for tool in module.tools
+        }
+        if self.ws and self.ws.sock and self.ws.sock.connected:
+            self._send_data({
+                "type": "session.update",
+                "session": {
+                    "type": "realtime",
+                    "instructions": self._session_instructions(),
+                    "tools": self._session_tools(),
+                },
+            })
+
+    def _session_instructions(self) -> str:
+        return _format_session_instructions(self.modules, self._situation_fields, self.conversation_prompt)
+
+    def _session_tools(self) -> List[dict]:
+        return [tool for module in self.modules for tool in module.tools]
+
     def start(self):
         if self.ws:
             self.close()
@@ -230,8 +172,8 @@ class OaiChatIntegrated:
             print("WebSocket connected")
             session_data = {
                 "type": "realtime",
-                "instructions": _format_session_instructions(self.conversation_prompt),
-                "output_modalities": ["text", "audio"] if self.voice else ["text"],  
+                "instructions": self._session_instructions(),
+                "output_modalities": ["text", "audio"] if self.voice else ["text"],
                 "audio": {
                     "input": {
                         "format": {
@@ -250,7 +192,7 @@ class OaiChatIntegrated:
 
                     },
                 },
-                "tools": self.tools,
+                "tools": self._session_tools(),
 
             }
             if self.voice:
@@ -301,6 +243,15 @@ class OaiChatIntegrated:
                     # print("ERROR:", evt)
                     syslogger.error(f"Error event: {evt}")
                 elif t == "input_audio_buffer.committed":
+                    # The audio item is already in the conversation, so the situation ends up right after it
+                    if self._situation_fields:
+                        situation_text = format_situation_message(
+                            self._situation_fields, self.situation.snapshot(), self._cur_query)
+                        self._send_item({
+                            "type": "message",
+                            "role": "system",
+                            "content": [{"type": "input_text", "text": situation_text}],
+                        })
                     self._send_data({"type": "response.create"})
                 elif t == "response.audio.delta":
                     b = base64.b64decode(evt.get("delta", ""))
@@ -316,15 +267,18 @@ class OaiChatIntegrated:
                 elif t == "response.output_text.delta":
                     self._add_response_text(evt.get("delta"))
                 elif t == "response.output_item.added":
-                    # Arrives before the tool's arguments are streamed, so the phrase is said as early as possible
+                    # Arrives before the tool's arguments are streamed, so a phrase is said as early as possible
                     item = evt.get("item", {})
-                    if (item.get("type") == "function_call" and item.get("name") == "look"
-                            and self.look_confirmation_phrase and not self._response_has_text):
-                        self._add_response_text(self.look_confirmation_phrase)
+                    module = self._tool_modules.get(item.get("name"))
+                    if item.get("type") == "function_call" and module and not self._response_has_text:
+                        if phrase := module.tool_call_started(item.get("name")):
+                            self._add_response_text(phrase)
                 elif t == "response.function_call_arguments.done":
                     # Execute the tool as soon as its arguments are complete, while text may still be streaming
-                    self._pending_tool_calls.append(
-                        self._start_tool_call(evt.get("call_id"), evt.get("name"), evt.get("arguments") or "{}"))
+                    self._pending_tool_calls.append((
+                        evt.get("call_id"),
+                        self._start_tool_call(evt.get("name"), evt.get("arguments") or "{}"),
+                    ))
                 elif t == "response.done":
                     # Tool results can only be followed by a new response once the current one is done
                     pending, self._pending_tool_calls = self._pending_tool_calls, []
@@ -337,22 +291,32 @@ class OaiChatIntegrated:
                     query = self._cur_query
 
                     def finish_tool_calls():
-                        # If the response was only tool calls, let the model say something about them
-                        needs_response = not has_message
-                        for future in pending:
-                            items, needs = future.result()
-                            needs_response = needs_response or needs
-                            for item in items:
-                                if query.canceled and item["item"]["type"] == "message":
-                                    continue
-                                self._send_data(item)
+                        results:List[ToolResult] = []
+                        for call_id, future in pending:
+                            result:ToolResult = future.result()
+                            results.append(result)
+                            self._send_item({
+                                "type": "function_call_output",
+                                "call_id": call_id,
+                                "output": json.dumps(result.output),
+                            })
+                            if not query.canceled:
+                                for item in result.followup_items:
+                                    self._send_item(item)
+                        silent = any(result.silent for result in results)
+                        if silent:
+                            query.silent = True
+                        # If the response was only tool calls, let the model say something about them,
+                        # unless it chose not to respond
+                        needs_response = ((not has_message and not silent)
+                                          or any(result.needs_response for result in results))
                         if needs_response and not query.canceled:
                             self._send_data({"type": "response.create"})
                         elif query is self._cur_query:
                             query.response_done = True
                             try_set_query_done()
 
-                    if all(future.done() for future in pending):
+                    if all(future.done() for _, future in pending):
                         finish_tool_calls()
                     else:
                         # Wait for slow tools (e.g. image capture) without blocking the websocket thread
@@ -374,10 +338,10 @@ class OaiChatIntegrated:
             on_error=on_error,
             on_close=on_close,
         )
-        threading.Thread(target=self.ws.run_forever, daemon=True).start()        
+        threading.Thread(target=self.ws.run_forever, daemon=True).start()
     def __del__(self):
         self.close()
-    
+
     def close(self):
         try:
             self.cancel_current()
@@ -398,6 +362,9 @@ class OaiChatIntegrated:
             data["audio"] = "..."
         syslogger.debug(f"SEND DATA:{json.dumps(data)}")
 
+    def _send_item(self, item:dict):
+        self._send_data({"type": "conversation.item.create", "item": item})
+
     def _add_response_text(self, text_delta:str):
         if not text_delta:
             return
@@ -413,74 +380,46 @@ class OaiChatIntegrated:
             for cbk in self.intermediate_response_text_callbacks:
                 cbk(text_delta)
 
-    def _start_tool_call(self, call_id:str, name:str, arguments:str) -> Future:
-        """Starts executing a tool call. The returned future resolves to
-        (conversation items to send, whether the model must respond to them)."""
-        def output_item(output:dict) -> dict:
-            return {
-                "type": "conversation.item.create",
-                "item": {
-                    "type": "function_call_output",
-                    "call_id": call_id,
-                    "output": json.dumps(output),
-                },
-            }
-
+    def _start_tool_call(self, name:str, arguments:str) -> Future:
+        """Starts executing a tool call in the module that owns the tool. The future resolves to a ToolResult."""
         def completed(output:dict) -> Future:
             future = Future()
-            future.set_result(([output_item(output)], False))
+            future.set_result(ToolResult(output))
             return future
 
+        query = self._cur_query
+        module = self._tool_modules.get(name)
+        if module is None:
+            return completed({"status": "error", "message": f"Unknown tool: {name}"})
+        if query.canceled:
+            return completed({"status": "canceled"})
         try:
             args = json.loads(arguments)
-            if name == "robot_action":
-                action = args["action"]
-                if self._cur_query.canceled:
-                    return completed({"status": "canceled", "action": action})
-                if self.robot_action_callback:
-                    # Run in a thread so a long gesture doesn't block the websocket thread
-                    threading.Thread(target=self.robot_action_callback, args=(action,), daemon=True).start()
-                return completed({"status": "ok", "action": action})
-            if name == "look" and self.image_capture_callback:
-                if self._cur_query.canceled:
-                    return completed({"status": "canceled"})
-
-                def capture() -> Tuple[List[dict], bool]:
-                    # The model always needs a new response to react to the image (or the failure)
-                    try:
-                        jpeg = self.image_capture_callback()
-                    except Exception as e:
-                        syslogger.exception("Image capture failed")
-                        return [output_item({"status": "error", "message": str(e)})], True
-                    image_item = {
-                        "type": "conversation.item.create",
-                        "item": {
-                            "type": "message",
-                            "role": "user",
-                            "content": [{
-                                "type": "input_image",
-                                "image_url": "data:image/jpeg;base64," + base64.b64encode(jpeg).decode("ascii"),
-                            }],
-                        },
-                    }
-                    return [output_item({"status": "ok", "message": "What you see right now follows in the next message."}), image_item], True
-
-                return self._tool_executor.submit(capture)
-            return completed({"status": "error", "message": f"Unknown tool: {name}"})
         except Exception as e:
-            syslogger.exception(f"Tool call {name} failed")
-            return completed({"status": "error", "message": str(e)})
+            return completed({"status": "error", "message": f"Invalid arguments: {e}"})
+        situation = self.situation.snapshot()
+
+        def run() -> ToolResult:
+            try:
+                return module.handle_tool_call(name, args, situation, query)
+            except Exception as e:
+                syslogger.exception(f"Tool call {name} failed")
+                return ToolResult({"status": "error", "message": str(e)})
+
+        return self._tool_executor.submit(run)
 
     def push_pcm16_frames(self, sample_rate:int, channel_cnt:int, frames:np.ndarray):
         if self._listening:
             self.silero.push_pcm16_frames(sample_rate, channel_cnt, frames)
-    
+
     def set_listening(self, listening:bool):
         if self._listening != listening:
             print("listening:",listening)
             self._listening = listening
             for cbk in self.listening_state_change_callbacks:
                 cbk(listening)
+    def is_listening(self):
+        return self._listening
     
     def cancel_current(self):
         self._cur_query.canceled = True
