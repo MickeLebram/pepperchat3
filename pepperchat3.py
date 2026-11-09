@@ -11,7 +11,7 @@ import subtitles
 from  oaichat_integrated import OaiChatIntegrated, Query
 from situation import Situation
 from turn_taking import GroupTurnTaking
-from robot_modules import RobotActions, Look
+from robot_modules import RobotActions, RobotLook
 import gui
 from syslogger import syslogger
 from config import config
@@ -66,19 +66,23 @@ def main():
 
 
     def perform_robot_action(action:str):
-        print("PERFORM:",action)
+        animation = None
         if action == "wave":
-            AnimationRunner.run("animations/Stand/Gestures/Hey_1")
+            animation = "animations/Stand/Gestures/Hey_1"
         elif action == "shake your head":
-            AnimationRunner.run("animations/Stand/Reactions/ShakeBody_1")
+            animation = "animations/Stand/Reactions/ShakeBody_1"
         elif action == "dance":
             if robot == "pepper": # OBS! Nao ramlar när den kör funny dancer
-                AnimationRunner.run("animations/Stand/Waiting/FunnyDancer_1")
+                animation = "animations/Stand/Waiting/FunnyDancer_1"
             else:
-                AnimationRunner.run("animations/Stand/Waiting/KungFu_1")
+                animation = "animations/Stand/Waiting/KungFu_1"
         elif action == "play air guitar":
-            AnimationRunner.run("animations/Stand/Waiting/AirGuitar_1")
-    
+            animation = "animations/Stand/Waiting/AirGuitar_1"
+        if animation:
+            threading.Thread(target=AnimationRunner.run, args=[animation], daemon=True).start()
+            return True
+        return False
+
     def get_head_cam_image() -> bytes:
         """Get jpeg bytes from an image captured with the head cam"""
         cam = api.ALVideoDevice.subscribeCamera("testcam", 0, 1, 11, 5)
@@ -113,7 +117,7 @@ def main():
         modules=[
             GroupTurnTaking(),
             RobotActions(["wave", "shake your head", "dance", "play air guitar"], perform_robot_action),
-            Look(get_head_cam_image),
+            RobotLook(get_head_cam_image),
         ],
         situation=situation,
     )
