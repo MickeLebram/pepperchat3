@@ -12,9 +12,9 @@ import textwrap
 import numpy as np
 from websocket import WebSocketApp
 from syslogger import syslogger
-from query import Query
-from situation import Situation, SituationField, format_situation_instructions, format_situation_message
-from instruction_module import InstructionModule, ToolResult
+from chat.query import Query
+from chat.situation import Situation, SituationField, format_situation_instructions, format_situation_message
+from chat.instruction_module import InstructionModule, ToolResult
 
 
 _INSTRUCTION_HIERARCHY = """<instruction_hierarchy>
@@ -62,7 +62,7 @@ def _format_session_instructions(modules:List[InstructionModule], situation_fiel
     )
 
 
-class OaiChatIntegrated:
+class OaiChat:
     STATE_IDLE = "IDLE"
     STATE_SENDING_SPEECH = "SENDING_SPEECH"
     STATE_RECEIVING_RESPONSE = "RECEIVING_RESPONSE"
@@ -360,6 +360,12 @@ class OaiChatIntegrated:
         if data["type"] == "input_audio_buffer.append":
             data = data.copy()
             data["audio"] = "..."
+        elif item := data.get("item"):
+            for content in item.get("content", []):
+                if "image_url" in content:
+                    data = data.copy()
+                    content["image_url"] = "..."
+
         syslogger.debug(f"SEND DATA:{json.dumps(data)}")
 
     def _send_item(self, item:dict):

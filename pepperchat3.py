@@ -8,14 +8,17 @@ from datetime import datetime
 from pepper_text_speaker import PepperTextSpeaker
 import pcm_utils
 import subtitles
-from  oaichat_integrated import OaiChatIntegrated, Query
-from situation import Situation
-from turn_taking import GroupTurnTaking
-from robot_modules import RobotActions, RobotLook
+from chat.oaichat import OaiChat
+from chat.query import Query
+from chat.situation import Situation
+from chat.turn_taking import GroupTurnTaking
+from chat.actions_instruction import ActionsInstruction
+from chat.look_instruction import LookInstruction
 import gui
 from syslogger import syslogger
 from config import config
 from utils import AnimationRunner
+import utils
 from PIL import Image
 import io
 
@@ -24,6 +27,12 @@ def main():
     gui.show_init_dialog()
     robot = api.ALSystem.robotName()
     print("robot", robot)
+    cleanups:List[Callable[[], None]] = [] # Called before exit
+
+    if robot == "nao":
+        api.ALMemory.insertData("NaoSchool/Disabled", True)
+        api.ALAutonomousLife.stopFocus()
+        cleanups.append(lambda: api.ALMemory.insertData("NaoSchool/Disabled", False))
 
     pts = PepperTextSpeaker(subtitles.SubtitleServer())
 
@@ -97,27 +106,23 @@ def main():
     # Fields left as None are sent to the model as unknown
     situation = Situation()
 
-    cleanups:List[Callable[[], None]] = [] # Called before exit
     def run_face_detection():
         # Face detection mainly finds faces turned towards the camera, so it works as a facing detector.
         # It reports about 10 times per second while a face is visible, and once with no faces when it's lost
         name = "PepperchatFacing"
         api.ALFaceDetection.subscribe(name)
         api.event.FaceDetected.subscribe(lambda faces: situation.record_facing(bool(faces)))
+        cleanups.append(lambda: api.ALFaceDetection.unsubscribe(name))
 
-        def cleanup():
-            api.ALFaceDetection.unsubscribe(name)
-            print(f"ALFaceDetection unsubscribed {name}")
-        cleanups.append(cleanup)
     run_face_detection()
 
-    oai = OaiChatIntegrated(
+    oai = OaiChat(
         api_key=config.openai_api_key,
         conversation_prompt=config.get_prompt(),
         modules=[
             GroupTurnTaking(),
-            RobotActions(["wave", "shake your head", "dance", "play air guitar"], perform_robot_action),
-            RobotLook(get_head_cam_image),
+            ActionsInstruction(["wave", "shake your head", "dance", "play air guitar"], perform_robot_action),
+            LookInstruction(get_head_cam_image),
         ],
         situation=situation,
     )

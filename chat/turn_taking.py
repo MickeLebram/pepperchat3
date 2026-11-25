@@ -1,6 +1,6 @@
 import textwrap
-from instruction_module import InstructionModule, ToolResult
-import situation
+from chat.instruction_module import InstructionModule, ToolResult
+from chat import situation
 
 
 STAY_SILENT_TOOL = {

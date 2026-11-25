@@ -19,7 +19,8 @@ import defs
 import subtitles
 from config import config
 from config import show_config_dlg
-from oaichat_integrated import OaiChatIntegrated, Query
+from chat.oaichat import OaiChat
+from chat.query import Query
 from syslogger import syslogger
 from utils import AnimationRunner
 _active_tasks = []
@@ -92,7 +93,7 @@ def show_msg(owner, msg:str):
 class ChatDisplay(QTextEdit):
     class QueryWorker(QObject):
         signal_query = Signal(Query)
-    def __init__(self, oai:OaiChatIntegrated):
+    def __init__(self, oai:OaiChat):
         super().__init__()
         self.worker = ChatDisplay.QueryWorker()
         self.worker.moveToThread(self.thread())
@@ -211,7 +212,7 @@ class AnimationBrowser(QDialog):
             self.play_selected()
 
 class MainWindow(QWidget):
-    def __init__(self, oai:OaiChatIntegrated):
+    def __init__(self, oai:OaiChat):
         super().__init__()
         self.oai = oai
         robot_connected = api.robot_client.robot_connected()
@@ -351,7 +352,7 @@ class MainWindow(QWidget):
         self.sparse_updater.timeout.connect(sparse_update)
         self.sparse_updater.start(100)
 
-def run(oai:OaiChatIntegrated):
+def run(oai:OaiChat):
     app = QApplication.instance() if QApplication.instance() else QApplication()
     window = MainWindow(oai)
     window.show()

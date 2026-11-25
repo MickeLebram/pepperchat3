@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
-from query import Query
-from situation import Situation, SituationField
+from chat.query import Query
+from chat.situation import Situation, SituationField
 
 
 @dataclass

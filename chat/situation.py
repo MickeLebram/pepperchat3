@@ -4,7 +4,7 @@ import time
 from collections import deque
 from dataclasses import dataclass, field
 from typing import Any, Callable, Deque, List, Optional, Tuple
-from query import Query
+from chat.query import Query
 
 # A facing observation counts for this long unless a newer one says otherwise. Bridges short
 # detection dropouts; assumes observations keep arriving while a person is facing the robot
